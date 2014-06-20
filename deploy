@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+set -e
+setopt extended_glob
+
+git checkout master
+
+[ -d public ] && rm -rf public
+
+mkdir -p public
+
+git merge drafts
+
+roots compile
+
+rm -rf *~public~.git~.gitignore~deploy
+
+ls -la
+
+mv public/* .
+
+rm -rf public
+
+git add --all .
+
+git now
+
+git push -u origin master
+
