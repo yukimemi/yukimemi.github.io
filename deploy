@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-set -e
+# set -e
 setopt extended_glob
 
 git checkout master
