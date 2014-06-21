@@ -21,3 +21,4 @@ locals:
 
 # Precompiled template path, see http://roots.cx/docs/#precompile
 # templates: 'views/templates'
+
