@@ -7,7 +7,9 @@ base()
 framework()
 
 header
-  background: orange
+  /* background: orange */
+  background: #fefcea /* Old browsers */
+  background: linear-gradient(bottom, #fefcea 0%,#e03333 82%) /* W3C */
   width: 100%
   text-align: center
 
@@ -19,7 +21,7 @@ header
 #posts
   reset-list()
   width: 800px
-  margin: 50px auto
+  margin: 30px auto
 
   h2
     margin-bottom: 40px
@@ -32,7 +34,11 @@ header
     li
       list-style-type: decimal
 
+#main
+  width: 800px
+  margin: 50px auto
+
 body
   a
-    color: orange
+    color: #e03333
 
