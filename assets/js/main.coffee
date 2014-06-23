@@ -5,6 +5,7 @@
 js = [
       "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
       "/bower_components/jquery.simplePagination/jquery.simplePagination.js"
+      "/bower_components/google-code-prettify/src/prettify.js"
      ]
 
 # this will fire once the required scripts have been loaded
@@ -33,3 +34,6 @@ require js, ->
         items.hide() # first hide everything, then show for the new page
              .slice(showFrom, showTo).show()
 
+    # google-code-prettify
+    $('pre').addClass 'prettyprint linenums'
+    prettyPrint()

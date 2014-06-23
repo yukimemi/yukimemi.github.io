@@ -7,8 +7,9 @@ html
     meta(name='author', content= "author of the site")
 
     title= post.title
-    
+
     link(rel='stylesheet', href='/css/master.css')
+    link(rel='stylesheet', href='/bower_components/google-code-prettify/src/prettify.css')
   body
     header
       h1 yukimemi's blog
@@ -36,4 +37,4 @@ html
       a(href='/') &laquo; back to index
 
   //- add other scripts through require.js, not here
-  script(data-main="js/main", src="js/require.js")
+  script(data-main="/js/main", src="/js/require.js")

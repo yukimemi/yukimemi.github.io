@@ -18,6 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery.simplePagination": "*"
+    "jquery.simplePagination": "*",
+    "google-code-prettify": "~1.0.1"
   }
 }
