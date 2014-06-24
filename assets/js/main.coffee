@@ -19,7 +19,7 @@ require js, ->
     perPage = 13
 
     # only show the first perPage items initially
-    items.slice(perPage).hide()
+    items.slice(0, perPage).show()
 
     # now setup your pagination
     $('.pagination').pagination
