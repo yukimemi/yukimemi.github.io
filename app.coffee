@@ -15,7 +15,7 @@ watcher_ignore_folders: ['components']
 # Locals will be made available on every page. They can be
 # variables or (coffeescript) functions.
 locals:
-  title: 'Welcome to yukimemi\'s blog presented by Roots!'
+  title: 'Welcome to yukimemi\'s blog powered by Roots!'
   title_with_markup: ->
     "<h1 class='title'>Welcome to yukimemi\'s blog powered by Roots!</h1>"
 
