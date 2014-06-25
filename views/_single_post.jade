@@ -5,10 +5,13 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge, chrome=1')
     meta(name='description', content='description of your site')
     meta(name='author', content= "author of the site")
+    // For mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, user-scalable=yes')
 
     title= post.title
 
     link(rel='stylesheet', href='/css/master.css')
+    link(media='only screen and (max-device-width: 480px)', rel='stylesheet', href='/css/mobile.css')
     //link(rel='stylesheet', href='/bower_components/google-code-prettify/src/prettify.css')
     link(rel='stylesheet', href='/bower_components/google-code-prettify/styles/desert.css')
 
@@ -34,12 +37,16 @@ html
         </script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
         </div>
 
+      #twitterfollow.
+        <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
       p= "[" + post.date + "]"
 
       != content
       a(href='/') &laquo; back to index
 
-      div#disqus.
+      #disqus.
         <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
