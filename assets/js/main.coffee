@@ -4,8 +4,8 @@
 # is below, or can use file paths, like 'vendor/underscore'
 js = [
       "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
-      "/bower_components/jquery.simplePagination/jquery.simplePagination.js"
       "/bower_components/google-code-prettify/src/prettify.js"
+      "/bower_components/jquery.simplePagination/jquery.simplePagination.js"
      ]
 
 # this will fire once the required scripts have been loaded
