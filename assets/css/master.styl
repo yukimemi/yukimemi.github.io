@@ -42,11 +42,28 @@ div#posts
       list-style-type: disc
       margin: 2px 0
       fs: 1em
-
   pre
-    ol
+    line-height: 1.8
+    code
+      margin: 0
+      padding: 0
+      font-size: 13px
+      border: 0
+      background: none
+    ol.linenums
+      font-size: 8px
+      margin: 5px 0
+      padding-left: 4em
       li
-        margin: 3px 0
+        margin: 0
+        padding-left: 1em
+        border-left: dashed 1px green
+      li.L1,
+      li.L3,
+      li.L5,
+      li.L7,
+      li.L9
+        background: rgb(49, 49, 49, 0.2)
 
 #main
   width: 800px
@@ -56,16 +73,8 @@ body
   a
     color: #e03333
 
-pre
-  line-height: 1.8
-  code
-    margin: 0
-    padding: 0
-    font-size: 13px
-    border: 0
-    background: none
-  ol
-    font-size: 8px
+code
+  color: black
 
 hr
   margin: 30px 0
@@ -76,3 +85,5 @@ hr
 
 #disqus
   margin: 20px 0
+
+
