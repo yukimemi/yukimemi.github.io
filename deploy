@@ -1,24 +1,7 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 set -e
-setopt extended_glob
-
-git branch -D master
-
-git checkout -b master
 
 roots compile --no-compress
 
-rm -rf *~public~.git
-
-mv public/* .
-
-rm -rf public
-
-git add --all .
-
-git now
-
-git push -f origin master
-
-git checkout drafts
+./deploy.sh
 
