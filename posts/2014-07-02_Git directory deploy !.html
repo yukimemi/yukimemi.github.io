@@ -84,17 +84,12 @@ $ git --work-tree public commit -m &quot;initial publish&quot;
 $ git push -f origin public
 $ git symbolic-ref HEAD refs/heads/drafts &amp;&amp; git reset --mixed</code></pre>
 <h3 id="-">デプロイの仕方。</h3>
-<p>まずは、 <strong>roots</strong> でコンパイル。</p>
-<pre><code class="lang-sh">$ roots compile --no-compress</code></pre>
-<p>それから、 <strong>drafts</strong> ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
+<p>まずは、 <strong>drafts</strong> ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
+それから、 <strong>roots</strong> でコンパイル。
 あとは、ダウンロードした <strong>deploy.sh</strong> を実行するだけ。</p>
-<pre><code class="lang-sh">$ ./deploy.sh</code></pre>
+<pre><code class="lang-sh">$ roots compile --no-compress
+$ ./deploy.sh</code></pre>
 <p>べんり。</p>
-<p>一つはまった点として、デプロイ対象の <strong>public</strong> ディレクトリは <code>.gitignore</code> から除外
-しておかなければいけないみたい。</p>
-<p><strong>drafts</strong> ブランチでは <code>.gitignore</code> に入れて除外しつつ、 <strong>master</strong> ブランチでは <code>.gitignore</code> から
-除外・・・みたいなことも出来るんだろうけど、ちょっと調べた限りじゃわかんなかった。
-知ってる人いたら教えてください。</p>
 <hr>
 <h4 id="-">参考:</h4>
 <p><a href="https://github.com/X1011/git-directory-deploy">X1011/git-directory-deploy</a></p>
