@@ -55,6 +55,13 @@
 </div>
 
       <p>[2014/07/02]</p><p><strong>roots</strong> のデプロイ手順。</p>
+<p>僕の環境では、まず <strong>drafts</strong> ブランチで書いて、 <strong>master</strong> ブランチでpushして
+githubへ更新という流れ。
+その際、 <strong>roots</strong> では、ビルド結果を <strong>public</strong> というディレクトリに出力するので
+そのディレクトリだけをpushしたい。
+gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 <code>git subtree push</code> という
+のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。</p>
+<p><a href="https://github.com/X1011/git-directory-deploy">X1011/git-directory-deploy</a></p>
 <p>rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。</p>
 <h3 id="-x1011-git-directory-deploy-https-github-com-x1011-git-directory-deploy-"><a href="https://github.com/X1011/git-directory-deploy">X1011/git-directory-deploy</a> をダウンロード</h3>
 <pre><code class="lang-sh">$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;&amp; chmod +x deploy.sh</code></pre>
