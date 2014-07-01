@@ -83,7 +83,7 @@ $ git --work-tree public add --all
 $ git --work-tree public commit -m &quot;initial publish&quot;
 $ git push -f origin public
 $ git symbolic-ref HEAD refs/heads/drafts &amp;&amp; git reset --mixed</code></pre>
-<h3 id="-">デプロイの仕方。</h3>
+<h3 id="-">デプロイの仕方</h3>
 <p>まずは、 <strong>drafts</strong> ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
 それから、 <strong>roots</strong> でコンパイル。
 あとは、ダウンロードした <strong>deploy.sh</strong> を実行するだけ。</p>
