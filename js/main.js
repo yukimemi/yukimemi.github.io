@@ -17,7 +17,7 @@
         console.log('jquery loaded, dom ready <-- via assets/js/main.coffee');
         items = $('#posts li');
         numItems = items.length;
-        perPage = 13;
+        perPage = 21;
         items.slice(0, perPage).show();
         $('.pagination').pagination({
           items: numItems,

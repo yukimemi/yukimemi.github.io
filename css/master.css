@@ -919,6 +919,20 @@ header h1 {
 }
 #posts .plist {
   display: none;
+  margin: 0;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+#posts .plist p {
+  margin: 0;
+}
+#posts .plist:hover {
+  background-color: rgba(230,230,230,0.5);
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  transition: all 0.5s;
 }
 div#posts h3 {
   border-bottom: 1px dashed #aaa;
@@ -1004,4 +1018,7 @@ hr {
 }
 #ninja {
   margin: -20px 0 5px;
+}
+.pagination {
+  margin-left: 15px !important;
 }
