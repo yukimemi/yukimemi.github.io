@@ -47,7 +47,15 @@ header
     fs: 1.5em
 
   .plist
-      display: none
+    display: none
+    margin: 0
+    padding: 10px 15px
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+    p
+      margin: 0
+  .plist:hover
+    background-color: rgba(230, 230, 230, 0.5)
+    transition: all 0.5s
 
 div#posts
   h3
@@ -127,3 +135,6 @@ hr
 
 #ninja
   margin: -20px 0 5px
+
+.pagination
+  margin-left: 15px !important

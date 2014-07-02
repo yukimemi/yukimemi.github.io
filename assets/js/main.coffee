@@ -17,7 +17,7 @@ require jq, ->
       # Pagination
       items = $('#posts li')
       numItems = items.length
-      perPage = 13
+      perPage = 21
 
       # only show the first perPage items initially
       items.slice(0, perPage).show()
