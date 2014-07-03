@@ -993,6 +993,9 @@ div#posts pre ol.linenums li.L7,
 div#posts pre ol.linenums li.L9 {
   background: #313131;
 }
+div#posts #back {
+  margin-top: 50px;
+}
 #main {
   width: 800px;
   margin: 50px auto;
