@@ -1,3 +1,4 @@
+@import url("http://fonts.googleapis.com/css?family=Audiowide");
 article,
 aside,
 details,
@@ -897,6 +898,7 @@ header h1 {
   margin-top: 0;
   padding: 80px 0 10px;
   font-weight: 300;
+  font-family: 'Audiowide', cursive;
 }
 #posts {
   margin: 0;
