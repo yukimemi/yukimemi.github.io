@@ -84,7 +84,7 @@ bash: mosh-server: command not found
 Connection to yukimemi-my-host.com closed.
 /usr/local/bin/mosh: Did not find mosh server startup message.</code></pre>
 <p>一応なんかエラーメッセージは変わったみたい。
-これは <code>mosh-server</code> コマンドが見つかんないって言ってるだけなので、これは
+これは <code>mosh-server</code> コマンドが見つかんないって言ってるだけなので、
 moshのオプションで指定出来るっぽい。</p>
 <pre><code class="lang-sh">$ SHELL=/bin/bash mosh --server=/usr/local/bin/mosh-server yukimemi@yukimemi-my-host.com
 [yukimemi@yukimemi-my-host.com] $</code></pre>
