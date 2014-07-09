@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="description" content="description of your site">
+    <meta name="author" content="author of the site">
+    <!-- For mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>roots simple pagination</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link media="only screen and (max-device-width: 480px)" rel="stylesheet" href="/css/mobile.css">
+    <!--link(rel='stylesheet', href='/bower_components/google-code-prettify/src/prettify.css')-->
+    <link rel="stylesheet" href="/bower_components/google-code-prettify/styles/desert.css">
+  </head>
+  <body>
+    <header><a href="/">
+        <h1>YUKIMEMI</h1></a>
+      <div id="googlesearch"><script>
+  (function() {
+    var cx = '011218958289840355707:u8gwqtv7xgg';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+      </div>
+    </header>
+    <div id="posts">
+      <h2>roots simple pagination</h2>
+      <!-- ninja social button--><div id="ninja">
+  <div class="ninja_onebutton">
+    <script type="text/javascript">
+//<![CDATA[
+    (function(d){
+     if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_0340347566df4b0439d87aa8bd1d7465)=='undefined'){
+     document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/0340347566df4b0439d87aa8bd1d7465'><\/sc"+"ript>");
+     }else{
+     window.NINJA_CO_JP_ONETAG_BUTTON_0340347566df4b0439d87aa8bd1d7465.ONETAGButton_Load();}
+     })(document);
+//]]>
+    </script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
+  </div>
+</div>
+
+      <!-- twitter follow button--><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+
+      <p>[2014/07/09 22:25]</p><p>rootsは非常にシンプルで良いのだが、シンプルが故に通常のブログだと当たり前な部分を自分で実装しなければいけないところがある。</p>
+<p>その一つが、ページネーション。</p>
+<p>rootsでブログテンプレートを作成した場合、トップページはページネーションされず、書いていったブログ記事が全部リストで並ぶことになる。</p>
+<p>まぁそんなたいした量を書いてないんで問題ないのだけれども、一応ブログとしてページネーションくらいはあったほうがいいと思い、実装方法を探してみた。</p>
+<p>rootsは静的サイトジェネレーターなので、通常だとjadeの記法などでコンパイル時に出来るんだろうけど、今回はjqueryで簡単に出来る <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> というものが見つかったので、それを追加してみた。</p>
+<h3 id="-">インストール</h3>
+<p>まず、追加するのにはbowerを使った。
+ちなみにローカルにインストールしたbowerを使う方法は、<a href="http://yukimemi.github.io/posts/2014-07-02_direnv%20for%20npm%20local%20commands.html">前の記事</a> を参照。</p>
+<pre><code class="lang-sh">$ npm install bower --save-dev</code></pre>
+<p>事前準備として、bowerのコンポーネントがインストールされる先を変更しておく。</p>
+<p>roots のルートで、</p>
+<pre><code class="lang-sh">$ vim .bowerrc</code></pre>
+<p>し、以下を記載。</p>
+<pre><code class="lang-javascript">{
+    &quot;directory&quot;: &quot;assets/bower_components&quot;
+}</code></pre>
+<p>その後、bowerにて、 <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> をインストールする。</p>
+<pre><code class="lang-sh">$ bower install jquery.simplePagination --save</code></pre>
+<p>これで、 <code>assets/bower_components</code> 配下に保存される。</p>
+<h3 id="-simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-"><a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> 設定</h3>
+<h4 id="jade-">jade側の設定</h4>
+<p>まずは、ページネーションの配置。</p>
+<pre><code class="lang-sh">$ vim views/layout.jade</code></pre>
+<pre><code class="lang-javascript">--- 省略 ---
+#main
+  != content
+  .pagination
+--- 省略 ---</code></pre>
+<p>divのclassで設定。単純に <code>pagination</code> というclassにて、divを配置しただけ。</p>
+<p>それから、stylusでの設定がしやすいように、ブログ記事のリストにclassを設定しておく。</p>
+<pre><code class="lang-sh">$ vim views/index.jade</code></pre>
+<pre><code class="lang-jade">ul#posts
+  - each post in sort(site.posts, { by: &#39;date&#39; })
+    li.plist
+      p
+        a(href=&quot;#{post.url}&quot;)= post.title</code></pre>
+<p><code>ul#posts -&gt; li</code> に、class <code>plist</code> を追加しただけ。</p>
+<h4 id="stylus-">stylus側の設定</h4>
+<pre><code class="lang-sh">$ vim assets/css/master.styl</code></pre>
+<p>最初はすべてのブログ記事リストを見えなくしておく。</p>
+<pre><code class="lang-stylus">#posts
+  .plist
+    display: none</code></pre>
+<h4 id="coffee-">coffee側の設定</h4>
+<p><code>assets/js/main.coffee</code> に設定を記述していく。</p>
+<pre><code class="lang-sh">$ vim assets/js/main.coffee</code></pre>
+<p>記載内容 ↓</p>
+<pre><code class="lang-javascript">#= require &quot;_helper&quot;
+
+# Add scripts to load to this array. These can be loaded remotely like jquery
+# is below, or can use file paths, like &#39;vendor/underscore&#39;
+jq = [&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js&quot;]
+js = [&quot;/bower_components/jquery.simplePagination/jquery.simplePagination.js&quot;]
+
+
+# this will fire once the required scripts have been loaded
+require jq, -&gt;
+  require js, -&gt;
+    $ -&gt;
+      console.log &#39;jquery loaded, dom ready &lt;-- via assets/js/main.coffee&#39;
+
+      # Pagination
+      items = $(&#39;#posts li&#39;)
+      numItems = items.length
+      perPage = 21
+
+      # only show the first perPage items initially
+      items.slice(0, perPage).show()
+
+      # now setup your pagination
+      $(&#39;.pagination&#39;).pagination
+        items: numItems
+        itemsOnPage: perPage
+        cssStyle: &quot;light-theme&quot;
+        onPageClick: (pageNumber) -&gt;
+          showFrom = perPage * (pageNumber - 1)
+          showTo = showFrom + perPage
+
+          items.hide()
+               .slice(showFrom, showTo).show()</code></pre>
+<p>javascriptのロードはrequire.jsで行うので、jade側への追記はなし。</p>
+<p>rootsはデフォルトで、jqueryのロードは行っているようだったので、追加で <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> の設定を追加していった。
+最初、jqueryと同じ配列に <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> を組み込んでいたのだが、 <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> はjqueryが読み込まれた後でないと正常に実行されないようなので、必ずjqueryが先に読み込まれるように、jqueryとそれ以外というように配列を分け、コールバックを一つ深くした。</p>
+<ul>
+<li><em>16L</em> でまず対象のリストのセレクタをゲット</li>
+<li><em>17L</em> で、リストの数をゲット。</li>
+<li><em>18L</em> で、1ページに表示するリストの数を指定。</li>
+<li><em>21L</em> で、最初の1ページだけを表示。</li>
+<li><em>24L</em> から、 <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> の設定。</li>
+<li><em>25L</em> で、 <em>17L</em> でゲットしたリストの数を指定。</li>
+<li><em>26L</em> で、 <em>18L</em> で指定した1ページに表示するリストの数を設定。</li>
+<li><em>27L</em> で、 <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> のテーマを指定。</li>
+<li><em>28L</em> から、ページネーションのボタンが押下された時の実装を指定。現在のページ番号が <code>pageNumber</code> に入っている。</li>
+<li><em>29L</em> で、表示するリストの開始番号を算出。</li>
+<li><em>30L</em> で、表示するリストの終了番号を算出。</li>
+<li><em>32-33L</em> で、一度リストを全部非表示にして、必要なところだけ表示する。</li>
+</ul>
+<p>今度はjadeでコンパイル時にページネーション実装してみたい。</p>
+<hr>
+<h4 id="-">参考</h4>
+<p><a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a></p>
+<p><a href="http://stackoverflow.com/questions/20896076/how-to-use-simplepagination-jquery">javascript - How to use SimplePagination jquery - Stack Overflow</a></p>
+
+<!-- vim: ft=markdown-->
+      <div id="back"><a href="/">&laquo; back to index</a></div>
+      <hr>
+      <!-- Disqus--><div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'yukimemi-github'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </body>
+  <script data-main="/js/main" src="/js/require.js"></script>
+  <!-- google analytics--><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+</html>
