@@ -105,15 +105,19 @@ Usage: coffee [options] path/to/script.coffee
 </ul>
 <pre><code class="lang-coffeescript">do (name = &quot;CoffeeScript&quot;) -&gt;
   WScript.Echo &quot;はろー, #{name} !&quot;</code></pre>
+<p>次のようにコンパイルすると、</p>
 <pre><code class="lang-sh">&gt; coffee -c hello.coffee</code></pre>
-<p>すると、 <code>hello.js</code> (文字コード: <strong>UTF-8</strong> 、 改行コード: <strong>LF</strong> )
+<p><code>hello.js</code> (文字コード: <strong>UTF-8</strong> 、 改行コード: <strong>LF</strong> )
 と <code>hello.cmd</code> (文字コード: <strong>Shift_JIS</strong> 、 改行コード: <strong>CRLF</strong> )が生成される。</p>
 <ul>
 <li>hello.js</li>
 </ul>
-<pre><code class="lang-javascript">(function(name) {
-  return WScript.Echo(&quot;はろー, &quot; + name + &quot; !&quot;);
-})(&quot;CoffeeScript&quot;);</code></pre>
+<pre><code class="lang-javascript">(function() {
+  (function(name) {
+    return WScript.Echo(&quot;はろー, &quot; + name + &quot; !&quot;);
+  })(&quot;CoffeeScript&quot;);
+
+}).call(this);</code></pre>
 <ul>
 <li>hello.cmd</li>
 </ul>
@@ -122,9 +126,12 @@ Usage: coffee [options] path/to/script.coffee
 @goto :eof
 */
 
-(function(name) {
-  return WScript.Echo(&quot;はろー, &quot; + name + &quot; !&quot;);
-})(&quot;CoffeeScript&quot;);</code></pre>
+(function() {
+  (function(name) {
+    return WScript.Echo(&quot;はろー, &quot; + name + &quot; !&quot;);
+  })(&quot;CoffeeScript&quot;);
+
+}).call(this);</code></pre>
 <p>これでダブルクリックで簡単にバッチとして実行出来る <code>hello.cmd</code> が作成された。</p>
 <p>一応、上記の <code>addHeader</code> 関数を加え、さらに <code>coffee-script.js</code> のバージョンを v1.7.1 にアップデートしたのを、thincaさんのからフォークして以下にあげた。</p>
 <p><a href="https://github.com/yukimemi/coffee-script-on-jscript">yukimemi/coffee-script-on-jscript</a></p>
