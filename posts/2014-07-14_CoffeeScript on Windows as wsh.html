@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="description" content="description of your site">
+    <meta name="author" content="author of the site">
+    <!-- For mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CoffeeScript on Windows as wsh</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link media="only screen and (max-device-width: 480px)" rel="stylesheet" href="/css/mobile.css">
+    <!--link(rel='stylesheet', href='/bower_components/google-code-prettify/src/prettify.css')-->
+    <link rel="stylesheet" href="/bower_components/google-code-prettify/styles/desert.css">
+  </head>
+  <body>
+    <header><a href="/">
+        <h1>YUKIMEMI</h1></a>
+      <div id="googlesearch"><script>
+  (function() {
+    var cx = '011218958289840355707:u8gwqtv7xgg';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+      </div>
+    </header>
+    <div id="posts">
+      <h2>CoffeeScript on Windows as wsh</h2>
+      <!-- ninja social button--><div id="ninja">
+  <div class="ninja_onebutton">
+    <script type="text/javascript">
+//<![CDATA[
+    (function(d){
+     if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_0340347566df4b0439d87aa8bd1d7465)=='undefined'){
+     document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/0340347566df4b0439d87aa8bd1d7465'><\/sc"+"ript>");
+     }else{
+     window.NINJA_CO_JP_ONETAG_BUTTON_0340347566df4b0439d87aa8bd1d7465.ONETAGButton_Load();}
+     })(document);
+//]]>
+    </script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
+  </div>
+</div>
+
+      <!-- twitter follow button--><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+
+      <p>[2014/07/14 07:27]</p><p>長い間、Windowsでcoffeescriptをwshとして記述する方法を模索していたけど、ようやく解が見つかった！！</p>
+<p><a href="https://github.com/thinca/coffee-script-on-jscript">thinca/coffee-script-on-jscript</a></p>
+<p>thincaさん作成のcoffeescriptコンパイラ。Windowsで動く。nodejsもいらず、バッチファイル1つ <code>coffee.bat</code> と、公式の <code>coffee-script.js</code> だけで動く。</p>
+<h3 id="-">使用方法</h3>
+<pre><code class="lang-sh">&gt; ghq get https://github.com/thinca/coffee-script-on-jscript.git</code></pre>
+<p>or</p>
+<pre><code class="lang-sh">&gt; git clone https://github.com/thinca/coffee-script-on-jscript.git</code></pre>
+<p>ghq があるなら上で。</p>
+<p>後は普通のcoffeescriptコンパイラと同じオプションがだいたい使えるようなので、普通にコンパイルするのであれば</p>
+<pre><code class="lang-sh">&gt; coffee -c hello.coffee</code></pre>
+<p>とかで <code>hello.js</code> に変換される。</p>
+<p><code>watch</code> オプションもあるみたいなので、</p>
+<pre><code class="lang-sh">&gt; coffee -cw hello.coffee</code></pre>
+<p>としておくと、 <code>hello.coffee</code> を更新するたびに自動でコンパイルしてくれる。便利。</p>
+<p>他のオプションは、 <code>coffee.bat</code> に何も引数をつけずに実行するとhelpで表示される。</p>
+<pre><code class="lang-sh">&gt; coffee
+Usage: coffee [options] path/to/script.coffee
+
+  -b, --bare         compile without the top-level function wrapper
+  -c, --compile      compile to JavaScript and save as .js files
+      --encoding     character encoding used by source files
+  -e, --eval         compile a string from the command line
+  -h, --help         display this help message
+  -j, --join         concatenate the scripts before compiling
+  -n, --nodes        print out the parse tree that the parser produces
+  -o, --output       set the directory for compiled JavaScript
+  -p, --print        print the compiled JavaScript to stdout
+  -s, --stdio        listen for and compile scripts over stdio
+  -t, --tokens       print the tokens that the lexer produces
+  -v, --version      display CoffeeScript version
+  -w, --watch        watch scripts for changes, and recompile</code></pre>
+<h3 id="jscript-">jscriptをバッチとして実行</h3>
+<p>上記までで、 <code>coffeescript</code> を <code>jscript</code> に変換することは簡単に出来るんだけど、どうせなら <code>jscript</code> からさらにバッチとして実行出来る状態に変換したい。 <code>jscript</code> をバッチとして実行するには、まさに <code>coffee.bat</code> がそうなっていて、ソースの一番最初に以下の4行を追加すればいいみたい。</p>
+<pre><code class="lang-dosbatch">@set @junk=1 /* vim:set ft=javascript:
+@cscript //nologo //e:jscript &quot;%~dpn0.bat&quot; %*
+@goto :eof
+*/</code></pre>
+<p>そこで、<code>coffee.bat</code> に、コンパイル時に自動で上記4行を追加する処理を加えた。</p>
+<pre><code class="lang-javascript">function addHeader(file) {//{{{
+  var content = binaryToString(readFile(file), &quot;UTF-8&quot;);
+  var header = &quot;@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \&quot;%~f0\&quot; %*\n@goto :eof\n*/\n\n&quot;;
+  var cmd = file.replace(/(\.\w+)?$/, &quot;.cmd&quot;);
+  writeFile(cmd, (header + content).split(&quot;\n&quot;).join(&quot;\r\n&quot;), &quot;Shift_JIS&quot;);
+}//}}}</code></pre>
+<p>また、 <code>jscript</code> として実行するために、coffeeからjsに変換されたファイルを <strong>UTF-8</strong> で読み込んで、 <strong>Shift_JIS</strong> で出力するようにしてある。</p>
+<p>例えば、以下の <code>hello.coffee</code> (文字コード: <strong>UTF-8</strong> 、 改行コード: <strong>LF</strong> で作成)があった場合、</p>
+<ul>
+<li>hello.coffee</li>
+</ul>
+<pre><code class="lang-coffeescript">do (name = &quot;CoffeeScript&quot;) -&gt;
+  WScript.Echo &quot;はろー, #{name} !&quot;</code></pre>
+<pre><code class="lang-sh">&gt; coffee -c hello.coffee</code></pre>
+<p>すると、 <code>hello.js</code> (文字コード: <strong>UTF-8</strong> 、 改行コード: <strong>LF</strong> )
+と <code>hello.cmd</code> (文字コード: <strong>Shift_JIS</strong> 、 改行コード: <strong>CRLF</strong> )が生成される。</p>
+<ul>
+<li>hello.js</li>
+</ul>
+<pre><code class="lang-javascript">(function(name) {
+  return WScript.Echo(&quot;はろー, &quot; + name + &quot; !&quot;);
+})(&quot;CoffeeScript&quot;);</code></pre>
+<ul>
+<li>hello.cmd</li>
+</ul>
+<pre><code class="lang-javascript">@set @junk=1 /* vim:set ft=javascript:
+@cscript //nologo //e:jscript &quot;%~f0&quot; %*
+@goto :eof
+*/
+
+(function(name) {
+  return WScript.Echo(&quot;はろー, &quot; + name + &quot; !&quot;);
+})(&quot;CoffeeScript&quot;);</code></pre>
+<p>これでダブルクリックで簡単にバッチとして実行出来る <code>hello.cmd</code> が作成された。</p>
+<p>一応、上記の <code>addHeader</code> 関数を加え、さらに <code>coffee-script.js</code> のバージョンを v1.7.1 にアップデートしたのを、thincaさんのからフォークして以下にあげた。</p>
+<p><a href="https://github.com/yukimemi/coffee-script-on-jscript">yukimemi/coffee-script-on-jscript</a></p>
+<p>Windowsではこれからは PowerShell だ！と思ってたけど、やっぱwshもまだまだ使えそう・・・。
+ExcelとかのCOMも、PowerShellより、wshの方が断然早いし。というかPowerShellはなぜあんなに遅いんだろうか・・・。</p>
+<hr>
+<h4 id="-">参考</h4>
+<p><a href="http://d.hatena.ne.jp/thinca/20110707/1310014720">JScript で動く CoffeeScript コンパイラのラッパ書いた - 永遠に未完成</a></p>
+<p><a href="https://github.com/thinca/coffee-script-on-jscript">thinca/coffee-script-on-jscript</a></p>
+
+<!-- vim: ft=markdown-->
+      <div id="back"><a href="/">&laquo; back to index</a></div>
+      <hr>
+      <!-- Disqus--><div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'yukimemi-github'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </body>
+  <script data-main="/js/main" src="/js/require.js"></script>
+  <!-- google analytics--><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+</html>
