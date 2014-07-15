@@ -91,10 +91,11 @@ Usage: coffee [options] path/to/script.coffee
 @cscript //nologo //e:jscript &quot;%~dpn0.bat&quot; %*
 @goto :eof
 */</code></pre>
-<p>そこで、<code>coffee.bat</code> に、コンパイル時に自動で上記4行を追加する処理を加えた。</p>
+<p>そこで、<code>coffee.bat</code> に、コンパイル時に自動で上記4行を追加する処理を加えた。
+(追加で戻り値も返すようにした。)</p>
 <pre><code class="lang-javascript">function addHeader(file) {//{{{
   var content = binaryToString(readFile(file), &quot;UTF-8&quot;);
-  var header = &quot;@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \&quot;%~f0\&quot; %*\n@goto :eof\n*/\n\n&quot;;
+  var header = &quot;@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \&quot;%~f0\&quot; %*\n@exit /b %errorlevel%\n*/\n\n&quot;;
   var cmd = file.replace(/(\.\w+)?$/, &quot;.cmd&quot;);
   writeFile(cmd, (header + content).split(&quot;\n&quot;).join(&quot;\r\n&quot;), &quot;Shift_JIS&quot;);
 }//}}}</code></pre>
@@ -123,7 +124,7 @@ Usage: coffee [options] path/to/script.coffee
 </ul>
 <pre><code class="lang-javascript">@set @junk=1 /* vim:set ft=javascript:
 @cscript //nologo //e:jscript &quot;%~f0&quot; %*
-@goto :eof
+@exit /b %errorlevel%
 */
 
 (function() {
