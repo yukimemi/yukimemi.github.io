@@ -73,11 +73,12 @@ layout: ../views/_single_post.jade
   ```
 
   そこで、```coffee.bat``` に、コンパイル時に自動で上記4行を追加する処理を加えた。
+  (追加で戻り値も返すようにした。)
 
   ```javascript
   function addHeader(file) {//{{{
     var content = binaryToString(readFile(file), "UTF-8");
-    var header = "@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \"%~f0\" %*\n@goto :eof\n*/\n\n";
+    var header = "@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \"%~f0\" %*\n@exit /b %errorlevel%\n*/\n\n";
     var cmd = file.replace(/(\.\w+)?$/, ".cmd");
     writeFile(cmd, (header + content).split("\n").join("\r\n"), "Shift_JIS");
   }//}}}
@@ -118,7 +119,7 @@ layout: ../views/_single_post.jade
   ```javascript
   @set @junk=1 /* vim:set ft=javascript:
   @cscript //nologo //e:jscript "%~f0" %*
-  @goto :eof
+  @exit /b %errorlevel%
   */
 
   (function() {
