@@ -34,7 +34,11 @@
     </header>
     <div id="posts">
       <h2>Tinkerer にソーシャルボタン追加</h2>
-      <p>[2013/06/15]</p><p>今時のブログとしては、ソーシャルボタンは追加したい。</p>
+      <p>[2013/06/15]</p><div id="addthis">
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <div class="addthis_native_toolbox"></div>
+</div>
+<p>今時のブログとしては、ソーシャルボタンは追加したい。</p>
 <p>参考になる記事がいっぱいあったので、参考にしてやってみた。</p>
 <h3 id="-">事前準備</h3>
 <p><em>layout.html</em> というファイルと <em>page.html</em> というファイルを作る。</p>
@@ -229,8 +233,6 @@ iframe.twitter-share-button {
     | iPhone 研究室</a></p>
 
       <!-- addthis sharing button--><div id="addthis">
-  <!-- Go to www.addthis.com/dashboard to customize your tools -->
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <div class="addthis_native_toolbox"></div>
 </div>
