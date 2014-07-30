@@ -24,15 +24,18 @@ html
 
     #posts
       h2= post.title
-      // ninja social button
-      include ninja.html
-
-      // twitter follow button
-      include twitterfollow.html
 
       p= "[" + post.date + "]"
 
+      include addthis.html
+
       != content
+
+      // addthis sharing button
+      include addthis.html
+
+      // twitter follow button
+      include twitterfollow.html
 
       #back
         a(href='/') &laquo; back to index
