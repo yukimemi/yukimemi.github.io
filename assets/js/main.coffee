@@ -6,7 +6,6 @@ jq = ["http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"]
 js = [
       "/bower_components/google-code-prettify/src/prettify.js"
       "/bower_components/jquery.simplePagination/jquery.simplePagination.js"
-      "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"
      ]
 
 # this will fire once the required scripts have been loaded
