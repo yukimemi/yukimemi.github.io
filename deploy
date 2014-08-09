@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-
-roots compile --no-compress
-
-./deploy.sh
-
