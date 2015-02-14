@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Npm on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/npm/</link>
+    <description>Recent content in Npm on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/npm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>direnv for npm local commands</title>
+      <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</guid>
+      <description>
+
+&lt;p&gt;通常、 npm で実行コマンドをインストールするときは、以下のようにグローバルオプションを
+つけてインストールすることが多いと思う。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g gulp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;だけど、これではプロジェクトごとに違うバージョンを使いたい！などの場合にこまる。
+そこで &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;これを使うとあるディレクトリでは、「〜〜する」というのが簡単に出来る。&lt;/p&gt;
+
+&lt;h3 id=&#34;導入方法:4be122604034f58ee5537b3c65fe8086&#34;&gt;導入方法&lt;/h3&gt;
+
+&lt;p&gt;まず、 &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; はgoを使うので、goをインストールしておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshenv&lt;/code&gt; に記載。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# direnv
+if which go &amp;gt; /dev/null; then
+    if [ ! -d $HOME/.direnv ]; then
+        git clone https://github.com/zimbatm/direnv ~/.direnv
+        pushd ~/.direnv
+        make install
+        popd
+    fi
+    eval &amp;quot;$(direnv hook zsh)&amp;quot;
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとはシェルを再起動したらインストール完了。&lt;/p&gt;
+
+&lt;h3 id=&#34;使い方:4be122604034f58ee5537b3c65fe8086&#34;&gt;使い方&lt;/h3&gt;
+
+&lt;p&gt;プロジェクトのディレクトリでローカルにnpmのコマンドをインストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install gulp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ローカルにインストールした場合、通常以下の場所に実行コマンドが配置される。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls node_modules/.bin
+bower  cake  coffee  gulp  nodemon  nodewebkit  wiredep
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なので、この場所をPATHに追加すればよい。
+&lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; では、以下のようにする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ direnv edit .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、エディタで &lt;code&gt;.envrc&lt;/code&gt; というファイルが開くので、以下の行を記載。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export PATH=$PWD/node_modules/.bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでOK。こうすると、このディレクトリに来た場合は自動的にPATHに追加され、
+反対にディレクトリから出た場合、自動的にPATHから削除される。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ~/.ghq/github.com/yukimemi/hogehoge
+direnv: loading .envrc
+direnv: export ~PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd
+direnv: unloading
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、プロジェクトローカルなコマンドをかんたんに実行出来る。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:4be122604034f58ee5537b3c65fe8086&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/kompiro/items/5fc46089247a56243a62&#34;&gt;direnvを使おう - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://doloopwhile.hatenablog.com/entry/2014/06/18/010449&#34;&gt;direnvで解決するGOPATHの3つの問題点 - None is None is None&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm&#34;&gt;Big Sky :: bundle exec がウザい&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

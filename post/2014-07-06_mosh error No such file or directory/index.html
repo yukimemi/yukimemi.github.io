@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>mosh error No such file or directory | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">mosh error No such file or directory</h2>
+      <p class="orange-text text-darken-4">2014/07/06 Sun</p>
+      
+
+<p>mosh というmobile-shelllを導入してみたところ、「No such file or directory」という
+エラーが発生して使えなかった・・・。</p>
+
+<p>原因は結局よくわからなかったんだけど、とりあえず使えるようになったので、一応メモとして残しとこ。</p>
+
+<h3 id="mosh-install:51c4a04d1c5f2563181f98eda5c8c5ac">mosh install</h3>
+
+<p>環境は Mac OSX Mavericks。Homebrewで簡単にインストール出来た。</p>
+
+<pre><code class="language-sh">$ brew install mosh
+</code></pre>
+
+<p>昔は <code>mobile-shelll</code> だったみたいだけど、今は <code>mosh</code> でインストール出来る。
+クライアント側とサーバ側両方インストールしておく必要あり。</p>
+
+<h3 id="使い方:51c4a04d1c5f2563181f98eda5c8c5ac">使い方</h3>
+
+<p>普通の <code>ssh</code> を <code>mosh</code> に変えるだけ。</p>
+
+<pre><code class="language-sh">$ ssh yukimemi@yukimemi-my-host.com
+</code></pre>
+
+<p>↓</p>
+
+<pre><code class="language-sh">$ mosh yukimemi@yukimemi-my-host.com
+</code></pre>
+
+<p>だけど、なぜか、こんなエラーが出て使えなかった・・・。</p>
+
+<pre><code class="language-sh">$ mosh yukimemi@yukimemi-my-host.com
+zsh: No such file or directory
+ssh_exchange_identification: Connection closed by remote host
+/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
+</code></pre>
+
+<p>なんかzshが見つかんない？みたいなエラー。
+zshが悪いのかと思い、bashからやってみてもエラーになった。</p>
+
+<pre><code class="language-sh">$ mosh yukimemi@yukimemi-my-host.com
+bash: No such file or directory
+ssh_exchange_identification: Connection closed by remote host
+/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
+</code></pre>
+
+<p>環境変数が悪いのか？と思い、以下のようにしてみた。</p>
+
+<pre><code class="language-sh">$ SHELL=/bin/bash mosh yukimemi@yukimemi-my-host.com
+bash: mosh-server: command not found
+Connection to yukimemi-my-host.com closed.
+/usr/local/bin/mosh: Did not find mosh server startup message.
+</code></pre>
+
+<p>一応なんかエラーメッセージは変わったみたい。
+これは <code>mosh-server</code> コマンドが見つかんないって言ってるだけなので、
+moshのオプションで指定出来るっぽい。</p>
+
+<pre><code class="language-sh">$ SHELL=/bin/bash mosh --server=/usr/local/bin/mosh-server yukimemi@yukimemi-my-host.com
+[yukimemi@yukimemi-my-host.com] $
+</code></pre>
+
+<p>つながった。
+Airを閉じて一度ネットの接続がきれても、自動で再接続してくれるの便利。</p>
+
+<hr />
+
+<h5 id="参考:51c4a04d1c5f2563181f98eda5c8c5ac">参考</h5>
+
+<p><a href="http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/">Moshを使ってみる #Linux - rcmdnk&rsquo;s blog</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

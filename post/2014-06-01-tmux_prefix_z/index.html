@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>tmuxで一時的にpaneを最大化する | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">tmuxで一時的にpaneを最大化する</h2>
+      <p class="orange-text text-darken-4">2014/06/01 Sun</p>
+      <p>知らんかった。便利</p>
+
+<p>tmux 1.8 以降だと、 <code>prefix z</code> で最大化をトグルできるみたい。</p>
+
+<p><a href="http://rhysd.hatenablog.com/entry/2013/09/16/003620">tmux で一時的に pane を最大化する - sorry, uninuplemented:</a></p>
+
+<p>ちなみに、vimでは、以下のような設定で似たようなことも出来るみたい。</p>
+
+<pre><code class="language-vim">nnoremap so &lt;C-w&gt;_&lt;C-w&gt;|
+</code></pre>
+
+<p>2個目の <code>&lt;C-w&gt;</code> と <code>|</code> の間には、 <code>&lt;C-v&gt;</code> があり。( <code>&lt;C-v&gt;</code> を2回入力する)</p>
+
+<p>トグルではないけど。</p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

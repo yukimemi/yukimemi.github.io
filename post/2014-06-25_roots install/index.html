@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>roots install | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">roots install</h2>
+      <p class="orange-text text-darken-4">2014/06/25 Wed</p>
+      
+
+<p>今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。</p>
+
+<p>roots は、静的サイトジェネレーター。nodeで動く。
+特徴としては、以下の形式で作成出来ること。</p>
+
+<ul>
+<li>スクリプト -&gt; coffeescript</li>
+<li>HTML -&gt; jade</li>
+<li>CSS -&gt; stylus</li>
+</ul>
+
+<p>しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。
+jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。</p>
+
+<hr />
+
+<h3 id="ブログ作成手順:277c647c8512cad05114c9463b934e39">ブログ作成手順</h3>
+
+<ol>
+<li>npmでグローバルにインストール</li>
+</ol>
+
+<pre><code class="language-sh">$ npm install -g roots
+</code></pre>
+
+<ol>
+<li>ブログテンプレートでプロジェクト作成</li>
+</ol>
+
+<pre><code class="language-sh">$ roots new yukimemi.github.io --blog
+</code></pre>
+
+<p>これでブログ完成。</p>
+
+<ol>
+<li>roots コマンドでコンパイル &amp; ウォッチ</li>
+</ol>
+
+<pre><code class="language-sh">$ cd yukimemi.github.io
+$ roots watch
+</code></pre>
+
+<p>自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
+を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)</p>
+
+<ol>
+<li>ブログ記事を修正</li>
+</ol>
+
+<pre><code class="language-sh">$ cd posts
+$ vim hello_world.jade
+</code></pre>
+
+<p>修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。
+すごい・・・。</p>
+
+<hr />
+
+<h5 id="参考:277c647c8512cad05114c9463b934e39">参考:</h5>
+
+<p><a href="http://qiita.com/morishitter/items/b708a11e09b6fcb2f751">Node.js - 静的サイトジェネレーター「roots」 - Qiita</a></p>
+
+<p><a href="http://re-dzine.net/2013/02/roots/">静的サイトジェネレータ「roots」を触ってみた | REFLECTDESIGN</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

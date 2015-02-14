@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Vim coffeescript syntastic | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">Vim coffeescript syntastic</h2>
+      <p class="orange-text text-darken-4">2013/08/11 Sun</p>
+      <p>vim で保存時に自動で構文チェックとかを行なってくれるプラギンに
+Syntastic というものがある。</p>
+
+<p>coffeescript を書く時も、これを使うと便利。</p>
+
+<p>インストールは NeoBundle で一発。</p>
+
+<pre><code class="language-vim">NeoBundle 'scrooloose/syntastic.git', {
+            \ 'build': {
+            \   'mac': ['pip install pyflake', 'npm -g install coffeelint'],
+            \   'unix': ['pip install pyflake', 'npm -g install coffeelint']
+            \ }}
+</code></pre>
+
+<p>上記のように書いておけば、 Syntastic をインストールする時に自動で、
+pyflake と coffeelint をインストールしてくれる。 NeoBundle
+すごい。</p>
+
+<p>後は普通にコードを書いて、保存すると、自動でエラー行にチェックがつく。
+エラーの内容を見たい時は、</p>
+
+<pre><code class="language-vim">:Errors
+</code></pre>
+
+<p>コマンドでおｋ</p>
+
+<p>coffeelint はデフォルトでインデントは 2 みたい。</p>
+
+<p>.vimrc に以下のように書いておいた。</p>
+
+<pre><code class="language-vim">autocmd MyAutoCmd BufNewFile,BufRead .coffee setl ft=coffee fenc=utf8 ff=unix tabstop=4 shiftwidth=2 softtabstop=2 expandtab
+</code></pre>
+
+<p>また、1行の長さが 80文字
+を超えてもエラーになるのが邪魔だったので、これは無視したい。</p>
+
+<p>以下のファイルの内容を変更すれば、無視することが出来た。(もっとスマートなやり方があるかもしれない。誰か教えてください。)</p>
+
+<pre><code class="language-diff">$ vim ~/.nodebrew/current/lib/node_modules/coffeelint/lib/coffeelint.js
+ max_line_length: {
+   value: 80,
+   -level: ERROR,
+   +level: IGNORE,
+   message: 'Line exceeds maximum allowed length'
+ },
+</code></pre>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

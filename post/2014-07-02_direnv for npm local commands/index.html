@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>direnv for npm local commands | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">direnv for npm local commands</h2>
+      <p class="orange-text text-darken-4">2014/07/02 Wed</p>
+      
+
+<p>通常、 npm で実行コマンドをインストールするときは、以下のようにグローバルオプションを
+つけてインストールすることが多いと思う。</p>
+
+<pre><code class="language-sh">$ npm install -g gulp
+</code></pre>
+
+<p>だけど、これではプロジェクトごとに違うバージョンを使いたい！などの場合にこまる。
+そこで <a href="https://github.com/zimbatm/direnv">direnv</a> 。</p>
+
+<p>これを使うとあるディレクトリでは、「〜〜する」というのが簡単に出来る。</p>
+
+<h3 id="導入方法:4be122604034f58ee5537b3c65fe8086">導入方法</h3>
+
+<p>まず、 <a href="https://github.com/zimbatm/direnv">direnv</a> はgoを使うので、goをインストールしておく。</p>
+
+<pre><code class="language-sh">$ brew install go --cross-compile-common
+</code></pre>
+
+<p>以下を <code>.zshenv</code> に記載。</p>
+
+<pre><code class="language-sh"># direnv
+if which go &gt; /dev/null; then
+    if [ ! -d $HOME/.direnv ]; then
+        git clone https://github.com/zimbatm/direnv ~/.direnv
+        pushd ~/.direnv
+        make install
+        popd
+    fi
+    eval &quot;$(direnv hook zsh)&quot;
+fi
+</code></pre>
+
+<p>あとはシェルを再起動したらインストール完了。</p>
+
+<h3 id="使い方:4be122604034f58ee5537b3c65fe8086">使い方</h3>
+
+<p>プロジェクトのディレクトリでローカルにnpmのコマンドをインストールする。</p>
+
+<pre><code class="language-sh">$ npm install gulp
+</code></pre>
+
+<p>ローカルにインストールした場合、通常以下の場所に実行コマンドが配置される。</p>
+
+<pre><code class="language-sh">$ ls node_modules/.bin
+bower  cake  coffee  gulp  nodemon  nodewebkit  wiredep
+</code></pre>
+
+<p>なので、この場所をPATHに追加すればよい。
+<a href="https://github.com/zimbatm/direnv">direnv</a> では、以下のようにする。</p>
+
+<pre><code class="language-sh">$ direnv edit .
+</code></pre>
+
+<p>これで、エディタで <code>.envrc</code> というファイルが開くので、以下の行を記載。</p>
+
+<pre><code class="language-sh">export PATH=$PWD/node_modules/.bin:$PATH
+</code></pre>
+
+<p>これでOK。こうすると、このディレクトリに来た場合は自動的にPATHに追加され、
+反対にディレクトリから出た場合、自動的にPATHから削除される。</p>
+
+<pre><code class="language-sh">$ cd ~/.ghq/github.com/yukimemi/hogehoge
+direnv: loading .envrc
+direnv: export ~PATH
+</code></pre>
+
+<pre><code class="language-sh">$ cd
+direnv: unloading
+</code></pre>
+
+<p>これで、プロジェクトローカルなコマンドをかんたんに実行出来る。</p>
+
+<hr />
+
+<h5 id="参考:4be122604034f58ee5537b3c65fe8086">参考:</h5>
+
+<p><a href="http://qiita.com/kompiro/items/5fc46089247a56243a62">direnvを使おう - Qiita</a></p>
+
+<p><a href="http://doloopwhile.hatenablog.com/entry/2014/06/18/010449">direnvで解決するGOPATHの3つの問題点 - None is None is None</a></p>
+
+<p><a href="http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm">Big Sky :: bundle exec がウザい</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

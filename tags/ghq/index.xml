@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ghq on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/ghq/</link>
+    <description>Recent content in Ghq on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 29 Jun 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/ghq/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>All You Need Is Peco</title>
+      <link>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</link>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</guid>
+      <description>
+
+&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; がかなり流行りっぽい。
+そこで導入してみた。思ったより使い心地よくて、 &lt;a href=&#34;https://github.com/zsh-users/zaw&#34;&gt;zaw&lt;/a&gt; から乗り換えた。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;導入手順:5ad334b2cec04f5e498f9309688bd674&#34;&gt;導入手順&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;homebrewでgoをインストール。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;.zshenv&lt;/code&gt; に以下を記載。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# go
+export GOPATH=$HOME/.go
+export PATH=$GOPATH/bin:$PATH
+
+[ ! -d $GOPATH ] &amp;amp;&amp;amp; mkdir $GOPATH
+if which go &amp;gt; /dev/null; then
+    export GOROOT=$(go env GOROOT)
+
+    # ghq
+    go get github.com/motemen/ghq
+    git config --global ghq.root ~/.ghq
+    # peco
+    go get github.com/peco/peco/cmd/peco
+    # gh-open
+    go get github.com/typester/gh-open
+
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;.zshenv&lt;/code&gt; を読み込み直す&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.zshenv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;インストール完了。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls -l | peco
+QUERY&amp;gt;                                                         IgnoreCase [1/1]
+total 96100
+drwxr-xr-x  13 yukimemi staff      442  6 27 05:07 Applications
+drwx------+  3 yukimemi staff      102  6 23 22:00 Desktop
+drwx------+  6 yukimemi staff      204  5 25 10:58 Documents
+drwx------+ 20 yukimemi staff      680  6 22 08:20 Downloads
+drwx------  94 yukimemi staff     3196  6 29 00:23 Dropbox
+drwx------+ 47 yukimemi staff     1598  5 18 12:26 Library
+drwx------+  3 yukimemi staff      102  5 17 18:13 Movies
+drwx------+  4 yukimemi staff      136  5 18 00:35 Music
+drwx------+  3 yukimemi staff      102  6  8 18:24 Pictures
+drwxr-xr-x+  5 yukimemi staff      170  5 17 18:13 Public
+drwxr-xr-x   5 yukimemi staff      170  6 29 00:07 bin
+drwxr-xr-x  35 yukimemi staff     1190  6 28 17:20 dotfiles
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;peco-使い方:5ad334b2cec04f5e498f9309688bd674&#34;&gt;&lt;strong&gt;peco&lt;/strong&gt; 使い方&lt;/h3&gt;
+
+&lt;h4 id=&#34;history:5ad334b2cec04f5e498f9309688bd674&#34;&gt;history&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-select-history() {
+  local tac
+  if which tac &amp;gt; /dev/null; then
+      tac=&amp;quot;tac&amp;quot;
+  else
+      tac=&amp;quot;tail -r&amp;quot;
+  fi
+  BUFFER=$(history -n 1 | \
+      eval $tac | \
+      peco --query &amp;quot;$LBUFFER&amp;quot;)
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-select-history
+bindkey &#39;^r&#39; peco-select-history
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-r&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/189]
+ls   -l | peco
+cd
+go env
+env G -i go
+pvim
+pwd
+git co drafts; roots watch
+mux github
+exit
+pn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;resent-dirs:5ad334b2cec04f5e498f9309688bd674&#34;&gt;resent dirs&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;zstyle &#39;:filter-select&#39; case-insensitive yes
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle &#39;:chpwd:*&#39; recent-dirs-max 5000
+zstyle &#39;:chpwd:*&#39; recent-dirs-default yes
+zstyle &#39;:completion:*&#39; recent-dirs-insert both
+
+function peco-cdr () {
+    local selected_dir=$(cdr -l | awk &#39;{ print $2 }&#39; | peco)
+    if [ -n &amp;quot;$selected_dir&amp;quot; ]; then
+        BUFFER=&amp;quot;cd ${selected_dir}&amp;quot;
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-cdr
+bindkey &#39;^@&#39; peco-cdr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-@&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/4]
+~
+~/.ghq
+~/.ghq/bitbucket.org/yukimemi/haskell
+~/.ghq/github.com/yukimemi/yukimemi.github.io
+~/.cabal/bin
+~/.ghq/bitbucket.org/yukimemi/yukimemi.bitbucket.org
+~/dotfiles
+~/dotfiles/.tmuxinator
+~/Documents/git/yukimemi.github.io
+~/.ghq/github.com/zcbenz/nw-sample-apps
+~/.go
+~/Pictures
+~/Downloads
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;snippets:5ad334b2cec04f5e498f9309688bd674&#34;&gt;snippets&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-snippets() {
+    BUFFER=$(grep -v &amp;quot;^#&amp;quot; ~/.peco-snippets | peco --query &amp;quot;$LBUFFER&amp;quot;)
+    zle clear-screen
+}
+zle -N peco-snippets
+bindkey &#39;^s&#39; peco-snippets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;~/.peco-snippets&lt;/code&gt; によく使うコマンドを記載しておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# find
+find . -type f -mtime +10
+find . -mtime +50 -exec mv {} del \;
+
+# date
+date +%Y%m%d
+
+# kill
+kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
+kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
+
+# screensaver
+open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
+
+# exiftool
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
+
+# neobundle
+vim +NeoBundleInstall! +q
+
+# ghq
+# github
+ghq get git@github.com:yukimemi/md2docx.git
+ghq get git@github.com:yukimemi/gitstatus.git
+
+# bitbucket
+ghq get git@bitbucket.org:yukimemi/haskell.git
+ghq get git@bitbucket.org:yukimemi/node-webkit.git
+ghq get git@bitbucket.org:yukimemi/clojure.git
+ghq get git@bitbucket.org:yukimemi/go.git
+ghq get git@bitbucket.org:yukimemi/scripts.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-s&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/1]
+find . -type f -mtime +10
+find . -mtime +50 -exec mv {} del \;
+
+date +%Y%m%d
+
+kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
+kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
+
+open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
+
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
+
+vim +NeoBundleInstall! +q
+
+ghq get git@github.com:yukimemi/md2docx.git
+ghq get git@github.com:yukimemi/gitstatus.git
+
+ghq get git@bitbucket.org:yukimemi/haskell.git
+ghq get git@bitbucket.org:yukimemi/node-webkit.git
+ghq get git@bitbucket.org:yukimemi/clojure.git
+ghq get git@bitbucket.org:yukimemi/go.git
+ghq get git@bitbucket.org:yukimemi/scripts.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;ghq:5ad334b2cec04f5e498f9309688bd674&#34;&gt;ghq&lt;/h4&gt;
+
+&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; も流行りだけど、 &lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;ghq&lt;/a&gt; も流行り。ちょうべんり。
+上記で記載済みの導入手順に従っていればインストールされているはず。&lt;/p&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias ghl=&#39;cd $(ghq list -p | peco)&#39;
+alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 ghq のどれかに &lt;code&gt;cd&lt;/code&gt; したり、該当のgithubをブラウザで開いたり出来る。&lt;/p&gt;
+
+&lt;h4 id=&#34;vim:5ad334b2cec04f5e498f9309688bd674&#34;&gt;vim&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias pvim=&#39;vim &amp;quot;$(find . -type f | peco)&amp;quot;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、カレントディレクトリ以下のファイルをすぐにvimで開ける。ちょうべんり。&lt;/p&gt;
+
+&lt;p&gt;いろんな参考ページの方々ありがとうございます。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:5ad334b2cec04f5e498f9309688bd674&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/peco.htm&#34;&gt;Big Sky :: Windows のコマンドプロンプトを10倍便利にするコマンド「peco」&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://shibayu36.hatenablog.com/entry/2014/06/27/223538&#34;&gt;pecoを使い始めた - $shibayu36-&amp;gt;blog;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://webtech-walker.com/archive/2014/06/peco-ghq-gh-open.html&#34;&gt;peco、ghq、gh-openの組み合わせが捗る - Webtech Walker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.glidenote.com/blog/2014/06/26/snippets-peco-percol/&#34;&gt;peco/percolでCUIなスニペットツールを作ってみる - Glide Note - グライドノート&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

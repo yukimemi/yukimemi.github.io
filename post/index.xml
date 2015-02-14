@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/post/</link>
+    <description>Recent content in Posts on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 15 Feb 2015 10:28:27 &#43;0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hello hugo</title>
+      <link>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</link>
+      <pubDate>Sun, 15 Feb 2015 10:28:27 &#43;0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</guid>
+      <description>
+
+&lt;p&gt;これまでいろいろ静的サイトジェネレーターを試してきた。&lt;/p&gt;
+
+&lt;h5 id=&#34;tinkerer-http-tinkerer-me:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;&lt;a href=&#34;http://tinkerer.me&#34;&gt;Tinkerer&lt;/a&gt;&lt;/h5&gt;
+
+&lt;h5 id=&#34;roots-http-roots-cx:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;&lt;a href=&#34;http://roots.cx&#34;&gt;roots&lt;/a&gt;&lt;/h5&gt;
+
+&lt;p&gt;そして今回はgolang製の &lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;hugo-http-gohugo-io:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;&lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/h5&gt;
+
+&lt;p&gt;流行りに乗ってみたいってのもあるけど、なによりサイト生成がはやい！！&lt;/p&gt;
+
+&lt;p&gt;これだけでも乗り換える価値があると思う。&lt;/p&gt;
+
+&lt;h5 id=&#34;参考:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;参考&lt;/h5&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://rakuishi.com/archives/wordpress-to-hugo/&#34;&gt;WordPress から Hugo に乗り換えました&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Set cursorline as needed</title>
+      <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
+      <pubDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
+      <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;
+
+&lt;p&gt;よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに &lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; でもとのバッファに戻ったときに、 &lt;code&gt;s:cursorline_lock&lt;/code&gt; 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと &lt;code&gt;set nocursorline&lt;/code&gt; されなくなるようだった。&lt;/p&gt;
+
+&lt;p&gt;そこで、 Lingr のvim部屋で初めて質問してみた。&lt;/p&gt;
+
+&lt;p&gt;そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; では、 &lt;code&gt;WinEnter&lt;/code&gt; イベントは発生しないが、 &lt;code&gt;BufEnter&lt;/code&gt; イベントは発生するらしい。
+また、僕は、 &lt;code&gt;nnoremap : q:i&lt;/code&gt; のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。
+そこで、thincaさんの &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;設定&lt;/a&gt; を以下のように、変更した。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline(&#39;CursorMoved&#39;)
+au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline(&#39;CursorHold&#39;)
+au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline(&#39;WinEnter,BufEnter,CmdwinLeave&#39;)
+au MyAutoCmd WinLeave * call s:auto_cursorline(&#39;WinLeave&#39;)
+
+let s:cursorline_lock = 0
+function! s:auto_cursorline(event)
+  if a:event ==# &#39;WinEnter,BufEnter,CmdwinLeave&#39;
+    setlocal cursorline
+    setlocal cursorcolumn
+    let s:cursorline_lock = 2
+  elseif a:event ==# &#39;WinLeave&#39;
+    setlocal nocursorline
+    setlocal nocursorcolumn
+  elseif a:event ==# &#39;CursorMoved&#39;
+    if s:cursorline_lock
+      if 1 &amp;lt; s:cursorline_lock
+        let s:cursorline_lock = 1
+      else
+        setlocal nocursorline
+        setlocal nocursorcolumn
+        let s:cursorline_lock = 0
+      endif
+    endif
+  elseif a:event ==# &#39;CursorHold&#39;
+    if &amp;amp;updatetime &amp;gt;= 4000
+      setlocal cursorline
+      setlocal cursorcolumn
+    endif
+    let s:cursorline_lock = 1
+  endif
+endfunction
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ついでに &lt;code&gt;cursorcolumn&lt;/code&gt; も追加しといた。
+また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
+
+&lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Add --runcmd option to coffee-script-on-jscript</title>
+      <link>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</link>
+      <pubDate>Tue, 15 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</guid>
+      <description>
+
+&lt;p&gt;先日の &lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh.html&#34;&gt;記事&lt;/a&gt; のthincaさんフォーク版、僕々仕様のWindows上でのCoffeeScriptコンパイラに &lt;code&gt;--runcmd&lt;/code&gt; オプションを加えた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee
+Usage: coffee [options] path/to/script.coffee
+
+  -b, --bare         compile without the top-level function wrapper
+  -c, --compile      compile to JavaScript and save as .js files
+      --encoding     character encoding used by source files
+  -e, --eval         compile a string from the command line
+  -h, --help         display this help message
+  -j, --join         concatenate the scripts before compiling
+  -n, --nodes        print out the parse tree that the parser produces
+  -o, --output       set the directory for compiled JavaScript
+  -p, --print        print the compiled JavaScript to stdout
+  -s, --stdio        listen for and compile scripts over stdio
+  -t, --tokens       print the tokens that the lexer produces
+  -v, --version      display CoffeeScript version
+  -w, --watch        watch scripts for changes, and recompile
+  -r, --runcmd       run the compiled scripts as JScript
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後の行のやつ。&lt;/p&gt;
+
+&lt;p&gt;オプションで &lt;code&gt;-r&lt;/code&gt; もしくは、 &lt;code&gt;--runcmd&lt;/code&gt; を指定すると、自動でコンパイルされて実行形式 (.cmd) になったファイルが実行される。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.coffee&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;do (name = &amp;quot;CoffeeScript&amp;quot;) -&amp;gt;
+  WScript.Echo &amp;quot;はろー, \#{name} !&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記の &lt;code&gt;hello.coffee&lt;/code&gt; を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -r hello.coffee
+はろー, CoffeeScript !
+
+ExitCode = [0]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動でコンパイルしてJScriptとして実行される。(あと一応戻り値もEchoするようにしておいた。)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;--watch&lt;/code&gt; オプションと一緒に使うとかなり便利。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -rw hello.coffee
+はろー, CoffeeScript !
+
+ExitCode = [0]
+
+
+へろー, CoffeeScript !
+
+ExitCode = [0]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存する度に自動でコンパイル、実行まで行ってくれる。&lt;/p&gt;
+
+&lt;p&gt;便利なのはいいんだけど、今どきJScriptとか、時代に逆行してるなぁ・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:7db1863f2219b94ca053bc8615393dd4&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://msdn.microsoft.com/ja-jp/library/cc364356.aspx&#34;&gt;Exec メソッド&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CoffeeScript on Windows as wsh</title>
+      <link>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</link>
+      <pubDate>Mon, 14 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</guid>
+      <description>
+
+&lt;p&gt;長い間、Windowsでcoffeescriptをwshとして記述する方法を模索していたけど、ようやく解が見つかった！！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/thinca/coffee-script-on-jscript&#34;&gt;thinca/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;thincaさん作成のcoffeescriptコンパイラ。Windowsで動く。nodejsもいらず、バッチファイル1つ &lt;code&gt;coffee.bat&lt;/code&gt; と、公式の &lt;code&gt;coffee-script.js&lt;/code&gt; だけで動く。&lt;/p&gt;
+
+&lt;h3 id=&#34;使用方法:e9056d41c708ea37cf281631f226d96d&#34;&gt;使用方法&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; ghq get https://github.com/thinca/coffee-script-on-jscript.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; git clone https://github.com/thinca/coffee-script-on-jscript.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ghq があるなら上で。&lt;/p&gt;
+
+&lt;p&gt;後は普通のcoffeescriptコンパイラと同じオプションがだいたい使えるようなので、普通にコンパイルするのであれば&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee -c hello.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とかで &lt;code&gt;hello.js&lt;/code&gt; に変換される。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;watch&lt;/code&gt; オプションもあるみたいなので、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee -cw hello.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;としておくと、 &lt;code&gt;hello.coffee&lt;/code&gt; を更新するたびに自動でコンパイルしてくれる。便利。&lt;/p&gt;
+
+&lt;p&gt;他のオプションは、 &lt;code&gt;coffee.bat&lt;/code&gt; に何も引数をつけずに実行するとhelpで表示される。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee
+Usage: coffee [options] path/to/script.coffee
+
+  -b, --bare         compile without the top-level function wrapper
+  -c, --compile      compile to JavaScript and save as .js files
+      --encoding     character encoding used by source files
+  -e, --eval         compile a string from the command line
+  -h, --help         display this help message
+  -j, --join         concatenate the scripts before compiling
+  -n, --nodes        print out the parse tree that the parser produces
+  -o, --output       set the directory for compiled JavaScript
+  -p, --print        print the compiled JavaScript to stdout
+  -s, --stdio        listen for and compile scripts over stdio
+  -t, --tokens       print the tokens that the lexer produces
+  -v, --version      display CoffeeScript version
+  -w, --watch        watch scripts for changes, and recompile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;jscriptをバッチとして実行:e9056d41c708ea37cf281631f226d96d&#34;&gt;jscriptをバッチとして実行&lt;/h3&gt;
+
+&lt;p&gt;上記までで、 &lt;code&gt;coffeescript&lt;/code&gt; を &lt;code&gt;jscript&lt;/code&gt; に変換することは簡単に出来るんだけど、どうせなら &lt;code&gt;jscript&lt;/code&gt; からさらにバッチとして実行出来る状態に変換したい。 &lt;code&gt;jscript&lt;/code&gt; をバッチとして実行するには、まさに &lt;code&gt;coffee.bat&lt;/code&gt; がそうなっていて、ソースの一番最初に以下の4行を追加すればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;@set @junk=1 /* vim:set ft=javascript:
+@cscript //nologo //e:jscript &amp;quot;%~dpn0.bat&amp;quot; %*
+@goto :eof
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;そこで、&lt;code&gt;coffee.bat&lt;/code&gt; に、コンパイル時に自動で上記4行を追加する処理を加えた。
+(追加で戻り値も返すようにした。)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function addHeader(file) {//{{{
+  var content = binaryToString(readFile(file), &amp;quot;UTF-8&amp;quot;);
+  var header = &amp;quot;@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \&amp;quot;%~f0\&amp;quot; %*\n@exit /b %errorlevel%\n*/\n\n&amp;quot;;
+  var cmd = file.replace(/(\.\w+)?$/, &amp;quot;.cmd&amp;quot;);
+  writeFile(cmd, (header + content).split(&amp;quot;\n&amp;quot;).join(&amp;quot;\r\n&amp;quot;), &amp;quot;Shift_JIS&amp;quot;);
+}//}}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;また、 &lt;code&gt;jscript&lt;/code&gt; として実行するために、coffeeからjsに変換されたファイルを UTF-8 で読み込んで、 Shift_JIS で出力するようにしてある。&lt;/p&gt;
+
+&lt;p&gt;例えば、以下の &lt;code&gt;hello.coffee&lt;/code&gt; (文字コード: UTF-8 、 改行コード: LF で作成)があった場合、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.coffee&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;do (name = &amp;quot;CoffeeScript&amp;quot;) -&amp;gt;
+  WScript.Echo &amp;quot;はろー, \#{name} !&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次のようにコンパイルすると、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee -c hello.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;hello.js&lt;/code&gt; (文字コード: UTF-8 、 改行コード: LF )
+と &lt;code&gt;hello.cmd&lt;/code&gt; (文字コード: Shift_JIS 、 改行コード: CRLF )が生成される。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.js&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;(function() {
+  (function(name) {
+    return WScript.Echo(&amp;quot;はろー, &amp;quot; + name + &amp;quot; !&amp;quot;);
+  })(&amp;quot;CoffeeScript&amp;quot;);
+
+}).call(this);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.cmd&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;@set @junk=1 /* vim:set ft=javascript:
+@cscript //nologo //e:jscript &amp;quot;%~f0&amp;quot; %*
+@exit /b %errorlevel%
+*/
+
+(function() {
+  (function(name) {
+    return WScript.Echo(&amp;quot;はろー, &amp;quot; + name + &amp;quot; !&amp;quot;);
+  })(&amp;quot;CoffeeScript&amp;quot;);
+
+}).call(this);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでダブルクリックで簡単にバッチとして実行出来る &lt;code&gt;hello.cmd&lt;/code&gt; が作成された。&lt;/p&gt;
+
+&lt;p&gt;一応、上記の &lt;code&gt;addHeader&lt;/code&gt; 関数を加え、さらに &lt;code&gt;coffee-script.js&lt;/code&gt; のバージョンを v1.7.1 にアップデートしたのを、thincaさんのからフォークして以下にあげた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Windowsではこれからは PowerShell だ！と思ってたけど、やっぱwshもまだまだ使えそう・・・。
+ExcelとかのCOMも、PowerShellより、wshの方が断然早いし。というかPowerShellはなぜあんなに遅いんだろうか・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:e9056d41c708ea37cf281631f226d96d&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/thinca/20110707/1310014720&#34;&gt;JScript で動く CoffeeScript コンパイラのラッパ書いた - 永遠に未完成&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/thinca/coffee-script-on-jscript&#34;&gt;thinca/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>roots simple pagination</title>
+      <link>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</link>
+      <pubDate>Wed, 09 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</guid>
+      <description>
+
+&lt;p&gt;rootsは非常にシンプルで良いのだが、シンプルが故に通常のブログだと当たり前な部分を自分で実装しなければいけないところがある。&lt;/p&gt;
+
+&lt;p&gt;その一つが、ページネーション。&lt;/p&gt;
+
+&lt;p&gt;rootsでブログテンプレートを作成した場合、トップページはページネーションされず、書いていったブログ記事が全部リストで並ぶことになる。&lt;/p&gt;
+
+&lt;p&gt;まぁそんなたいした量を書いてないんで問題ないのだけれども、一応ブログとしてページネーションくらいはあったほうがいいと思い、実装方法を探してみた。&lt;/p&gt;
+
+&lt;p&gt;rootsは静的サイトジェネレーターなので、通常だとjadeの記法などでコンパイル時に出来るんだろうけど、今回はjqueryで簡単に出来る &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; というものが見つかったので、それを追加してみた。&lt;/p&gt;
+
+&lt;h3 id=&#34;インストール:6d359caa743518f0339530aa8cdf1d76&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;まず、追加するのにはbowerを使った。
+ちなみにローカルにインストールしたbowerを使う方法は、&lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-02_direnv%20for%20npm%20local%20commands.html&#34;&gt;前の記事&lt;/a&gt; を参照。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install bower --save-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;事前準備として、bowerのコンポーネントがインストールされる先を変更しておく。&lt;/p&gt;
+
+&lt;p&gt;roots のルートで、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim .bowerrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;し、以下を記載。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
+    &amp;quot;directory&amp;quot;: &amp;quot;assets/bower_components&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;その後、bowerにて、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; をインストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ bower install jquery.simplePagination --save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 &lt;code&gt;assets/bower_components&lt;/code&gt; 配下に保存される。&lt;/p&gt;
+
+&lt;h3 id=&#34;simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; 設定&lt;/h3&gt;
+
+&lt;h4 id=&#34;jade側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;jade側の設定&lt;/h4&gt;
+
+&lt;p&gt;まずは、ページネーションの配置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim views/layout.jade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;--- 省略 ---
+#main
+  != content
+  .pagination
+--- 省略 ---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;divのclassで設定。単純に &lt;code&gt;pagination&lt;/code&gt; というclassにて、divを配置しただけ。&lt;/p&gt;
+
+&lt;p&gt;それから、stylusでの設定がしやすいように、ブログ記事のリストにclassを設定しておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim views/index.jade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-jade&#34;&gt;ul#posts
+  - each post in sort(site.posts, { by: &#39;date&#39; })
+    li.plist
+      p
+        a(href=&amp;quot;\#{post.url}&amp;quot;)= post.title
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;ul#posts -&amp;gt; li&lt;/code&gt; に、class &lt;code&gt;plist&lt;/code&gt; を追加しただけ。&lt;/p&gt;
+
+&lt;h4 id=&#34;stylus側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;stylus側の設定&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/css/master.styl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最初はすべてのブログ記事リストを見えなくしておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-stylus&#34;&gt;#posts
+  .plist
+    display: none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;coffee側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;coffee側の設定&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;assets/js/main.coffee&lt;/code&gt; に設定を記述していく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/js/main.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;記載内容 ↓&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;#= require &amp;quot;_helper&amp;quot;
+
+# Add scripts to load to this array. These can be loaded remotely like jquery
+# is below, or can use file paths, like &#39;vendor/underscore&#39;
+jq = [&amp;quot;http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js&amp;quot;]
+js = [&amp;quot;/bower_components/jquery.simplePagination/jquery.simplePagination.js&amp;quot;]
+
+
+# this will fire once the required scripts have been loaded
+require jq, -&amp;gt;
+  require js, -&amp;gt;
+    $ -&amp;gt;
+      console.log &#39;jquery loaded, dom ready &amp;lt;-- via assets/js/main.coffee&#39;
+
+      # Pagination
+      items = $(&#39;#posts li&#39;)
+      numItems = items.length
+      perPage = 21
+
+      # only show the first perPage items initially
+      items.slice(0, perPage).show()
+
+      # now setup your pagination
+      $(&#39;.pagination&#39;).pagination
+        items: numItems
+        itemsOnPage: perPage
+        cssStyle: &amp;quot;light-theme&amp;quot;
+        onPageClick: (pageNumber) -&amp;gt;
+          showFrom = perPage * (pageNumber - 1)
+          showTo = showFrom + perPage
+
+          items.hide()
+               .slice(showFrom, showTo).show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;javascriptのロードはrequire.jsで行うので、jade側への追記はなし。&lt;/p&gt;
+
+&lt;p&gt;rootsはデフォルトで、jqueryのロードは行っているようだったので、追加で &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; の設定を追加していった。
+最初、jqueryと同じ配列に &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; を組み込んでいたのだが、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; はjqueryが読み込まれた後でないと正常に実行されないようなので、必ずjqueryが先に読み込まれるように、jqueryとそれ以外というように配列を分け、コールバックを一つ深くした。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;16L でまず対象のリストのセレクタをゲット&lt;/li&gt;
+&lt;li&gt;17L で、リストの数をゲット。&lt;/li&gt;
+&lt;li&gt;18L で、1ページに表示するリストの数を指定。&lt;/li&gt;
+&lt;li&gt;21L で、最初の1ページだけを表示。&lt;/li&gt;
+&lt;li&gt;24L から、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; の設定。&lt;/li&gt;
+&lt;li&gt;25L で、 17L でゲットしたリストの数を指定。&lt;/li&gt;
+&lt;li&gt;26L で、 18L で指定した1ページに表示するリストの数を設定。&lt;/li&gt;
+&lt;li&gt;27L で、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; のテーマを指定。&lt;/li&gt;
+&lt;li&gt;28L から、ページネーションのボタンが押下された時の実装を指定。現在のページ番号が &lt;code&gt;pageNumber&lt;/code&gt; に入っている。&lt;/li&gt;
+&lt;li&gt;29L で、表示するリストの開始番号を算出。&lt;/li&gt;
+&lt;li&gt;30L で、表示するリストの終了番号を算出。&lt;/li&gt;
+&lt;li&gt;32-33L で、一度リストを全部非表示にして、必要なところだけ表示する。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;今度はjadeでコンパイル時にページネーション実装してみたい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:6d359caa743518f0339530aa8cdf1d76&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/20896076/how-to-use-simplepagination-jquery&#34;&gt;javascript - How to use SimplePagination jquery - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>mosh error No such file or directory</title>
+      <link>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</link>
+      <pubDate>Sun, 06 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</guid>
+      <description>
+
+&lt;p&gt;mosh というmobile-shelllを導入してみたところ、「No such file or directory」という
+エラーが発生して使えなかった・・・。&lt;/p&gt;
+
+&lt;p&gt;原因は結局よくわからなかったんだけど、とりあえず使えるようになったので、一応メモとして残しとこ。&lt;/p&gt;
+
+&lt;h3 id=&#34;mosh-install:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;mosh install&lt;/h3&gt;
+
+&lt;p&gt;環境は Mac OSX Mavericks。Homebrewで簡単にインストール出来た。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install mosh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;昔は &lt;code&gt;mobile-shelll&lt;/code&gt; だったみたいだけど、今は &lt;code&gt;mosh&lt;/code&gt; でインストール出来る。
+クライアント側とサーバ側両方インストールしておく必要あり。&lt;/p&gt;
+
+&lt;h3 id=&#34;使い方:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;使い方&lt;/h3&gt;
+
+&lt;p&gt;普通の &lt;code&gt;ssh&lt;/code&gt; を &lt;code&gt;mosh&lt;/code&gt; に変えるだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh yukimemi@yukimemi-my-host.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;↓&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;だけど、なぜか、こんなエラーが出て使えなかった・・・。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
+zsh: No such file or directory
+ssh_exchange_identification: Connection closed by remote host
+/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なんかzshが見つかんない？みたいなエラー。
+zshが悪いのかと思い、bashからやってみてもエラーになった。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
+bash: No such file or directory
+ssh_exchange_identification: Connection closed by remote host
+/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;環境変数が悪いのか？と思い、以下のようにしてみた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ SHELL=/bin/bash mosh yukimemi@yukimemi-my-host.com
+bash: mosh-server: command not found
+Connection to yukimemi-my-host.com closed.
+/usr/local/bin/mosh: Did not find mosh server startup message.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一応なんかエラーメッセージは変わったみたい。
+これは &lt;code&gt;mosh-server&lt;/code&gt; コマンドが見つかんないって言ってるだけなので、
+moshのオプションで指定出来るっぽい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ SHELL=/bin/bash mosh --server=/usr/local/bin/mosh-server yukimemi@yukimemi-my-host.com
+[yukimemi@yukimemi-my-host.com] $
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;つながった。
+Airを閉じて一度ネットの接続がきれても、自動で再接続してくれるの便利。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/&#34;&gt;Moshを使ってみる #Linux - rcmdnk&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Git directory deploy !</title>
+      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
+      <description>
+
+&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
+
+&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
+githubへ更新という流れ。
+その際、 roots では、ビルド結果を public というディレクトリに出力するので
+そのディレクトリだけをpushしたい。
+gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
+のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
+
+&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
+
+&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
+deploy_branch=master
+
+#if no user identity is already set in the current git environment, use this:
+default_username=yukimemi
+default_email=yukimemi@gmail.com
+
+#repository to deploy to. must be readable and writable.
+repo=origin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
+$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
+$ git --work-tree public add --all
+$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
+$ git push -f origin public
+$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
+
+&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
+それから、 roots でコンパイル。
+あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
+$ ./deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;べんり。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>direnv for npm local commands</title>
+      <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</guid>
+      <description>
+
+&lt;p&gt;通常、 npm で実行コマンドをインストールするときは、以下のようにグローバルオプションを
+つけてインストールすることが多いと思う。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g gulp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;だけど、これではプロジェクトごとに違うバージョンを使いたい！などの場合にこまる。
+そこで &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;これを使うとあるディレクトリでは、「〜〜する」というのが簡単に出来る。&lt;/p&gt;
+
+&lt;h3 id=&#34;導入方法:4be122604034f58ee5537b3c65fe8086&#34;&gt;導入方法&lt;/h3&gt;
+
+&lt;p&gt;まず、 &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; はgoを使うので、goをインストールしておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshenv&lt;/code&gt; に記載。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# direnv
+if which go &amp;gt; /dev/null; then
+    if [ ! -d $HOME/.direnv ]; then
+        git clone https://github.com/zimbatm/direnv ~/.direnv
+        pushd ~/.direnv
+        make install
+        popd
+    fi
+    eval &amp;quot;$(direnv hook zsh)&amp;quot;
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとはシェルを再起動したらインストール完了。&lt;/p&gt;
+
+&lt;h3 id=&#34;使い方:4be122604034f58ee5537b3c65fe8086&#34;&gt;使い方&lt;/h3&gt;
+
+&lt;p&gt;プロジェクトのディレクトリでローカルにnpmのコマンドをインストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install gulp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ローカルにインストールした場合、通常以下の場所に実行コマンドが配置される。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls node_modules/.bin
+bower  cake  coffee  gulp  nodemon  nodewebkit  wiredep
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なので、この場所をPATHに追加すればよい。
+&lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; では、以下のようにする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ direnv edit .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、エディタで &lt;code&gt;.envrc&lt;/code&gt; というファイルが開くので、以下の行を記載。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export PATH=$PWD/node_modules/.bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでOK。こうすると、このディレクトリに来た場合は自動的にPATHに追加され、
+反対にディレクトリから出た場合、自動的にPATHから削除される。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ~/.ghq/github.com/yukimemi/hogehoge
+direnv: loading .envrc
+direnv: export ~PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd
+direnv: unloading
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、プロジェクトローカルなコマンドをかんたんに実行出来る。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:4be122604034f58ee5537b3c65fe8086&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/kompiro/items/5fc46089247a56243a62&#34;&gt;direnvを使おう - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://doloopwhile.hatenablog.com/entry/2014/06/18/010449&#34;&gt;direnvで解決するGOPATHの3つの問題点 - None is None is None&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm&#34;&gt;Big Sky :: bundle exec がウザい&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>All You Need Is Peco</title>
+      <link>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</link>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</guid>
+      <description>
+
+&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; がかなり流行りっぽい。
+そこで導入してみた。思ったより使い心地よくて、 &lt;a href=&#34;https://github.com/zsh-users/zaw&#34;&gt;zaw&lt;/a&gt; から乗り換えた。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;導入手順:5ad334b2cec04f5e498f9309688bd674&#34;&gt;導入手順&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;homebrewでgoをインストール。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;.zshenv&lt;/code&gt; に以下を記載。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# go
+export GOPATH=$HOME/.go
+export PATH=$GOPATH/bin:$PATH
+
+[ ! -d $GOPATH ] &amp;amp;&amp;amp; mkdir $GOPATH
+if which go &amp;gt; /dev/null; then
+    export GOROOT=$(go env GOROOT)
+
+    # ghq
+    go get github.com/motemen/ghq
+    git config --global ghq.root ~/.ghq
+    # peco
+    go get github.com/peco/peco/cmd/peco
+    # gh-open
+    go get github.com/typester/gh-open
+
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;.zshenv&lt;/code&gt; を読み込み直す&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.zshenv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;インストール完了。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls -l | peco
+QUERY&amp;gt;                                                         IgnoreCase [1/1]
+total 96100
+drwxr-xr-x  13 yukimemi staff      442  6 27 05:07 Applications
+drwx------+  3 yukimemi staff      102  6 23 22:00 Desktop
+drwx------+  6 yukimemi staff      204  5 25 10:58 Documents
+drwx------+ 20 yukimemi staff      680  6 22 08:20 Downloads
+drwx------  94 yukimemi staff     3196  6 29 00:23 Dropbox
+drwx------+ 47 yukimemi staff     1598  5 18 12:26 Library
+drwx------+  3 yukimemi staff      102  5 17 18:13 Movies
+drwx------+  4 yukimemi staff      136  5 18 00:35 Music
+drwx------+  3 yukimemi staff      102  6  8 18:24 Pictures
+drwxr-xr-x+  5 yukimemi staff      170  5 17 18:13 Public
+drwxr-xr-x   5 yukimemi staff      170  6 29 00:07 bin
+drwxr-xr-x  35 yukimemi staff     1190  6 28 17:20 dotfiles
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;peco-使い方:5ad334b2cec04f5e498f9309688bd674&#34;&gt;&lt;strong&gt;peco&lt;/strong&gt; 使い方&lt;/h3&gt;
+
+&lt;h4 id=&#34;history:5ad334b2cec04f5e498f9309688bd674&#34;&gt;history&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-select-history() {
+  local tac
+  if which tac &amp;gt; /dev/null; then
+      tac=&amp;quot;tac&amp;quot;
+  else
+      tac=&amp;quot;tail -r&amp;quot;
+  fi
+  BUFFER=$(history -n 1 | \
+      eval $tac | \
+      peco --query &amp;quot;$LBUFFER&amp;quot;)
+  CURSOR=$#BUFFER
+  zle clear-screen
+}
+zle -N peco-select-history
+bindkey &#39;^r&#39; peco-select-history
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-r&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/189]
+ls   -l | peco
+cd
+go env
+env G -i go
+pvim
+pwd
+git co drafts; roots watch
+mux github
+exit
+pn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;resent-dirs:5ad334b2cec04f5e498f9309688bd674&#34;&gt;resent dirs&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;zstyle &#39;:filter-select&#39; case-insensitive yes
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle &#39;:chpwd:*&#39; recent-dirs-max 5000
+zstyle &#39;:chpwd:*&#39; recent-dirs-default yes
+zstyle &#39;:completion:*&#39; recent-dirs-insert both
+
+function peco-cdr () {
+    local selected_dir=$(cdr -l | awk &#39;{ print $2 }&#39; | peco)
+    if [ -n &amp;quot;$selected_dir&amp;quot; ]; then
+        BUFFER=&amp;quot;cd ${selected_dir}&amp;quot;
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-cdr
+bindkey &#39;^@&#39; peco-cdr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-@&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/4]
+~
+~/.ghq
+~/.ghq/bitbucket.org/yukimemi/haskell
+~/.ghq/github.com/yukimemi/yukimemi.github.io
+~/.cabal/bin
+~/.ghq/bitbucket.org/yukimemi/yukimemi.bitbucket.org
+~/dotfiles
+~/dotfiles/.tmuxinator
+~/Documents/git/yukimemi.github.io
+~/.ghq/github.com/zcbenz/nw-sample-apps
+~/.go
+~/Pictures
+~/Downloads
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;snippets:5ad334b2cec04f5e498f9309688bd674&#34;&gt;snippets&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-snippets() {
+    BUFFER=$(grep -v &amp;quot;^#&amp;quot; ~/.peco-snippets | peco --query &amp;quot;$LBUFFER&amp;quot;)
+    zle clear-screen
+}
+zle -N peco-snippets
+bindkey &#39;^s&#39; peco-snippets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;~/.peco-snippets&lt;/code&gt; によく使うコマンドを記載しておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# find
+find . -type f -mtime +10
+find . -mtime +50 -exec mv {} del \;
+
+# date
+date +%Y%m%d
+
+# kill
+kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
+kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
+
+# screensaver
+open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
+
+# exiftool
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
+
+# neobundle
+vim +NeoBundleInstall! +q
+
+# ghq
+# github
+ghq get git@github.com:yukimemi/md2docx.git
+ghq get git@github.com:yukimemi/gitstatus.git
+
+# bitbucket
+ghq get git@bitbucket.org:yukimemi/haskell.git
+ghq get git@bitbucket.org:yukimemi/node-webkit.git
+ghq get git@bitbucket.org:yukimemi/clojure.git
+ghq get git@bitbucket.org:yukimemi/go.git
+ghq get git@bitbucket.org:yukimemi/scripts.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-s&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/1]
+find . -type f -mtime +10
+find . -mtime +50 -exec mv {} del \;
+
+date +%Y%m%d
+
+kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
+kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
+
+open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
+
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
+exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
+
+vim +NeoBundleInstall! +q
+
+ghq get git@github.com:yukimemi/md2docx.git
+ghq get git@github.com:yukimemi/gitstatus.git
+
+ghq get git@bitbucket.org:yukimemi/haskell.git
+ghq get git@bitbucket.org:yukimemi/node-webkit.git
+ghq get git@bitbucket.org:yukimemi/clojure.git
+ghq get git@bitbucket.org:yukimemi/go.git
+ghq get git@bitbucket.org:yukimemi/scripts.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;ghq:5ad334b2cec04f5e498f9309688bd674&#34;&gt;ghq&lt;/h4&gt;
+
+&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; も流行りだけど、 &lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;ghq&lt;/a&gt; も流行り。ちょうべんり。
+上記で記載済みの導入手順に従っていればインストールされているはず。&lt;/p&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias ghl=&#39;cd $(ghq list -p | peco)&#39;
+alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 ghq のどれかに &lt;code&gt;cd&lt;/code&gt; したり、該当のgithubをブラウザで開いたり出来る。&lt;/p&gt;
+
+&lt;h4 id=&#34;vim:5ad334b2cec04f5e498f9309688bd674&#34;&gt;vim&lt;/h4&gt;
+
+&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias pvim=&#39;vim &amp;quot;$(find . -type f | peco)&amp;quot;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、カレントディレクトリ以下のファイルをすぐにvimで開ける。ちょうべんり。&lt;/p&gt;
+
+&lt;p&gt;いろんな参考ページの方々ありがとうございます。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:5ad334b2cec04f5e498f9309688bd674&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/peco.htm&#34;&gt;Big Sky :: Windows のコマンドプロンプトを10倍便利にするコマンド「peco」&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://shibayu36.hatenablog.com/entry/2014/06/27/223538&#34;&gt;pecoを使い始めた - $shibayu36-&amp;gt;blog;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://webtech-walker.com/archive/2014/06/peco-ghq-gh-open.html&#34;&gt;peco、ghq、gh-openの組み合わせが捗る - Webtech Walker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.glidenote.com/blog/2014/06/26/snippets-peco-percol/&#34;&gt;peco/percolでCUIなスニペットツールを作ってみる - Glide Note - グライドノート&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>roots new post command</title>
+      <link>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</link>
+      <pubDate>Thu, 26 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</guid>
+      <description>&lt;p&gt;Tinkererでは、 &lt;code&gt;tinker -p &amp;quot;hogehoge&amp;quot;&lt;/code&gt; で、新しい記事を作成することが出来た。
+roots でも同じことがしたかったので、コマンドを作ってみた。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+
+# posts dir
+postsDir=posts
+
+# title
+echo -n &amp;quot;title: &amp;quot;
+read title
+
+postFile=${postsDir}/$(date +%Y-%m-%d)_${title}.jade
+
+cat &amp;lt;&amp;lt; EOT &amp;gt;&amp;gt; &amp;quot;${postFile}&amp;quot;
+---
+title: ${title}
+date: $(date &amp;quot;+%Y/%m/%d %H:%M&amp;quot;)
+layout: ../views/_single_post.jade
+---
+
+:markdown
+
+
+// vim: ft=markdown
+EOT
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これを &lt;code&gt;pn&lt;/code&gt; というファイル名でpathの通った場所に保存すると、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pn
+title: hogehoge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とプロンプトが表示され、タイトルを打ち込むことで新しいブログ記事を作成出来る。
+便利。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>roots install</title>
+      <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
+      <pubDate>Wed, 25 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
+      <description>
+
+&lt;p&gt;今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。&lt;/p&gt;
+
+&lt;p&gt;roots は、静的サイトジェネレーター。nodeで動く。
+特徴としては、以下の形式で作成出来ること。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクリプト -&amp;gt; coffeescript&lt;/li&gt;
+&lt;li&gt;HTML -&amp;gt; jade&lt;/li&gt;
+&lt;li&gt;CSS -&amp;gt; stylus&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。
+jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;ブログ作成手順:277c647c8512cad05114c9463b934e39&#34;&gt;ブログ作成手順&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;npmでグローバルにインストール&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g roots
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ブログテンプレートでプロジェクト作成&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots new yukimemi.github.io --blog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでブログ完成。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd yukimemi.github.io
+$ roots watch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
+を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ブログ記事を修正&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd posts
+$ vim hello_world.jade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。
+すごい・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:277c647c8512cad05114c9463b934e39&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/morishitter/items/b708a11e09b6fcb2f751&#34;&gt;Node.js - 静的サイトジェネレーター「roots」 - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://re-dzine.net/2013/02/roots/&#34;&gt;静的サイトジェネレータ「roots」を触ってみた | REFLECTDESIGN&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Second roots</title>
+      <link>http://yukimemi.github.io/post/2014-06-20-second_post/</link>
+      <pubDate>Fri, 20 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-20-second_post/</guid>
+      <description>&lt;p&gt;roots&lt;/p&gt;
+
+&lt;p&gt;やっぱりいろいろ難しい。&lt;/p&gt;
+
+&lt;p&gt;とりあえず、 subtree push が便利っぽい。
+がんばる。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>First roots</title>
+      <link>http://yukimemi.github.io/post/2014-06-19-first_post/</link>
+      <pubDate>Thu, 19 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-19-first_post/</guid>
+      <description>&lt;p&gt;はじめての「roots」&lt;/p&gt;
+
+&lt;p&gt;Markdown でもブログが書けるらしい。&lt;/p&gt;
+
+&lt;p&gt;移行しよかな。
+ライブリロードがあるのがいいね。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>tmuxで一時的にpaneを最大化する</title>
+      <link>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</link>
+      <pubDate>Sun, 01 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</guid>
+      <description>&lt;p&gt;知らんかった。便利&lt;/p&gt;
+
+&lt;p&gt;tmux 1.8 以降だと、 &lt;code&gt;prefix z&lt;/code&gt; で最大化をトグルできるみたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://rhysd.hatenablog.com/entry/2013/09/16/003620&#34;&gt;tmux で一時的に pane を最大化する - sorry, uninuplemented:&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ちなみに、vimでは、以下のような設定で似たようなことも出来るみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap so &amp;lt;C-w&amp;gt;_&amp;lt;C-w&amp;gt;|
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2個目の &lt;code&gt;&amp;lt;C-w&amp;gt;&lt;/code&gt; と &lt;code&gt;|&lt;/code&gt; の間には、 &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; があり。( &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; を2回入力する)&lt;/p&gt;
+
+&lt;p&gt;トグルではないけど。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tinkerer テーマ変更</title>
+      <link>http://yukimemi.github.io/post/2014-05-19-change_theme/</link>
+      <pubDate>Mon, 19 May 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-05-19-change_theme/</guid>
+      <description>&lt;p&gt;Tinkerer のテーマを変えた。 tinkerturquoise ていうテーマ&lt;/p&gt;
+
+&lt;p&gt;naoiwata さん作成。 使用させて頂きます。&lt;/p&gt;
+
+&lt;p&gt;インストールの仕方は以下のページの通り。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://pypi.python.org/pypi/sphinxjp.themes.tinkerturquoise/0.2.21&#34;&gt;sphinxjp.themes.tinkerturquoise 0.2.21 : Python Package Index&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

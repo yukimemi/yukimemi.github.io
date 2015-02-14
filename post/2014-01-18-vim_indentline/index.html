@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>vim indentLine で見やすいインデントを | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">vim indentLine で見やすいインデントを</h2>
+      <p class="orange-text text-darken-4">2014/01/18 Sat</p>
+      <p>vim には、見やすい定番のインデントプラグインとして、
+<a href="https://github.com/nathanaelkane/vim-indent-guides">nathanaelkane/vim-indent-guides</a>
+がある。</p>
+
+<p>しかし、最近、
+<a href="https://github.com/Yggdroot/indentLine">Yggdroot/indentLine</a>
+というプラグイン が、 <a href="http://alpaca.tc/blog/vim/plugins-best-of-vim-1.html">オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ</a>
+で紹介されていたので、乗り換えた。</p>
+
+<p><img src="/img/20140119_002810.png" alt="image" />
+</p>
+
+<p>シンプルでかっこいい。 それに、 vim-indent-guides は、 indent
+をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。</p>
+
+<p>個人的にはタブを使用することはなくて、スペースを使用するから問題ないのだけれども・・・。</p>
+
+<p>その点、 <a href="https://github.com/Yggdroot/indentLine">indentLine</a>
+では、スペースしか対応してなく、タブの場合は何もしない。</p>
+
+<p>README にも記載があるが、タブで同じことやるためには、 .vimrc
+に、以下の記載を加えればいい。</p>
+
+<pre><code class="language-vim">set list listchars=tab:\¦\
+</code></pre>
+
+<p>最後にスペースが入っていることに注意。</p>
+
+<p>こうすると、スペースの場合とほぼ同じように表示される。</p>
+
+<p><img src="/img/20140119_135554.png" alt="image" />
+</p>
+
+<p>ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。</p>
+
+<p>また、インデントを除外したい場合は、その filetype
+を設定してやればいいみたい。</p>
+
+<pre><code class="language-vim">let g:indentLine_fileTypeExclude = ['help', 'nerdtree', 'calendar', 'thumbnail', 'tweetvim']
+</code></pre>
+
+<p>こんな感じ。</p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

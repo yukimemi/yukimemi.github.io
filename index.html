@@ -1,159 +1,298 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <meta charset="utf8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="description" content="description of your site">
-    <meta name="author" content="author of the site">
-    <!-- For mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Welcome to yukimemi's blog powered by roots!</title>
-    <link rel="stylesheet" href="/css/master.css">
-    <link media="only screen and (max-device-width: 480px)" rel="stylesheet" href="/css/mobile.css">
-    <link rel="stylesheet" href="/bower_components/jquery.simplePagination/simplePagination.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>YUKIMEMI | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   </head>
   <body>
-    <header><a href="/">
-        <h1>YUKIMEMI</h1></a>
-      <div id="googlesearch"><script>
-  (function() {
-    var cx = '011218958289840355707:u8gwqtv7xgg';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:search></gcse:search>
-
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
       </div>
-    </header>
-    <div id="main">
-<ul id="posts">
-  <li class="plist">
-    <p><a href="/posts/2014-08-05_Set cursorline as needed.html">Set cursorline as needed</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-07-15_Add --runcmd option to coffee-script-on-jscript.html">Add --runcmd option to coffee-script-on-jscript</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-07-14_CoffeeScript on Windows as wsh.html">CoffeeScript on Windows as wsh</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-07-09_roots simple pagination.html">roots simple pagination</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-07-06_mosh error No such file or directory.html">mosh error No such file or directory</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-07-02_direnv for npm local commands.html">direnv for npm local commands</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-07-02_Git directory deploy !.html">Git directory deploy !</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-06-29_All You Need Is Peco.html">All You Need Is Peco</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-06-26_roots new post command.html">roots new post command</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-06-25_roots install.html">roots install</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-06-20-second_post.html">Second roots</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-06-19-first_post.html">First roots</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-06-01-tmux_prefix_z.html">tmuxで一時的にpaneを最大化する</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-05-19-change_theme.html">Tinkerer テーマ変更</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-05-15-haskell_gitstatus.html">haskellでgitstatus</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-04-17-md2docx.html">PowerShell Markdown を Wordに変換する</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-03-22-gitstatus.html">golang git 管理のすべてのディレクトリで 「git status」する</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-02-08-powershell_make_cmd.html">vim で powershell を書く！</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-01-18-vim_indentline.html">vim indentLine で見やすいインデントを</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2014-01-05-vimperator_treestyletab.html">vimperator ツリー型タブとvimperatorの表示の上下を修正</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-11-03-pyenv.html">pyenv python でも rbenv</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-10-26-setup_mavericks.html">Mac OS X Mavericks クリーンインストール</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-10-19-foreach_object_continue.html">powershell ForEach-Objectでcontinue</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-10-13-powershell_server.html">powershell MacからWindowsへsshしてpowershell</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-10-13-powershell_vim_plugin.html">powershell vim plugin</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-09-15-automatic_vim.html">vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-09-14-ricty_powerline_install.html">Ricty Mac HomebrewでRicty Powerline フォントをインストールする</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-08-11-syntastic_coffeelint.html">Vim coffeescript syntastic</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-07-27-cygwin_setup.html">cygwin インストールコマンド</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-06-29-qfixhowm.html">qfixhowm Vim でメモ</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-06-23-add_more_directive.html">Tinkerer で「続きを読む」</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-06-16-setup_mongodb.html">Mac OSX Mountain Lion MongoDB セットアップ</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-06-16-tmux_detach_before_attach.html">tmuxで画面サイズをリセットしてアタッチ</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-06-15-add_social_button.html">Tinkerer にソーシャルボタン追加</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-06-13-change_theme.html">Tinkererでテーマカスタマイズ</a></p>
-  </li>
-  <li class="plist">
-    <p><a href="/posts/2013-05-27-first_tinkerer.html">First Tinkerer</a></p>
-  </li>
-</ul>
-      <div class="pagination"></div>
+    </nav>
+
+<div id="posts" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2015-02-15_hello%20hugo/">
+        <h5 class="white-text">hello hugo</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/">
+        <h5 class="white-text">Set cursorline as needed</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/">
+        <h5 class="white-text">Add --runcmd option to coffee-script-on-jscript</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/">
+        <h5 class="white-text">CoffeeScript on Windows as wsh</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/">
+        <h5 class="white-text">roots simple pagination</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/">
+        <h5 class="white-text">mosh error No such file or directory</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/">
+        <h5 class="white-text">Git directory deploy !</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/">
+        <h5 class="white-text">direnv for npm local commands</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/">
+        <h5 class="white-text">All You Need Is Peco</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/">
+        <h5 class="white-text">roots new post command</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-06-25_roots%20install/">
+        <h5 class="white-text">roots install</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-06-20-second_post/">
+        <h5 class="white-text">Second roots</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-06-19-first_post/">
+        <h5 class="white-text">First roots</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/">
+        <h5 class="white-text">tmuxで一時的にpaneを最大化する</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-05-19-change_theme/">
+        <h5 class="white-text">Tinkerer テーマ変更</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-05-15-haskell_gitstatus/">
+        <h5 class="white-text">haskellでgitstatus</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-04-17-md2docx/">
+        <h5 class="white-text">PowerShell Markdown を Wordに変換する</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-03-22-gitstatus/">
+        <h5 class="white-text">golang git 管理のすべてのディレクトリで 「git status」する</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-02-08-powershell_make_cmd/">
+        <h5 class="white-text">vim で powershell を書く！</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-01-18-vim_indentline/">
+        <h5 class="white-text">vim indentLine で見やすいインデントを</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2014-01-05-vimperator_treestyletab/">
+        <h5 class="white-text">vimperator ツリー型タブとvimperatorの表示の上下を修正</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-11-03-pyenv/">
+        <h5 class="white-text">pyenv python でも rbenv</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-10-26-setup_mavericks/">
+        <h5 class="white-text">Mac OS X Mavericks クリーンインストール</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-10-19-foreach_object_continue/">
+        <h5 class="white-text">powershell ForEach-Objectでcontinue</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-10-13-powershell_server/">
+        <h5 class="white-text">powershell MacからWindowsへsshしてpowershell</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-10-13-powershell_vim_plugin/">
+        <h5 class="white-text">powershell vim plugin</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-09-15-automatic_vim/">
+        <h5 class="white-text">vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-09-14-ricty_powerline_install/">
+        <h5 class="white-text">Ricty Mac HomebrewでRicty Powerline フォントをインストールする</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/">
+        <h5 class="white-text">Vim coffeescript syntastic</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-07-27-cygwin_setup/">
+        <h5 class="white-text">cygwin インストールコマンド</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-06-29-qfixhowm/">
+        <h5 class="white-text">qfixhowm Vim でメモ</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-06-23-add_more_directive/">
+        <h5 class="white-text">Tinkerer で「続きを読む」</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-06-16-setup_mongodb/">
+        <h5 class="white-text">Mac OSX Mountain Lion MongoDB セットアップ</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-06-16-tmux_detach_before_attach/">
+        <h5 class="white-text">tmuxで画面サイズをリセットしてアタッチ</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-06-15-add_social_button/">
+        <h5 class="white-text">Tinkerer にソーシャルボタン追加</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-06-13-change_theme/">
+        <h5 class="white-text">Tinkererでテーマカスタマイズ</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
+      
+      <a class="col s12 card-panel waves-effect pink lighten-2" href="http://yukimemi.github.io/post/2013-05-27-first_tinkerer/">
+        <h5 class="white-text">First Tinkerer</h5>
+      </a>
+      <div class="divider"></div>
+      
+      
     </div>
-  </body>
-  <script data-main="/js/main" src="/js/require.js"></script>
-  <!-- google analytics--><script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  </div>
+</div>
 
-  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
-  ga('send', 'pageview');
-</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
 
+</body>
 </html>
+

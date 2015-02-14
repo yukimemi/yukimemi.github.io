@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jscript on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/jscript/</link>
+    <description>Recent content in Jscript on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Tue, 15 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/jscript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Add --runcmd option to coffee-script-on-jscript</title>
+      <link>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</link>
+      <pubDate>Tue, 15 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</guid>
+      <description>
+
+&lt;p&gt;先日の &lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh.html&#34;&gt;記事&lt;/a&gt; のthincaさんフォーク版、僕々仕様のWindows上でのCoffeeScriptコンパイラに &lt;code&gt;--runcmd&lt;/code&gt; オプションを加えた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee
+Usage: coffee [options] path/to/script.coffee
+
+  -b, --bare         compile without the top-level function wrapper
+  -c, --compile      compile to JavaScript and save as .js files
+      --encoding     character encoding used by source files
+  -e, --eval         compile a string from the command line
+  -h, --help         display this help message
+  -j, --join         concatenate the scripts before compiling
+  -n, --nodes        print out the parse tree that the parser produces
+  -o, --output       set the directory for compiled JavaScript
+  -p, --print        print the compiled JavaScript to stdout
+  -s, --stdio        listen for and compile scripts over stdio
+  -t, --tokens       print the tokens that the lexer produces
+  -v, --version      display CoffeeScript version
+  -w, --watch        watch scripts for changes, and recompile
+  -r, --runcmd       run the compiled scripts as JScript
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後の行のやつ。&lt;/p&gt;
+
+&lt;p&gt;オプションで &lt;code&gt;-r&lt;/code&gt; もしくは、 &lt;code&gt;--runcmd&lt;/code&gt; を指定すると、自動でコンパイルされて実行形式 (.cmd) になったファイルが実行される。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.coffee&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;do (name = &amp;quot;CoffeeScript&amp;quot;) -&amp;gt;
+  WScript.Echo &amp;quot;はろー, \#{name} !&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記の &lt;code&gt;hello.coffee&lt;/code&gt; を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -r hello.coffee
+はろー, CoffeeScript !
+
+ExitCode = [0]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動でコンパイルしてJScriptとして実行される。(あと一応戻り値もEchoするようにしておいた。)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;--watch&lt;/code&gt; オプションと一緒に使うとかなり便利。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -rw hello.coffee
+はろー, CoffeeScript !
+
+ExitCode = [0]
+
+
+へろー, CoffeeScript !
+
+ExitCode = [0]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存する度に自動でコンパイル、実行まで行ってくれる。&lt;/p&gt;
+
+&lt;p&gt;便利なのはいいんだけど、今どきJScriptとか、時代に逆行してるなぁ・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:7db1863f2219b94ca053bc8615393dd4&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://msdn.microsoft.com/ja-jp/library/cc364356.aspx&#34;&gt;Exec メソッド&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CoffeeScript on Windows as wsh</title>
+      <link>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</link>
+      <pubDate>Mon, 14 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</guid>
+      <description>
+
+&lt;p&gt;長い間、Windowsでcoffeescriptをwshとして記述する方法を模索していたけど、ようやく解が見つかった！！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/thinca/coffee-script-on-jscript&#34;&gt;thinca/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;thincaさん作成のcoffeescriptコンパイラ。Windowsで動く。nodejsもいらず、バッチファイル1つ &lt;code&gt;coffee.bat&lt;/code&gt; と、公式の &lt;code&gt;coffee-script.js&lt;/code&gt; だけで動く。&lt;/p&gt;
+
+&lt;h3 id=&#34;使用方法:e9056d41c708ea37cf281631f226d96d&#34;&gt;使用方法&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; ghq get https://github.com/thinca/coffee-script-on-jscript.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; git clone https://github.com/thinca/coffee-script-on-jscript.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ghq があるなら上で。&lt;/p&gt;
+
+&lt;p&gt;後は普通のcoffeescriptコンパイラと同じオプションがだいたい使えるようなので、普通にコンパイルするのであれば&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee -c hello.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とかで &lt;code&gt;hello.js&lt;/code&gt; に変換される。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;watch&lt;/code&gt; オプションもあるみたいなので、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee -cw hello.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;としておくと、 &lt;code&gt;hello.coffee&lt;/code&gt; を更新するたびに自動でコンパイルしてくれる。便利。&lt;/p&gt;
+
+&lt;p&gt;他のオプションは、 &lt;code&gt;coffee.bat&lt;/code&gt; に何も引数をつけずに実行するとhelpで表示される。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee
+Usage: coffee [options] path/to/script.coffee
+
+  -b, --bare         compile without the top-level function wrapper
+  -c, --compile      compile to JavaScript and save as .js files
+      --encoding     character encoding used by source files
+  -e, --eval         compile a string from the command line
+  -h, --help         display this help message
+  -j, --join         concatenate the scripts before compiling
+  -n, --nodes        print out the parse tree that the parser produces
+  -o, --output       set the directory for compiled JavaScript
+  -p, --print        print the compiled JavaScript to stdout
+  -s, --stdio        listen for and compile scripts over stdio
+  -t, --tokens       print the tokens that the lexer produces
+  -v, --version      display CoffeeScript version
+  -w, --watch        watch scripts for changes, and recompile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;jscriptをバッチとして実行:e9056d41c708ea37cf281631f226d96d&#34;&gt;jscriptをバッチとして実行&lt;/h3&gt;
+
+&lt;p&gt;上記までで、 &lt;code&gt;coffeescript&lt;/code&gt; を &lt;code&gt;jscript&lt;/code&gt; に変換することは簡単に出来るんだけど、どうせなら &lt;code&gt;jscript&lt;/code&gt; からさらにバッチとして実行出来る状態に変換したい。 &lt;code&gt;jscript&lt;/code&gt; をバッチとして実行するには、まさに &lt;code&gt;coffee.bat&lt;/code&gt; がそうなっていて、ソースの一番最初に以下の4行を追加すればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;@set @junk=1 /* vim:set ft=javascript:
+@cscript //nologo //e:jscript &amp;quot;%~dpn0.bat&amp;quot; %*
+@goto :eof
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;そこで、&lt;code&gt;coffee.bat&lt;/code&gt; に、コンパイル時に自動で上記4行を追加する処理を加えた。
+(追加で戻り値も返すようにした。)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;function addHeader(file) {//{{{
+  var content = binaryToString(readFile(file), &amp;quot;UTF-8&amp;quot;);
+  var header = &amp;quot;@set @junk=1 /* vim:set ft=javascript:\n@cscript //nologo //e:jscript \&amp;quot;%~f0\&amp;quot; %*\n@exit /b %errorlevel%\n*/\n\n&amp;quot;;
+  var cmd = file.replace(/(\.\w+)?$/, &amp;quot;.cmd&amp;quot;);
+  writeFile(cmd, (header + content).split(&amp;quot;\n&amp;quot;).join(&amp;quot;\r\n&amp;quot;), &amp;quot;Shift_JIS&amp;quot;);
+}//}}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;また、 &lt;code&gt;jscript&lt;/code&gt; として実行するために、coffeeからjsに変換されたファイルを UTF-8 で読み込んで、 Shift_JIS で出力するようにしてある。&lt;/p&gt;
+
+&lt;p&gt;例えば、以下の &lt;code&gt;hello.coffee&lt;/code&gt; (文字コード: UTF-8 、 改行コード: LF で作成)があった場合、&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.coffee&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;do (name = &amp;quot;CoffeeScript&amp;quot;) -&amp;gt;
+  WScript.Echo &amp;quot;はろー, \#{name} !&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次のようにコンパイルすると、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; coffee -c hello.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;hello.js&lt;/code&gt; (文字コード: UTF-8 、 改行コード: LF )
+と &lt;code&gt;hello.cmd&lt;/code&gt; (文字コード: Shift_JIS 、 改行コード: CRLF )が生成される。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.js&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;(function() {
+  (function(name) {
+    return WScript.Echo(&amp;quot;はろー, &amp;quot; + name + &amp;quot; !&amp;quot;);
+  })(&amp;quot;CoffeeScript&amp;quot;);
+
+}).call(this);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;hello.cmd&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;@set @junk=1 /* vim:set ft=javascript:
+@cscript //nologo //e:jscript &amp;quot;%~f0&amp;quot; %*
+@exit /b %errorlevel%
+*/
+
+(function() {
+  (function(name) {
+    return WScript.Echo(&amp;quot;はろー, &amp;quot; + name + &amp;quot; !&amp;quot;);
+  })(&amp;quot;CoffeeScript&amp;quot;);
+
+}).call(this);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでダブルクリックで簡単にバッチとして実行出来る &lt;code&gt;hello.cmd&lt;/code&gt; が作成された。&lt;/p&gt;
+
+&lt;p&gt;一応、上記の &lt;code&gt;addHeader&lt;/code&gt; 関数を加え、さらに &lt;code&gt;coffee-script.js&lt;/code&gt; のバージョンを v1.7.1 にアップデートしたのを、thincaさんのからフォークして以下にあげた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Windowsではこれからは PowerShell だ！と思ってたけど、やっぱwshもまだまだ使えそう・・・。
+ExcelとかのCOMも、PowerShellより、wshの方が断然早いし。というかPowerShellはなぜあんなに遅いんだろうか・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:e9056d41c708ea37cf281631f226d96d&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/thinca/20110707/1310014720&#34;&gt;JScript で動く CoffeeScript コンパイラのラッパ書いた - 永遠に未完成&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/thinca/coffee-script-on-jscript&#34;&gt;thinca/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

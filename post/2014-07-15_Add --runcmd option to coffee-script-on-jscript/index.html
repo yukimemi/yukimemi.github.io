@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Add --runcmd option to coffee-script-on-jscript | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">Add --runcmd option to coffee-script-on-jscript</h2>
+      <p class="orange-text text-darken-4">2014/07/15 Tue</p>
+      
+
+<p>先日の <a href="http://yukimemi.github.io/posts/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh.html">記事</a> のthincaさんフォーク版、僕々仕様のWindows上でのCoffeeScriptコンパイラに <code>--runcmd</code> オプションを加えた。</p>
+
+<p><a href="https://github.com/yukimemi/coffee-script-on-jscript">yukimemi/coffee-script-on-jscript</a></p>
+
+<pre><code class="language-dosbatch">&gt; coffee
+Usage: coffee [options] path/to/script.coffee
+
+  -b, --bare         compile without the top-level function wrapper
+  -c, --compile      compile to JavaScript and save as .js files
+      --encoding     character encoding used by source files
+  -e, --eval         compile a string from the command line
+  -h, --help         display this help message
+  -j, --join         concatenate the scripts before compiling
+  -n, --nodes        print out the parse tree that the parser produces
+  -o, --output       set the directory for compiled JavaScript
+  -p, --print        print the compiled JavaScript to stdout
+  -s, --stdio        listen for and compile scripts over stdio
+  -t, --tokens       print the tokens that the lexer produces
+  -v, --version      display CoffeeScript version
+  -w, --watch        watch scripts for changes, and recompile
+  -r, --runcmd       run the compiled scripts as JScript
+</code></pre>
+
+<p>最後の行のやつ。</p>
+
+<p>オプションで <code>-r</code> もしくは、 <code>--runcmd</code> を指定すると、自動でコンパイルされて実行形式 (.cmd) になったファイルが実行される。</p>
+
+<ul>
+<li>hello.coffee</li>
+</ul>
+
+<pre><code class="language-coffeescript">do (name = &quot;CoffeeScript&quot;) -&gt;
+  WScript.Echo &quot;はろー, \#{name} !&quot;
+</code></pre>
+
+<p>上記の <code>hello.coffee</code> を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。</p>
+
+<pre><code class="language-dosbatch">&gt; coffee -r hello.coffee
+はろー, CoffeeScript !
+
+ExitCode = [0]
+</code></pre>
+
+<p>自動でコンパイルしてJScriptとして実行される。(あと一応戻り値もEchoするようにしておいた。)</p>
+
+<p><code>--watch</code> オプションと一緒に使うとかなり便利。</p>
+
+<pre><code class="language-dosbatch">&gt; coffee -rw hello.coffee
+はろー, CoffeeScript !
+
+ExitCode = [0]
+
+
+へろー, CoffeeScript !
+
+ExitCode = [0]
+</code></pre>
+
+<p>保存する度に自動でコンパイル、実行まで行ってくれる。</p>
+
+<p>便利なのはいいんだけど、今どきJScriptとか、時代に逆行してるなぁ・・・。</p>
+
+<hr />
+
+<h5 id="参考:7db1863f2219b94ca053bc8615393dd4">参考</h5>
+
+<p><a href="http://msdn.microsoft.com/ja-jp/library/cc364356.aspx">Exec メソッド</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

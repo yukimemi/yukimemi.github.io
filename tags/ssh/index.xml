@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ssh on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/ssh/</link>
+    <description>Recent content in Ssh on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 06 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>mosh error No such file or directory</title>
+      <link>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</link>
+      <pubDate>Sun, 06 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</guid>
+      <description>
+
+&lt;p&gt;mosh というmobile-shelllを導入してみたところ、「No such file or directory」という
+エラーが発生して使えなかった・・・。&lt;/p&gt;
+
+&lt;p&gt;原因は結局よくわからなかったんだけど、とりあえず使えるようになったので、一応メモとして残しとこ。&lt;/p&gt;
+
+&lt;h3 id=&#34;mosh-install:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;mosh install&lt;/h3&gt;
+
+&lt;p&gt;環境は Mac OSX Mavericks。Homebrewで簡単にインストール出来た。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install mosh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;昔は &lt;code&gt;mobile-shelll&lt;/code&gt; だったみたいだけど、今は &lt;code&gt;mosh&lt;/code&gt; でインストール出来る。
+クライアント側とサーバ側両方インストールしておく必要あり。&lt;/p&gt;
+
+&lt;h3 id=&#34;使い方:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;使い方&lt;/h3&gt;
+
+&lt;p&gt;普通の &lt;code&gt;ssh&lt;/code&gt; を &lt;code&gt;mosh&lt;/code&gt; に変えるだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh yukimemi@yukimemi-my-host.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;↓&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;だけど、なぜか、こんなエラーが出て使えなかった・・・。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
+zsh: No such file or directory
+ssh_exchange_identification: Connection closed by remote host
+/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;なんかzshが見つかんない？みたいなエラー。
+zshが悪いのかと思い、bashからやってみてもエラーになった。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
+bash: No such file or directory
+ssh_exchange_identification: Connection closed by remote host
+/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;環境変数が悪いのか？と思い、以下のようにしてみた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ SHELL=/bin/bash mosh yukimemi@yukimemi-my-host.com
+bash: mosh-server: command not found
+Connection to yukimemi-my-host.com closed.
+/usr/local/bin/mosh: Did not find mosh server startup message.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一応なんかエラーメッセージは変わったみたい。
+これは &lt;code&gt;mosh-server&lt;/code&gt; コマンドが見つかんないって言ってるだけなので、
+moshのオプションで指定出来るっぽい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ SHELL=/bin/bash mosh --server=/usr/local/bin/mosh-server yukimemi@yukimemi-my-host.com
+[yukimemi@yukimemi-my-host.com] $
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;つながった。
+Airを閉じて一度ネットの接続がきれても、自動で再接続してくれるの便利。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/&#34;&gt;Moshを使ってみる #Linux - rcmdnk&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>powershell MacからWindowsへsshしてpowershell</title>
+      <link>http://yukimemi.github.io/post/2013-10-13-powershell_server/</link>
+      <pubDate>Sun, 13 Oct 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-10-13-powershell_server/</guid>
+      <description>&lt;p&gt;普段家で触れるのはMacだけど、仕事で使うのはWindows。 Windows
+でCUI環境といえば、今はもうコマンドプロンプトでは なくて powershell
+らしい。 そこで、 powershell を覚えようと思った。&lt;/p&gt;
+
+&lt;p&gt;僕はかたちから入るタイプなので、まずは環境構築から。&lt;/p&gt;
+
+&lt;p&gt;理想としては、 powershell のスクリプトを書いたり実行する
+のは普段使っているMacから行いたい。
+そこで、MacからWindowsへsshして、Macのターミナルから powershell
+を実行することにする。 調べたら、 powershell server
+という便利なものがあるらしい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.powershellserver.com/&#34;&gt;PowerShell Server | Secure Remote Access to PowerShell Over SSH&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;上記からダウンロードして、インストール。
+特に何も設定は変えずにそのままインストールした。
+あとは、「other」タブにある、エンコーディングを「UTF-8」に設定して、「Start」。
+Macからsshで簡単に接続できた。 これで powershell
+の勉強をやっていこう。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

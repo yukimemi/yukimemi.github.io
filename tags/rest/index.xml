@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rest on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/rest/</link>
+    <description>Recent content in Rest on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 23 Jun 2013 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tinkerer で「続きを読む」</title>
+      <link>http://yukimemi.github.io/post/2013-06-23-add_more_directive/</link>
+      <pubDate>Sun, 23 Jun 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-06-23-add_more_directive/</guid>
+      <description>
+
+&lt;p&gt;Tinkererで「続きを読む」をいれる方法。&lt;/p&gt;
+
+&lt;p&gt;「続きを読む」を入れたいところに more ディレクティブを入れる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;.. more::
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上！&lt;/p&gt;
+
+&lt;h5 id=&#34;参考:1c83ab2f69edb297d60f7e881a570b4f&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://tinkerer.me/doc/tinkering.html#posts&#34;&gt;Tinkering — Tinkerer&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/categories/vim/</link>
+    <description>Recent content in Vim on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Set cursorline as needed</title>
+      <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
+      <pubDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
+      <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;
+
+&lt;p&gt;よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに &lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; でもとのバッファに戻ったときに、 &lt;code&gt;s:cursorline_lock&lt;/code&gt; 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと &lt;code&gt;set nocursorline&lt;/code&gt; されなくなるようだった。&lt;/p&gt;
+
+&lt;p&gt;そこで、 Lingr のvim部屋で初めて質問してみた。&lt;/p&gt;
+
+&lt;p&gt;そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; では、 &lt;code&gt;WinEnter&lt;/code&gt; イベントは発生しないが、 &lt;code&gt;BufEnter&lt;/code&gt; イベントは発生するらしい。
+また、僕は、 &lt;code&gt;nnoremap : q:i&lt;/code&gt; のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。
+そこで、thincaさんの &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;設定&lt;/a&gt; を以下のように、変更した。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline(&#39;CursorMoved&#39;)
+au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline(&#39;CursorHold&#39;)
+au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline(&#39;WinEnter,BufEnter,CmdwinLeave&#39;)
+au MyAutoCmd WinLeave * call s:auto_cursorline(&#39;WinLeave&#39;)
+
+let s:cursorline_lock = 0
+function! s:auto_cursorline(event)
+  if a:event ==# &#39;WinEnter,BufEnter,CmdwinLeave&#39;
+    setlocal cursorline
+    setlocal cursorcolumn
+    let s:cursorline_lock = 2
+  elseif a:event ==# &#39;WinLeave&#39;
+    setlocal nocursorline
+    setlocal nocursorcolumn
+  elseif a:event ==# &#39;CursorMoved&#39;
+    if s:cursorline_lock
+      if 1 &amp;lt; s:cursorline_lock
+        let s:cursorline_lock = 1
+      else
+        setlocal nocursorline
+        setlocal nocursorcolumn
+        let s:cursorline_lock = 0
+      endif
+    endif
+  elseif a:event ==# &#39;CursorHold&#39;
+    if &amp;amp;updatetime &amp;gt;= 4000
+      setlocal cursorline
+      setlocal cursorcolumn
+    endif
+    let s:cursorline_lock = 1
+  endif
+endfunction
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ついでに &lt;code&gt;cursorcolumn&lt;/code&gt; も追加しといた。
+また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
+
+&lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>vim で powershell を書く！</title>
+      <link>http://yukimemi.github.io/post/2014-02-08-powershell_make_cmd/</link>
+      <pubDate>Sat, 08 Feb 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-02-08-powershell_make_cmd/</guid>
+      <description>&lt;p&gt;この記事は、 &lt;a href=&#34;http://atnd.org/events/45072&#34;&gt;Vim Advent Calendar 2013&lt;/a&gt;
+70日目の記事になります。&lt;/p&gt;
+
+&lt;p&gt;vim で powershell を書く時の設定です。&lt;/p&gt;
+
+&lt;p&gt;まず、 syntax と indent 。
+これは、以下のプラグインでOK。(なんかインデントは変だけど・・・)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundleLazy &#39;PProvost/vim-ps1&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、 vim から実行するために、 quickrun
+を入れます。(これは定番ですね！)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundleLazy &#39;thinca/vim-quickrun&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちょっと前までは、powershell
+でquickrunするためには、設定が必要だったけど、最近オフィシャルに対応されるようになったみたいです。&lt;/p&gt;
+
+&lt;p&gt;参考: &lt;a href=&#34;http://qiita.com/rbtnn/items/ea441a77181d29188880&#34;&gt;VimとPowerShell - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これで、powershellを書いてる時に、デフォルトだと &amp;lt;Leader&amp;gt;r
+で実行できます。&lt;/p&gt;
+
+&lt;p&gt;さらに、おもむろに以下のファイルを作成して、 header.cmd
+というファイル名で保存。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;@echo off
+pushd &amp;quot;%~dp0&amp;quot; &amp;gt; nul
+set tm=%time: =0%
+set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1
+for /f &amp;quot;usebackq skip=10 delims=&amp;quot; %%i in (&amp;quot;%~f0&amp;quot;) do @echo %%i &amp;gt;&amp;gt; &amp;quot;%ps1file%&amp;quot;
+powershell -NoProfile -ExecutionPolicy unrestricted -File &amp;quot;%ps1file%&amp;quot; %*
+del &amp;quot;%ps1file%&amp;quot;
+popd &amp;gt; nul
+pause
+exit /b %ERRORLEVEL%
+# ========== do ps1 file as a dosbatch ==========
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;そして、以下の設定を .vimrc
+に書いておくと、powershellスクリプトを手軽に実行できるバッチファイルが作成できます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;let s:is_windows = has(&#39;win16&#39;) || has(&#39;win32&#39;) || has(&#39;win64&#39;)
+let s:system = exists(&#39;g:loaded_vimproc&#39;) ? &#39;vimproc#system_bg&#39; : &#39;system&#39;
+
+if neobundle#tap(&#39;vim-ps1&#39;)&amp;quot;{{{
+    call neobundle#config({
+                \ &#39;autoload&#39;: {
+                \   &#39;filetypes&#39;: &#39;ps1&#39;
+                \ }
+                \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        function! s:make_ps12cmd()
+            if s:is_windows
+                let s:com = &amp;quot;copy /b header.cmd + &amp;quot; . expand(&amp;quot;%:p:t&amp;quot;) . &amp;quot; &amp;quot; . expand(&amp;quot;%:p:t:r&amp;quot;) . &amp;quot;.cmd&amp;quot;
+            else
+                let s:com = &amp;quot;cat header.cmd &amp;quot; . expand(&amp;quot;%:p:t&amp;quot;) . &amp;quot; &amp;gt; &amp;quot; . expand(&amp;quot;%:p:t:r&amp;quot;) . &amp;quot;.cmd&amp;quot;
+            endif
+            echom(s:com)
+            call {s:system}(s:com)
+        endfunction
+        au BufWritePost *.ps1 call s:make_ps12cmd()
+    endfunction
+
+    call neobundle#untap()
+endif&amp;quot;}}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;やってることは単純で、さっきの header.cmd と作成中の powershell
+スクリプトを合体させてるだけです。 windows の場合は、 copy
+コマンドで。LinuxやMac の場合は、 cat コマンドで。&lt;/p&gt;
+
+&lt;p&gt;上記の設定では、保存時に自動で結合されて、元のpowershellファイルの拡張子が&amp;rdquo;cmd&amp;rdquo;になったものができあがります。&lt;/p&gt;
+
+&lt;p&gt;例えば、以下の hello.ps1 をvim上で保存すると・・・&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ps1&#34;&gt;Write-Host &amp;quot;Hello ps1&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんな hello.cmd ができてるはずです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;@echo off
+pushd &amp;quot;%~dp0&amp;quot; &amp;gt; nul
+set tm=%time: =0%
+set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1
+for /f &amp;quot;usebackq skip=10 delims=&amp;quot; %%i in (&amp;quot;%~f0&amp;quot;) do @echo %%i &amp;gt;&amp;gt; &amp;quot;%ps1file%&amp;quot;
+powershell -NoProfile -ExecutionPolicy unrestricted -File &amp;quot;%ps1file%&amp;quot; %*
+del &amp;quot;%ps1file%&amp;quot;
+popd &amp;gt; nul
+pause
+exit /b %ERRORLEVEL%
+# ========== do ps1 file as a dosbatch ==========
+
+Write-Host &amp;quot;Hello ps1&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;このファイルは、エクスプローラからダブルクリックで実行出来ます。
+一時ファイルを作成してから実行しているのでダサいし、途中でスクリプトを強制終了すると一時ファイルが残ったままになるという致命的な問題はありますが、まぁちょっとしたスクリプトにはいいんではないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、 neobundle の tap と untap とかの設定は、 supermomonga
+さんの
+&lt;a href=&#34;http://blog.supermomonga.com/articles/vim/neobundle-sugoi-setting.html&#34;&gt;この記事&lt;/a&gt;
+がすごい参考になります。かなりすごいです。かなり。&lt;/p&gt;
+
+&lt;p&gt;さらにこの保存時に結合っていう方法を使えば、例えば先頭行にコメントで
+import文みたいなのを入れておけば、動的に複数のpowershell
+スクリプトを結合して、一つのバッチファイルにする・・・ってなこともできると思います。(誰かお願いします)&lt;/p&gt;
+
+&lt;p&gt;以上です。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>vim indentLine で見やすいインデントを</title>
+      <link>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</link>
+      <pubDate>Sat, 18 Jan 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</guid>
+      <description>&lt;p&gt;vim には、見やすい定番のインデントプラグインとして、
+&lt;a href=&#34;https://github.com/nathanaelkane/vim-indent-guides&#34;&gt;nathanaelkane/vim-indent-guides&lt;/a&gt;
+がある。&lt;/p&gt;
+
+&lt;p&gt;しかし、最近、
+&lt;a href=&#34;https://github.com/Yggdroot/indentLine&#34;&gt;Yggdroot/indentLine&lt;/a&gt;
+というプラグイン が、 &lt;a href=&#34;http://alpaca.tc/blog/vim/plugins-best-of-vim-1.html&#34;&gt;オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ&lt;/a&gt;
+で紹介されていたので、乗り換えた。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_002810.png&#34; alt=&#34;image&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;シンプルでかっこいい。 それに、 vim-indent-guides は、 indent
+をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。&lt;/p&gt;
+
+&lt;p&gt;個人的にはタブを使用することはなくて、スペースを使用するから問題ないのだけれども・・・。&lt;/p&gt;
+
+&lt;p&gt;その点、 &lt;a href=&#34;https://github.com/Yggdroot/indentLine&#34;&gt;indentLine&lt;/a&gt;
+では、スペースしか対応してなく、タブの場合は何もしない。&lt;/p&gt;
+
+&lt;p&gt;README にも記載があるが、タブで同じことやるためには、 .vimrc
+に、以下の記載を加えればいい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;set list listchars=tab:\¦\
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後にスペースが入っていることに注意。&lt;/p&gt;
+
+&lt;p&gt;こうすると、スペースの場合とほぼ同じように表示される。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_135554.png&#34; alt=&#34;image&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。&lt;/p&gt;
+
+&lt;p&gt;また、インデントを除外したい場合は、その filetype
+を設定してやればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;let g:indentLine_fileTypeExclude = [&#39;help&#39;, &#39;nerdtree&#39;, &#39;calendar&#39;, &#39;thumbnail&#39;, &#39;tweetvim&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんな感じ。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ</title>
+      <link>http://yukimemi.github.io/post/2013-09-15-automatic_vim/</link>
+      <pubDate>Sun, 15 Sep 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-09-15-automatic_vim/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/osyo-manga/vim-automatic&#34;&gt;automatic.vim&lt;/a&gt;
+という便利なプラギンがある。&lt;/p&gt;
+
+&lt;p&gt;これを利用すると、 Unite や QuickFix や help
+など、様々なウィンドウを一元管理出来るっぽい。&lt;/p&gt;
+
+&lt;p&gt;そこで、いろんなサイトを参考にやってみた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; ESC2回押しで検索ハイライトを消去
+autocm MyAutoCmd VimEnter,WinEnter,WinLeave * nmap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;&amp;lt;Plug&amp;gt;(anzu-clear-search-status)
+
+&amp;quot; vim-automatic {{{
+function! s:my_temporary_window_init(config, context)
+    silent! nunmap &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt;
+    nmap &amp;lt;buffer&amp;gt; &amp;lt;C-[&amp;gt; :&amp;lt;C-u&amp;gt;q&amp;lt;CR&amp;gt;
+    nmap &amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;q&amp;lt;CR&amp;gt;
+endfunction
+
+let g:automatic_default_match_config = {
+            \   &#39;is_open_other_window&#39;: 1
+            \ }
+let g:automatic_default_set_config = {
+            \   &#39;height&#39;: &#39;60%&#39;,
+            \   &#39;move&#39;: &#39;bottom&#39;,
+            \   &#39;apply&#39;: function(&#39;s:my_temporary_window_init&#39;)
+            \ }
+let g:automatic_config = [
+            \   {&#39;match&#39;: {&#39;buftype&#39;: &#39;help&#39;}},
+            \   {&#39;match&#39;: {&#39;bufname&#39;: &#39;^.vimshell&#39;}},
+            \   {&#39;match&#39;: {&#39;bufname&#39;: &#39;[\[\*]unite[\]\*]&#39;}},
+            \   {
+            \       &#39;match&#39;: {
+            \           &#39;filetype&#39;: &#39;qf&#39;,
+            \           &#39;autocmds&#39;: [&#39;FileType&#39;]
+            \       },
+            \   },
+            \   {
+            \       &#39;match&#39;: {
+            \           &#39;filetype&#39;: &#39;\v^ref-.+&#39;,
+            \           &#39;autocmds&#39;: [&#39;FileType&#39;]
+            \       }
+            \   },
+            \   {
+            \       &#39;match&#39;: {
+            \           &#39;bufname&#39;: &#39;\[quickrun output\]&#39;
+            \       },
+            \       &#39;set&#39;: {
+            \           &#39;height&#39;: 8
+            \       }
+            \   },
+            \   {
+            \       &#39;match&#39;: {
+            \           &#39;autocmds&#39;: [&#39;CmdwinEnter&#39;]
+            \       },
+            \       &#39;set&#39;: {
+            \           &#39;is_close_focus_out&#39;: 1,
+            \           &#39;unsettings&#39;: [&#39;move&#39;, &#39;resize&#39;]
+            \       }
+            \   }
+            \ ]
+&amp;quot; }}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 Unite 、 QuickFix 、 help で、 &lt;code&gt;&amp;lt;C-[&amp;gt;&amp;lt;C-[&amp;gt;&lt;/code&gt;
+を押すと閉じることが出来る。 &lt;code&gt;&amp;lt;C-[&amp;gt;&amp;lt;C-[&amp;gt;&lt;/code&gt;
+で検索後のハイライトを消すというマッピングを行っているため、わざわざ一回マッピング削除して
+さらにもう一回設定みたいなことをやってるのがなんかカッコ悪い・・・。&lt;/p&gt;
+
+&lt;p&gt;もうちょっとうまく出来ると思うんだけど、 vim 力足りず・・・。&lt;/p&gt;
+
+&lt;h5 id=&#34;参考:f4572b3d00f460adf89934561bf9dd64&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.supermomonga.com/articles/vim/automatic.html&#34;&gt;automatic.vimでウィンドウの一時的分割をハンドリングしよう |かなりすごいブログ&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/osyo-manga/vim-automatic&#34;&gt;osyo-manga/vim-automatic GitHub&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>qfixhowm Vim でメモ</title>
+      <link>http://yukimemi.github.io/post/2013-06-29-qfixhowm/</link>
+      <pubDate>Sat, 29 Jun 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-06-29-qfixhowm/</guid>
+      <description>
+
+&lt;p&gt;vimでメモをとる場合、簡単な設定では vimrc に JunkFile
+コマンドを定義するなどする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; JunkFile {{{
+&amp;quot; http://vim-users.jp/2010/11/hack181/
+  &amp;quot;&amp;quot; Open junk file.
+  command! -nargs=0 JunkFile call s:open_junk_file()
+  function! s:open_junk_file()
+    let l:junk_dir = $HOME . &#39;/.vim_junk&#39;. strftime(&#39;/%Y/%m&#39;)
+    if !isdirectory(l:junk_dir)
+      call mkdir(l:junk_dir, &#39;p&#39;)
+    endif
+
+    let l:filename = input(&#39;Junk Code: &#39;, l:junk_dir.strftime(&#39;/%Y-%m-%d-%H%M%S.&#39;))
+    if l:filename != &#39;&#39;
+      execute &#39;edit &#39; . l:filename
+    endif
+  endfunction
+  &amp;quot; }}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これは実行時に拡張子が自由に設定出来るので、簡単にスクリプトを試してみたい場合
+はとても便利。&lt;/p&gt;
+
+&lt;p&gt;でも、やっぱり最近、メモは統合的に管理したいと思い、 QfixHowm
+を導入することにした。&lt;/p&gt;
+
+&lt;h3 id=&#34;インストール:24b8e55833fae809ad1fe864f6f928a4&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;Neobundle で一発&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundle &#39;fuenor/qfixgrep&#39;
+NeoBundle &#39;fuenor/qfixhowm&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;qfixgrep もいれとくと何かといいみたい。&lt;/p&gt;
+
+&lt;h3 id=&#34;設定:24b8e55833fae809ad1fe864f6f928a4&#34;&gt;設定&lt;/h3&gt;
+
+&lt;p&gt;デフォルトだと拡張子 txt で作成されるため、 markdown
+で記録するように 変更する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot;&amp;quot; qfixhowm {{{
+&amp;quot; ファイル拡張子をmdにする
+let howm_filename = &#39;%Y/%m/%Y-%m-%d-%H%M%S.md&#39;
+&amp;quot; ファイルタイプをmarkdownにする
+let QFixHowm_FileType = &#39;markdown&#39;
+&amp;quot; タイトル記号
+let QFixHowm_Title = &#39;#&#39;
+&amp;quot; タイトル行検索正規表現の辞書を初期化
+let QFixMRU_Title = {}
+&amp;quot; MRUでタイトル行とみなす正規表現(Vimの正規表現で指定)
+let QFixMRU_Title[&#39;mkd&#39;] = &#39;^###[^#]&#39;
+&amp;quot; grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
+let QFixMRU_Title[&#39;mkd_regxp&#39;] = &#39;^###[^#]&#39;
+&amp;quot; }}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんなんでいいっぽい。&lt;/p&gt;
+
+&lt;p&gt;使い方、細かい設定は作者さんのページ参照&lt;/p&gt;
+
+&lt;h5 id=&#34;参考:24b8e55833fae809ad1fe864f6f928a4&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://sites.google.com/site/fudist/Home/qfixhowm&#34;&gt;QFixHowm - vim用howmプラグイン - fudist&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://vim-users.jp/2010/11/hack181/&#34;&gt;Vim-users.jp - Hack #181: Vimで使い捨てのファイルを作成する&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

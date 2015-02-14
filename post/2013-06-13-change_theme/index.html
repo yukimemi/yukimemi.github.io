@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Tinkererでテーマカスタマイズ | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">Tinkererでテーマカスタマイズ</h2>
+      <p class="orange-text text-darken-4">2013/06/13 Thu</p>
+      
+
+<p>Tinkererのテーマをカスタマイズしたいと思った。</p>
+
+<p>カスタマイズといってもそんな大層なことがしたいわけではなく。</p>
+
+<p>デフォルトの &ldquo;modern5&rdquo; だと、横幅が狭いと思ったので広くしたかっただけ。
+今時のワイド画面が多い中ではもうちょっと広くてもいいでしょう。</p>
+
+<p>カスタマイズの方法は、まず元になるテーマである &ldquo;modern5&rdquo;
+をコピーしてくる。</p>
+
+<pre><code class="language-sh">$ mkdir -p _themes/mytheme
+$ cp -r ~/.virtualenvs/2.7.4/lib/python2.7/site-packages/tinkerer/themes/modern5/_themes/mytheme
+</code></pre>
+
+<p>それから、conf.pyにmythemeを使うことを明記する。</p>
+
+<pre><code class="language-python"># Pick another Tinkerer theme or use your own
+html_theme = &quot;mytheme&quot;
+
+# Add other theme paths here
+html_theme_path = ['_themes', tinkerer.paths.themes]
+</code></pre>
+
+<p>後は <code>_themes/mytheme/static/modern5.css_t</code> を編集すればいいみたい。</p>
+
+<p>よくわからないけど、 width がついているところを全部 +200px
+したった。</p>
+
+<h5 id="参考:e4847be51899363b77b0579c58301dae">参考:</h5>
+
+<p><a href="http://krakenbeal.blogspot.jp/2012/05/tinkererblog.html">Tinkererを使ってblogを始める - KRAKENBEAL RECORDS</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

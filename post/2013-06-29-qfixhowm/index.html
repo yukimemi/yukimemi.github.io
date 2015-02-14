@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>qfixhowm Vim でメモ | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">qfixhowm Vim でメモ</h2>
+      <p class="orange-text text-darken-4">2013/06/29 Sat</p>
+      
+
+<p>vimでメモをとる場合、簡単な設定では vimrc に JunkFile
+コマンドを定義するなどする。</p>
+
+<pre><code class="language-vim">&quot; JunkFile {{{
+&quot; http://vim-users.jp/2010/11/hack181/
+  &quot;&quot; Open junk file.
+  command! -nargs=0 JunkFile call s:open_junk_file()
+  function! s:open_junk_file()
+    let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
+    if !isdirectory(l:junk_dir)
+      call mkdir(l:junk_dir, 'p')
+    endif
+
+    let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+    if l:filename != ''
+      execute 'edit ' . l:filename
+    endif
+  endfunction
+  &quot; }}}
+</code></pre>
+
+<p>これは実行時に拡張子が自由に設定出来るので、簡単にスクリプトを試してみたい場合
+はとても便利。</p>
+
+<p>でも、やっぱり最近、メモは統合的に管理したいと思い、 QfixHowm
+を導入することにした。</p>
+
+<h3 id="インストール:24b8e55833fae809ad1fe864f6f928a4">インストール</h3>
+
+<p>Neobundle で一発</p>
+
+<pre><code class="language-vim">NeoBundle 'fuenor/qfixgrep'
+NeoBundle 'fuenor/qfixhowm'
+</code></pre>
+
+<p>qfixgrep もいれとくと何かといいみたい。</p>
+
+<h3 id="設定:24b8e55833fae809ad1fe864f6f928a4">設定</h3>
+
+<p>デフォルトだと拡張子 txt で作成されるため、 markdown
+で記録するように 変更する。</p>
+
+<pre><code class="language-vim">&quot;&quot; qfixhowm {{{
+&quot; ファイル拡張子をmdにする
+let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
+&quot; ファイルタイプをmarkdownにする
+let QFixHowm_FileType = 'markdown'
+&quot; タイトル記号
+let QFixHowm_Title = '#'
+&quot; タイトル行検索正規表現の辞書を初期化
+let QFixMRU_Title = {}
+&quot; MRUでタイトル行とみなす正規表現(Vimの正規表現で指定)
+let QFixMRU_Title['mkd'] = '^###[^#]'
+&quot; grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
+let QFixMRU_Title['mkd_regxp'] = '^###[^#]'
+&quot; }}}
+</code></pre>
+
+<p>こんなんでいいっぽい。</p>
+
+<p>使い方、細かい設定は作者さんのページ参照</p>
+
+<h5 id="参考:24b8e55833fae809ad1fe864f6f928a4">参考:</h5>
+
+<p><a href="https://sites.google.com/site/fudist/Home/qfixhowm">QFixHowm - vim用howmプラグイン - fudist</a></p>
+
+<p><a href="http://vim-users.jp/2010/11/hack181/">Vim-users.jp - Hack #181: Vimで使い捨てのファイルを作成する</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

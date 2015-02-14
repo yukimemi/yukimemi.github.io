@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Firefox on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/firefox/</link>
+    <description>Recent content in Firefox on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 05 Jan 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/firefox/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>vimperator ツリー型タブとvimperatorの表示の上下を修正</title>
+      <link>http://yukimemi.github.io/post/2014-01-05-vimperator_treestyletab/</link>
+      <pubDate>Sun, 05 Jan 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-01-05-vimperator_treestyletab/</guid>
+      <description>&lt;p&gt;vimperator と ツリー型タブ は便利で使ってたのだが、
+先日、表示がおかしくなってることに気づいた。&lt;/p&gt;
+
+&lt;p&gt;こんな感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_231852.png&#34; alt=&#34;image&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;コマンドラインの補完部分に、タブ表示が覆い被さっている。&lt;/p&gt;
+
+&lt;p&gt;修正するには、 .vimperatorrc に、以下を記載したら出来た。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;style! -name=treestyletab chrome://* .tabbrowser-tab { z-index: 0 !important; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;style コマンドで、既存のcssを書き換えることが出来るみたい。 詳細は、
+&lt;code&gt;:h style&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;p&gt;修正後はこんな感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_232026.png&#34; alt=&#34;image&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;ツリー型タブのcssのクラス名とかを調べるには、 &lt;a href=&#34;https://addons.mozilla.org/ja/firefox/addon/dom-inspector-6622/&#34;&gt;DOM Inspector :: Add-ons for Firefox&lt;/a&gt;
+を使用した。&lt;/p&gt;
+
+&lt;p&gt;使い方は、 &lt;a href=&#34;http://diary.noasobi.net/junk/DOMInspector.html&#34;&gt;Dom Inspectorでブックマークサイドバーを開くコマンドを見つける&lt;/a&gt;
+がすごい参考になった。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

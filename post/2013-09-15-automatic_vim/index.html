@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ</h2>
+      <p class="orange-text text-darken-4">2013/09/15 Sun</p>
+      
+
+<p><a href="https://github.com/osyo-manga/vim-automatic">automatic.vim</a>
+という便利なプラギンがある。</p>
+
+<p>これを利用すると、 Unite や QuickFix や help
+など、様々なウィンドウを一元管理出来るっぽい。</p>
+
+<p>そこで、いろんなサイトを参考にやってみた。</p>
+
+<pre><code class="language-vim">&quot; ESC2回押しで検索ハイライトを消去
+autocm MyAutoCmd VimEnter,WinEnter,WinLeave * nmap &lt;silent&gt; &lt;ESC&gt;&lt;ESC&gt; :&lt;C-u&gt;nohlsearch&lt;CR&gt;&lt;Plug&gt;(anzu-clear-search-status)
+
+&quot; vim-automatic {{{
+function! s:my_temporary_window_init(config, context)
+    silent! nunmap &lt;ESC&gt;&lt;ESC&gt;
+    nmap &lt;buffer&gt; &lt;C-[&gt; :&lt;C-u&gt;q&lt;CR&gt;
+    nmap &lt;buffer&gt; &lt;ESC&gt; :&lt;C-u&gt;q&lt;CR&gt;
+endfunction
+
+let g:automatic_default_match_config = {
+            \   'is_open_other_window': 1
+            \ }
+let g:automatic_default_set_config = {
+            \   'height': '60%',
+            \   'move': 'bottom',
+            \   'apply': function('s:my_temporary_window_init')
+            \ }
+let g:automatic_config = [
+            \   {'match': {'buftype': 'help'}},
+            \   {'match': {'bufname': '^.vimshell'}},
+            \   {'match': {'bufname': '[\[\*]unite[\]\*]'}},
+            \   {
+            \       'match': {
+            \           'filetype': 'qf',
+            \           'autocmds': ['FileType']
+            \       },
+            \   },
+            \   {
+            \       'match': {
+            \           'filetype': '\v^ref-.+',
+            \           'autocmds': ['FileType']
+            \       }
+            \   },
+            \   {
+            \       'match': {
+            \           'bufname': '\[quickrun output\]'
+            \       },
+            \       'set': {
+            \           'height': 8
+            \       }
+            \   },
+            \   {
+            \       'match': {
+            \           'autocmds': ['CmdwinEnter']
+            \       },
+            \       'set': {
+            \           'is_close_focus_out': 1,
+            \           'unsettings': ['move', 'resize']
+            \       }
+            \   }
+            \ ]
+&quot; }}}
+</code></pre>
+
+<p>これで、 Unite 、 QuickFix 、 help で、 <code>&lt;C-[&gt;&lt;C-[&gt;</code>
+を押すと閉じることが出来る。 <code>&lt;C-[&gt;&lt;C-[&gt;</code>
+で検索後のハイライトを消すというマッピングを行っているため、わざわざ一回マッピング削除して
+さらにもう一回設定みたいなことをやってるのがなんかカッコ悪い・・・。</p>
+
+<p>もうちょっとうまく出来ると思うんだけど、 vim 力足りず・・・。</p>
+
+<h5 id="参考:f4572b3d00f460adf89934561bf9dd64">参考:</h5>
+
+<p><a href="http://blog.supermomonga.com/articles/vim/automatic.html">automatic.vimでウィンドウの一時的分割をハンドリングしよう |かなりすごいブログ</a></p>
+
+<p><a href="https://github.com/osyo-manga/vim-automatic">osyo-manga/vim-automatic GitHub</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

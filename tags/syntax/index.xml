@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Syntax on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/syntax/</link>
+    <description>Recent content in Syntax on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 11 Aug 2013 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/syntax/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Vim coffeescript syntastic</title>
+      <link>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</link>
+      <pubDate>Sun, 11 Aug 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</guid>
+      <description>&lt;p&gt;vim で保存時に自動で構文チェックとかを行なってくれるプラギンに
+Syntastic というものがある。&lt;/p&gt;
+
+&lt;p&gt;coffeescript を書く時も、これを使うと便利。&lt;/p&gt;
+
+&lt;p&gt;インストールは NeoBundle で一発。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundle &#39;scrooloose/syntastic.git&#39;, {
+            \ &#39;build&#39;: {
+            \   &#39;mac&#39;: [&#39;pip install pyflake&#39;, &#39;npm -g install coffeelint&#39;],
+            \   &#39;unix&#39;: [&#39;pip install pyflake&#39;, &#39;npm -g install coffeelint&#39;]
+            \ }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記のように書いておけば、 Syntastic をインストールする時に自動で、
+pyflake と coffeelint をインストールしてくれる。 NeoBundle
+すごい。&lt;/p&gt;
+
+&lt;p&gt;後は普通にコードを書いて、保存すると、自動でエラー行にチェックがつく。
+エラーの内容を見たい時は、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:Errors
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;コマンドでおｋ&lt;/p&gt;
+
+&lt;p&gt;coffeelint はデフォルトでインデントは 2 みたい。&lt;/p&gt;
+
+&lt;p&gt;.vimrc に以下のように書いておいた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;autocmd MyAutoCmd BufNewFile,BufRead .coffee setl ft=coffee fenc=utf8 ff=unix tabstop=4 shiftwidth=2 softtabstop=2 expandtab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;また、1行の長さが 80文字
+を超えてもエラーになるのが邪魔だったので、これは無視したい。&lt;/p&gt;
+
+&lt;p&gt;以下のファイルの内容を変更すれば、無視することが出来た。(もっとスマートなやり方があるかもしれない。誰か教えてください。)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-diff&#34;&gt;$ vim ~/.nodebrew/current/lib/node_modules/coffeelint/lib/coffeelint.js
+ max_line_length: {
+   value: 80,
+   -level: ERROR,
+   +level: IGNORE,
+   message: &#39;Line exceeds maximum allowed length&#39;
+ },
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

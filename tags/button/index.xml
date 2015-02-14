@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Button on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/button/</link>
+    <description>Recent content in Button on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sat, 15 Jun 2013 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/button/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tinkerer にソーシャルボタン追加</title>
+      <link>http://yukimemi.github.io/post/2013-06-15-add_social_button/</link>
+      <pubDate>Sat, 15 Jun 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-06-15-add_social_button/</guid>
+      <description>
+
+&lt;p&gt;今時のブログとしては、ソーシャルボタンは追加したい。&lt;/p&gt;
+
+&lt;p&gt;参考になる記事がいっぱいあったので、参考にしてやってみた。&lt;/p&gt;
+
+&lt;h3 id=&#34;事前準備:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;事前準備&lt;/h3&gt;
+
+&lt;p&gt;layout.html というファイルと page.html というファイルを作る。&lt;/p&gt;
+
+&lt;p&gt;layout.html は全体？ page.html
+は記事一つ一つみたいな感じがする。たぶん。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim _templates/layout.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;中身はこんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% extends &amp;quot;!layout.html&amp;quot; %}
+
+{% block extrahead %}
+&amp;lt;!-- ここに html の ヘッダ部分に追加するスクリプトを書く --&amp;gt;
+{% endblock %}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ね。簡単でしょ。 1行目で既存の layout.html を継承してる。たぶん&lt;/p&gt;
+
+&lt;p&gt;layout.html では、extrahead というブロックを使うことで、既存の
+&amp;lt;head&amp;gt;タグに追加の情報を出力することが出来る。&lt;/p&gt;
+
+&lt;p&gt;次に page.html&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim _templates/page.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;中身はこんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% extends &amp;quot;!page.html&amp;quot; %}
+
+{% block body %}
+{{ timestamp(metadata.formatted_date) }}
+{% block buttons %}
+&amp;lt;!-- ここに ソーシャルボタンのコードを追加していく --&amp;gt;
+{% endblock %}
+{{ body }}
+{{ self.buttons() }}
+{{ post_meta(metadata) }}
+{{ comments }}
+{% endblock %}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ソーシャルボタンは記事の上と下に表示したいため、下では上の定義を
+&lt;code&gt;{{ self.buttons() }}&lt;/code&gt; という形 で参照している。&lt;/p&gt;
+
+&lt;p&gt;これで事前準備は完了。&lt;/p&gt;
+
+&lt;h3 id=&#34;twitter-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;Twitter ボタン&lt;/h3&gt;
+
+&lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
+
+&lt;p&gt;Twitter のボタンは&amp;lt;head&amp;gt;部分のスクリプトは必要ないみたいなので、
+page.html にコードを記述する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- Twitter button --&amp;gt;
+&amp;lt;a href=&amp;quot;https://twitter.com/share&amp;quot; class=&amp;quot;twitter-share-button&amp;quot; data-lang=&amp;quot;ja&amp;quot;&amp;gt;ツイート&amp;lt;/a&amp;gt;
+&amp;lt;script&amp;gt;!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?&#39;http&#39;:&#39;https&#39;;if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+&#39;://platform.twitter.com/widgets.js&#39;;fjs.parentNode.insertBefore(js,fjs);}}(document, &#39;script&#39;, &#39;twitter-wjs&#39;);&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、デフォルトでは横幅が広すぎるので css を調整する。
+&lt;a href=&#34;http://yukimemi.bitbucket.org/blog/html/2013/06/13/change_theme.html&#34;&gt;前回&lt;/a&gt;
+の記事で自分の theme を 作っていたら、それに追記する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim _themes/mytheme/static/modern5.css_t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;追加するcssはこんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;/* Twitter button */
+iframe.twitter-share-button {
+width: 88px!important;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;hatena-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;hatena ボタン&lt;/h3&gt;
+
+&lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
+
+&lt;p&gt;hatena のボタンは
+&amp;lt;head&amp;gt;部分にも追加のスクリプトがあるみたいなので、まず layout.html
+の &lt;code&gt;{% block extrahead %}&lt;/code&gt; に追記する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- for hatena --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://b.st-hatena.com/js/bookmark_button.js&amp;quot; charset=&amp;quot;utf-8&amp;quot; async=&amp;quot;async&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次にボタン部分を page.html に追加する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- Hatena button --&amp;gt;
+&amp;lt;a href=&amp;quot;http://b.hatena.ne.jp/entry/http://yukimemi.bitbucket.org/{{ pagename }}{{ file_suffix }}&amp;quot; class=&amp;quot;hatena-bookmark-button&amp;quot; data-hatena-bookmark-title=&amp;quot;{{ title }} - {{ project }}&amp;quot; data-hatena-bookmark-layout=&amp;quot;standard-balloon&amp;quot; title=&amp;quot;このエントリーをはてなブックマークに追加&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;http://b.st-hatena.com/images/entry-button/button-only.gif&amp;quot; alt=&amp;quot;このエントリーをはてなブックマークに追加&amp;quot; width=&amp;quot;20&amp;quot; height=&amp;quot;20&amp;quot; style=&amp;quot;border: none;&amp;quot; /&amp;gt;&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;URLやタイトルをそのページにあったものに変換している。 &lt;code&gt;{{ pagename }}&lt;/code&gt;
+、 &lt;code&gt;{{ file_suffix }}&lt;/code&gt; などは ググればわかる。&lt;/p&gt;
+
+&lt;h3 id=&#34;google-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;google+ ボタン&lt;/h3&gt;
+
+&lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
+
+&lt;p&gt;まず&amp;lt;head&amp;gt;部分に追加するスクリプトを layout.html に追記。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- for gogogle + --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+window.___gcfg = {lang: &#39;ja&#39;};
+
+(function() {
+ var po = document.createElement(&#39;script&#39;); po.type = &#39;text/javascript&#39;; po.async = true;
+ po.src = &#39;https://apis.google.com/js/plusone.js&#39;;
+ var s = document.getElementsByTagName(&#39;script&#39;)[0]; s.parentNode.insertBefore(po, s);
+ })();
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、ボタン部分を page.html に追記。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- Google+ button --&amp;gt;
+&amp;lt;div class=&amp;quot;g-plusone&amp;quot; data-size=&amp;quot;medium&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Google+ は簡単でいいね。&lt;/p&gt;
+
+&lt;h3 id=&#34;facebook-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;facebook ボタン&lt;/h3&gt;
+
+&lt;p&gt;ボタン作成のコードをググって取得する。 これは app id
+とか取得しなきゃいけなくてけっこうめんどくさい。&lt;/p&gt;
+
+&lt;p&gt;取得したら、&amp;lt;head&amp;gt;部分に追加するスクリプトを layout.html に追記。
+channelUrl
+とかいうのが全然意味わからんかった。誰か知ってる人教えて下さい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- for facebook --&amp;gt;
+&amp;lt;div id=&amp;quot;fb-root&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script&amp;gt;
+window.fbAsyncInit = function() {
+  // init the FB JS SDK
+  FB.init({
+appId      : &#39;XXXXXXXXXXXXXXX&#39;,                      // App ID from the app dashboard
+channelUrl : &#39;//yukimemi.bitbucket.org/channel.html&#39;, // Channel file for x-domain comms
+status     : true,                                   // Check Facebook Login status
+xfbml      : true                                    // Look for social plugins on the page
+});
+
+// Additional initialization code such as adding Event Listeners goes here
+};
+
+(function(d, s, id) {
+ var js, fjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) return;
+ js = d.createElement(s); js.id = id; js.async = true;
+ js.src = &amp;quot;//connect.facebook.net/ja_JP/all.js#xfbml=1&amp;quot;;
+ fjs.parentNode.insertBefore(js, fjs);
+ }(document, &#39;script&#39;, &#39;facebook-jssdk&#39;));
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ちなみに、非同期にすることで早くなるらしい。&lt;/p&gt;
+
+&lt;p&gt;次にボタンを配置する。 page.html に追加する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- facebook button --&amp;gt;
+&amp;lt;div class=&amp;quot;fb-like&amp;quot; data-href=&amp;quot;http://yukimemi.bitbucket.org/{{ pagename }}{{ file_suffix }}&amp;quot; data-send=&amp;quot;false&amp;quot; data-layout=&amp;quot;button_count&amp;quot; data-width=&amp;quot;200&amp;quot; data-show-faces=&amp;quot;true&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでおｋ。&lt;/p&gt;
+
+&lt;p&gt;全体は以下の通り。&lt;/p&gt;
+
+&lt;p&gt;layout.html&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% extends &amp;quot;!layout.html&amp;quot; %}
+
+{% block extrahead %}
+&amp;lt;!-- for hatena --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://b.st-hatena.com/js/bookmark_button.js&amp;quot; charset=&amp;quot;utf-8&amp;quot; async=&amp;quot;async&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+
+&amp;lt;!-- for gogogle + --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+window.___gcfg = {lang: &#39;ja&#39;};
+
+(function() {
+ var po = document.createElement(&#39;script&#39;); po.type = &#39;text/javascript&#39;; po.async = true;
+ po.src = &#39;https://apis.google.com/js/plusone.js&#39;;
+ var s = document.getElementsByTagName(&#39;script&#39;)[0]; s.parentNode.insertBefore(po, s);
+ })();
+&amp;lt;/script&amp;gt;
+
+&amp;lt;!-- for facebook --&amp;gt;
+&amp;lt;div id=&amp;quot;fb-root&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script&amp;gt;
+window.fbAsyncInit = function() {
+  // init the FB JS SDK
+  FB.init({
+appId      : &#39;XXXXXXXXXXXXXXX&#39;,                      // App ID from the app dashboard
+channelUrl : &#39;//yukimemi.bitbucket.org/channel.html&#39;, // Channel file for x-domain comms
+status     : true,                                   // Check Facebook Login status
+xfbml      : true                                    // Look for social plugins on the page
+});
+
+// Additional initialization code such as adding Event Listeners goes here
+};
+
+(function(d, s, id) {
+ var js, fjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) return;
+ js = d.createElement(s); js.id = id; js.async = true;
+ js.src = &amp;quot;//connect.facebook.net/ja_JP/all.js#xfbml=1&amp;quot;;
+ fjs.parentNode.insertBefore(js, fjs);
+ }(document, &#39;script&#39;, &#39;facebook-jssdk&#39;));
+&amp;lt;/script&amp;gt;
+{% endblock %}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;page.html&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% extends &amp;quot;!page.html&amp;quot; %}
+
+{% block body %}
+{{ timestamp(metadata.formatted_date) }}
+{% block buttons %}
+&amp;lt;!-- facebook button --&amp;gt;
+&amp;lt;div class=&amp;quot;fb-like&amp;quot; data-href=&amp;quot;http://yukimemi.bitbucket.org/{{ pagename }}{{ file_suffix }}&amp;quot; data-send=&amp;quot;false&amp;quot; data-layout=&amp;quot;button_count&amp;quot; data-width=&amp;quot;200&amp;quot; data-show-faces=&amp;quot;true&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+&amp;lt;!-- Hatena button --&amp;gt;
+&amp;lt;a href=&amp;quot;http://b.hatena.ne.jp/entry/http://yukimemi.bitbucket.org/{{ pagename }}{{ file_suffix }}&amp;quot; class=&amp;quot;hatena-bookmark-button&amp;quot; data-hatena-bookmark-title=&amp;quot;{{ title }} - {{ project }}&amp;quot; data-hatena-bookmark-layout=&amp;quot;standard-balloon&amp;quot; title=&amp;quot;このエントリーをはてなブックマークに追加&amp;quot;&amp;gt;&amp;lt;img src=&amp;quot;http://b.st-hatena.com/images/entry-button/button-only.gif&amp;quot; alt=&amp;quot;このエントリーをはてなブックマークに追加&amp;quot; width=&amp;quot;20&amp;quot; height=&amp;quot;20&amp;quot; style=&amp;quot;border: none;&amp;quot; /&amp;gt;&amp;lt;/a&amp;gt;
+
+&amp;lt;!-- Twitter button --&amp;gt;
+&amp;lt;a href=&amp;quot;https://twitter.com/share&amp;quot; class=&amp;quot;twitter-share-button&amp;quot; data-lang=&amp;quot;ja&amp;quot;&amp;gt;ツイート&amp;lt;/a&amp;gt;
+&amp;lt;script&amp;gt;!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?&#39;http&#39;:&#39;https&#39;;if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+&#39;://platform.twitter.com/widgets.js&#39;;fjs.parentNode.insertBefore(js,fjs);}}(document, &#39;script&#39;, &#39;twitter-wjs&#39;);&amp;lt;/script&amp;gt;
+
+&amp;lt;!-- Google+ button --&amp;gt;
+&amp;lt;div class=&amp;quot;g-plusone&amp;quot; data-size=&amp;quot;medium&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+{% endblock %}
+{{ body }}
+{{ self.buttons() }}
+{{ post_meta(metadata) }}
+{{ comments }}
+{% endblock %}
+
+{% set script_files = script_files + [&amp;quot;_static/google_analytics.js&amp;quot;] %}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;参考:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://te2uma.com/blog/2013/03/29/tinkerer_with_social_button.html&#34;&gt;Tinkererで作ったブログにソーシャルボタンを追加する—鉄馬の工具箱&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://sphinx-users.jp/doc10/templating.html#id2&#34;&gt;テンプレート — Sphinx v1.0.6 documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://sphinx-users.jp/doc10/templating.html#id6&#34;&gt;テンプレート — Sphinx v1.0.6 documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://happyweblife.main.jp/mtarcive/laboratory/2011/03/xfbmlfacebook.html&#34;&gt;XFBML版Facebookの「いいね！」ボタンを設置する。 - The Web Laboratory&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://iphone-lab.net/archives/253683&#34;&gt;たった一言で「いいね！」ボタンが爆速に！全ブロガーに必須の呪文。| iPhone 研究室&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

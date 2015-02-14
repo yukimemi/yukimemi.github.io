@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Indentline on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/indentline/</link>
+    <description>Recent content in Indentline on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sat, 18 Jan 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/indentline/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>vim indentLine で見やすいインデントを</title>
+      <link>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</link>
+      <pubDate>Sat, 18 Jan 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</guid>
+      <description>&lt;p&gt;vim には、見やすい定番のインデントプラグインとして、
+&lt;a href=&#34;https://github.com/nathanaelkane/vim-indent-guides&#34;&gt;nathanaelkane/vim-indent-guides&lt;/a&gt;
+がある。&lt;/p&gt;
+
+&lt;p&gt;しかし、最近、
+&lt;a href=&#34;https://github.com/Yggdroot/indentLine&#34;&gt;Yggdroot/indentLine&lt;/a&gt;
+というプラグイン が、 &lt;a href=&#34;http://alpaca.tc/blog/vim/plugins-best-of-vim-1.html&#34;&gt;オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ&lt;/a&gt;
+で紹介されていたので、乗り換えた。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_002810.png&#34; alt=&#34;image&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;シンプルでかっこいい。 それに、 vim-indent-guides は、 indent
+をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。&lt;/p&gt;
+
+&lt;p&gt;個人的にはタブを使用することはなくて、スペースを使用するから問題ないのだけれども・・・。&lt;/p&gt;
+
+&lt;p&gt;その点、 &lt;a href=&#34;https://github.com/Yggdroot/indentLine&#34;&gt;indentLine&lt;/a&gt;
+では、スペースしか対応してなく、タブの場合は何もしない。&lt;/p&gt;
+
+&lt;p&gt;README にも記載があるが、タブで同じことやるためには、 .vimrc
+に、以下の記載を加えればいい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;set list listchars=tab:\¦\
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最後にスペースが入っていることに注意。&lt;/p&gt;
+
+&lt;p&gt;こうすると、スペースの場合とほぼ同じように表示される。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_135554.png&#34; alt=&#34;image&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。&lt;/p&gt;
+
+&lt;p&gt;また、インデントを除外したい場合は、その filetype
+を設定してやればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;let g:indentLine_fileTypeExclude = [&#39;help&#39;, &#39;nerdtree&#39;, &#39;calendar&#39;, &#39;thumbnail&#39;, &#39;tweetvim&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんな感じ。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

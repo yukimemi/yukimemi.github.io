@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>PowerShell Markdown を Wordに変換する | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">PowerShell Markdown を Wordに変換する</h2>
+      <p class="orange-text text-darken-4">2014/04/17 Thu</p>
+      <p>仕事でwordを使うことが多々あるのだが、正直いってwordは使いづらい！
+勝手にレイアウトが変わったりスタイルが変わったり・・・思い通りにならないこと山のごとし。</p>
+
+<p>なんとかならんもんか！とGoogle先生に聞いたところ、Markdownを使ってdocxを作成出来るものがあるじゃないですか。</p>
+
+<p><a href="http://johnmacfarlane.net/pandoc/">Pandoc - About pandoc</a></p>
+
+<p>ただ、pandocは基本htmlやlatex向きに作成されているのか、wordで思い通りのレイアウトには出来なかった。
+特にスタイルとか・・・。</p>
+
+<p>そこで、Markdownからdocxに変換するスクリプトを書いた。</p>
+
+<p><a href="https://github.com/yukimemi/md2docx">yukimemi/md2docx</a></p>
+
+<p>詳しくは README
+に記載してあるが、見出しやリストや画像や改ページ等には対応しています。</p>
+
+<p>簡単に試すなら、上記リポジトリにある、 md2docx.cmd と sample.md
+をダウンロードし、コマンドプロンプトより、</p>
+
+<pre><code class="language-bat">&gt; md2docx.cmd sample.md
+</code></pre>
+
+<p>と実行すれば、あら不思議。sample.docxが出来ているはずです。</p>
+
+<p>Windows標準のPowerShellで書いてあるので、Windowsを使ってる人なら誰でもMarkdownからdocxに変換出来ます。</p>
+
+<p>pandocだと、わざわざpandocをインストールしなくてはいけないので、これからプロジェクトの仕様書はMarkdownで書く！なんてことは出来ませんが、このPowerShellならそれも可能・・・なはず。</p>
+
+<p>ぜひブラッシュアップして本当に使えるようにしたいので、プルリクお願いします＞＜</p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

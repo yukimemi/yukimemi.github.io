@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vimrc on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/vimrc/</link>
+    <description>Recent content in Vimrc on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/vimrc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Set cursorline as needed</title>
+      <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
+      <pubDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
+      <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;
+
+&lt;p&gt;よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに &lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; でもとのバッファに戻ったときに、 &lt;code&gt;s:cursorline_lock&lt;/code&gt; 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと &lt;code&gt;set nocursorline&lt;/code&gt; されなくなるようだった。&lt;/p&gt;
+
+&lt;p&gt;そこで、 Lingr のvim部屋で初めて質問してみた。&lt;/p&gt;
+
+&lt;p&gt;そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; では、 &lt;code&gt;WinEnter&lt;/code&gt; イベントは発生しないが、 &lt;code&gt;BufEnter&lt;/code&gt; イベントは発生するらしい。
+また、僕は、 &lt;code&gt;nnoremap : q:i&lt;/code&gt; のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。
+そこで、thincaさんの &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;設定&lt;/a&gt; を以下のように、変更した。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline(&#39;CursorMoved&#39;)
+au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline(&#39;CursorHold&#39;)
+au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline(&#39;WinEnter,BufEnter,CmdwinLeave&#39;)
+au MyAutoCmd WinLeave * call s:auto_cursorline(&#39;WinLeave&#39;)
+
+let s:cursorline_lock = 0
+function! s:auto_cursorline(event)
+  if a:event ==# &#39;WinEnter,BufEnter,CmdwinLeave&#39;
+    setlocal cursorline
+    setlocal cursorcolumn
+    let s:cursorline_lock = 2
+  elseif a:event ==# &#39;WinLeave&#39;
+    setlocal nocursorline
+    setlocal nocursorcolumn
+  elseif a:event ==# &#39;CursorMoved&#39;
+    if s:cursorline_lock
+      if 1 &amp;lt; s:cursorline_lock
+        let s:cursorline_lock = 1
+      else
+        setlocal nocursorline
+        setlocal nocursorcolumn
+        let s:cursorline_lock = 0
+      endif
+    endif
+  elseif a:event ==# &#39;CursorHold&#39;
+    if &amp;amp;updatetime &amp;gt;= 4000
+      setlocal cursorline
+      setlocal cursorcolumn
+    endif
+    let s:cursorline_lock = 1
+  endif
+endfunction
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ついでに &lt;code&gt;cursorcolumn&lt;/code&gt; も追加しといた。
+また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
+
+&lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

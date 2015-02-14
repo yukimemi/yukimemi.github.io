@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Set cursorline as needed | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">Set cursorline as needed</h2>
+      <p class="orange-text text-darken-4">2014/08/05 Tue</p>
+      <p>これまで、 <a href="http://d.hatena.ne.jp/thinca/20090530/1243615055">&lsquo;cursorline&rsquo; を必要な時にだけ有効にする - 永遠に未完成</a> を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。</p>
+
+<p>よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに <code>&lt;C-^&gt;</code> でもとのバッファに戻ったときに、 <code>s:cursorline_lock</code> 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと <code>set nocursorline</code> されなくなるようだった。</p>
+
+<p>そこで、 Lingr のvim部屋で初めて質問してみた。</p>
+
+<p>そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。</p>
+
+<p><code>&lt;C-^&gt;</code> では、 <code>WinEnter</code> イベントは発生しないが、 <code>BufEnter</code> イベントは発生するらしい。
+また、僕は、 <code>nnoremap : q:i</code> のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。
+そこで、thincaさんの <a href="http://d.hatena.ne.jp/thinca/20090530/1243615055">設定</a> を以下のように、変更した。</p>
+
+<pre><code class="language-vim">au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline('CursorMoved')
+au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline('CursorHold')
+au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline('WinEnter,BufEnter,CmdwinLeave')
+au MyAutoCmd WinLeave * call s:auto_cursorline('WinLeave')
+
+let s:cursorline_lock = 0
+function! s:auto_cursorline(event)
+  if a:event ==# 'WinEnter,BufEnter,CmdwinLeave'
+    setlocal cursorline
+    setlocal cursorcolumn
+    let s:cursorline_lock = 2
+  elseif a:event ==# 'WinLeave'
+    setlocal nocursorline
+    setlocal nocursorcolumn
+  elseif a:event ==# 'CursorMoved'
+    if s:cursorline_lock
+      if 1 &lt; s:cursorline_lock
+        let s:cursorline_lock = 1
+      else
+        setlocal nocursorline
+        setlocal nocursorcolumn
+        let s:cursorline_lock = 0
+      endif
+    endif
+  elseif a:event ==# 'CursorHold'
+    if &amp;updatetime &gt;= 4000
+      setlocal cursorline
+      setlocal cursorcolumn
+    endif
+    let s:cursorline_lock = 1
+  endif
+endfunction
+</code></pre>
+
+<p>ついでに <code>cursorcolumn</code> も追加しといた。
+また、 <a href="https://github.com/basyura/TweetVim">TweetVim</a> や、 <a href="https://github.com/itchyny/calendar.vim">calendar.vim</a> では、 updatetime が短すぎるため、すぐに <code>CursorHold</code> イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 <code>set cursorline</code> するようにしている。</p>
+
+<p>こんないろんな設定出来るvimすごい。</p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

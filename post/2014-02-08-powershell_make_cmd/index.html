@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>vim で powershell を書く！ | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">vim で powershell を書く！</h2>
+      <p class="orange-text text-darken-4">2014/02/08 Sat</p>
+      <p>この記事は、 <a href="http://atnd.org/events/45072">Vim Advent Calendar 2013</a>
+70日目の記事になります。</p>
+
+<p>vim で powershell を書く時の設定です。</p>
+
+<p>まず、 syntax と indent 。
+これは、以下のプラグインでOK。(なんかインデントは変だけど・・・)</p>
+
+<pre><code class="language-vim">NeoBundleLazy 'PProvost/vim-ps1'
+</code></pre>
+
+<p>それから、 vim から実行するために、 quickrun
+を入れます。(これは定番ですね！)</p>
+
+<pre><code class="language-vim">NeoBundleLazy 'thinca/vim-quickrun'
+</code></pre>
+
+<p>ちょっと前までは、powershell
+でquickrunするためには、設定が必要だったけど、最近オフィシャルに対応されるようになったみたいです。</p>
+
+<p>参考: <a href="http://qiita.com/rbtnn/items/ea441a77181d29188880">VimとPowerShell - Qiita</a></p>
+
+<p>これで、powershellを書いてる時に、デフォルトだと &lt;Leader&gt;r
+で実行できます。</p>
+
+<p>さらに、おもむろに以下のファイルを作成して、 header.cmd
+というファイル名で保存。</p>
+
+<pre><code class="language-bat">@echo off
+pushd &quot;%~dp0&quot; &gt; nul
+set tm=%time: =0%
+set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1
+for /f &quot;usebackq skip=10 delims=&quot; %%i in (&quot;%~f0&quot;) do @echo %%i &gt;&gt; &quot;%ps1file%&quot;
+powershell -NoProfile -ExecutionPolicy unrestricted -File &quot;%ps1file%&quot; %*
+del &quot;%ps1file%&quot;
+popd &gt; nul
+pause
+exit /b %ERRORLEVEL%
+# ========== do ps1 file as a dosbatch ==========
+</code></pre>
+
+<p>そして、以下の設定を .vimrc
+に書いておくと、powershellスクリプトを手軽に実行できるバッチファイルが作成できます。</p>
+
+<pre><code class="language-vim">let s:is_windows = has('win16') || has('win32') || has('win64')
+let s:system = exists('g:loaded_vimproc') ? 'vimproc#system_bg' : 'system'
+
+if neobundle#tap('vim-ps1')&quot;{{{
+    call neobundle#config({
+                \ 'autoload': {
+                \   'filetypes': 'ps1'
+                \ }
+                \ })
+
+    function! neobundle#tapped.hooks.on_source(bundle)
+        function! s:make_ps12cmd()
+            if s:is_windows
+                let s:com = &quot;copy /b header.cmd + &quot; . expand(&quot;%:p:t&quot;) . &quot; &quot; . expand(&quot;%:p:t:r&quot;) . &quot;.cmd&quot;
+            else
+                let s:com = &quot;cat header.cmd &quot; . expand(&quot;%:p:t&quot;) . &quot; &gt; &quot; . expand(&quot;%:p:t:r&quot;) . &quot;.cmd&quot;
+            endif
+            echom(s:com)
+            call {s:system}(s:com)
+        endfunction
+        au BufWritePost *.ps1 call s:make_ps12cmd()
+    endfunction
+
+    call neobundle#untap()
+endif&quot;}}}
+</code></pre>
+
+<p>やってることは単純で、さっきの header.cmd と作成中の powershell
+スクリプトを合体させてるだけです。 windows の場合は、 copy
+コマンドで。LinuxやMac の場合は、 cat コマンドで。</p>
+
+<p>上記の設定では、保存時に自動で結合されて、元のpowershellファイルの拡張子が&rdquo;cmd&rdquo;になったものができあがります。</p>
+
+<p>例えば、以下の hello.ps1 をvim上で保存すると・・・</p>
+
+<pre><code class="language-ps1">Write-Host &quot;Hello ps1&quot;
+</code></pre>
+
+<p>こんな hello.cmd ができてるはずです。</p>
+
+<pre><code class="language-bat">@echo off
+pushd &quot;%~dp0&quot; &gt; nul
+set tm=%time: =0%
+set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1
+for /f &quot;usebackq skip=10 delims=&quot; %%i in (&quot;%~f0&quot;) do @echo %%i &gt;&gt; &quot;%ps1file%&quot;
+powershell -NoProfile -ExecutionPolicy unrestricted -File &quot;%ps1file%&quot; %*
+del &quot;%ps1file%&quot;
+popd &gt; nul
+pause
+exit /b %ERRORLEVEL%
+# ========== do ps1 file as a dosbatch ==========
+
+Write-Host &quot;Hello ps1&quot;
+</code></pre>
+
+<p>このファイルは、エクスプローラからダブルクリックで実行出来ます。
+一時ファイルを作成してから実行しているのでダサいし、途中でスクリプトを強制終了すると一時ファイルが残ったままになるという致命的な問題はありますが、まぁちょっとしたスクリプトにはいいんではないでしょうか。</p>
+
+<p>ちなみに、 neobundle の tap と untap とかの設定は、 supermomonga
+さんの
+<a href="http://blog.supermomonga.com/articles/vim/neobundle-sugoi-setting.html">この記事</a>
+がすごい参考になります。かなりすごいです。かなり。</p>
+
+<p>さらにこの保存時に結合っていう方法を使えば、例えば先頭行にコメントで
+import文みたいなのを入れておけば、動的に複数のpowershell
+スクリプトを結合して、一つのバッチファイルにする・・・ってなこともできると思います。(誰かお願いします)</p>
+
+<p>以上です。</p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

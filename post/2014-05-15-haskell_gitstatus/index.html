@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>haskellでgitstatus | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">haskellでgitstatus</h2>
+      <p class="orange-text text-darken-4">2014/05/15 Thu</p>
+      
+
+<p>前に Go言語で <a href="http://yukimemi.bitbucket.org/blog/html/2014/03/22/gitstatus.html#more">「すべてのディレクトリで git statusする」</a>
+という記事を書いた。</p>
+
+<p>今度は、 haskell で同じようなのを書いてみた。</p>
+
+<pre><code class="language-haskell">import System.IO
+import System.Process
+import System.Directory
+import Control.Exception
+import System.FilePath
+
+getAllFiles :: FilePath -&gt; IO [String]
+getAllFiles dir = do
+  contents &lt;- getDirectoryContents dir `catch` (\(SomeException e) -&gt; const (return []) e)
+  let contents' = [dir &lt;/&gt; path | path &lt;- contents, notElem path [&quot;.&quot;, &quot;..&quot;]]
+  contents'' &lt;- mapM getAllFiles contents'
+  return $ contents' ++ concat contents''
+
+takeLast list n = reverse . take n $ reverse list
+
+split :: (Char -&gt; Bool) -&gt; String -&gt; [String]
+split p s =  case dropWhile p s of
+                  &quot;&quot; -&gt; []
+                  s' -&gt; w : split p s''
+                    where (w, s'') = break p s'
+
+join :: String -&gt; [String] -&gt; String
+join sep [] = []
+join sep [x] = x
+join sep (x:xs) = x ++ sep ++ join sep xs
+
+onlyGitDir :: FilePath -&gt; Bool
+onlyGitDir fileName =
+  if last == &quot;.git&quot;
+    then True
+    else False
+      where last = takeLast fileName 4
+
+gitStatus :: FilePath -&gt; IO String
+gitStatus path = do
+  setCurrentDirectory path
+  readProcess &quot;git&quot; [&quot;status&quot;] &quot;&quot;
+
+printGitStatus :: FilePath -&gt; IO ()
+printGitStatus path = do
+  putStrLn &quot;--------------------------------------------------------------------------------&quot;
+  putStrLn $ &quot;* &quot; ++ path
+  putStrLn &quot;--------------------------------------------------------------------------------&quot;
+  gitStatus path &gt;&gt;= putStrLn
+  return ()
+
+main = do
+  path &lt;- getCurrentDirectory
+  files &lt;- getAllFiles path
+  let dirs = map takeDirectory $ filter onlyGitDir files
+  mapM printGitStatus dirs
+  return ()
+</code></pre>
+
+<p>haskell は勉強始めたばっかだからいろいろ改善の余地があると思われる。
+詳しい人教えてくだしあ</p>
+
+<h5 id="参考:e24206e77a55e9763de85e26fea272b0">参考:</h5>
+
+<p><a href="http://yunomu.hatenablog.jp/entry/2012/03/10/111222">HaskellでOSコマンド実行 - yunomuのブログ</a></p>
+
+<p><a href="http://sitekamimura.blogspot.jp/2014/01/haskell-systemfilepathpathseparator.html">Haskell - 移植性の問題(ファイル名問題(パス区切りの違い), System.FilePathモジュール(pathSeparator, joinPath関数)) | Kamimura&rsquo;s blog</a></p>
+
+<p><a href="http://tsurushuu.wikidot.com/haskell">Haskell - すてきにへんな覚え書き</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

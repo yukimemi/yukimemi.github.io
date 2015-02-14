@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homebrew on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/homebrew/</link>
+    <description>Recent content in Homebrew on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sat, 14 Sep 2013 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/homebrew/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ricty Mac HomebrewでRicty Powerline フォントをインストールする</title>
+      <link>http://yukimemi.github.io/post/2013-09-14-ricty_powerline_install/</link>
+      <pubDate>Sat, 14 Sep 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-09-14-ricty_powerline_install/</guid>
+      <description>
+
+&lt;p&gt;最近動作が重くなってきたこともあり、Mountain Lion を
+再インストールした。&lt;/p&gt;
+
+&lt;p&gt;再インストールは簡単で、起動時に 「 Command + R 」を押せばOK。&lt;/p&gt;
+
+&lt;p&gt;まずディスクユーティリティでディスクを消去して、Mountain Lion
+の再インストール。&lt;/p&gt;
+
+&lt;p&gt;再インストール後、 iTerm2 や、 MacVim のフォント Ricty
+のインストールと Powerline
+のパッチ当てをまた簡単に出来るようにスクリプトとしてまとめた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/sh
+
+brew tap sanemat/font
+brew install ricty
+
+cmd=$(brew info ricty | grep &amp;quot;Ricty\*.ttf&amp;quot; | sed -e &amp;quot;s/.*\(cp -f.*\)/\1/&amp;quot;)
+echo $cmd
+eval $cmd
+
+#git clone https://github.com/Lokaltog/powerline.git ~/.powerline
+#fontforge -script $HOME/.powerline/font/fontpatcher.py ~/Library/Fonts/Ricty-Regular.ttf
+
+git clone https://github.com/Lokaltog/vim-powerline ~/.vim-powerline
+fontforge -lang=py -script ~/.vim-powerline/fontpatcher/fontpatcher ~/Library/Fonts/Ricty-Regular.ttf
+
+mv -f *.ttf ~/Library/Fonts/
+
+# wait a minute
+fc-cache -vf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Powerline の方のパッチではなぜかうまく出来なかったので、
+vim-powerline の方で行っている。&lt;/p&gt;
+
+&lt;h5 id=&#34;参考:bbdce9ba0a634b8513b608b10a01cecd&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://sanematsu.wordpress.com/2013/05/11/brew-install-ricty/&#34;&gt;brew install ricty |
+實松アウトプット&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/alpaca_taichou/items/ab70f914a6a577e25d70&#34;&gt;Vim - powerlineをいつ使う？今でしょ！ - Qiita [キータ]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://calorie001.hatenablog.com/entry/2012/11/08/054056&#34;&gt;【Linux Mint, vim】vim-powerlineにフォントRictyのパッチをあてる - i&amp;rsquo;ll be fine&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

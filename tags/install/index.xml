@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Install on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/install/</link>
+    <description>Recent content in Install on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sat, 27 Jul 2013 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>cygwin インストールコマンド</title>
+      <link>http://yukimemi.github.io/post/2013-07-27-cygwin_setup/</link>
+      <pubDate>Sat, 27 Jul 2013 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-07-27-cygwin_setup/</guid>
+      <description>
+
+&lt;p&gt;Windows では泣く泣く cygwin を使用する。&lt;/p&gt;
+
+&lt;p&gt;cygwin のインストールは setup.exe というインストーラーがあり、
+必要なパッケージは手動でダウンロードしなきゃいけない。&lt;/p&gt;
+
+&lt;p&gt;なんとか簡単にインストール出来ないかと探っていたところ、 cygwin
+のコマンドラインオプションがあることを発見。&lt;/p&gt;
+
+&lt;p&gt;以下のバッチスクリプトを作っておくと簡単にインストールできる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;setup-x86.exe -q -d -D -L -s http://ftp.jaist.ac.jp/pub/cygwin/ -l &amp;quot;%USERPROFILE%\.cygwin&amp;quot; -R c:\cygwin -P gcc,git,git-completion,git-svn,make,vim,wget,ruby,screen,zsh,subversion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それぞれのオプションの意味は以下の通り&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;Command Line Options:
+ -A --disable-buggy-antivirus           Disable known or suspected buggy antivirus software packages during execution.
+ -C --categories                        Specify entire categories to install
+ -D --download                          Download from internet
+ -d --no-desktop                        Disable creation of desktop shortcut
+ -h --help                              print help
+ -K --pubkey                            URL of extra public key file (gpg format)
+ -L --local-install                     Install from local directory
+ -l --local-package-dir                 Local package directory
+ -n --no-shortcuts                      Disable creation of desktop and start menu shortcuts
+ -N --no-startmenu                      Disable creation of start menu shortcut
+ -O --only-site                         Ignore all sites except for -s
+ -P --packages                          Specify packages to install
+ -p --proxy                             HTTP/FTP proxy (host:port)
+ -q --quiet-mode                        Unattended setup mode
+ -r --no-replaceonreboot                Disable replacing in-use files on next reboot.
+ -R --root                              Root installation directory
+ -S --sexpr-pubkey                      Extra public key in s-expr format
+ -s --site                              Download site
+ -U --keep-untrusted-keys               Use untrusted keys and retain all
+ -u --untrusted-keys                    Use untrusted keys from last-extrakeys
+ -X --no-verify                         Don&#39;t verify setup.ini signatures
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;このインストールの後に、 apt-cyg を入れれば完璧&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ svn --force export http://apt-cyg.googlecode.com/svn/trunk/ /bin/
+$ chmod +x /bin/apt-cyg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;参考:cefcf18a7403f7d3974eb3d7b9d17573&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://dd0125.blogspot.jp/2013/02/windows-cygwin-terminalmintty-zsh-git.html&#34;&gt;ばりとんひろば: 【Windows】Cygwin Terminal(mintty) + zshで快適Git&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://cygwin.com/faq/faq.html#faq.setup.cli&#34;&gt;Cygwin FAQ&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://code.google.com/p/apt-cyg/&#34;&gt;apt-cyg - A command-line software installer for Cygwin - Google Project Hosting&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

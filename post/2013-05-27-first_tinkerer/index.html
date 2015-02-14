@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>First Tinkerer | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">First Tinkerer</h2>
+      <p class="orange-text text-darken-4">2013/05/27 Mon</p>
+      
+
+<p>Tinkerer でブログ書く。</p>
+
+<p>今まではgithubでocropressで書いてたけど、やっぱこれからは sphinx
+でしょ！ markdown より reStructuredText でしょ！</p>
+
+<p>で、 bitbucket を使う。</p>
+
+<p>bitbucket では、 github と同じように、
+&lt;ユーザー名&gt;.bitbucket.org で 自分のページを持つことが出来る。</p>
+
+<h3 id="リポジトリの作成:b46bb1a11490e036cd9f823dcf70c4a2">リポジトリの作成</h3>
+
+<p>bitbucket で、 &lt;ユーザー名&gt;.bitbucket.org
+というリポジトリを作る。 僕の場合は、 yukimemi.bitbucket.org</p>
+
+<h3 id="tinkererのインストール:b46bb1a11490e036cd9f823dcf70c4a2">Tinkererのインストール</h3>
+
+<p>僕の場合は python3 ではダメだったので、 python2.7.4 で virtualenv
+を作成して Tinkerer をインストールした。 python のインストールには
+pythonz を使用している。</p>
+
+<pre><code class="language-sh">$ pythonz install 2.7.4
+$ mkvirtualenv -p /Users/yukimemi/.pythonz/pythons/CPython-2.7.4/bin/python --distribute 2.7.4
+$ workon 2.7.4
+$ easy_install pip
+$ pip install Tinkerer
+</code></pre>
+
+<h3 id="ブログの作成:b46bb1a11490e036cd9f823dcf70c4a2">ブログの作成</h3>
+
+<p>bitbucketでgit repositoryを作成したら、それを clone する。</p>
+
+<p>$ git clone ssh://git@bitbucket.org/yukimemi/yukimemi.bitbucket.org.git
+$ cd yukimemi.bitbucket.org</p>
+
+<p>clone した後は、 Tinkerer でブログを初期化する。</p>
+
+<p>$ tinker -s</p>
+
+<p>そして、 同ディレクトリに作成された、 conf.py を適当に修正する。</p>
+
+<pre><code class="language-python">#
+# TODO: Edit the lines below
+#
+
+# Change this to the name of your blog
+project = 'yukimemi blog'
+
+# Change this to the tagline of your blog
+tagline = ''
+
+# Change this to the description of your blog
+description = 'This is yukimemi\'s blog'
+
+# Change this to your name
+author = 'yukimemi'
+
+# Change this to your copyright string
+copyright = '1984, ' + author
+
+# Change this to your blog root URL (required for RSS feed)
+website = 'http://yukimemi.bitbucket.org/'
+
+#
+# More tweaks you can do
+#
+
+# Add your Disqus shortname to enable comments powered by Disqus
+disqus_shortname = 'yukimemi'
+</code></pre>
+
+<p>こんな感じ。コメントシステムは Disqus
+が採用されているので、事前にアカウント作成しておく必要あり。</p>
+
+<p>ブログの作成は以下のコマンドで</p>
+
+<p>$ tinker -p &ldquo;First Tinkerer&rdquo;</p>
+
+<p>これで、</p>
+
+<pre><code>├── 2013
+│ └── 05
+│     └── 27
+│         ├── first_tinkerer.rst
+</code></pre>
+
+<p>こんなふうに reST ファイルが出来るので、編集する。</p>
+
+<pre><code>$ vim 2013/05/27/first_tinkerer.rst
+</code></pre>
+
+<p>編集が終わったら、ビルドする。</p>
+
+<pre><code>$ tinker -b
+</code></pre>
+
+<p>実に簡単。 確認は index.html をブラウザで開けばおっけー。</p>
+
+<p>問題なければ bitbucket に push</p>
+
+<pre><code>$ git add .
+$ git commit -m &quot;initial commit&quot;
+$ git push -u origin master
+</code></pre>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

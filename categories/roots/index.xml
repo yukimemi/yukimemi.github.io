@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Roots on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/categories/roots/</link>
+    <description>Recent content in Roots on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Wed, 09 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/categories/roots/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>roots simple pagination</title>
+      <link>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</link>
+      <pubDate>Wed, 09 Jul 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</guid>
+      <description>
+
+&lt;p&gt;rootsは非常にシンプルで良いのだが、シンプルが故に通常のブログだと当たり前な部分を自分で実装しなければいけないところがある。&lt;/p&gt;
+
+&lt;p&gt;その一つが、ページネーション。&lt;/p&gt;
+
+&lt;p&gt;rootsでブログテンプレートを作成した場合、トップページはページネーションされず、書いていったブログ記事が全部リストで並ぶことになる。&lt;/p&gt;
+
+&lt;p&gt;まぁそんなたいした量を書いてないんで問題ないのだけれども、一応ブログとしてページネーションくらいはあったほうがいいと思い、実装方法を探してみた。&lt;/p&gt;
+
+&lt;p&gt;rootsは静的サイトジェネレーターなので、通常だとjadeの記法などでコンパイル時に出来るんだろうけど、今回はjqueryで簡単に出来る &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; というものが見つかったので、それを追加してみた。&lt;/p&gt;
+
+&lt;h3 id=&#34;インストール:6d359caa743518f0339530aa8cdf1d76&#34;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;まず、追加するのにはbowerを使った。
+ちなみにローカルにインストールしたbowerを使う方法は、&lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-02_direnv%20for%20npm%20local%20commands.html&#34;&gt;前の記事&lt;/a&gt; を参照。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install bower --save-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;事前準備として、bowerのコンポーネントがインストールされる先を変更しておく。&lt;/p&gt;
+
+&lt;p&gt;roots のルートで、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim .bowerrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;し、以下を記載。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
+    &amp;quot;directory&amp;quot;: &amp;quot;assets/bower_components&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;その後、bowerにて、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; をインストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ bower install jquery.simplePagination --save
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 &lt;code&gt;assets/bower_components&lt;/code&gt; 配下に保存される。&lt;/p&gt;
+
+&lt;h3 id=&#34;simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; 設定&lt;/h3&gt;
+
+&lt;h4 id=&#34;jade側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;jade側の設定&lt;/h4&gt;
+
+&lt;p&gt;まずは、ページネーションの配置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim views/layout.jade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;--- 省略 ---
+#main
+  != content
+  .pagination
+--- 省略 ---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;divのclassで設定。単純に &lt;code&gt;pagination&lt;/code&gt; というclassにて、divを配置しただけ。&lt;/p&gt;
+
+&lt;p&gt;それから、stylusでの設定がしやすいように、ブログ記事のリストにclassを設定しておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim views/index.jade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-jade&#34;&gt;ul#posts
+  - each post in sort(site.posts, { by: &#39;date&#39; })
+    li.plist
+      p
+        a(href=&amp;quot;\#{post.url}&amp;quot;)= post.title
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;ul#posts -&amp;gt; li&lt;/code&gt; に、class &lt;code&gt;plist&lt;/code&gt; を追加しただけ。&lt;/p&gt;
+
+&lt;h4 id=&#34;stylus側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;stylus側の設定&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/css/master.styl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最初はすべてのブログ記事リストを見えなくしておく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-stylus&#34;&gt;#posts
+  .plist
+    display: none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;coffee側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;coffee側の設定&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;assets/js/main.coffee&lt;/code&gt; に設定を記述していく。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/js/main.coffee
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;記載内容 ↓&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;#= require &amp;quot;_helper&amp;quot;
+
+# Add scripts to load to this array. These can be loaded remotely like jquery
+# is below, or can use file paths, like &#39;vendor/underscore&#39;
+jq = [&amp;quot;http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js&amp;quot;]
+js = [&amp;quot;/bower_components/jquery.simplePagination/jquery.simplePagination.js&amp;quot;]
+
+
+# this will fire once the required scripts have been loaded
+require jq, -&amp;gt;
+  require js, -&amp;gt;
+    $ -&amp;gt;
+      console.log &#39;jquery loaded, dom ready &amp;lt;-- via assets/js/main.coffee&#39;
+
+      # Pagination
+      items = $(&#39;#posts li&#39;)
+      numItems = items.length
+      perPage = 21
+
+      # only show the first perPage items initially
+      items.slice(0, perPage).show()
+
+      # now setup your pagination
+      $(&#39;.pagination&#39;).pagination
+        items: numItems
+        itemsOnPage: perPage
+        cssStyle: &amp;quot;light-theme&amp;quot;
+        onPageClick: (pageNumber) -&amp;gt;
+          showFrom = perPage * (pageNumber - 1)
+          showTo = showFrom + perPage
+
+          items.hide()
+               .slice(showFrom, showTo).show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;javascriptのロードはrequire.jsで行うので、jade側への追記はなし。&lt;/p&gt;
+
+&lt;p&gt;rootsはデフォルトで、jqueryのロードは行っているようだったので、追加で &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; の設定を追加していった。
+最初、jqueryと同じ配列に &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; を組み込んでいたのだが、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; はjqueryが読み込まれた後でないと正常に実行されないようなので、必ずjqueryが先に読み込まれるように、jqueryとそれ以外というように配列を分け、コールバックを一つ深くした。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;16L でまず対象のリストのセレクタをゲット&lt;/li&gt;
+&lt;li&gt;17L で、リストの数をゲット。&lt;/li&gt;
+&lt;li&gt;18L で、1ページに表示するリストの数を指定。&lt;/li&gt;
+&lt;li&gt;21L で、最初の1ページだけを表示。&lt;/li&gt;
+&lt;li&gt;24L から、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; の設定。&lt;/li&gt;
+&lt;li&gt;25L で、 17L でゲットしたリストの数を指定。&lt;/li&gt;
+&lt;li&gt;26L で、 18L で指定した1ページに表示するリストの数を設定。&lt;/li&gt;
+&lt;li&gt;27L で、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; のテーマを指定。&lt;/li&gt;
+&lt;li&gt;28L から、ページネーションのボタンが押下された時の実装を指定。現在のページ番号が &lt;code&gt;pageNumber&lt;/code&gt; に入っている。&lt;/li&gt;
+&lt;li&gt;29L で、表示するリストの開始番号を算出。&lt;/li&gt;
+&lt;li&gt;30L で、表示するリストの終了番号を算出。&lt;/li&gt;
+&lt;li&gt;32-33L で、一度リストを全部非表示にして、必要なところだけ表示する。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;今度はjadeでコンパイル時にページネーション実装してみたい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:6d359caa743518f0339530aa8cdf1d76&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/20896076/how-to-use-simplepagination-jquery&#34;&gt;javascript - How to use SimplePagination jquery - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>roots new post command</title>
+      <link>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</link>
+      <pubDate>Thu, 26 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</guid>
+      <description>&lt;p&gt;Tinkererでは、 &lt;code&gt;tinker -p &amp;quot;hogehoge&amp;quot;&lt;/code&gt; で、新しい記事を作成することが出来た。
+roots でも同じことがしたかったので、コマンドを作ってみた。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+
+# posts dir
+postsDir=posts
+
+# title
+echo -n &amp;quot;title: &amp;quot;
+read title
+
+postFile=${postsDir}/$(date +%Y-%m-%d)_${title}.jade
+
+cat &amp;lt;&amp;lt; EOT &amp;gt;&amp;gt; &amp;quot;${postFile}&amp;quot;
+---
+title: ${title}
+date: $(date &amp;quot;+%Y/%m/%d %H:%M&amp;quot;)
+layout: ../views/_single_post.jade
+---
+
+:markdown
+
+
+// vim: ft=markdown
+EOT
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これを &lt;code&gt;pn&lt;/code&gt; というファイル名でpathの通った場所に保存すると、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pn
+title: hogehoge
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とプロンプトが表示され、タイトルを打ち込むことで新しいブログ記事を作成出来る。
+便利。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>roots install</title>
+      <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
+      <pubDate>Wed, 25 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
+      <description>
+
+&lt;p&gt;今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。&lt;/p&gt;
+
+&lt;p&gt;roots は、静的サイトジェネレーター。nodeで動く。
+特徴としては、以下の形式で作成出来ること。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクリプト -&amp;gt; coffeescript&lt;/li&gt;
+&lt;li&gt;HTML -&amp;gt; jade&lt;/li&gt;
+&lt;li&gt;CSS -&amp;gt; stylus&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。
+jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;ブログ作成手順:277c647c8512cad05114c9463b934e39&#34;&gt;ブログ作成手順&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;npmでグローバルにインストール&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g roots
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ブログテンプレートでプロジェクト作成&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots new yukimemi.github.io --blog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでブログ完成。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd yukimemi.github.io
+$ roots watch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
+を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ブログ記事を修正&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd posts
+$ vim hello_world.jade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。
+すごい・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:277c647c8512cad05114c9463b934e39&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/morishitter/items/b708a11e09b6fcb2f751&#34;&gt;Node.js - 静的サイトジェネレーター「roots」 - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://re-dzine.net/2013/02/roots/&#34;&gt;静的サイトジェネレータ「roots」を触ってみた | REFLECTDESIGN&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Second roots</title>
+      <link>http://yukimemi.github.io/post/2014-06-20-second_post/</link>
+      <pubDate>Fri, 20 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-20-second_post/</guid>
+      <description>&lt;p&gt;roots&lt;/p&gt;
+
+&lt;p&gt;やっぱりいろいろ難しい。&lt;/p&gt;
+
+&lt;p&gt;とりあえず、 subtree push が便利っぽい。
+がんばる。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>First roots</title>
+      <link>http://yukimemi.github.io/post/2014-06-19-first_post/</link>
+      <pubDate>Thu, 19 Jun 2014 00:00:00 &#43;0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-06-19-first_post/</guid>
+      <description>&lt;p&gt;はじめての「roots」&lt;/p&gt;
+
+&lt;p&gt;Markdown でもブログが書けるらしい。&lt;/p&gt;
+
+&lt;p&gt;移行しよかな。
+ライブリロードがあるのがいいね。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

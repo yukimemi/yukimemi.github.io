@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>powershell ForEach-Objectでcontinue | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s10 offset-s1">
+      <h2 class="pink-text">powershell ForEach-Objectでcontinue</h2>
+      <p class="orange-text text-darken-4">2013/10/19 Sat</p>
+      
+
+<p>powershell の ForEach-Object で、continue しようと
+したら、思ったように動かなかった話。</p>
+
+<p>こんなコードを書いた。</p>
+
+<pre><code class="language-powershell">gci -r |
+% {
+   if ($_.Name -match &quot;^tes.*&quot;) {
+      continue
+   }
+   $_
+}
+</code></pre>
+
+<p>現在のディレクトリ配下を再帰的に見て、ファイル名が tes
+から始まるもの以外を 表示する・・・みたいな処理。 マッチした場合のみ、
+continue して次の処理に行きたいのだが、この書き方だと、 break
+したのと同じような動きになってしまい、初回マッチしたら、それ以降の処理
+はされない。</p>
+
+<p>やりたいことを満たすには、以下のように書けばいいみたい。</p>
+
+<pre><code class="language-powershell">gci -r |
+% {
+   if ($_.Name -match &quot;^tes.*&quot;) {
+      return
+   }
+   $_
+}
+</code></pre>
+
+<p>continue の代わりに return を使う。</p>
+
+<h5 id="参考:44dc947e29f15be3037e81611cc77b7d">参考:</h5>
+
+<p><a href="http://stackoverflow.com/questions/7760013/why-does-continue-behave-like-break-in-a-foreach-object">powershell - Why does continue behave like break in a Foreach-Object? - Stack Overflow</a></p>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
+

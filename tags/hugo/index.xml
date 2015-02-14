@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/hugo/</link>
+    <description>Recent content in Hugo on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    
+    
+    
+    <lastBuildDate>Sun, 15 Feb 2015 10:28:27 &#43;0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hello hugo</title>
+      <link>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</link>
+      <pubDate>Sun, 15 Feb 2015 10:28:27 &#43;0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</guid>
+      <description>
+
+&lt;p&gt;これまでいろいろ静的サイトジェネレーターを試してきた。&lt;/p&gt;
+
+&lt;h5 id=&#34;tinkerer-http-tinkerer-me:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;&lt;a href=&#34;http://tinkerer.me&#34;&gt;Tinkerer&lt;/a&gt;&lt;/h5&gt;
+
+&lt;h5 id=&#34;roots-http-roots-cx:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;&lt;a href=&#34;http://roots.cx&#34;&gt;roots&lt;/a&gt;&lt;/h5&gt;
+
+&lt;p&gt;そして今回はgolang製の &lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;hugo-http-gohugo-io:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;&lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/h5&gt;
+
+&lt;p&gt;流行りに乗ってみたいってのもあるけど、なによりサイト生成がはやい！！&lt;/p&gt;
+
+&lt;p&gt;これだけでも乗り換える価値があると思う。&lt;/p&gt;
+
+&lt;h5 id=&#34;参考:56c4634510a3f2cfb8c2a53b4d5e125f&#34;&gt;参考&lt;/h5&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://rakuishi.com/archives/wordpress-to-hugo/&#34;&gt;WordPress から Hugo に乗り換えました&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
