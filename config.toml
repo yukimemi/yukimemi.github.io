@@ -1,0 +1,9 @@
+MetaDataFormat = "toml"
+baseurl = "http://yukimemi.github.io"
+languageCode = "ja"
+title = "YUKIMEMI"
+theme = "yukimemi"
+
+[permalinks]
+  page = "/:title/"
+  about = "/:filename/"
