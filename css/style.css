@@ -1,22 +1,22 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
-/* @font-face {                                              */
-/*   font-family: 'azuki_font';                              */
-/*   src: url('../font/azuki/azuki.ttf') format('truetype'); */
-/* }                                                         */
+@font-face {
+font-family: 'azuki_font';
+src: url('../font/azuki/azuki.ttf') format('truetype');
+}
 /* @font-face {                                            */
 /*   font-family: 'S2G Love font';                         */
 /*   src: url('../font/love/love.ttf') format('truetype'); */
 /* }                                                       */
-@font-face {
-  font-family: 'JK Gothic L';
-  src: url('../font/jk-go-l/JKG-L_2.ttf') format('truetype');
-}
+/* @font-face {                                                  */
+/*   font-family: 'JK Gothic L';                                 */
+/*   src: url('../font/jk-go-l/JKG-L_2.ttf') format('truetype'); */
+/* }                                                             */
 
 body {
   /* font-family: 'S2G Love font', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
-  /* font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif; */
-  font-family: 'JK Gothic L', 'azuki_font', 'Noto Sans Japanese', sun-serif;
+  font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif;
+  /* font-family: 'JK Gothic L', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
 }
 
 nav {
@@ -66,8 +66,8 @@ pre ol.linenums li {
   list-style: decimal outside;
 }
 
-pre ol.linenums li.L1,li.L3,li.L5,li.L7,li.L9 {
-  background: rgb(49, 49, 49, 0.2);
+pre ol.linenums li .L0,.L1,.L3,.L5,.L7,.L9 {
+  background: rgba(45, 45, 45, 0.2);
 }
 
 code {
