@@ -74,3 +74,28 @@ code {
   color: black;
 }
 /* ============================== */
+
+/* === google search === */
+/*
+#googlesearch {
+  width: 300px;
+  margin-left: auto;
+}
+*/
+/*
+div.gsc-control-cse {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+}
+div.gsc-control-cse table tr td {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+}
+input.gsc-search-button {
+  background-color: #666;
+}
+td.gsc-clear-button {
+  display: none;
+}
+*/
+/* ============================== */
