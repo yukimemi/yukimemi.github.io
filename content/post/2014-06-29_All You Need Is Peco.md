@@ -14,12 +14,12 @@ title = "All You Need Is Peco"
 
 ### 導入手順
 
-1. homebrewでgoをインストール。
+homebrewでgoをインストール。
 ```sh
 $ brew install go --cross-compile-common
 ```
 
-2. `.zshenv` に以下を記載。
+`.zshenv` に以下を記載。
 ```sh
 # go
 export GOPATH=$HOME/.go
@@ -40,12 +40,12 @@ if which go > /dev/null; then
 fi
 ```
 
-3. `.zshenv` を読み込み直す
+`.zshenv` を読み込み直す
 ```sh
 $ source ~/.zshenv
 ```
 
-4. インストール完了。
+インストール完了。
 ```sh
 $ ls -l | peco
 QUERY>                                                         IgnoreCase [1/1]
