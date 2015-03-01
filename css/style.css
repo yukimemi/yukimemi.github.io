@@ -1,9 +1,17 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
 @font-face {
-font-family: 'azuki_font';
-src: url('../font/azuki/azuki.ttf') format('truetype');
+  font-family: 'SistersFS';
+  src: url('../font/sisters/SistersFS.ttf') format('truetype');
 }
+/* @font-face {                                              */
+/*   font-family: 'uzura_font';                              */
+/*   src: url('../font/uzura/uzura.ttf') format('truetype'); */
+/* }                                                         */
+/* @font-face {                                              */
+/*   font-family: 'azuki_font';                              */
+/*   src: url('../font/azuki/azuki.ttf') format('truetype'); */
+/* }                                                         */
 /* @font-face {                                            */
 /*   font-family: 'S2G Love font';                         */
 /*   src: url('../font/love/love.ttf') format('truetype'); */
@@ -14,8 +22,10 @@ src: url('../font/azuki/azuki.ttf') format('truetype');
 /* }                                                             */
 
 body {
+  font-family: 'SistersFS', 'Noto Sans Japanese', sun-serif;
+  /* font-family: 'uzura_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'S2G Love font', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
-  font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif;
+  /* font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'JK Gothic L', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
 }
 

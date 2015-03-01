@@ -151,16 +151,12 @@ direnv: unloading
 
 &lt;h3 id=&#34;導入手順:5ad334b2cec04f5e498f9309688bd674&#34;&gt;導入手順&lt;/h3&gt;
 
-&lt;ol&gt;
-&lt;li&gt;homebrewでgoをインストール。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;homebrewでgoをインストール。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;.zshenv&lt;/code&gt; に以下を記載。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;.zshenv&lt;/code&gt; に以下を記載。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# go
 export GOPATH=$HOME/.go
@@ -181,16 +177,12 @@ if which go &amp;gt; /dev/null; then
 fi
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;.zshenv&lt;/code&gt; を読み込み直す&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;.zshenv&lt;/code&gt; を読み込み直す&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.zshenv
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;インストール完了。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;インストール完了。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls -l | peco
 QUERY&amp;gt;                                                         IgnoreCase [1/1]
