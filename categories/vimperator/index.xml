@@ -9,8 +9,47 @@
     
     
     
-    <lastBuildDate>Sun, 05 Jan 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Mar 2015 02:00:14 &#43;0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/categories/vimperator/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>vimperator colorscheme</title>
+      <link>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</link>
+      <pubDate>Mon, 02 Mar 2015 02:00:14 &#43;0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</guid>
+      <description>
+
+&lt;p&gt;vimperatorでcolorschemeを使う方法。&lt;/p&gt;
+
+&lt;p&gt;自分で作ってもいいけど、大変なので・・・&lt;/p&gt;
+
+&lt;h3 id=&#34;リポジトリクローン:bfd5c9c7dfc3ad559a7f00709d299852&#34;&gt;リポジトリクローン&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;ghq&lt;/code&gt; については、&lt;a href=&#34;http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/&#34;&gt;この記事&lt;/a&gt;で。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/vimpr/vimperator-colors.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;シンボリックリンク:bfd5c9c7dfc3ad559a7f00709d299852&#34;&gt;シンボリックリンク&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;vimperatorrc編集:bfd5c9c7dfc3ad559a7f00709d299852&#34;&gt;.vimperatorrc編集&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme sweets_snaka
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;かっこいい！！&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:bfd5c9c7dfc3ad559a7f00709d299852&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-colors&#34;&gt;vimpr/vimperator-colors&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>vimperator ツリー型タブとvimperatorの表示の上下を修正</title>
