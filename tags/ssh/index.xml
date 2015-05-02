@@ -6,16 +6,13 @@
     <description>Recent content in Ssh on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Sun, 06 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Jul 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>mosh error No such file or directory</title>
       <link>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</link>
-      <pubDate>Sun, 06 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 06 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</guid>
       <description>
@@ -94,7 +91,7 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
     <item>
       <title>powershell MacからWindowsへsshしてpowershell</title>
       <link>http://yukimemi.github.io/post/2013-10-13-powershell_server/</link>
-      <pubDate>Sun, 13 Oct 2013 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 13 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-10-13-powershell_server/</guid>
       <description>&lt;p&gt;普段家で触れるのはMacだけど、仕事で使うのはWindows。 Windows

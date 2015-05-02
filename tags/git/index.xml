@@ -6,16 +6,13 @@
     <description>Recent content in Git on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Git directory deploy !</title>
       <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
       <description>
@@ -86,7 +83,7 @@ $ ./deploy.sh
     <item>
       <title>haskellでgitstatus</title>
       <link>http://yukimemi.github.io/post/2014-05-15-haskell_gitstatus/</link>
-      <pubDate>Thu, 15 May 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Thu, 15 May 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-05-15-haskell_gitstatus/</guid>
       <description>
@@ -166,7 +163,7 @@ main = do
     <item>
       <title>golang git 管理のすべてのディレクトリで 「git status」する</title>
       <link>http://yukimemi.github.io/post/2014-03-22-gitstatus/</link>
-      <pubDate>Sat, 22 Mar 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sat, 22 Mar 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-03-22-gitstatus/</guid>
       <description>

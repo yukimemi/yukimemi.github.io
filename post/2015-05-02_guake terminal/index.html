@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Guake terminal in ubuntu | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="deep-orange lighten-1 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2 class="pink-text">Guake terminal in ubuntu</h2>
+      <p class="orange-text text-darken-4">2015/05/02 Sat</p>
+      <div class="row">
+        <div class="col s1"><div id="addthis">
+  
+  <div class="addthis_native_toolbox"></div>
+</div>
+</div>
+        <div class="col s1"><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</div>
+      </div>
+      
+
+<p>macでiTerm2を使っていたので、同じように使えるterminalがないか探していたところ、あんまこれ！ってのが見つからなかったので、昔使ってたguakeを入れた。けっこう普通につかえて便利。</p>
+
+<pre><code class="language-sh">$ sudo apt-get install guake
+</code></pre>
+
+<p>デフォルトでは、「F12」で起動する。</p>
+
+<p>おすすめ設定は、こんな感じ。</p>
+
+<ul>
+<li>全般</li>
+</ul>
+
+<p><img src="/img/guake-general_min.png" alt="guake-general" />
+</p>
+
+<ul>
+<li>スクロール</li>
+</ul>
+
+<p><img src="/img/guake-scroll_min.png" alt="guake-scroll" />
+</p>
+
+<ul>
+<li>外観</li>
+</ul>
+
+<p><img src="/img/guake-style_min.png" alt="guake-style" />
+</p>
+
+<p>タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。</p>
+
+<p><img src="/img/guake-terminal_min.png" alt="guake" />
+</p>
+
+<p>あとは、fontをRicty for Powerlineにする。</p>
+
+<p>Ricty for Powerlineのインストールは以下の通り。</p>
+
+<pre><code class="language-sh">#!/bin/bash
+mkdir -p ~/tmp
+mkdir -p ~/.fonts
+pushd ~/tmp
+
+sudo apt-get install fontforge
+
+wget http://levien.com/type/myfonts/Inconsolata.otf
+wget http://iij.dl.sourceforge.jp/mix-mplus-ipa/59022/migu-1m-20130617.zip
+
+unzip migu-1m-20130617.zip
+
+git clone https://github.com/yascentur/Ricty.git
+
+pushd Ricty
+
+./ricty_generator.sh ~/tmp/Inconsolata.otf ~/tmp/migu-1m-20130617/migu-1m-regular.ttf ~/tmp/migu-1m-20130617/migu-1m-bold.ttf
+
+mv Ricty*.ttf ~/.fonts
+
+popd
+
+git clone https://github.com/Lokaltog/vim-powerline.git
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Regular.ttf
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Bold.ttf
+mv Ricty-Regular-Powerline.ttf ~/.fonts
+mv Ricty-Bold-Powerline.ttf ~/.fonts
+
+popd
+
+fc-cache -vf
+</code></pre>
+
+<p>これでかなり良くなる。
+あとは、色を設定する。iTerm2でもテーマがあったように、guakeでも、ネットにテーマを作ってくださっているありがたい方がいらっしゃるので、使用させてもらう。</p>
+
+<pre><code class="language-sh">$ ghq get https://github.com/coolwanglu/guake-colors-solarized.git
+$ ghq get https://github.com/erroneousboat/guake-colors-monokai.git
+</code></pre>
+
+<p>有名なsolarizedとmonokaiのテーマ。
+適用は、どちらもシェルスクリプトを実行するだけ。</p>
+
+<pre><code class="language-sh">$ cd guake-colors-solarized
+$ ./set_dark.sh
+</code></pre>
+
+<p>もしくは、</p>
+
+<pre><code class="language-sh">$ cd guake-colors-monokai
+$ ./setup.sh
+</code></pre>
+
+<p>一瞬で変わる。べんり。</p>
+
+<p>あとは、なぜかtmuxが256-color表示出来ていなかった。これは、オプションを指定して起動すればいいみたい。</p>
+
+<pre><code class="language-sh">$ tmux -2
+</code></pre>
+
+<p>それから、guake上で実行したvimの背景が透過されていなかった。
+こちらは、.vimrcに以下を追加して解決。</p>
+
+<pre><code class="language-vim">highlight Normal ctermbg=none
+</code></pre>
+
+<hr />
+
+<h5 id="参考:eef5b703d01059dd9739a3c795dd7926">参考</h5>
+
+<p><a href="http://uonl.tumblr.com/post/53433544404">Ubuntu on Let&rsquo;s Note vimの背景を半透明にする</a></p>
+
+<p><a href="http://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux">Getting 256 colors to work in tmux - Unix &amp; Linux Stack Exchange</a></p>
+
+      <hr />
+      <div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+   
+  var disqus_shortname = 'yukimemi-github'; 
+
+   
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+

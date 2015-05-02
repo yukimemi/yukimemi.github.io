@@ -6,16 +6,13 @@
     <description>Recent content in Mongodb on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Sun, 16 Jun 2013 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jun 2013 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/categories/mongodb/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Mac OSX Mountain Lion MongoDB セットアップ</title>
       <link>http://yukimemi.github.io/post/2013-06-16-setup_mongodb/</link>
-      <pubDate>Sun, 16 Jun 2013 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-06-16-setup_mongodb/</guid>
       <description>&lt;p&gt;mongodb をいれてみた。&lt;/p&gt;

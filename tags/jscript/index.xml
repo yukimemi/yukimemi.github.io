@@ -6,16 +6,13 @@
     <description>Recent content in Jscript on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Tue, 15 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Jul 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/jscript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Add --runcmd option to coffee-script-on-jscript</title>
       <link>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</link>
-      <pubDate>Tue, 15 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Tue, 15 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</guid>
       <description>
@@ -93,7 +90,7 @@ ExitCode = [0]
     <item>
       <title>CoffeeScript on Windows as wsh</title>
       <link>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</link>
-      <pubDate>Mon, 14 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Mon, 14 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</guid>
       <description>

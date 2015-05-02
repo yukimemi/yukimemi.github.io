@@ -22,7 +22,8 @@
 /* }                                                             */
 
 body {
-  font-family: 'SistersFS', 'Noto Sans Japanese', sun-serif;
+  /* font-family: 'SistersFS', 'Noto Sans Japanese', sun-serif; */
+  font-family: 'Noto Sans Japanese', sun-serif;
   /* font-family: 'uzura_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'S2G Love font', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif; */
@@ -82,10 +83,6 @@ pre ol.linenums li .L0,.L1,.L3,.L5,.L7,.L9 {
 
 code {
   color: black;
-}
-
-#addthis {
-  margin-bottom: 5px;
 }
 /* ============================== */
 

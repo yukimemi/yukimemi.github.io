@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 02 May 2015 22:03:13 +0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Guake terminal in ubuntu</title>
+      <link>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</link>
+      <pubDate>Sat, 02 May 2015 22:03:13 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</guid>
+      <description>
+
+&lt;p&gt;macでiTerm2を使っていたので、同じように使えるterminalがないか探していたところ、あんまこれ！ってのが見つからなかったので、昔使ってたguakeを入れた。けっこう普通につかえて便利。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install guake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;デフォルトでは、「F12」で起動する。&lt;/p&gt;
+
+&lt;p&gt;おすすめ設定は、こんな感じ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;全般&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクロール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;外観&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;あとは、fontをRicty for Powerlineにする。&lt;/p&gt;
+
+&lt;p&gt;Ricty for Powerlineのインストールは以下の通り。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+mkdir -p ~/tmp
+mkdir -p ~/.fonts
+pushd ~/tmp
+
+sudo apt-get install fontforge
+
+wget http://levien.com/type/myfonts/Inconsolata.otf
+wget http://iij.dl.sourceforge.jp/mix-mplus-ipa/59022/migu-1m-20130617.zip
+
+unzip migu-1m-20130617.zip
+
+git clone https://github.com/yascentur/Ricty.git
+
+pushd Ricty
+
+./ricty_generator.sh ~/tmp/Inconsolata.otf ~/tmp/migu-1m-20130617/migu-1m-regular.ttf ~/tmp/migu-1m-20130617/migu-1m-bold.ttf
+
+mv Ricty*.ttf ~/.fonts
+
+popd
+
+git clone https://github.com/Lokaltog/vim-powerline.git
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Regular.ttf
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Bold.ttf
+mv Ricty-Regular-Powerline.ttf ~/.fonts
+mv Ricty-Bold-Powerline.ttf ~/.fonts
+
+popd
+
+fc-cache -vf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでかなり良くなる。
+あとは、色を設定する。iTerm2でもテーマがあったように、guakeでも、ネットにテーマを作ってくださっているありがたい方がいらっしゃるので、使用させてもらう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/coolwanglu/guake-colors-solarized.git
+$ ghq get https://github.com/erroneousboat/guake-colors-monokai.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;有名なsolarizedとmonokaiのテーマ。
+適用は、どちらもシェルスクリプトを実行するだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-solarized
+$ ./set_dark.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もしくは、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-monokai
+$ ./setup.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一瞬で変わる。べんり。&lt;/p&gt;
+
+&lt;p&gt;あとは、なぜかtmuxが256-color表示出来ていなかった。これは、オプションを指定して起動すればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tmux -2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、guake上で実行したvimの背景が透過されていなかった。
+こちらは、.vimrcに以下を追加して解決。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;highlight Normal ctermbg=none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:eef5b703d01059dd9739a3c795dd7926&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://uonl.tumblr.com/post/53433544404&#34;&gt;Ubuntu on Let&amp;rsquo;s Note vimの背景を半透明にする&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux&#34;&gt;Getting 256 colors to work in tmux - Unix &amp;amp; Linux Stack Exchange&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Ubuntu 15.04 to MacBook Air (11-inch, Late 2010)</title>
+      <link>http://yukimemi.github.io/post/2015-05-02_install%20ubuntu%20to%20macbook%20air/</link>
+      <pubDate>Sat, 02 May 2015 09:23:30 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-02_install%20ubuntu%20to%20macbook%20air/</guid>
+      <description>
+
+&lt;p&gt;使ってるMacBook Airが最近遅くて耐えられなくなってきたので、Ubuntuに乗り換えてみた。&lt;/p&gt;
+
+&lt;p&gt;nvidiaのドライバ関係でいろいろ大変だったのでメモ。&lt;/p&gt;
+
+&lt;h3 id=&#34;install-usbメモリの作成:da437a952248d6819932723caee2ddc3&#34;&gt;Install Usbメモリの作成&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo dd if=./ubuntu-15.04-desktop-amd64.iso of=/dev/sdb bs=4M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ubuntu-インストール:da437a952248d6819932723caee2ddc3&#34;&gt;Ubuntu インストール&lt;/h3&gt;
+
+&lt;p&gt;nvidiaのグラフィックドライバをインストールする場合、grubがefiモードじゃなくてbiosモードでインストールされる必要があるっぽい。
+そこで、通常とはちょっと違う方法でインストールする。&lt;/p&gt;
+
+&lt;p&gt;まず、最初の選択で、 &amp;ldquo;Try Ubuntu without installing it&amp;rdquo; を選ぶ。
+その後、 &amp;ldquo;Ctrl + Alt + T&amp;rdquo; を押して端末を起動し、インストーラを起動する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo ubiquity
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、 &amp;ldquo;それ以外&amp;rdquo; ってのを選んで、自分でパーティションを作成する。
+必要なパーティションは以下の3つ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;予約されたBIOSブート領域: 1M&lt;/li&gt;
+&lt;li&gt;ext4(/): swap以外全部&lt;/li&gt;
+&lt;li&gt;swap: 2048M&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;その後はそのままインストールを続ける。
+全部終わると再起動が促されるが、そのまま再起動せずに、端末を起動し、grubをインストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo mount /dev/sda2 /mnt # rootパーティション
+$ sudo grub-install --root-directory=/mnt /dev/sda
+$ sudo grub-install --root-directory=/mnt --recheck /dev/sda
+
+$ sudo mount --bind /dev /mnt/dev
+$ sudo mount --bind /dev/pts /mnt/dev/pts
+$ sudo mount --bind /proc /mnt/proc
+$ sudo mount --bind /sys /mnt/sys
+$ sudo chroot /mnt
+$ update-grub
+$ exit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;usbをさしたままだと、sdbにはインストールできないとかなんとかのエラーが出るけど、むし。
+コマンドが全部終わったら再起動してusbを抜く。&lt;/p&gt;
+
+&lt;p&gt;普通にubuntuが起動するのでログインし、システム設定より、ソフトウェアとアップデートを開き、追加のドライバータブより、NVIDIAのドライバーにチェックを入れて適用する。
+ここのバージョンは変わるっぽいけど、現時点では、「NVIDIA binary driver -version 340.76をnvidia-340から使用します(プロプライエタリ、検証済み)」ってやつだった。&lt;/p&gt;
+
+&lt;p&gt;あと、Wi-Fiのドライバは、使用しない方が安定してた。使用すると、スリープ復帰後にWi-Fiが切断される。&lt;/p&gt;
+
+&lt;p&gt;プロプライエタリのドライバをインストール後は、以下のコマンドを実行して、xorg.confファイルを作成する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo nvidia-xconfig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;バックライトの調整ができるように、xorg.confファイルに1行追加する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Section &amp;quot;Device&amp;quot;
+    Identifier     &amp;quot;Device0&amp;quot;
+    Driver         &amp;quot;nvidia&amp;quot;
+    VendorName     &amp;quot;NVIDIA Corporation&amp;quot;
+    BoardName      &amp;quot;GeForce 320M&amp;quot;
+    Option         &amp;quot;RegistryDwords&amp;quot; &amp;quot;EnableBrightnessControl=1&amp;quot; # この行
+EndSection
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;終わったら再起動して完了。&lt;/p&gt;
+
+&lt;p&gt;あとは細かい設定をしていくだけ。
+インストールして使えるようになるのはここまで。
+デフォルト状態でもかなり使える。ubuntuすごい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:da437a952248d6819932723caee2ddc3&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://variedtastefinder.jpn.ph/diary/395/&#34;&gt;MacBook Air Late 2010 on Ubuntu 14.04 (※05/30追記)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.ubuntuforums.org/showthread.php?t=2209602&#34;&gt;[SOLVED] Installing Ubuntu from USB on a MacBook Air 3,1-3,2 (nvidia card)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

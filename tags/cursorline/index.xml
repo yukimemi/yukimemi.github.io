@@ -6,16 +6,13 @@
     <description>Recent content in Cursorline on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Aug 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/cursorline/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Set cursorline as needed</title>
       <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
-      <pubDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
       <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;

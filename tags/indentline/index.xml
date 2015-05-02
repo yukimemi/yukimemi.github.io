@@ -6,16 +6,13 @@
     <description>Recent content in Indentline on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Sat, 18 Jan 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jan 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/indentline/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>vim indentLine で見やすいインデントを</title>
       <link>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</link>
-      <pubDate>Sat, 18 Jan 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sat, 18 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</guid>
       <description>&lt;p&gt;vim には、見やすい定番のインデントプラグインとして、

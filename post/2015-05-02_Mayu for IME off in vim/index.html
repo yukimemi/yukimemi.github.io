@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>vimperator colorscheme | YUKIMEMI</title>
+    <title>Mayu for IME off in vim | YUKIMEMI</title>
 
     
     <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -28,9 +28,9 @@
 
 <div id="post" class="container">
   <div class="row">
-    <div class="col s10 offset-s1">
-      <h2 class="pink-text">vimperator colorscheme</h2>
-      <p class="orange-text text-darken-4">2015/03/02 Mon</p>
+    <div class="col s12">
+      <h2 class="pink-text">Mayu for IME off in vim</h2>
+      <p class="orange-text text-darken-4">2015/05/02 Sat</p>
       <div class="row">
         <div class="col s1"><div id="addthis">
   
@@ -43,36 +43,13 @@
 </div>
 </div>
       </div>
-      
+      <p>vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。
+Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。</p>
 
-<p>vimperatorでcolorschemeを使う方法。</p>
+<p>Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。
+そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。</p>
 
-<p>自分で作ってもいいけど、大変なので・・・</p>
-
-<h3 id="リポジトリクローン:bfd5c9c7dfc3ad559a7f00709d299852">リポジトリクローン</h3>
-
-<p><code>ghq</code> については、<a href="http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/">この記事</a>で。</p>
-
-<pre><code class="language-sh">$ ghq get https://github.com/vimpr/vimperator-colors.git
-</code></pre>
-
-<h3 id="シンボリックリンク:bfd5c9c7dfc3ad559a7f00709d299852">シンボリックリンク</h3>
-
-<pre><code class="language-sh">$ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors
-</code></pre>
-
-<h3 id="vimperatorrc編集:bfd5c9c7dfc3ad559a7f00709d299852">.vimperatorrc編集</h3>
-
-<pre><code class="language-vim">colorscheme sweets_snaka
-</code></pre>
-
-<p>かっこいい！！</p>
-
-<hr />
-
-<h5 id="参考:bfd5c9c7dfc3ad559a7f00709d299852">参考:</h5>
-
-<p><a href="https://github.com/vimpr/vimperator-colors">vimpr/vimperator-colors</a></p>
+<p>Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。</p>
 
       <hr />
       <div id="disqus">

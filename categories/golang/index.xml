@@ -6,16 +6,13 @@
     <description>Recent content in Golang on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jul 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>direnv for npm local commands</title>
       <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</guid>
       <description>
@@ -107,7 +104,7 @@ direnv: unloading
     <item>
       <title>All You Need Is Peco</title>
       <link>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</link>
-      <pubDate>Sun, 29 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</guid>
       <description>
@@ -365,7 +362,7 @@ alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
     <item>
       <title>golang git 管理のすべてのディレクトリで 「git status」する</title>
       <link>http://yukimemi.github.io/post/2014-03-22-gitstatus/</link>
-      <pubDate>Sat, 22 Mar 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sat, 22 Mar 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-03-22-gitstatus/</guid>
       <description>

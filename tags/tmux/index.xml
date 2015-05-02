@@ -6,16 +6,13 @@
     <description>Recent content in Tmux on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Sun, 01 Jun 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jun 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>tmuxで一時的にpaneを最大化する</title>
       <link>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</link>
-      <pubDate>Sun, 01 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</guid>
       <description>&lt;p&gt;知らんかった。便利&lt;/p&gt;
@@ -38,7 +35,7 @@
     <item>
       <title>tmuxで画面サイズをリセットしてアタッチ</title>
       <link>http://yukimemi.github.io/post/2013-06-16-tmux_detach_before_attach/</link>
-      <pubDate>Sun, 16 Jun 2013 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-06-16-tmux_detach_before_attach/</guid>
       <description>

@@ -6,16 +6,13 @@
     <description>Recent content in Nodejs on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Thu, 26 Jun 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Jun 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>roots new post command</title>
       <link>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</link>
-      <pubDate>Thu, 26 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Thu, 26 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</guid>
       <description>&lt;p&gt;Tinkererでは、 &lt;code&gt;tinker -p &amp;quot;hogehoge&amp;quot;&lt;/code&gt; で、新しい記事を作成することが出来た。
@@ -62,7 +59,7 @@ title: hogehoge
     <item>
       <title>roots install</title>
       <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
-      <pubDate>Wed, 25 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 25 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
       <description>
@@ -136,7 +133,7 @@ $ vim hello_world.jade
     <item>
       <title>Second roots</title>
       <link>http://yukimemi.github.io/post/2014-06-20-second_post/</link>
-      <pubDate>Fri, 20 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Fri, 20 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-20-second_post/</guid>
       <description>&lt;p&gt;roots&lt;/p&gt;
@@ -151,7 +148,7 @@ $ vim hello_world.jade
     <item>
       <title>First roots</title>
       <link>http://yukimemi.github.io/post/2014-06-19-first_post/</link>
-      <pubDate>Thu, 19 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-19-first_post/</guid>
       <description>&lt;p&gt;はじめての「roots」&lt;/p&gt;

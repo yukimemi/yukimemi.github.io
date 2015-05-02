@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Guake on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/guake/</link>
+    <description>Recent content in Guake on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 02 May 2015 22:03:13 +0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/guake/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Guake terminal in ubuntu</title>
+      <link>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</link>
+      <pubDate>Sat, 02 May 2015 22:03:13 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</guid>
+      <description>
+
+&lt;p&gt;macでiTerm2を使っていたので、同じように使えるterminalがないか探していたところ、あんまこれ！ってのが見つからなかったので、昔使ってたguakeを入れた。けっこう普通につかえて便利。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install guake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;デフォルトでは、「F12」で起動する。&lt;/p&gt;
+
+&lt;p&gt;おすすめ設定は、こんな感じ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;全般&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクロール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;外観&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;あとは、fontをRicty for Powerlineにする。&lt;/p&gt;
+
+&lt;p&gt;Ricty for Powerlineのインストールは以下の通り。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+mkdir -p ~/tmp
+mkdir -p ~/.fonts
+pushd ~/tmp
+
+sudo apt-get install fontforge
+
+wget http://levien.com/type/myfonts/Inconsolata.otf
+wget http://iij.dl.sourceforge.jp/mix-mplus-ipa/59022/migu-1m-20130617.zip
+
+unzip migu-1m-20130617.zip
+
+git clone https://github.com/yascentur/Ricty.git
+
+pushd Ricty
+
+./ricty_generator.sh ~/tmp/Inconsolata.otf ~/tmp/migu-1m-20130617/migu-1m-regular.ttf ~/tmp/migu-1m-20130617/migu-1m-bold.ttf
+
+mv Ricty*.ttf ~/.fonts
+
+popd
+
+git clone https://github.com/Lokaltog/vim-powerline.git
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Regular.ttf
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Bold.ttf
+mv Ricty-Regular-Powerline.ttf ~/.fonts
+mv Ricty-Bold-Powerline.ttf ~/.fonts
+
+popd
+
+fc-cache -vf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでかなり良くなる。
+あとは、色を設定する。iTerm2でもテーマがあったように、guakeでも、ネットにテーマを作ってくださっているありがたい方がいらっしゃるので、使用させてもらう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/coolwanglu/guake-colors-solarized.git
+$ ghq get https://github.com/erroneousboat/guake-colors-monokai.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;有名なsolarizedとmonokaiのテーマ。
+適用は、どちらもシェルスクリプトを実行するだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-solarized
+$ ./set_dark.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もしくは、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-monokai
+$ ./setup.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一瞬で変わる。べんり。&lt;/p&gt;
+
+&lt;p&gt;あとは、なぜかtmuxが256-color表示出来ていなかった。これは、オプションを指定して起動すればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tmux -2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、guake上で実行したvimの背景が透過されていなかった。
+こちらは、.vimrcに以下を追加して解決。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;highlight Normal ctermbg=none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:eef5b703d01059dd9739a3c795dd7926&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://uonl.tumblr.com/post/53433544404&#34;&gt;Ubuntu on Let&amp;rsquo;s Note vimの背景を半透明にする&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux&#34;&gt;Getting 256 colors to work in tmux - Unix &amp;amp; Linux Stack Exchange&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

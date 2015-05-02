@@ -6,16 +6,229 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Mon, 02 Mar 2015 02:00:14 &#43;0900</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2015 22:03:13 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Guake terminal in ubuntu</title>
+      <link>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</link>
+      <pubDate>Sat, 02 May 2015 22:03:13 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</guid>
+      <description>
+
+&lt;p&gt;macでiTerm2を使っていたので、同じように使えるterminalがないか探していたところ、あんまこれ！ってのが見つからなかったので、昔使ってたguakeを入れた。けっこう普通につかえて便利。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install guake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;デフォルトでは、「F12」で起動する。&lt;/p&gt;
+
+&lt;p&gt;おすすめ設定は、こんな感じ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;全般&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スクロール&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;外観&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;あとは、fontをRicty for Powerlineにする。&lt;/p&gt;
+
+&lt;p&gt;Ricty for Powerlineのインストールは以下の通り。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
+mkdir -p ~/tmp
+mkdir -p ~/.fonts
+pushd ~/tmp
+
+sudo apt-get install fontforge
+
+wget http://levien.com/type/myfonts/Inconsolata.otf
+wget http://iij.dl.sourceforge.jp/mix-mplus-ipa/59022/migu-1m-20130617.zip
+
+unzip migu-1m-20130617.zip
+
+git clone https://github.com/yascentur/Ricty.git
+
+pushd Ricty
+
+./ricty_generator.sh ~/tmp/Inconsolata.otf ~/tmp/migu-1m-20130617/migu-1m-regular.ttf ~/tmp/migu-1m-20130617/migu-1m-bold.ttf
+
+mv Ricty*.ttf ~/.fonts
+
+popd
+
+git clone https://github.com/Lokaltog/vim-powerline.git
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Regular.ttf
+fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Bold.ttf
+mv Ricty-Regular-Powerline.ttf ~/.fonts
+mv Ricty-Bold-Powerline.ttf ~/.fonts
+
+popd
+
+fc-cache -vf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでかなり良くなる。
+あとは、色を設定する。iTerm2でもテーマがあったように、guakeでも、ネットにテーマを作ってくださっているありがたい方がいらっしゃるので、使用させてもらう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/coolwanglu/guake-colors-solarized.git
+$ ghq get https://github.com/erroneousboat/guake-colors-monokai.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;有名なsolarizedとmonokaiのテーマ。
+適用は、どちらもシェルスクリプトを実行するだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-solarized
+$ ./set_dark.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もしくは、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-monokai
+$ ./setup.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;一瞬で変わる。べんり。&lt;/p&gt;
+
+&lt;p&gt;あとは、なぜかtmuxが256-color表示出来ていなかった。これは、オプションを指定して起動すればいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tmux -2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、guake上で実行したvimの背景が透過されていなかった。
+こちらは、.vimrcに以下を追加して解決。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;highlight Normal ctermbg=none
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:eef5b703d01059dd9739a3c795dd7926&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://uonl.tumblr.com/post/53433544404&#34;&gt;Ubuntu on Let&amp;rsquo;s Note vimの背景を半透明にする&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux&#34;&gt;Getting 256 colors to work in tmux - Unix &amp;amp; Linux Stack Exchange&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Ubuntu 15.04 to MacBook Air (11-inch, Late 2010)</title>
+      <link>http://yukimemi.github.io/post/2015-05-02_install%20ubuntu%20to%20macbook%20air/</link>
+      <pubDate>Sat, 02 May 2015 09:23:30 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-02_install%20ubuntu%20to%20macbook%20air/</guid>
+      <description>
+
+&lt;p&gt;使ってるMacBook Airが最近遅くて耐えられなくなってきたので、Ubuntuに乗り換えてみた。&lt;/p&gt;
+
+&lt;p&gt;nvidiaのドライバ関係でいろいろ大変だったのでメモ。&lt;/p&gt;
+
+&lt;h3 id=&#34;install-usbメモリの作成:da437a952248d6819932723caee2ddc3&#34;&gt;Install Usbメモリの作成&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo dd if=./ubuntu-15.04-desktop-amd64.iso of=/dev/sdb bs=4M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ubuntu-インストール:da437a952248d6819932723caee2ddc3&#34;&gt;Ubuntu インストール&lt;/h3&gt;
+
+&lt;p&gt;nvidiaのグラフィックドライバをインストールする場合、grubがefiモードじゃなくてbiosモードでインストールされる必要があるっぽい。
+そこで、通常とはちょっと違う方法でインストールする。&lt;/p&gt;
+
+&lt;p&gt;まず、最初の選択で、 &amp;ldquo;Try Ubuntu without installing it&amp;rdquo; を選ぶ。
+その後、 &amp;ldquo;Ctrl + Alt + T&amp;rdquo; を押して端末を起動し、インストーラを起動する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo ubiquity
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、 &amp;ldquo;それ以外&amp;rdquo; ってのを選んで、自分でパーティションを作成する。
+必要なパーティションは以下の3つ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;予約されたBIOSブート領域: 1M&lt;/li&gt;
+&lt;li&gt;ext4(/): swap以外全部&lt;/li&gt;
+&lt;li&gt;swap: 2048M&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;その後はそのままインストールを続ける。
+全部終わると再起動が促されるが、そのまま再起動せずに、端末を起動し、grubをインストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo mount /dev/sda2 /mnt # rootパーティション
+$ sudo grub-install --root-directory=/mnt /dev/sda
+$ sudo grub-install --root-directory=/mnt --recheck /dev/sda
+
+$ sudo mount --bind /dev /mnt/dev
+$ sudo mount --bind /dev/pts /mnt/dev/pts
+$ sudo mount --bind /proc /mnt/proc
+$ sudo mount --bind /sys /mnt/sys
+$ sudo chroot /mnt
+$ update-grub
+$ exit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;usbをさしたままだと、sdbにはインストールできないとかなんとかのエラーが出るけど、むし。
+コマンドが全部終わったら再起動してusbを抜く。&lt;/p&gt;
+
+&lt;p&gt;普通にubuntuが起動するのでログインし、システム設定より、ソフトウェアとアップデートを開き、追加のドライバータブより、NVIDIAのドライバーにチェックを入れて適用する。
+ここのバージョンは変わるっぽいけど、現時点では、「NVIDIA binary driver -version 340.76をnvidia-340から使用します(プロプライエタリ、検証済み)」ってやつだった。&lt;/p&gt;
+
+&lt;p&gt;あと、Wi-Fiのドライバは、使用しない方が安定してた。使用すると、スリープ復帰後にWi-Fiが切断される。&lt;/p&gt;
+
+&lt;p&gt;プロプライエタリのドライバをインストール後は、以下のコマンドを実行して、xorg.confファイルを作成する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo nvidia-xconfig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;バックライトの調整ができるように、xorg.confファイルに1行追加する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Section &amp;quot;Device&amp;quot;
+    Identifier     &amp;quot;Device0&amp;quot;
+    Driver         &amp;quot;nvidia&amp;quot;
+    VendorName     &amp;quot;NVIDIA Corporation&amp;quot;
+    BoardName      &amp;quot;GeForce 320M&amp;quot;
+    Option         &amp;quot;RegistryDwords&amp;quot; &amp;quot;EnableBrightnessControl=1&amp;quot; # この行
+EndSection
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;終わったら再起動して完了。&lt;/p&gt;
+
+&lt;p&gt;あとは細かい設定をしていくだけ。
+インストールして使えるようになるのはここまで。
+デフォルト状態でもかなり使える。ubuntuすごい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:da437a952248d6819932723caee2ddc3&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://variedtastefinder.jpn.ph/diary/395/&#34;&gt;MacBook Air Late 2010 on Ubuntu 14.04 (※05/30追記)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.ubuntuforums.org/showthread.php?t=2209602&#34;&gt;[SOLVED] Installing Ubuntu from USB on a MacBook Air 3,1-3,2 (nvidia card)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>vimperator colorscheme</title>
       <link>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</link>
-      <pubDate>Mon, 02 Mar 2015 02:00:14 &#43;0900</pubDate>
+      <pubDate>Mon, 02 Mar 2015 02:00:14 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</guid>
       <description>
@@ -54,7 +267,7 @@
     <item>
       <title>hello hugo</title>
       <link>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</link>
-      <pubDate>Sun, 15 Feb 2015 10:28:27 &#43;0900</pubDate>
+      <pubDate>Sun, 15 Feb 2015 10:28:27 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</guid>
       <description>
@@ -86,7 +299,7 @@
     <item>
       <title>Set cursorline as needed</title>
       <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
-      <pubDate>Tue, 05 Aug 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
       <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;
@@ -145,7 +358,7 @@ endfunction
     <item>
       <title>Add --runcmd option to coffee-script-on-jscript</title>
       <link>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</link>
-      <pubDate>Tue, 15 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Tue, 15 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</guid>
       <description>
@@ -223,7 +436,7 @@ ExitCode = [0]
     <item>
       <title>CoffeeScript on Windows as wsh</title>
       <link>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</link>
-      <pubDate>Mon, 14 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Mon, 14 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh/</guid>
       <description>
@@ -372,7 +585,7 @@ ExcelとかのCOMも、PowerShellより、wshの方が断然早いし。とい�
     <item>
       <title>roots simple pagination</title>
       <link>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</link>
-      <pubDate>Wed, 09 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 09 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</guid>
       <description>
@@ -539,7 +752,7 @@ require jq, -&amp;gt;
     <item>
       <title>mosh error No such file or directory</title>
       <link>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</link>
-      <pubDate>Sun, 06 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 06 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</guid>
       <description>
@@ -618,7 +831,7 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
     <item>
       <title>Git directory deploy !</title>
       <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
       <description>
@@ -689,7 +902,7 @@ $ ./deploy.sh
     <item>
       <title>direnv for npm local commands</title>
       <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</guid>
       <description>
@@ -781,7 +994,7 @@ direnv: unloading
     <item>
       <title>All You Need Is Peco</title>
       <link>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</link>
-      <pubDate>Sun, 29 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</guid>
       <description>
@@ -1039,7 +1252,7 @@ alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
     <item>
       <title>roots new post command</title>
       <link>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</link>
-      <pubDate>Thu, 26 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Thu, 26 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</guid>
       <description>&lt;p&gt;Tinkererでは、 &lt;code&gt;tinker -p &amp;quot;hogehoge&amp;quot;&lt;/code&gt; で、新しい記事を作成することが出来た。
@@ -1086,7 +1299,7 @@ title: hogehoge
     <item>
       <title>roots install</title>
       <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
-      <pubDate>Wed, 25 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Wed, 25 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
       <description>
@@ -1160,7 +1373,7 @@ $ vim hello_world.jade
     <item>
       <title>Second roots</title>
       <link>http://yukimemi.github.io/post/2014-06-20-second_post/</link>
-      <pubDate>Fri, 20 Jun 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Fri, 20 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-20-second_post/</guid>
       <description>&lt;p&gt;roots&lt;/p&gt;
@@ -1169,44 +1382,6 @@ $ vim hello_world.jade
 
 &lt;p&gt;とりあえず、 subtree push が便利っぽい。
 がんばる。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>First roots</title>
-      <link>http://yukimemi.github.io/post/2014-06-19-first_post/</link>
-      <pubDate>Thu, 19 Jun 2014 00:00:00 &#43;0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-06-19-first_post/</guid>
-      <description>&lt;p&gt;はじめての「roots」&lt;/p&gt;
-
-&lt;p&gt;Markdown でもブログが書けるらしい。&lt;/p&gt;
-
-&lt;p&gt;移行しよかな。
-ライブリロードがあるのがいいね。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>tmuxで一時的にpaneを最大化する</title>
-      <link>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</link>
-      <pubDate>Sun, 01 Jun 2014 00:00:00 &#43;0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</guid>
-      <description>&lt;p&gt;知らんかった。便利&lt;/p&gt;
-
-&lt;p&gt;tmux 1.8 以降だと、 &lt;code&gt;prefix z&lt;/code&gt; で最大化をトグルできるみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rhysd.hatenablog.com/entry/2013/09/16/003620&#34;&gt;tmux で一時的に pane を最大化する - sorry, uninuplemented:&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ちなみに、vimでは、以下のような設定で似たようなことも出来るみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap so &amp;lt;C-w&amp;gt;_&amp;lt;C-w&amp;gt;|
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2個目の &lt;code&gt;&amp;lt;C-w&amp;gt;&lt;/code&gt; と &lt;code&gt;|&lt;/code&gt; の間には、 &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; があり。( &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; を2回入力する)&lt;/p&gt;
-
-&lt;p&gt;トグルではないけど。&lt;/p&gt;
 </description>
     </item>
     

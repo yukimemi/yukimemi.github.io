@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ime on YUKIMEMI</title>
+    <link>http://localhost:1313/tags/ime/</link>
+    <description>Recent content in Ime on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 02 May 2015 22:59:12 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ime/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mayu for IME off in vim</title>
+      <link>http://localhost:1313/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</link>
+      <pubDate>Sat, 02 May 2015 22:59:12 +0900</pubDate>
+      
+      <guid>http://localhost:1313/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</guid>
+      <description>&lt;p&gt;vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。
+Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。&lt;/p&gt;
+
+&lt;p&gt;Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。
+そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。&lt;/p&gt;
+
+&lt;p&gt;Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

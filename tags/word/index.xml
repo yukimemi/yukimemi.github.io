@@ -6,16 +6,13 @@
     <description>Recent content in Word on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Thu, 17 Apr 2014 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Apr 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/word/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>PowerShell Markdown を Wordに変換する</title>
       <link>http://yukimemi.github.io/post/2014-04-17-md2docx/</link>
-      <pubDate>Thu, 17 Apr 2014 00:00:00 &#43;0000</pubDate>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-04-17-md2docx/</guid>
       <description>&lt;p&gt;仕事でwordを使うことが多々あるのだが、正直いってwordは使いづらい！

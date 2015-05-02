@@ -6,16 +6,13 @@
     <description>Recent content in Syntax on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    
-    
-    
-    <lastBuildDate>Sun, 11 Aug 2013 00:00:00 &#43;0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Aug 2013 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/syntax/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Vim coffeescript syntastic</title>
       <link>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</link>
-      <pubDate>Sun, 11 Aug 2013 00:00:00 &#43;0000</pubDate>
+      <pubDate>Sun, 11 Aug 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</guid>
       <description>&lt;p&gt;vim で保存時に自動で構文チェックとかを行なってくれるプラギンに
