@@ -6,8 +6,174 @@
     <description>Recent content on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 02 May 2015 22:03:13 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2015 22:59:12 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mayu for IME off in vim</title>
+      <link>http://yukimemi.github.io/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</link>
+      <pubDate>Sat, 02 May 2015 22:59:12 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</guid>
+      <description>
+
+&lt;p&gt;vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。
+Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。&lt;/p&gt;
+
+&lt;p&gt;Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。
+そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。&lt;/p&gt;
+
+&lt;p&gt;Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。&lt;/p&gt;
+
+&lt;p&gt;設定自体は単純なんだけど、キーボードのキーコードを全部定義しなきゃいけないみたいで、それがめんどくさそうだった。
+幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。
+一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。&lt;/p&gt;
+
+&lt;h3 id=&#34;mayuのインストール:83043f7e85625bcb6030d80110ca1e46&#34;&gt;Mayuのインストール&lt;/h3&gt;
+
+&lt;p&gt;Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。
+Ubuntu 15.04では以下の通りにやるとビルド出来た。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/kenhys/mayu.git
+$ cd ~/.ghq/src/github.com/kenhys/mayu
+$ sudo aptitude install build-essential libboost-iostreams-dev libudev-dev libusb-1.0-0-dev
+$ ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu/
+$ make
+$ sudo make install
+$ sudo chmod +s /usr/local/bin/mayu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。
+本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。&lt;/p&gt;
+
+&lt;h3 id=&#34;fcitx設定:83043f7e85625bcb6030d80110ca1e46&#34;&gt;fcitx設定&lt;/h3&gt;
+
+&lt;p&gt;今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。
+前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。&lt;/p&gt;
+
+&lt;p&gt;それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;mayu設定:83043f7e85625bcb6030d80110ca1e46&#34;&gt;Mayu設定&lt;/h3&gt;
+
+&lt;p&gt;次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;def key Esc Escape = 0x01
+def key Eisu = 0x7b
+
+key Esc = Esc Eisu
+key C-OpenBracket = C-OpenBracket Eisu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;「Escape」が押された時に、「Escape」、「英数」を押し、「Ctrl-[」が押された時に、「Ctrl-[」、「英数」を押すという設定。&lt;/p&gt;
+
+&lt;p&gt;ただ、mayuでは、一通りキーボード上のキーは全てdefしなきゃいけないみたいで、ネット上に公開してくださっているありがたい方の &lt;a href=&#34;http://d.hatena.ne.jp/OKIIZO/20080106/1199639459&#34;&gt;キーコード一覧&lt;/a&gt; を使用させてもらった。&lt;/p&gt;
+
+&lt;p&gt;一部、MacBookAirのキーコードと違う部分があったので、改変している。 &lt;a href=&#34;https://raw.githubusercontent.com/yukimemi/dotfiles/master/.mayu&#34;&gt;mayu&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;この設定ファイルをHOMEに「.mayu」として置く。
+その後、mayuをルート権限で実行する。&lt;/p&gt;
+
+&lt;p&gt;これでvim上でもシェル上でも、どこでも同じようにIMEがオフになるようになる。&lt;/p&gt;
+
+&lt;p&gt;あと、キーボードでキーコード一覧に記載されていないものがあった場合、mayuの標準出力にキーコードが表示される。それをメモして、設定ファイルに適当な名前で「def key hoge = 0xXX」とかしてやれば大丈夫。&lt;/p&gt;
+
+&lt;h3 id=&#34;mayu自動起動:83043f7e85625bcb6030d80110ca1e46&#34;&gt;Mayu自動起動&lt;/h3&gt;
+
+&lt;p&gt;システム起動時に自動でmayuが起動するように、systemdに登録する。&lt;/p&gt;
+
+&lt;p&gt;userごとの自動起動設定としたいため、以下のファイルをまず作成する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mkdir -p ~/.config/systemd/user
+$ vim ~/.config/systemd/user/mayu.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;「mayu.service」の中身はこんな感じ&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Unit]
+Description=mayu keyboard hack
+
+[Service]
+ExecStart=/usr/local/bin/mayu
+
+[Install]
+WantedBy=default.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、以下のようにして登録する。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ systemctl --user daemon-reload
+$ systemctl --user list-unit-files
+UNIT FILE            STATE
+mayu.service         disabled
+systemd-exit.service static
+basic.target         static
+bluetooth.target     static
+default.target       static
+exit.target          disabled
+paths.target         static
+printer.target       static
+shutdown.target      static
+smartcard.target     static
+sockets.target       static
+sound.target         static
+timers.target        static
+
+13 unit files listed.
+
+$ systemctl --user enable mayu.service
+$ systemctl --user list-unit-files
+UNIT FILE            STATE
+mayu.service         enabled
+systemd-exit.service static
+basic.target         static
+bluetooth.target     static
+default.target       static
+exit.target          disabled
+paths.target         static
+printer.target       static
+shutdown.target      static
+smartcard.target     static
+sockets.target       static
+sound.target         static
+timers.target        static
+
+13 unit files listed.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;systemdとして正しく起動しているか確かめる場合は、ログを見る。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ journalctl
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Basic System.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Started mayu keyboard hack.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting mayu keyboard hack...
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Reached target Default.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Startup finished in 44ms.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1]: Started User Manager for UID 1000.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Default.
+5月 02 08:57:56 yukimemi-MacBookAir kernel: input: mayu uinpt as /devices/virtual/input/input14
+5月 02 08:57:56 yukimemi-MacBookAir mayu[1386]: loading: /home/yukimemi/.mayu
+5月 02 08:57:58 yukimemi-MacBookAir mayu[1386]: successfully loaded.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんな感じ。
+だいぶ使いやすくなった。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:83043f7e85625bcb6030d80110ca1e46&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/sharow/items/e8f7d3e0628d7ee925db&#34;&gt;systemdでの定期実行(timerユニット) - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/OKIIZO/20080106/1199639459&#34;&gt;新型Apple Keyboard微妙 - どんごどんご&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/kenhys/mayu&#34;&gt;kenhys/mayu&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://symfoware.blog68.fc2.com/blog-entry-1397.html&#34;&gt;Ubuntu 14.04にMozcと窓使いの憂鬱をインストールする - Symfoware&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Guake terminal in ubuntu</title>
@@ -839,77 +1005,6 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
     </item>
     
     <item>
-      <title>Git directory deploy !</title>
-      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
-      <description>
-
-&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
-
-&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
-githubへ更新という流れ。
-その際、 roots では、ビルド結果を public というディレクトリに出力するので
-そのディレクトリだけをpushしたい。
-gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
-のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
-
-&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
-
-&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
-deploy_branch=master
-
-#if no user identity is already set in the current git environment, use this:
-default_username=yukimemi
-default_email=yukimemi@gmail.com
-
-#repository to deploy to. must be readable and writable.
-repo=origin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
-$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
-$ git --work-tree public add --all
-$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
-$ git push -f origin public
-$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
-
-&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
-それから、 roots でコンパイル。
-あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
-$ ./deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;べんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>direnv for npm local commands</title>
       <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
       <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
@@ -998,6 +1093,77 @@ direnv: unloading
 &lt;p&gt;&lt;a href=&#34;http://doloopwhile.hatenablog.com/entry/2014/06/18/010449&#34;&gt;direnvで解決するGOPATHの3つの問題点 - None is None is None&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm&#34;&gt;Big Sky :: bundle exec がウザい&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Git directory deploy !</title>
+      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
+      <description>
+
+&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
+
+&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
+githubへ更新という流れ。
+その際、 roots では、ビルド結果を public というディレクトリに出力するので
+そのディレクトリだけをpushしたい。
+gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
+のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
+
+&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
+
+&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
+deploy_branch=master
+
+#if no user identity is already set in the current git environment, use this:
+default_username=yukimemi
+default_email=yukimemi@gmail.com
+
+#repository to deploy to. must be readable and writable.
+repo=origin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
+$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
+$ git --work-tree public add --all
+$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
+$ git push -f origin public
+$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
+
+&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
+それから、 roots でコンパイル。
+あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
+$ ./deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;べんり。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -1303,80 +1469,6 @@ title: hogehoge
 
 &lt;p&gt;とプロンプトが表示され、タイトルを打ち込むことで新しいブログ記事を作成出来る。
 便利。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>roots install</title>
-      <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
-      <pubDate>Wed, 25 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
-      <description>
-
-&lt;p&gt;今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。&lt;/p&gt;
-
-&lt;p&gt;roots は、静的サイトジェネレーター。nodeで動く。
-特徴としては、以下の形式で作成出来ること。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;スクリプト -&amp;gt; coffeescript&lt;/li&gt;
-&lt;li&gt;HTML -&amp;gt; jade&lt;/li&gt;
-&lt;li&gt;CSS -&amp;gt; stylus&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。
-jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;ブログ作成手順:277c647c8512cad05114c9463b934e39&#34;&gt;ブログ作成手順&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;npmでグローバルにインストール&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g roots
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;ブログテンプレートでプロジェクト作成&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots new yukimemi.github.io --blog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでブログ完成。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd yukimemi.github.io
-$ roots watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
-を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;ブログ記事を修正&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd posts
-$ vim hello_world.jade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。
-すごい・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:277c647c8512cad05114c9463b934e39&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/morishitter/items/b708a11e09b6fcb2f751&#34;&gt;Node.js - 静的サイトジェネレーター「roots」 - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://re-dzine.net/2013/02/roots/&#34;&gt;静的サイトジェネレータ「roots」を触ってみた | REFLECTDESIGN&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
