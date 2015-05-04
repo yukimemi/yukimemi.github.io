@@ -1005,6 +1005,77 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
     </item>
     
     <item>
+      <title>Git directory deploy !</title>
+      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
+      <description>
+
+&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
+
+&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
+githubへ更新という流れ。
+その際、 roots では、ビルド結果を public というディレクトリに出力するので
+そのディレクトリだけをpushしたい。
+gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
+のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
+
+&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
+
+&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
+deploy_branch=master
+
+#if no user identity is already set in the current git environment, use this:
+default_username=yukimemi
+default_email=yukimemi@gmail.com
+
+#repository to deploy to. must be readable and writable.
+repo=origin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
+$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
+$ git --work-tree public add --all
+$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
+$ git push -f origin public
+$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
+
+&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
+それから、 roots でコンパイル。
+あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
+$ ./deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;べんり。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>direnv for npm local commands</title>
       <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
       <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
@@ -1093,77 +1164,6 @@ direnv: unloading
 &lt;p&gt;&lt;a href=&#34;http://doloopwhile.hatenablog.com/entry/2014/06/18/010449&#34;&gt;direnvで解決するGOPATHの3つの問題点 - None is None is None&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm&#34;&gt;Big Sky :: bundle exec がウザい&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Git directory deploy !</title>
-      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
-      <description>
-
-&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
-
-&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
-githubへ更新という流れ。
-その際、 roots では、ビルド結果を public というディレクトリに出力するので
-そのディレクトリだけをpushしたい。
-gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
-のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
-
-&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
-
-&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
-deploy_branch=master
-
-#if no user identity is already set in the current git environment, use this:
-default_username=yukimemi
-default_email=yukimemi@gmail.com
-
-#repository to deploy to. must be readable and writable.
-repo=origin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
-$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
-$ git --work-tree public add --all
-$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
-$ git push -f origin public
-$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
-
-&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
-それから、 roots でコンパイル。
-あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
-$ ./deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;べんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -1,9 +1,13 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
 @font-face {
-  font-family: 'SistersFS';
-  src: url('../font/sisters/SistersFS.ttf') format('truetype');
+  font-family: 'M+ 1m';
+  src: url('../font/mplus-1m/mplus-1m-regular.ttf') format('truetype');
 }
+/* @font-face {                                                    */
+/*   font-family: 'SistersFS';                                     */
+/*   src: url('../font/sisters/SistersFS.ttf') format('truetype'); */
+/* }                                                               */
 /* @font-face {                                              */
 /*   font-family: 'uzura_font';                              */
 /*   src: url('../font/uzura/uzura.ttf') format('truetype'); */
@@ -23,11 +27,13 @@
 
 body {
   /* font-family: 'SistersFS', 'Noto Sans Japanese', sun-serif; */
-  font-family: 'Noto Sans Japanese', sun-serif;
+  /* font-family: 'Noto Sans Japanese', sun-serif; */
+  font-family: 'M+ 1m', 'Noto Sans Japanese', sun-serif;
   /* font-family: 'uzura_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'S2G Love font', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'JK Gothic L', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
+  background-color: #f5f5f5;
 }
 
 nav {
