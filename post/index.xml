@@ -6,8 +6,29 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 02 May 2015 22:59:12 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 04 May 2015 17:14:11 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use gomi instead of rm</title>
+      <link>http://yukimemi.github.io/post/2015-05-04_Use%20gomi/</link>
+      <pubDate>Mon, 04 May 2015 17:14:11 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-04_Use%20gomi/</guid>
+      <description>&lt;p&gt;rmを安全に行うツールとして、Macでは「rmtrash」、Linuxでは「trash-cli」を使ってきたけど、最近Golangで「gomi」というツールが作成されたとのことなので使用してみた。
+とても便利。&lt;/p&gt;
+
+&lt;p&gt;インストールはgo get。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get -u github.com/b4b4r07/gomi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;さっそくaliasした。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ alias rm=&#39;gomi&#39;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Mayu for IME off in vim</title>
@@ -1459,80 +1480,6 @@ title: hogehoge
 
 &lt;p&gt;とプロンプトが表示され、タイトルを打ち込むことで新しいブログ記事を作成出来る。
 便利。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>roots install</title>
-      <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
-      <pubDate>Wed, 25 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
-      <description>
-
-&lt;p&gt;今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。&lt;/p&gt;
-
-&lt;p&gt;roots は、静的サイトジェネレーター。nodeで動く。
-特徴としては、以下の形式で作成出来ること。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;スクリプト -&amp;gt; coffeescript&lt;/li&gt;
-&lt;li&gt;HTML -&amp;gt; jade&lt;/li&gt;
-&lt;li&gt;CSS -&amp;gt; stylus&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。
-jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;ブログ作成手順:277c647c8512cad05114c9463b934e39&#34;&gt;ブログ作成手順&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;npmでグローバルにインストール&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g roots
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;ブログテンプレートでプロジェクト作成&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots new yukimemi.github.io --blog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでブログ完成。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd yukimemi.github.io
-$ roots watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
-を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;ブログ記事を修正&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd posts
-$ vim hello_world.jade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。
-すごい・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:277c647c8512cad05114c9463b934e39&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/morishitter/items/b708a11e09b6fcb2f751&#34;&gt;Node.js - 静的サイトジェネレーター「roots」 - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://re-dzine.net/2013/02/roots/&#34;&gt;静的サイトジェネレータ「roots」を触ってみた | REFLECTDESIGN&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

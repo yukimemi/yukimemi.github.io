@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gomi on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/gomi/</link>
+    <description>Recent content in Gomi on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 04 May 2015 17:14:11 +0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/gomi/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use gomi instead of rm</title>
+      <link>http://yukimemi.github.io/post/2015-05-04_Use%20gomi/</link>
+      <pubDate>Mon, 04 May 2015 17:14:11 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-05-04_Use%20gomi/</guid>
+      <description>&lt;p&gt;rmを安全に行うツールとして、Macでは「rmtrash」、Linuxでは「trash-cli」を使ってきたけど、最近Golangで「gomi」というツールが作成されたとのことなので使用してみた。
+とても便利。&lt;/p&gt;
+
+&lt;p&gt;インストールはgo get。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get -u github.com/b4b4r07/gomi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;さっそくaliasした。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ alias rm=&#39;gomi&#39;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
