@@ -90,6 +90,15 @@ pre ol.linenums li .L0,.L1,.L3,.L5,.L7,.L9 {
 code {
   color: black;
 }
+
+#addthis {
+  margin-bottom: 5px;
+}
+
+#twitterfollow {
+  margin-bottom: 5px;
+}
+
 /* ============================== */
 
 /* === google search === */
