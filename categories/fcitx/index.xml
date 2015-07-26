@@ -53,8 +53,7 @@ $ sudo chmod +s /usr/local/bin/mayu
 
 &lt;p&gt;それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;mayu設定:83043f7e85625bcb6030d80110ca1e46&#34;&gt;Mayu設定&lt;/h3&gt;
 

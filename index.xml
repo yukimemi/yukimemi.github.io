@@ -6,8 +6,67 @@
     <description>Recent content on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 10 May 2015 08:57:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jul 2015 16:08:23 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Set up Macbook in Ansible</title>
+      <link>http://yukimemi.github.io/post/2015-07-26_Set%20up%20Macbook%20in%20Ansible/</link>
+      <pubDate>Sun, 26 Jul 2015 16:08:23 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-07-26_Set%20up%20Macbook%20in%20Ansible/</guid>
+      <description>
+
+&lt;p&gt;せっかくMacbookを新調したので、セットアップを今までのオレオレスクリプトから、ansibleに移行した。&lt;/p&gt;
+
+&lt;p&gt;先人の参考になりまくる記事がいっぱいあるので、けっこう簡単に出来た。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/ansible-playbook&#34;&gt;yukimemi/ansible-playbook&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参考記事だと、ansible-galaxyで、事前にhomebrewパッケージをインストールしなきゃいけない
+みたいに書いてあるけど、実際は不要だった。&lt;/p&gt;
+
+&lt;p&gt;べんりだansible。
+Mac以外にも対応出来るように今後は拡張していきたい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:6241a9d95dc3f62e67c7f3216330c7b8&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://goo.gl/oAjTzf&#34;&gt;AnsibleでHomebrew, Cask, Atomエディターのパッケージを管理する - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://goo.gl/SrOGry&#34;&gt;MacだってAnsibleで構成管理したい！ - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://goo.gl/xczLlf&#34;&gt;Mac の開発環境構築を自動化する (2015 年初旬編) - t-wadaのブログ&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>New MacBook 12</title>
+      <link>http://yukimemi.github.io/post/2015-07-26_New%20MacBook%2012/</link>
+      <pubDate>Sun, 26 Jul 2015 15:17:39 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-07-26_New%20MacBook%2012/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/NewMacbook12.png&#34; alt=&#34;NewMacBook12&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ついに・・・ついに買ってしまった。New MacBook 12インチ。&lt;/p&gt;
+
+&lt;p&gt;今まで使ってたMacbook Air Late 2010のキーボードが急に反応しなくなってしまったため、
+急遽New Macbook 12インチを新調した。&lt;/p&gt;
+
+&lt;p&gt;なんにもカスタマイズせずに一番安いのをヤマダ電機で購入した。&lt;/p&gt;
+
+&lt;p&gt;ヤマダのポイントが10パーついて、14000もポイントがある。
+何に使おうか・・・。&lt;/p&gt;
+
+&lt;p&gt;肝心のMacbookの使い勝手は、もう文句なしに素晴らしい。
+心配してた熱も特になし。&lt;/p&gt;
+
+&lt;p&gt;驚いたのが、こんなに薄いのに、思った以上に良い音が出るということ。&lt;/p&gt;
+
+&lt;p&gt;性能も十分だしすばらしい。ほんとAppleはすごい。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>PalmDetect in Ubuntu</title>
@@ -116,8 +175,7 @@ $ sudo chmod +s /usr/local/bin/mayu
 
 &lt;p&gt;それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;mayu設定:83043f7e85625bcb6030d80110ca1e46&#34;&gt;Mayu設定&lt;/h3&gt;
 
@@ -259,27 +317,23 @@ timers.target        static
 &lt;li&gt;全般&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;スクロール&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;外観&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;あとは、fontをRicty for Powerlineにする。&lt;/p&gt;
 
@@ -527,10 +581,10 @@ EndSection
     
     <item>
       <title>about</title>
-      <link>http://yukimemi.github.io/about-time/</link>
+      <link>http://yukimemi.github.io/about%20time/</link>
       <pubDate>Thu, 29 Jan 2015 23:15:03 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/about-time/</guid>
+      <guid>http://yukimemi.github.io/about%20time/</guid>
       <description>&lt;p&gt;This site is yukimemi&amp;rsquo;s blog.&lt;/p&gt;
 </description>
     </item>
@@ -1064,169 +1118,6 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
 &lt;h5 id=&#34;参考:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/&#34;&gt;Moshを使ってみる #Linux - rcmdnk&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Git directory deploy !</title>
-      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
-      <description>
-
-&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
-
-&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
-githubへ更新という流れ。
-その際、 roots では、ビルド結果を public というディレクトリに出力するので
-そのディレクトリだけをpushしたい。
-gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
-のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
-
-&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
-
-&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
-deploy_branch=master
-
-#if no user identity is already set in the current git environment, use this:
-default_username=yukimemi
-default_email=yukimemi@gmail.com
-
-#repository to deploy to. must be readable and writable.
-repo=origin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
-$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
-$ git --work-tree public add --all
-$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
-$ git push -f origin public
-$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
-
-&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
-それから、 roots でコンパイル。
-あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
-$ ./deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;べんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>direnv for npm local commands</title>
-      <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</guid>
-      <description>
-
-&lt;p&gt;通常、 npm で実行コマンドをインストールするときは、以下のようにグローバルオプションを
-つけてインストールすることが多いと思う。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g gulp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;だけど、これではプロジェクトごとに違うバージョンを使いたい！などの場合にこまる。
-そこで &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; 。&lt;/p&gt;
-
-&lt;p&gt;これを使うとあるディレクトリでは、「〜〜する」というのが簡単に出来る。&lt;/p&gt;
-
-&lt;h3 id=&#34;導入方法:4be122604034f58ee5537b3c65fe8086&#34;&gt;導入方法&lt;/h3&gt;
-
-&lt;p&gt;まず、 &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; はgoを使うので、goをインストールしておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshenv&lt;/code&gt; に記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# direnv
-if which go &amp;gt; /dev/null; then
-    if [ ! -d $HOME/.direnv ]; then
-        git clone https://github.com/zimbatm/direnv ~/.direnv
-        pushd ~/.direnv
-        make install
-        popd
-    fi
-    eval &amp;quot;$(direnv hook zsh)&amp;quot;
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとはシェルを再起動したらインストール完了。&lt;/p&gt;
-
-&lt;h3 id=&#34;使い方:4be122604034f58ee5537b3c65fe8086&#34;&gt;使い方&lt;/h3&gt;
-
-&lt;p&gt;プロジェクトのディレクトリでローカルにnpmのコマンドをインストールする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install gulp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ローカルにインストールした場合、通常以下の場所に実行コマンドが配置される。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls node_modules/.bin
-bower  cake  coffee  gulp  nodemon  nodewebkit  wiredep
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;なので、この場所をPATHに追加すればよい。
-&lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; では、以下のようにする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ direnv edit .
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、エディタで &lt;code&gt;.envrc&lt;/code&gt; というファイルが開くので、以下の行を記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export PATH=$PWD/node_modules/.bin:$PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでOK。こうすると、このディレクトリに来た場合は自動的にPATHに追加され、
-反対にディレクトリから出た場合、自動的にPATHから削除される。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ~/.ghq/github.com/yukimemi/hogehoge
-direnv: loading .envrc
-direnv: export ~PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd
-direnv: unloading
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、プロジェクトローカルなコマンドをかんたんに実行出来る。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:4be122604034f58ee5537b3c65fe8086&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/kompiro/items/5fc46089247a56243a62&#34;&gt;direnvを使おう - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://doloopwhile.hatenablog.com/entry/2014/06/18/010449&#34;&gt;direnvで解決するGOPATHの3つの問題点 - None is None is None&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm&#34;&gt;Big Sky :: bundle exec がウザい&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

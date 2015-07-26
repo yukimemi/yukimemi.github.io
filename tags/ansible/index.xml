@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ansible on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/ansible/</link>
+    <description>Recent content in Ansible on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 26 Jul 2015 16:08:23 +0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Set up Macbook in Ansible</title>
+      <link>http://yukimemi.github.io/post/2015-07-26_Set%20up%20Macbook%20in%20Ansible/</link>
+      <pubDate>Sun, 26 Jul 2015 16:08:23 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-07-26_Set%20up%20Macbook%20in%20Ansible/</guid>
+      <description>
+
+&lt;p&gt;せっかくMacbookを新調したので、セットアップを今までのオレオレスクリプトから、ansibleに移行した。&lt;/p&gt;
+
+&lt;p&gt;先人の参考になりまくる記事がいっぱいあるので、けっこう簡単に出来た。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/ansible-playbook&#34;&gt;yukimemi/ansible-playbook&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参考記事だと、ansible-galaxyで、事前にhomebrewパッケージをインストールしなきゃいけない
+みたいに書いてあるけど、実際は不要だった。&lt;/p&gt;
+
+&lt;p&gt;べんりだansible。
+Mac以外にも対応出来るように今後は拡張していきたい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考:6241a9d95dc3f62e67c7f3216330c7b8&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://goo.gl/oAjTzf&#34;&gt;AnsibleでHomebrew, Cask, Atomエディターのパッケージを管理する - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://goo.gl/SrOGry&#34;&gt;MacだってAnsibleで構成管理したい！ - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://goo.gl/xczLlf&#34;&gt;Mac の開発環境構築を自動化する (2015 年初旬編) - t-wadaのブログ&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

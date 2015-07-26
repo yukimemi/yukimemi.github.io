@@ -95,8 +95,7 @@ $ sudo chmod +s /usr/local/bin/mayu
 
 &lt;p&gt;それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;mayu設定:83043f7e85625bcb6030d80110ca1e46&#34;&gt;Mayu設定&lt;/h3&gt;
 
@@ -238,27 +237,23 @@ timers.target        static
 &lt;li&gt;全般&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;スクロール&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;外観&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;あとは、fontをRicty for Powerlineにする。&lt;/p&gt;
 

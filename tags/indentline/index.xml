@@ -24,8 +24,7 @@
 というプラグイン が、 &lt;a href=&#34;http://alpaca.tc/blog/vim/plugins-best-of-vim-1.html&#34;&gt;オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ&lt;/a&gt;
 で紹介されていたので、乗り換えた。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_002810.png&#34; alt=&#34;image&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_002810.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;シンプルでかっこいい。 それに、 vim-indent-guides は、 indent
 をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。&lt;/p&gt;
@@ -45,8 +44,7 @@
 
 &lt;p&gt;こうすると、スペースの場合とほぼ同じように表示される。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_135554.png&#34; alt=&#34;image&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_135554.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。&lt;/p&gt;
 

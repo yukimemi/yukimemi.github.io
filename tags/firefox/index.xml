@@ -20,8 +20,7 @@
 
 &lt;p&gt;こんな感じ。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_231852.png&#34; alt=&#34;image&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_231852.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;コマンドラインの補完部分に、タブ表示が覆い被さっている。&lt;/p&gt;
 
@@ -35,8 +34,7 @@
 
 &lt;p&gt;修正後はこんな感じ。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_232026.png&#34; alt=&#34;image&#34; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_232026.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ツリー型タブのcssのクラス名とかを調べるには、 &lt;a href=&#34;https://addons.mozilla.org/ja/firefox/addon/dom-inspector-6622/&#34;&gt;DOM Inspector :: Add-ons for Firefox&lt;/a&gt;
 を使用した。&lt;/p&gt;

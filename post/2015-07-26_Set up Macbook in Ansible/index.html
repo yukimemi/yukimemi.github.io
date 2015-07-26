@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>vim indentLine で見やすいインデントを | YUKIMEMI</title>
+    <title>Set up Macbook in Ansible | YUKIMEMI</title>
 
     
     <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -29,8 +29,8 @@
 <div id="post" class="container">
   <div class="row">
     <div class="col s12">
-      <h2 class="pink-text">vim indentLine で見やすいインデントを</h2>
-      <p class="orange-text text-darken-4">2014/01/18 Sat</p>
+      <h2 class="pink-text">Set up Macbook in Ansible</h2>
+      <p class="orange-text text-darken-4">2015/07/26 Sun</p>
       <div class="row">
         <div class="col s12 m1"><div id="addthis">
   
@@ -43,46 +43,29 @@
 </div>
 </div>
       </div>
-      <p>vim には、見やすい定番のインデントプラグインとして、
-<a href="https://github.com/nathanaelkane/vim-indent-guides">nathanaelkane/vim-indent-guides</a>
-がある。</p>
+      
 
-<p>しかし、最近、
-<a href="https://github.com/Yggdroot/indentLine">Yggdroot/indentLine</a>
-というプラグイン が、 <a href="http://alpaca.tc/blog/vim/plugins-best-of-vim-1.html">オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ</a>
-で紹介されていたので、乗り換えた。</p>
+<p>せっかくMacbookを新調したので、セットアップを今までのオレオレスクリプトから、ansibleに移行した。</p>
 
-<p><img src="/img/20140119_002810.png" alt="image" /></p>
+<p>先人の参考になりまくる記事がいっぱいあるので、けっこう簡単に出来た。</p>
 
-<p>シンプルでかっこいい。 それに、 vim-indent-guides は、 indent
-をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。</p>
+<p><a href="https://github.com/yukimemi/ansible-playbook">yukimemi/ansible-playbook</a></p>
 
-<p>個人的にはタブを使用することはなくて、スペースを使用するから問題ないのだけれども・・・。</p>
+<p>参考記事だと、ansible-galaxyで、事前にhomebrewパッケージをインストールしなきゃいけない
+みたいに書いてあるけど、実際は不要だった。</p>
 
-<p>その点、 <a href="https://github.com/Yggdroot/indentLine">indentLine</a>
-では、スペースしか対応してなく、タブの場合は何もしない。</p>
+<p>べんりだansible。
+Mac以外にも対応出来るように今後は拡張していきたい。</p>
 
-<p>README にも記載があるが、タブで同じことやるためには、 .vimrc
-に、以下の記載を加えればいい。</p>
+<hr />
 
-<pre><code class="language-vim">set list listchars=tab:\¦\
-</code></pre>
+<h5 id="参考:6241a9d95dc3f62e67c7f3216330c7b8">参考</h5>
 
-<p>最後にスペースが入っていることに注意。</p>
+<p><a href="http://goo.gl/oAjTzf">AnsibleでHomebrew, Cask, Atomエディターのパッケージを管理する - Qiita</a></p>
 
-<p>こうすると、スペースの場合とほぼ同じように表示される。</p>
+<p><a href="http://goo.gl/SrOGry">MacだってAnsibleで構成管理したい！ - Qiita</a></p>
 
-<p><img src="/img/20140119_135554.png" alt="image" /></p>
-
-<p>ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。</p>
-
-<p>また、インデントを除外したい場合は、その filetype
-を設定してやればいいみたい。</p>
-
-<pre><code class="language-vim">let g:indentLine_fileTypeExclude = ['help', 'nerdtree', 'calendar', 'thumbnail', 'tweetvim']
-</code></pre>
-
-<p>こんな感じ。</p>
+<p><a href="http://goo.gl/xczLlf">Mac の開発環境構築を自動化する (2015 年初旬編) - t-wadaのブログ</a></p>
 
       <hr />
       <div id="disqus">
