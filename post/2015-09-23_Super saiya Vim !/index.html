@@ -52,8 +52,7 @@
 <p>経緯としては、Windows環境でvimの起動がかなり遅かったため。</p>
 
 <p>vimに導入したプラグイン数が多くなりすぎていたため、起動に時間がかかっていた。
-そこで、起動時には基本的なプラグインのみ読み込み、後から必要に応じてpluginを追加で
-読み込むようにしてみた。</p>
+そこで、起動時には基本的なプラグインのみ読み込み、後から必要に応じてpluginを追加で読み込むようにしてみた。</p>
 
 <pre><code class="language-vim">if has('vim_starting')
   if &amp;compatible
@@ -90,11 +89,9 @@ function! s:loadAllPlugins()
 endfunction
 </code></pre>
 
-<p>これで、起動時は最小限のpluginで爆速起動し、必要な時に <code>&lt;Space&gt;s</code> を押下することで
-超サイヤVimになれる。(全pluginをロードする)</p>
+<p>これで、起動時は最小限のpluginで爆速起動し、必要な時に <code>&lt;Space&gt;s</code> を押下することで超サイヤVimになれる。(全pluginをロードする)</p>
 
-<p>遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮
-された・・・！</p>
+<p>遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮された・・・！</p>
 
 <h4 id="参考:4bcf2f42b9eca582cb99c77c3892fafc">参考</h4>
 
