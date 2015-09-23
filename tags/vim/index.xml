@@ -6,8 +6,75 @@
     <description>Recent content in Vim on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 02 May 2015 22:59:12 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2015 14:54:51 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Super saiya Vim !</title>
+      <link>http://yukimemi.github.io/post/2015-09-23_Super%20saiya%20Vim%20%21/</link>
+      <pubDate>Wed, 23 Sep 2015 14:54:51 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-09-23_Super%20saiya%20Vim%20%21/</guid>
+      <description>
+
+&lt;p&gt;Vimでも超サイヤ人になりたい！&lt;/p&gt;
+
+&lt;p&gt;ってなわけでやってみた。&lt;/p&gt;
+
+&lt;p&gt;経緯としては、Windows環境でvimの起動がかなり遅かったため。&lt;/p&gt;
+
+&lt;p&gt;vimに導入したプラグイン数が多くなりすぎていたため、起動に時間がかかっていた。
+そこで、起動時には基本的なプラグインのみ読み込み、後から必要に応じてpluginを追加で
+読み込むようにしてみた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;vim_starting&#39;)
+  if &amp;amp;compatible
+    set nocompatible
+  endif
+  set runtimepath+=~/.cache/neobundle/neobundle.vim
+endif
+
+call neobundle#begin(expand(&#39;~/.cache/neobundle&#39;))
+
+if neobundle#load_cache()
+
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle_base.toml&#39;)
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy_base.toml&#39;, {&#39;lazy&#39; : 1})
+
+  NeoBundleSaveCache
+endif
+
+call neobundle#end()
+
+filetype plugin indent on
+
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;Space&amp;gt;s :&amp;lt;C-u&amp;gt;call &amp;lt;SID&amp;gt;loadAllPlugins()&amp;lt;CR&amp;gt;
+function! s:loadAllPlugins()
+  call neobundle#append()
+
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle.toml&#39;)
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy.toml&#39;, {&#39;lazy&#39; : 1})
+
+  call neobundle#end()
+  filetype plugin indent on
+  source ~/.vim/vim.d/05_pluginsetting.vim
+  echom &amp;quot;Suuuuuuuuuper !!!!!!!&amp;quot;
+endfunction
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、起動時は最小限のpluginで爆速起動し、必要な時に &lt;code&gt;&amp;lt;Space&amp;gt;s&lt;/code&gt; を押下することで
+超サイヤVimになれる。(全pluginをロードする)&lt;/p&gt;
+
+&lt;p&gt;遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮
+された・・・！&lt;/p&gt;
+
+&lt;h4 id=&#34;参考:4bcf2f42b9eca582cb99c77c3892fafc&#34;&gt;参考&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.hifumi.info/2015/03/29/neobundle-load-toml/&#34;&gt;NeoBundleのプラグイン管理をTOMLに任せてvimrcをスッキリさせる | blog: takahiro okumura&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gist.github.com/Shougo/3d2adcb83e9eb0e8d4af&#34;&gt;neobundle の toml 記法サンプル&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Mayu for IME off in vim</title>

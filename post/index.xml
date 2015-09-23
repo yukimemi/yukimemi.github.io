@@ -6,8 +6,75 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 26 Jul 2015 16:08:23 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2015 14:54:51 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Super saiya Vim !</title>
+      <link>http://yukimemi.github.io/post/2015-09-23_Super%20saiya%20Vim%20%21/</link>
+      <pubDate>Wed, 23 Sep 2015 14:54:51 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2015-09-23_Super%20saiya%20Vim%20%21/</guid>
+      <description>
+
+&lt;p&gt;Vimでも超サイヤ人になりたい！&lt;/p&gt;
+
+&lt;p&gt;ってなわけでやってみた。&lt;/p&gt;
+
+&lt;p&gt;経緯としては、Windows環境でvimの起動がかなり遅かったため。&lt;/p&gt;
+
+&lt;p&gt;vimに導入したプラグイン数が多くなりすぎていたため、起動に時間がかかっていた。
+そこで、起動時には基本的なプラグインのみ読み込み、後から必要に応じてpluginを追加で
+読み込むようにしてみた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;vim_starting&#39;)
+  if &amp;amp;compatible
+    set nocompatible
+  endif
+  set runtimepath+=~/.cache/neobundle/neobundle.vim
+endif
+
+call neobundle#begin(expand(&#39;~/.cache/neobundle&#39;))
+
+if neobundle#load_cache()
+
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle_base.toml&#39;)
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy_base.toml&#39;, {&#39;lazy&#39; : 1})
+
+  NeoBundleSaveCache
+endif
+
+call neobundle#end()
+
+filetype plugin indent on
+
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;Space&amp;gt;s :&amp;lt;C-u&amp;gt;call &amp;lt;SID&amp;gt;loadAllPlugins()&amp;lt;CR&amp;gt;
+function! s:loadAllPlugins()
+  call neobundle#append()
+
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle.toml&#39;)
+  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy.toml&#39;, {&#39;lazy&#39; : 1})
+
+  call neobundle#end()
+  filetype plugin indent on
+  source ~/.vim/vim.d/05_pluginsetting.vim
+  echom &amp;quot;Suuuuuuuuuper !!!!!!!&amp;quot;
+endfunction
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、起動時は最小限のpluginで爆速起動し、必要な時に &lt;code&gt;&amp;lt;Space&amp;gt;s&lt;/code&gt; を押下することで
+超サイヤVimになれる。(全pluginをロードする)&lt;/p&gt;
+
+&lt;p&gt;遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮
+された・・・！&lt;/p&gt;
+
+&lt;h4 id=&#34;参考:4bcf2f42b9eca582cb99c77c3892fafc&#34;&gt;参考&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://blog.hifumi.info/2015/03/29/neobundle-load-toml/&#34;&gt;NeoBundleのプラグイン管理をTOMLに任せてvimrcをスッキリさせる | blog: takahiro okumura&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gist.github.com/Shougo/3d2adcb83e9eb0e8d4af&#34;&gt;neobundle の toml 記法サンプル&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Set up Macbook in Ansible</title>
@@ -1108,77 +1175,6 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
 &lt;h5 id=&#34;参考:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/&#34;&gt;Moshを使ってみる #Linux - rcmdnk&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Git directory deploy !</title>
-      <link>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</link>
-      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-02_Git%20directory%20deploy%20%21/</guid>
-      <description>
-
-&lt;p&gt;roots のデプロイ手順。&lt;/p&gt;
-
-&lt;p&gt;僕の環境では、まず drafts ブランチで書いて、 master ブランチでpushして
-githubへ更新という流れ。
-その際、 roots では、ビルド結果を public というディレクトリに出力するので
-そのディレクトリだけをpushしたい。
-gitで管理している中の、ある一部のディレクトリのみをpushしたい場合は、 &lt;code&gt;git subtree push&lt;/code&gt; という
-のが使えるらしいんだけど、参考にしたサイトでは違うアプローチをとっているみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
-
-&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
-
-&lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;deploy_directory=public
-deploy_branch=master
-
-#if no user identity is already set in the current git environment, use this:
-default_username=yukimemi
-default_email=yukimemi@gmail.com
-
-#repository to deploy to. must be readable and writable.
-repo=origin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
-$ git --work-tree public rm -rf &amp;quot;*&amp;quot;
-$ git --work-tree public add --all
-$ git --work-tree public commit -m &amp;quot;initial publish&amp;quot;
-$ git push -f origin public
-$ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
-
-&lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
-それから、 roots でコンパイル。
-あとは、ダウンロードした deploy.sh を実行するだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots compile --no-compress
-$ ./deploy.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;べんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
