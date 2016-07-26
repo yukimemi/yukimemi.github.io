@@ -31,7 +31,7 @@ Mac以外にも対応出来るように今後は拡張していきたい。&lt;/
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:6241a9d95dc3f62e67c7f3216330c7b8&#34;&gt;参考&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://goo.gl/oAjTzf&#34;&gt;AnsibleでHomebrew, Cask, Atomエディターのパッケージを管理する - Qiita&lt;/a&gt;&lt;/p&gt;
 
@@ -80,12 +80,12 @@ Mac以外にも対応出来るように今後は拡張していきたい。&lt;/
 
 &lt;p&gt;nvidiaのドライバ関係でいろいろ大変だったのでメモ。&lt;/p&gt;
 
-&lt;h3 id=&#34;install-usbメモリの作成:da437a952248d6819932723caee2ddc3&#34;&gt;Install Usbメモリの作成&lt;/h3&gt;
+&lt;h3 id=&#34;install-usbメモリの作成&#34;&gt;Install Usbメモリの作成&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo dd if=./ubuntu-15.04-desktop-amd64.iso of=/dev/sdb bs=4M
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;ubuntu-インストール:da437a952248d6819932723caee2ddc3&#34;&gt;Ubuntu インストール&lt;/h3&gt;
+&lt;h3 id=&#34;ubuntu-インストール&#34;&gt;Ubuntu インストール&lt;/h3&gt;
 
 &lt;p&gt;nvidiaのグラフィックドライバをインストールする場合、grubがefiモードじゃなくてbiosモードでインストールされる必要があるっぽい。
 そこで、通常とはちょっと違う方法でインストールする。&lt;/p&gt;
@@ -153,7 +153,7 @@ EndSection
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:da437a952248d6819932723caee2ddc3&#34;&gt;参考&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://variedtastefinder.jpn.ph/diary/395/&#34;&gt;MacBook Air Late 2010 on Ubuntu 14.04 (※05/30追記)&lt;/a&gt;&lt;/p&gt;
 
@@ -357,7 +357,7 @@ git clone git@bitbucket.org:yukimemi/scripts.git
 git clone https://github.com/altercation/solarized.git ~/.solarized
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id=&#34;参考:f91564b6048f06bbfa66f0ade9821258&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://qiita.com/ryurock/items/1432578d364985f6cb06&#34;&gt;OSX - みんなhomebrew-caskって知ってるか？ - Qiita&lt;/a&gt;&lt;/p&gt;
 </description>

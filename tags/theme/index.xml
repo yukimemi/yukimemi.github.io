@@ -61,7 +61,7 @@ html_theme_path = [&#39;_themes&#39;, tinkerer.paths.themes]
 &lt;p&gt;よくわからないけど、 width がついているところを全部 +200px
 したった。&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:e4847be51899363b77b0579c58301dae&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://krakenbeal.blogspot.jp/2012/05/tinkererblog.html&#34;&gt;Tinkererを使ってblogを始める - KRAKENBEAL RECORDS&lt;/a&gt;&lt;/p&gt;
 </description>

@@ -27,7 +27,7 @@
 
 &lt;p&gt;rootsは静的サイトジェネレーターなので、通常だとjadeの記法などでコンパイル時に出来るんだろうけど、今回はjqueryで簡単に出来る &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; というものが見つかったので、それを追加してみた。&lt;/p&gt;
 
-&lt;h3 id=&#34;インストール:6d359caa743518f0339530aa8cdf1d76&#34;&gt;インストール&lt;/h3&gt;
+&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
 
 &lt;p&gt;まず、追加するのにはbowerを使った。
 ちなみにローカルにインストールしたbowerを使う方法は、&lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-02_direnv%20for%20npm%20local%20commands.html&#34;&gt;前の記事&lt;/a&gt; を参照。&lt;/p&gt;
@@ -56,9 +56,9 @@
 
 &lt;p&gt;これで、 &lt;code&gt;assets/bower_components&lt;/code&gt; 配下に保存される。&lt;/p&gt;
 
-&lt;h3 id=&#34;simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; 設定&lt;/h3&gt;
+&lt;h3 id=&#34;simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定&#34;&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; 設定&lt;/h3&gt;
 
-&lt;h4 id=&#34;jade側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;jade側の設定&lt;/h4&gt;
+&lt;h4 id=&#34;jade側の設定&#34;&gt;jade側の設定&lt;/h4&gt;
 
 &lt;p&gt;まずは、ページネーションの配置。&lt;/p&gt;
 
@@ -88,7 +88,7 @@
 
 &lt;p&gt;&lt;code&gt;ul#posts -&amp;gt; li&lt;/code&gt; に、class &lt;code&gt;plist&lt;/code&gt; を追加しただけ。&lt;/p&gt;
 
-&lt;h4 id=&#34;stylus側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;stylus側の設定&lt;/h4&gt;
+&lt;h4 id=&#34;stylus側の設定&#34;&gt;stylus側の設定&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/css/master.styl
 &lt;/code&gt;&lt;/pre&gt;
@@ -100,7 +100,7 @@
     display: none
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;coffee側の設定:6d359caa743518f0339530aa8cdf1d76&#34;&gt;coffee側の設定&lt;/h4&gt;
+&lt;h4 id=&#34;coffee側の設定&#34;&gt;coffee側の設定&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;assets/js/main.coffee&lt;/code&gt; に設定を記述していく。&lt;/p&gt;
 
@@ -168,7 +168,7 @@ require jq, -&amp;gt;
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:6d359caa743518f0339530aa8cdf1d76&#34;&gt;参考&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt;&lt;/p&gt;
 

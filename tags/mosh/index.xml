@@ -22,7 +22,7 @@
 
 &lt;p&gt;原因は結局よくわからなかったんだけど、とりあえず使えるようになったので、一応メモとして残しとこ。&lt;/p&gt;
 
-&lt;h3 id=&#34;mosh-install:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;mosh install&lt;/h3&gt;
+&lt;h3 id=&#34;mosh-install&#34;&gt;mosh install&lt;/h3&gt;
 
 &lt;p&gt;環境は Mac OSX Mavericks。Homebrewで簡単にインストール出来た。&lt;/p&gt;
 
@@ -32,7 +32,7 @@
 &lt;p&gt;昔は &lt;code&gt;mobile-shelll&lt;/code&gt; だったみたいだけど、今は &lt;code&gt;mosh&lt;/code&gt; でインストール出来る。
 クライアント側とサーバ側両方インストールしておく必要あり。&lt;/p&gt;
 
-&lt;h3 id=&#34;使い方:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;使い方&lt;/h3&gt;
+&lt;h3 id=&#34;使い方&#34;&gt;使い方&lt;/h3&gt;
 
 &lt;p&gt;普通の &lt;code&gt;ssh&lt;/code&gt; を &lt;code&gt;mosh&lt;/code&gt; に変えるだけ。&lt;/p&gt;
 
@@ -82,7 +82,7 @@ Airを閉じて一度ネットの接続がきれても、自動で再接続し�
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:51c4a04d1c5f2563181f98eda5c8c5ac&#34;&gt;参考&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/&#34;&gt;Moshを使ってみる #Linux - rcmdnk&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
 </description>

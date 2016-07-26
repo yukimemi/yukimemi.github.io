@@ -58,12 +58,12 @@ gitで管理している中の、ある一部のディレクトリのみをpush�
 
 <p>rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。</p>
 
-<h3 id="これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de"><a href="https://github.com/X1011/git-directory-deploy">これ</a> をダウンロード</h3>
+<h3 id="これ-https-github-com-x1011-git-directory-deploy-をダウンロード"><a href="https://github.com/X1011/git-directory-deploy">これ</a> をダウンロード</h3>
 
 <pre><code class="language-sh">$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;&amp; chmod +x deploy.sh
 </code></pre>
 
-<h3 id="git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de">git-directory-deployの設定</h3>
+<h3 id="git-directory-deployの設定">git-directory-deployの設定</h3>
 
 <p>以下の部分を必要に応じて書き換え。</p>
 
@@ -78,7 +78,7 @@ default_email=yukimemi@gmail.com
 repo=origin
 </code></pre>
 
-<h3 id="初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de">初回一度だけ実行</h3>
+<h3 id="初回一度だけ実行">初回一度だけ実行</h3>
 
 <pre><code class="language-sh">$ git --work-tree public checkout --orphan master
 $ git --work-tree public rm -rf &quot;*&quot;
@@ -88,7 +88,7 @@ $ git push -f origin public
 $ git symbolic-ref HEAD refs/heads/drafts &amp;&amp; git reset --mixed
 </code></pre>
 
-<h3 id="デプロイの仕方:2f203adfdea8bdd911f0e15804d882de">デプロイの仕方</h3>
+<h3 id="デプロイの仕方">デプロイの仕方</h3>
 
 <p>まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
 それから、 roots でコンパイル。
@@ -102,7 +102,7 @@ $ ./deploy.sh
 
 <hr />
 
-<h5 id="参考:2f203adfdea8bdd911f0e15804d882de">参考:</h5>
+<h5 id="参考">参考:</h5>
 
 <p><a href="https://github.com/X1011/git-directory-deploy">X1011/git-directory-deploy</a></p>
 

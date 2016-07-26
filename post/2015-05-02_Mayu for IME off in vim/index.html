@@ -57,7 +57,7 @@ Macでは、「karabiner」というソフトを使って、「Escape」もし�
 幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。
 一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。</p>
 
-<h3 id="mayuのインストール:83043f7e85625bcb6030d80110ca1e46">Mayuのインストール</h3>
+<h3 id="mayuのインストール">Mayuのインストール</h3>
 
 <p>Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。
 Ubuntu 15.04では以下の通りにやるとビルド出来た。</p>
@@ -74,7 +74,7 @@ $ sudo chmod +s /usr/local/bin/mayu
 <p>mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。
 本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。</p>
 
-<h3 id="fcitx設定:83043f7e85625bcb6030d80110ca1e46">fcitx設定</h3>
+<h3 id="fcitx設定">fcitx設定</h3>
 
 <p>今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。
 前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。</p>
@@ -83,7 +83,7 @@ $ sudo chmod +s /usr/local/bin/mayu
 
 <p><img src="/img/fcitx-setting_min.png" alt="fcitx-setting" /></p>
 
-<h3 id="mayu設定:83043f7e85625bcb6030d80110ca1e46">Mayu設定</h3>
+<h3 id="mayu設定">Mayu設定</h3>
 
 <p>次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。</p>
 
@@ -107,7 +107,7 @@ key C-OpenBracket = C-OpenBracket Eisu
 
 <p>あと、キーボードでキーコード一覧に記載されていないものがあった場合、mayuの標準出力にキーコードが表示される。それをメモして、設定ファイルに適当な名前で「def key hoge = 0xXX」とかしてやれば大丈夫。</p>
 
-<h3 id="mayu自動起動:83043f7e85625bcb6030d80110ca1e46">Mayu自動起動</h3>
+<h3 id="mayu自動起動">Mayu自動起動</h3>
 
 <p>システム起動時に自動でmayuが起動するように、systemdに登録する。</p>
 
@@ -190,7 +190,7 @@ timers.target        static
 
 <hr />
 
-<h5 id="参考:83043f7e85625bcb6030d80110ca1e46">参考</h5>
+<h5 id="参考">参考</h5>
 
 <p><a href="http://qiita.com/sharow/items/e8f7d3e0628d7ee925db">systemdでの定期実行(timerユニット) - Qiita</a></p>
 

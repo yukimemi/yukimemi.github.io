@@ -87,7 +87,7 @@ let g:automatic_config = [
 
 &lt;p&gt;もうちょっとうまく出来ると思うんだけど、 vim 力足りず・・・。&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:f4572b3d00f460adf89934561bf9dd64&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://blog.supermomonga.com/articles/vim/automatic.html&#34;&gt;automatic.vimでウィンドウの一時的分割をハンドリングしよう |かなりすごいブログ&lt;/a&gt;&lt;/p&gt;
 

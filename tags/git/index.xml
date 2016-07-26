@@ -30,12 +30,12 @@ gitで管理している中の、ある一部のディレクトリのみをpush�
 
 &lt;p&gt;rootsに限らず、静的サイトジェネレーターを使う場合はけっこう使えると思う。&lt;/p&gt;
 
-&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード:2f203adfdea8bdd911f0e15804d882de&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
+&lt;h3 id=&#34;これ-https-github-com-x1011-git-directory-deploy-をダウンロード&#34;&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;これ&lt;/a&gt; をダウンロード&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ wget https://github.com/X1011/git-directory-deploy/raw/master/deploy.sh &amp;amp;&amp;amp; chmod +x deploy.sh
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;git-directory-deployの設定:2f203adfdea8bdd911f0e15804d882de&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
+&lt;h3 id=&#34;git-directory-deployの設定&#34;&gt;git-directory-deployの設定&lt;/h3&gt;
 
 &lt;p&gt;以下の部分を必要に応じて書き換え。&lt;/p&gt;
 
@@ -50,7 +50,7 @@ default_email=yukimemi@gmail.com
 repo=origin
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;初回一度だけ実行:2f203adfdea8bdd911f0e15804d882de&#34;&gt;初回一度だけ実行&lt;/h3&gt;
+&lt;h3 id=&#34;初回一度だけ実行&#34;&gt;初回一度だけ実行&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git --work-tree public checkout --orphan master
 $ git --work-tree public rm -rf &amp;quot;*&amp;quot;
@@ -60,7 +60,7 @@ $ git push -f origin public
 $ git symbolic-ref HEAD refs/heads/drafts &amp;amp;&amp;amp; git reset --mixed
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;デプロイの仕方:2f203adfdea8bdd911f0e15804d882de&#34;&gt;デプロイの仕方&lt;/h3&gt;
+&lt;h3 id=&#34;デプロイの仕方&#34;&gt;デプロイの仕方&lt;/h3&gt;
 
 &lt;p&gt;まずは、 drafts ブランチですべてコミットしておく。(未コミットが残っているとエラーになる。)
 それから、 roots でコンパイル。
@@ -74,7 +74,7 @@ $ ./deploy.sh
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:2f203adfdea8bdd911f0e15804d882de&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/X1011/git-directory-deploy&#34;&gt;X1011/git-directory-deploy&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -150,7 +150,7 @@ main = do
 &lt;p&gt;haskell は勉強始めたばっかだからいろいろ改善の余地があると思われる。
 詳しい人教えてくだしあ&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:e24206e77a55e9763de85e26fea272b0&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://yunomu.hatenablog.jp/entry/2012/03/10/111222&#34;&gt;HaskellでOSコマンド実行 - yunomuのブログ&lt;/a&gt;&lt;/p&gt;
 
@@ -239,7 +239,7 @@ no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git
 
 &lt;p&gt;非常に便利。&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:d9bb4835abf9467c9059844c881c48a3&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://qiita.com/atotto/items/b796c31c1755dbec13db&#34;&gt;Go言語のビルド生活を drone.ioで幸せに暮らす #golang - Qiita&lt;/a&gt;&lt;/p&gt;
 

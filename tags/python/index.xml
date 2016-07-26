@@ -39,7 +39,7 @@ virtualenvwrapper だったっぽいけど、 今は rbenv
 
 &lt;p&gt;名前も 「〜env」で一緒だしね。&lt;/p&gt;
 
-&lt;h3 id=&#34;簡単導入:dc094c128f61dbfc36659ad27fadffef&#34;&gt;簡単導入&lt;/h3&gt;
+&lt;h3 id=&#34;簡単導入&#34;&gt;簡単導入&lt;/h3&gt;
 
 &lt;p&gt;以下を .zshenv に追記&lt;/p&gt;
 
@@ -56,7 +56,7 @@ fi
 &lt;p&gt;zshを再起動すればインストール完了。 pyenv
 使いたくないってなったら、1行目の git clone をコメントアウト。&lt;/p&gt;
 
-&lt;h3 id=&#34;pyenv-使用方法:dc094c128f61dbfc36659ad27fadffef&#34;&gt;pyenv 使用方法&lt;/h3&gt;
+&lt;h3 id=&#34;pyenv-使用方法&#34;&gt;pyenv 使用方法&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;python のインストール&lt;/li&gt;
@@ -99,7 +99,7 @@ $ pyenv local sample_project    # ローカル環境での設定
 グローバル環境で使うバージョンは、 ~/.pyenv/version
 に記載されてるっぽい。&lt;/p&gt;
 
-&lt;h4 id=&#34;参考:dc094c128f61dbfc36659ad27fadffef&#34;&gt;参考:&lt;/h4&gt;
+&lt;h4 id=&#34;参考&#34;&gt;参考:&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/yyuu/pyenv&#34;&gt;yyuu/pyenv&lt;/a&gt;&lt;/p&gt;
 
@@ -128,7 +128,7 @@ $ pyenv local sample_project    # ローカル環境での設定
 
 &lt;p&gt;以上！&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:1c83ab2f69edb297d60f7e881a570b4f&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://tinkerer.me/doc/tinkering.html#posts&#34;&gt;Tinkering — Tinkerer&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -146,7 +146,7 @@ $ pyenv local sample_project    # ローカル環境での設定
 
 &lt;p&gt;参考になる記事がいっぱいあったので、参考にしてやってみた。&lt;/p&gt;
 
-&lt;h3 id=&#34;事前準備:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;事前準備&lt;/h3&gt;
+&lt;h3 id=&#34;事前準備&#34;&gt;事前準備&lt;/h3&gt;
 
 &lt;p&gt;layout.html というファイルと page.html というファイルを作る。&lt;/p&gt;
 
@@ -196,7 +196,7 @@ $ pyenv local sample_project    # ローカル環境での設定
 
 &lt;p&gt;これで事前準備は完了。&lt;/p&gt;
 
-&lt;h3 id=&#34;twitter-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;Twitter ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;twitter-ボタン&#34;&gt;Twitter ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
 
@@ -223,7 +223,7 @@ width: 88px!important;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;hatena-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;hatena ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;hatena-ボタン&#34;&gt;hatena ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
 
@@ -244,7 +244,7 @@ width: 88px!important;
 &lt;p&gt;URLやタイトルをそのページにあったものに変換している。 &lt;code&gt;{{ pagename }}&lt;/code&gt;
 、 &lt;code&gt;{{ file_suffix }}&lt;/code&gt; などは ググればわかる。&lt;/p&gt;
 
-&lt;h3 id=&#34;google-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;google+ ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;google-ボタン&#34;&gt;google+ ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
 
@@ -270,7 +270,7 @@ window.___gcfg = {lang: &#39;ja&#39;};
 
 &lt;p&gt;Google+ は簡単でいいね。&lt;/p&gt;
 
-&lt;h3 id=&#34;facebook-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;facebook ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;facebook-ボタン&#34;&gt;facebook ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。 これは app id
 とか取得しなきゃいけなくてけっこうめんどくさい。&lt;/p&gt;
@@ -390,7 +390,7 @@ xfbml      : true                                    // Look for social plugins 
 {% set script_files = script_files + [&amp;quot;_static/google_analytics.js&amp;quot;] %}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id=&#34;参考:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://te2uma.com/blog/2013/03/29/tinkerer_with_social_button.html&#34;&gt;Tinkererで作ったブログにソーシャルボタンを追加する—鉄馬の工具箱&lt;/a&gt;&lt;/p&gt;
 
@@ -440,7 +440,7 @@ html_theme_path = [&#39;_themes&#39;, tinkerer.paths.themes]
 &lt;p&gt;よくわからないけど、 width がついているところを全部 +200px
 したった。&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:e4847be51899363b77b0579c58301dae&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://krakenbeal.blogspot.jp/2012/05/tinkererblog.html&#34;&gt;Tinkererを使ってblogを始める - KRAKENBEAL RECORDS&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -464,12 +464,12 @@ html_theme_path = [&#39;_themes&#39;, tinkerer.paths.themes]
 &lt;p&gt;bitbucket では、 github と同じように、
 &amp;lt;ユーザー名&amp;gt;.bitbucket.org で 自分のページを持つことが出来る。&lt;/p&gt;
 
-&lt;h3 id=&#34;リポジトリの作成:b46bb1a11490e036cd9f823dcf70c4a2&#34;&gt;リポジトリの作成&lt;/h3&gt;
+&lt;h3 id=&#34;リポジトリの作成&#34;&gt;リポジトリの作成&lt;/h3&gt;
 
 &lt;p&gt;bitbucket で、 &amp;lt;ユーザー名&amp;gt;.bitbucket.org
 というリポジトリを作る。 僕の場合は、 yukimemi.bitbucket.org&lt;/p&gt;
 
-&lt;h3 id=&#34;tinkererのインストール:b46bb1a11490e036cd9f823dcf70c4a2&#34;&gt;Tinkererのインストール&lt;/h3&gt;
+&lt;h3 id=&#34;tinkererのインストール&#34;&gt;Tinkererのインストール&lt;/h3&gt;
 
 &lt;p&gt;僕の場合は python3 ではダメだったので、 python2.7.4 で virtualenv
 を作成して Tinkerer をインストールした。 python のインストールには
@@ -482,7 +482,7 @@ $ easy_install pip
 $ pip install Tinkerer
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;ブログの作成:b46bb1a11490e036cd9f823dcf70c4a2&#34;&gt;ブログの作成&lt;/h3&gt;
+&lt;h3 id=&#34;ブログの作成&#34;&gt;ブログの作成&lt;/h3&gt;
 
 &lt;p&gt;bitbucketでgit repositoryを作成したら、それを clone する。&lt;/p&gt;
 

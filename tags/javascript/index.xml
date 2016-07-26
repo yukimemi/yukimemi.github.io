@@ -80,7 +80,7 @@ jade ファイルを保存したら、自動でブラウザが更新され、す
 
 &lt;hr /&gt;
 
-&lt;h3 id=&#34;ブログ作成手順:277c647c8512cad05114c9463b934e39&#34;&gt;ブログ作成手順&lt;/h3&gt;
+&lt;h3 id=&#34;ブログ作成手順&#34;&gt;ブログ作成手順&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;npmでグローバルにインストール&lt;/li&gt;
@@ -122,7 +122,7 @@ $ vim hello_world.jade
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:277c647c8512cad05114c9463b934e39&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://qiita.com/morishitter/items/b708a11e09b6fcb2f751&#34;&gt;Node.js - 静的サイトジェネレーター「roots」 - Qiita&lt;/a&gt;&lt;/p&gt;
 

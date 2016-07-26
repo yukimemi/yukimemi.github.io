@@ -81,7 +81,7 @@ ExitCode = [0]
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:7db1863f2219b94ca053bc8615393dd4&#34;&gt;参考&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://msdn.microsoft.com/ja-jp/library/cc364356.aspx&#34;&gt;Exec メソッド&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -101,7 +101,7 @@ ExitCode = [0]
 
 &lt;p&gt;thincaさん作成のcoffeescriptコンパイラ。Windowsで動く。nodejsもいらず、バッチファイル1つ &lt;code&gt;coffee.bat&lt;/code&gt; と、公式の &lt;code&gt;coffee-script.js&lt;/code&gt; だけで動く。&lt;/p&gt;
 
-&lt;h3 id=&#34;使用方法:e9056d41c708ea37cf281631f226d96d&#34;&gt;使用方法&lt;/h3&gt;
+&lt;h3 id=&#34;使用方法&#34;&gt;使用方法&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;&amp;gt; ghq get https://github.com/thinca/coffee-script-on-jscript.git
 &lt;/code&gt;&lt;/pre&gt;
@@ -147,7 +147,7 @@ Usage: coffee [options] path/to/script.coffee
   -w, --watch        watch scripts for changes, and recompile
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;jscriptをバッチとして実行:e9056d41c708ea37cf281631f226d96d&#34;&gt;jscriptをバッチとして実行&lt;/h3&gt;
+&lt;h3 id=&#34;jscriptをバッチとして実行&#34;&gt;jscriptをバッチとして実行&lt;/h3&gt;
 
 &lt;p&gt;上記までで、 &lt;code&gt;coffeescript&lt;/code&gt; を &lt;code&gt;jscript&lt;/code&gt; に変換することは簡単に出来るんだけど、どうせなら &lt;code&gt;jscript&lt;/code&gt; からさらにバッチとして実行出来る状態に変換したい。 &lt;code&gt;jscript&lt;/code&gt; をバッチとして実行するには、まさに &lt;code&gt;coffee.bat&lt;/code&gt; がそうなっていて、ソースの一番最初に以下の4行を追加すればいいみたい。&lt;/p&gt;
 
@@ -228,7 +228,7 @@ ExcelとかのCOMも、PowerShellより、wshの方が断然早いし。とい�
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:e9056d41c708ea37cf281631f226d96d&#34;&gt;参考&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/thinca/20110707/1310014720&#34;&gt;JScript で動く CoffeeScript コンパイラのラッパ書いた - 永遠に未完成&lt;/a&gt;&lt;/p&gt;
 

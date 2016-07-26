@@ -53,7 +53,7 @@ fc-cache -vf
 &lt;p&gt;Powerline の方のパッチではなぜかうまく出来なかったので、
 vim-powerline の方で行っている。&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:bbdce9ba0a634b8513b608b10a01cecd&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://sanematsu.wordpress.com/2013/05/11/brew-install-ricty/&#34;&gt;brew install ricty |
 實松アウトプット&lt;/a&gt;&lt;/p&gt;

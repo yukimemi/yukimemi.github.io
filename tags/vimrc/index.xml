@@ -65,7 +65,7 @@ endfunction
 
 &lt;p&gt;遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮された・・・！&lt;/p&gt;
 
-&lt;h4 id=&#34;参考:4bcf2f42b9eca582cb99c77c3892fafc&#34;&gt;参考&lt;/h4&gt;
+&lt;h4 id=&#34;参考&#34;&gt;参考&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://blog.hifumi.info/2015/03/29/neobundle-load-toml/&#34;&gt;NeoBundleのプラグイン管理をTOMLに任せてvimrcをスッキリさせる | blog: takahiro okumura&lt;/a&gt;&lt;/p&gt;
 

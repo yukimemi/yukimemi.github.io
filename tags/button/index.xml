@@ -21,7 +21,7 @@
 
 &lt;p&gt;参考になる記事がいっぱいあったので、参考にしてやってみた。&lt;/p&gt;
 
-&lt;h3 id=&#34;事前準備:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;事前準備&lt;/h3&gt;
+&lt;h3 id=&#34;事前準備&#34;&gt;事前準備&lt;/h3&gt;
 
 &lt;p&gt;layout.html というファイルと page.html というファイルを作る。&lt;/p&gt;
 
@@ -71,7 +71,7 @@
 
 &lt;p&gt;これで事前準備は完了。&lt;/p&gt;
 
-&lt;h3 id=&#34;twitter-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;Twitter ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;twitter-ボタン&#34;&gt;Twitter ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
 
@@ -98,7 +98,7 @@ width: 88px!important;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;hatena-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;hatena ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;hatena-ボタン&#34;&gt;hatena ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
 
@@ -119,7 +119,7 @@ width: 88px!important;
 &lt;p&gt;URLやタイトルをそのページにあったものに変換している。 &lt;code&gt;{{ pagename }}&lt;/code&gt;
 、 &lt;code&gt;{{ file_suffix }}&lt;/code&gt; などは ググればわかる。&lt;/p&gt;
 
-&lt;h3 id=&#34;google-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;google+ ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;google-ボタン&#34;&gt;google+ ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。&lt;/p&gt;
 
@@ -145,7 +145,7 @@ window.___gcfg = {lang: &#39;ja&#39;};
 
 &lt;p&gt;Google+ は簡単でいいね。&lt;/p&gt;
 
-&lt;h3 id=&#34;facebook-ボタン:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;facebook ボタン&lt;/h3&gt;
+&lt;h3 id=&#34;facebook-ボタン&#34;&gt;facebook ボタン&lt;/h3&gt;
 
 &lt;p&gt;ボタン作成のコードをググって取得する。 これは app id
 とか取得しなきゃいけなくてけっこうめんどくさい。&lt;/p&gt;
@@ -265,7 +265,7 @@ xfbml      : true                                    // Look for social plugins 
 {% set script_files = script_files + [&amp;quot;_static/google_analytics.js&amp;quot;] %}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id=&#34;参考:846a00b0fdefd878c1c1c2a77cddba3c&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://te2uma.com/blog/2013/03/29/tinkerer_with_social_button.html&#34;&gt;Tinkererで作ったブログにソーシャルボタンを追加する—鉄馬の工具箱&lt;/a&gt;&lt;/p&gt;
 

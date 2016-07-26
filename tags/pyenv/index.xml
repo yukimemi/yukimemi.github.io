@@ -23,7 +23,7 @@ virtualenvwrapper だったっぽいけど、 今は rbenv
 
 &lt;p&gt;名前も 「〜env」で一緒だしね。&lt;/p&gt;
 
-&lt;h3 id=&#34;簡単導入:dc094c128f61dbfc36659ad27fadffef&#34;&gt;簡単導入&lt;/h3&gt;
+&lt;h3 id=&#34;簡単導入&#34;&gt;簡単導入&lt;/h3&gt;
 
 &lt;p&gt;以下を .zshenv に追記&lt;/p&gt;
 
@@ -40,7 +40,7 @@ fi
 &lt;p&gt;zshを再起動すればインストール完了。 pyenv
 使いたくないってなったら、1行目の git clone をコメントアウト。&lt;/p&gt;
 
-&lt;h3 id=&#34;pyenv-使用方法:dc094c128f61dbfc36659ad27fadffef&#34;&gt;pyenv 使用方法&lt;/h3&gt;
+&lt;h3 id=&#34;pyenv-使用方法&#34;&gt;pyenv 使用方法&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;python のインストール&lt;/li&gt;
@@ -83,7 +83,7 @@ $ pyenv local sample_project    # ローカル環境での設定
 グローバル環境で使うバージョンは、 ~/.pyenv/version
 に記載されてるっぽい。&lt;/p&gt;
 
-&lt;h4 id=&#34;参考:dc094c128f61dbfc36659ad27fadffef&#34;&gt;参考:&lt;/h4&gt;
+&lt;h4 id=&#34;参考&#34;&gt;参考:&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/yyuu/pyenv&#34;&gt;yyuu/pyenv&lt;/a&gt;&lt;/p&gt;
 

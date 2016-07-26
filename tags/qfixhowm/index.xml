@@ -44,7 +44,7 @@
 &lt;p&gt;でも、やっぱり最近、メモは統合的に管理したいと思い、 QfixHowm
 を導入することにした。&lt;/p&gt;
 
-&lt;h3 id=&#34;インストール:24b8e55833fae809ad1fe864f6f928a4&#34;&gt;インストール&lt;/h3&gt;
+&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
 
 &lt;p&gt;Neobundle で一発&lt;/p&gt;
 
@@ -54,7 +54,7 @@ NeoBundle &#39;fuenor/qfixhowm&#39;
 
 &lt;p&gt;qfixgrep もいれとくと何かといいみたい。&lt;/p&gt;
 
-&lt;h3 id=&#34;設定:24b8e55833fae809ad1fe864f6f928a4&#34;&gt;設定&lt;/h3&gt;
+&lt;h3 id=&#34;設定&#34;&gt;設定&lt;/h3&gt;
 
 &lt;p&gt;デフォルトだと拡張子 txt で作成されるため、 markdown
 で記録するように 変更する。&lt;/p&gt;
@@ -79,7 +79,7 @@ let QFixMRU_Title[&#39;mkd_regxp&#39;] = &#39;^###[^#]&#39;
 
 &lt;p&gt;使い方、細かい設定は作者さんのページ参照&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:24b8e55833fae809ad1fe864f6f928a4&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://sites.google.com/site/fudist/Home/qfixhowm&#34;&gt;QFixHowm - vim用howmプラグイン - fudist&lt;/a&gt;&lt;/p&gt;
 

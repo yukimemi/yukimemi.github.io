@@ -89,7 +89,7 @@ continue して次の処理に行きたいのだが、この書き方だと、 b
 
 &lt;p&gt;continue の代わりに return を使う。&lt;/p&gt;
 
-&lt;h5 id=&#34;参考:44dc947e29f15be3037e81611cc77b7d&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/7760013/why-does-continue-behave-like-break-in-a-foreach-object&#34;&gt;powershell - Why does continue behave like break in a Foreach-Object? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
 </description>

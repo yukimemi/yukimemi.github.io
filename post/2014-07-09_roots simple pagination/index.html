@@ -55,7 +55,7 @@
 
 <p>rootsは静的サイトジェネレーターなので、通常だとjadeの記法などでコンパイル時に出来るんだろうけど、今回はjqueryで簡単に出来る <a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> というものが見つかったので、それを追加してみた。</p>
 
-<h3 id="インストール:6d359caa743518f0339530aa8cdf1d76">インストール</h3>
+<h3 id="インストール">インストール</h3>
 
 <p>まず、追加するのにはbowerを使った。
 ちなみにローカルにインストールしたbowerを使う方法は、<a href="http://yukimemi.github.io/posts/2014-07-02_direnv%20for%20npm%20local%20commands.html">前の記事</a> を参照。</p>
@@ -84,9 +84,9 @@
 
 <p>これで、 <code>assets/bower_components</code> 配下に保存される。</p>
 
-<h3 id="simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定:6d359caa743518f0339530aa8cdf1d76"><a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> 設定</h3>
+<h3 id="simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定"><a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a> 設定</h3>
 
-<h4 id="jade側の設定:6d359caa743518f0339530aa8cdf1d76">jade側の設定</h4>
+<h4 id="jade側の設定">jade側の設定</h4>
 
 <p>まずは、ページネーションの配置。</p>
 
@@ -116,7 +116,7 @@
 
 <p><code>ul#posts -&gt; li</code> に、class <code>plist</code> を追加しただけ。</p>
 
-<h4 id="stylus側の設定:6d359caa743518f0339530aa8cdf1d76">stylus側の設定</h4>
+<h4 id="stylus側の設定">stylus側の設定</h4>
 
 <pre><code class="language-sh">$ vim assets/css/master.styl
 </code></pre>
@@ -128,7 +128,7 @@
     display: none
 </code></pre>
 
-<h4 id="coffee側の設定:6d359caa743518f0339530aa8cdf1d76">coffee側の設定</h4>
+<h4 id="coffee側の設定">coffee側の設定</h4>
 
 <p><code>assets/js/main.coffee</code> に設定を記述していく。</p>
 
@@ -196,7 +196,7 @@ require jq, -&gt;
 
 <hr />
 
-<h5 id="参考:6d359caa743518f0339530aa8cdf1d76">参考</h5>
+<h5 id="参考">参考</h5>
 
 <p><a href="http://flaviusmatis.github.io/simplePagination.js/">simplePagination.js</a></p>
 

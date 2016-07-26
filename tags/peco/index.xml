@@ -22,7 +22,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&#34;導入手順:5ad334b2cec04f5e498f9309688bd674&#34;&gt;導入手順&lt;/h3&gt;
+&lt;h3 id=&#34;導入手順&#34;&gt;導入手順&lt;/h3&gt;
 
 &lt;p&gt;homebrewでgoをインストール。&lt;/p&gt;
 
@@ -74,9 +74,9 @@ drwxr-xr-x   5 yukimemi staff      170  6 29 00:07 bin
 drwxr-xr-x  35 yukimemi staff     1190  6 28 17:20 dotfiles
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;peco-使い方:5ad334b2cec04f5e498f9309688bd674&#34;&gt;&lt;strong&gt;peco&lt;/strong&gt; 使い方&lt;/h3&gt;
+&lt;h3 id=&#34;peco-使い方&#34;&gt;&lt;strong&gt;peco&lt;/strong&gt; 使い方&lt;/h3&gt;
 
-&lt;h4 id=&#34;history:5ad334b2cec04f5e498f9309688bd674&#34;&gt;history&lt;/h4&gt;
+&lt;h4 id=&#34;history&#34;&gt;history&lt;/h4&gt;
 
 &lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
 
@@ -112,7 +112,7 @@ exit
 pn
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;resent-dirs:5ad334b2cec04f5e498f9309688bd674&#34;&gt;resent dirs&lt;/h4&gt;
+&lt;h4 id=&#34;resent-dirs&#34;&gt;resent dirs&lt;/h4&gt;
 
 &lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
 
@@ -153,7 +153,7 @@ bindkey &#39;^@&#39; peco-cdr
 ~/Downloads
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;snippets:5ad334b2cec04f5e498f9309688bd674&#34;&gt;snippets&lt;/h4&gt;
+&lt;h4 id=&#34;snippets&#34;&gt;snippets&lt;/h4&gt;
 
 &lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
 
@@ -229,7 +229,7 @@ ghq get git@bitbucket.org:yukimemi/go.git
 ghq get git@bitbucket.org:yukimemi/scripts.git
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;ghq:5ad334b2cec04f5e498f9309688bd674&#34;&gt;ghq&lt;/h4&gt;
+&lt;h4 id=&#34;ghq&#34;&gt;ghq&lt;/h4&gt;
 
 &lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; も流行りだけど、 &lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;ghq&lt;/a&gt; も流行り。ちょうべんり。
 上記で記載済みの導入手順に従っていればインストールされているはず。&lt;/p&gt;
@@ -242,7 +242,7 @@ alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
 
 &lt;p&gt;これで、 ghq のどれかに &lt;code&gt;cd&lt;/code&gt; したり、該当のgithubをブラウザで開いたり出来る。&lt;/p&gt;
 
-&lt;h4 id=&#34;vim:5ad334b2cec04f5e498f9309688bd674&#34;&gt;vim&lt;/h4&gt;
+&lt;h4 id=&#34;vim&#34;&gt;vim&lt;/h4&gt;
 
 &lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
 
@@ -255,7 +255,7 @@ alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
 
 &lt;hr /&gt;
 
-&lt;h5 id=&#34;参考:5ad334b2cec04f5e498f9309688bd674&#34;&gt;参考:&lt;/h5&gt;
+&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/peco.htm&#34;&gt;Big Sky :: Windows のコマンドプロンプトを10倍便利にするコマンド「peco」&lt;/a&gt;&lt;/p&gt;
 
