@@ -37,6 +37,7 @@
 ├── dst
 │   ├── foo.cmd
 │   └── bar.cmd
+├── .babelrc
 ├── package.json
 ├── gulpfile.babel.js
 └── webpack.config.babel.js
@@ -142,6 +143,19 @@ export default {
 &lt;p&gt;スクリプトってのはその場でちょーっと書くものだから、一つじゃなくてentry pointは複数にしてる。
 ポイント？としては、 &lt;code&gt;es3ify-webpack-plugin&lt;/code&gt; で、es3へダウンコンパイル？させてることと、 &lt;code&gt;moment.js&lt;/code&gt; を使う場合、そのままではwebpackが全ロケールを読みこんじゃうんで、一部だけ読み込むようにしてるところ。&lt;/p&gt;
 
+&lt;p&gt;&lt;code&gt;webpack&lt;/code&gt; でばべる時の設定で、JScriptとして使えるようにするために(IE8以下対応) &lt;code&gt;.babelrc&lt;/code&gt; の設定をする。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.babelrc&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
+  &amp;quot;presets&amp;quot;: [
+    &amp;quot;es2015-loose&amp;quot;
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;p&gt;んで、これが &lt;code&gt;gulp&lt;/code&gt; の設定。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -163,7 +177,7 @@ const Header = &amp;quot;@set @junk=1 /*\r\n@cscript //nologo //e:jscript \&amp;
 
 gulp.task(&#39;build&#39;, () =&amp;gt; {
   gulp.src(&#39;src&#39;)
-    .pipe(plumber(err =&amp;gt; { return this.emit(&#39;end&#39;); }))
+    .pipe(plumber())
     .pipe(webpack(config))
     .pipe(eol(&amp;quot;\r\n&amp;quot;))
     .pipe(encoding({to: &amp;quot;Shift_JIS&amp;quot;}))

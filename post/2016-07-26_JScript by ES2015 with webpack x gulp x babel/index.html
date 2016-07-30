@@ -65,6 +65,7 @@
 ├── dst
 │   ├── foo.cmd
 │   └── bar.cmd
+├── .babelrc
 ├── package.json
 ├── gulpfile.babel.js
 └── webpack.config.babel.js
@@ -170,6 +171,19 @@ export default {
 <p>スクリプトってのはその場でちょーっと書くものだから、一つじゃなくてentry pointは複数にしてる。
 ポイント？としては、 <code>es3ify-webpack-plugin</code> で、es3へダウンコンパイル？させてることと、 <code>moment.js</code> を使う場合、そのままではwebpackが全ロケールを読みこんじゃうんで、一部だけ読み込むようにしてるところ。</p>
 
+<p><code>webpack</code> でばべる時の設定で、JScriptとして使えるようにするために(IE8以下対応) <code>.babelrc</code> の設定をする。</p>
+
+<ul>
+<li><code>.babelrc</code></li>
+</ul>
+
+<pre><code class="language-javascript">{
+  &quot;presets&quot;: [
+    &quot;es2015-loose&quot;
+  ]
+}
+</code></pre>
+
 <p>んで、これが <code>gulp</code> の設定。</p>
 
 <ul>
@@ -191,7 +205,7 @@ const Header = &quot;@set @junk=1 /*\r\n@cscript //nologo //e:jscript \&quot;%~f
 
 gulp.task('build', () =&gt; {
   gulp.src('src')
-    .pipe(plumber(err =&gt; { return this.emit('end'); }))
+    .pipe(plumber())
     .pipe(webpack(config))
     .pipe(eol(&quot;\r\n&quot;))
     .pipe(encoding({to: &quot;Shift_JIS&quot;}))
