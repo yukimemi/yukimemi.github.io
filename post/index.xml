@@ -6,8 +6,59 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 26 Jul 2016 00:58:51 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 09 Aug 2016 09:58:11 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mapping with &lt;nowait&gt; option in vim</title>
+      <link>http://yukimemi.github.io/post/2016-08-09_Mapping%20with%20%3Cnowait%3E%20option%20in%20vim/</link>
+      <pubDate>Tue, 09 Aug 2016 09:58:11 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-08-09_Mapping%20with%20%3Cnowait%3E%20option%20in%20vim/</guid>
+      <description>&lt;p&gt;&lt;code&gt;vim&lt;/code&gt; でマッピングをする時に、便利なオプションがあることを最近知った。&lt;/p&gt;
+
+&lt;p&gt;それが &lt;code&gt;&amp;lt;nowait&amp;gt;&lt;/code&gt; オプション。&lt;/p&gt;
+
+&lt;p&gt;例えば、よくやるキーマップの例としてこんなのがある。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;エスケープ2回でハイライト消すっていうマッピング。&lt;/p&gt;
+
+&lt;p&gt;だけど、これを設定した状態で、コマンドウィンドウを &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; で閉じたい場合、&lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; を押下しても、次のマッピングを待っている状態になってしまって、すぐに閉じることができない。&lt;/p&gt;
+
+&lt;p&gt;こんなマッピングをした場合。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;この場合に、 &lt;code&gt;&amp;lt;nowait&amp;gt;&lt;/code&gt; というオプションを追加することで、 &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; を押下したらすぐにコマンドウィンドウを閉じることができる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;めちゃめちゃ便利。&lt;/p&gt;
+
+&lt;p&gt;僕の場合、コマンドウィンドウと、Uniteを閉じるのにこのオプションを使っている。&lt;/p&gt;
+
+&lt;p&gt;こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Cmdwin.
+nnoremap : q:i
+vnoremap : q:A
+
+&amp;quot; nohlsearch.
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;
+
+&amp;quot; Escape cmd win.
+au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
+
+&amp;quot; Escape unite.
+au MyAutoCmd FileType unite nmap &amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;Esc&amp;gt; &amp;lt;Plug&amp;gt;(unite_exit)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>JScript by ES2015 with webpack x gulp x babel</title>
@@ -1144,173 +1195,6 @@ ExcelとかのCOMも、PowerShellより、wshの方が断然早いし。とい�
 &lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/thinca/20110707/1310014720&#34;&gt;JScript で動く CoffeeScript コンパイラのラッパ書いた - 永遠に未完成&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/thinca/coffee-script-on-jscript&#34;&gt;thinca/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>roots simple pagination</title>
-      <link>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</link>
-      <pubDate>Wed, 09 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-09_roots%20simple%20pagination/</guid>
-      <description>
-
-&lt;p&gt;rootsは非常にシンプルで良いのだが、シンプルが故に通常のブログだと当たり前な部分を自分で実装しなければいけないところがある。&lt;/p&gt;
-
-&lt;p&gt;その一つが、ページネーション。&lt;/p&gt;
-
-&lt;p&gt;rootsでブログテンプレートを作成した場合、トップページはページネーションされず、書いていったブログ記事が全部リストで並ぶことになる。&lt;/p&gt;
-
-&lt;p&gt;まぁそんなたいした量を書いてないんで問題ないのだけれども、一応ブログとしてページネーションくらいはあったほうがいいと思い、実装方法を探してみた。&lt;/p&gt;
-
-&lt;p&gt;rootsは静的サイトジェネレーターなので、通常だとjadeの記法などでコンパイル時に出来るんだろうけど、今回はjqueryで簡単に出来る &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; というものが見つかったので、それを追加してみた。&lt;/p&gt;
-
-&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;p&gt;まず、追加するのにはbowerを使った。
-ちなみにローカルにインストールしたbowerを使う方法は、&lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-02_direnv%20for%20npm%20local%20commands.html&#34;&gt;前の記事&lt;/a&gt; を参照。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install bower --save-dev
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;事前準備として、bowerのコンポーネントがインストールされる先を変更しておく。&lt;/p&gt;
-
-&lt;p&gt;roots のルートで、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim .bowerrc
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;し、以下を記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
-    &amp;quot;directory&amp;quot;: &amp;quot;assets/bower_components&amp;quot;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;その後、bowerにて、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; をインストールする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ bower install jquery.simplePagination --save
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、 &lt;code&gt;assets/bower_components&lt;/code&gt; 配下に保存される。&lt;/p&gt;
-
-&lt;h3 id=&#34;simplepagination-js-http-flaviusmatis-github-io-simplepagination-js-設定&#34;&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; 設定&lt;/h3&gt;
-
-&lt;h4 id=&#34;jade側の設定&#34;&gt;jade側の設定&lt;/h4&gt;
-
-&lt;p&gt;まずは、ページネーションの配置。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim views/layout.jade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;--- 省略 ---
-#main
-  != content
-  .pagination
---- 省略 ---
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;divのclassで設定。単純に &lt;code&gt;pagination&lt;/code&gt; というclassにて、divを配置しただけ。&lt;/p&gt;
-
-&lt;p&gt;それから、stylusでの設定がしやすいように、ブログ記事のリストにclassを設定しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim views/index.jade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-jade&#34;&gt;ul#posts
-  - each post in sort(site.posts, { by: &#39;date&#39; })
-    li.plist
-      p
-        a(href=&amp;quot;\#{post.url}&amp;quot;)= post.title
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;ul#posts -&amp;gt; li&lt;/code&gt; に、class &lt;code&gt;plist&lt;/code&gt; を追加しただけ。&lt;/p&gt;
-
-&lt;h4 id=&#34;stylus側の設定&#34;&gt;stylus側の設定&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/css/master.styl
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最初はすべてのブログ記事リストを見えなくしておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-stylus&#34;&gt;#posts
-  .plist
-    display: none
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;coffee側の設定&#34;&gt;coffee側の設定&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;assets/js/main.coffee&lt;/code&gt; に設定を記述していく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim assets/js/main.coffee
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;記載内容 ↓&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;#= require &amp;quot;_helper&amp;quot;
-
-# Add scripts to load to this array. These can be loaded remotely like jquery
-# is below, or can use file paths, like &#39;vendor/underscore&#39;
-jq = [&amp;quot;http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js&amp;quot;]
-js = [&amp;quot;/bower_components/jquery.simplePagination/jquery.simplePagination.js&amp;quot;]
-
-
-# this will fire once the required scripts have been loaded
-require jq, -&amp;gt;
-  require js, -&amp;gt;
-    $ -&amp;gt;
-      console.log &#39;jquery loaded, dom ready &amp;lt;-- via assets/js/main.coffee&#39;
-
-      # Pagination
-      items = $(&#39;#posts li&#39;)
-      numItems = items.length
-      perPage = 21
-
-      # only show the first perPage items initially
-      items.slice(0, perPage).show()
-
-      # now setup your pagination
-      $(&#39;.pagination&#39;).pagination
-        items: numItems
-        itemsOnPage: perPage
-        cssStyle: &amp;quot;light-theme&amp;quot;
-        onPageClick: (pageNumber) -&amp;gt;
-          showFrom = perPage * (pageNumber - 1)
-          showTo = showFrom + perPage
-
-          items.hide()
-               .slice(showFrom, showTo).show()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;javascriptのロードはrequire.jsで行うので、jade側への追記はなし。&lt;/p&gt;
-
-&lt;p&gt;rootsはデフォルトで、jqueryのロードは行っているようだったので、追加で &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; の設定を追加していった。
-最初、jqueryと同じ配列に &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; を組み込んでいたのだが、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; はjqueryが読み込まれた後でないと正常に実行されないようなので、必ずjqueryが先に読み込まれるように、jqueryとそれ以外というように配列を分け、コールバックを一つ深くした。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;16L でまず対象のリストのセレクタをゲット&lt;/li&gt;
-&lt;li&gt;17L で、リストの数をゲット。&lt;/li&gt;
-&lt;li&gt;18L で、1ページに表示するリストの数を指定。&lt;/li&gt;
-&lt;li&gt;21L で、最初の1ページだけを表示。&lt;/li&gt;
-&lt;li&gt;24L から、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; の設定。&lt;/li&gt;
-&lt;li&gt;25L で、 17L でゲットしたリストの数を指定。&lt;/li&gt;
-&lt;li&gt;26L で、 18L で指定した1ページに表示するリストの数を設定。&lt;/li&gt;
-&lt;li&gt;27L で、 &lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt; のテーマを指定。&lt;/li&gt;
-&lt;li&gt;28L から、ページネーションのボタンが押下された時の実装を指定。現在のページ番号が &lt;code&gt;pageNumber&lt;/code&gt; に入っている。&lt;/li&gt;
-&lt;li&gt;29L で、表示するリストの開始番号を算出。&lt;/li&gt;
-&lt;li&gt;30L で、表示するリストの終了番号を算出。&lt;/li&gt;
-&lt;li&gt;32-33L で、一度リストを全部非表示にして、必要なところだけ表示する。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;今度はjadeでコンパイル時にページネーション実装してみたい。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://flaviusmatis.github.io/simplePagination.js/&#34;&gt;simplePagination.js&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/20896076/how-to-use-simplepagination-jquery&#34;&gt;javascript - How to use SimplePagination jquery - Stack Overflow&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
