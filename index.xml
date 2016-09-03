@@ -6,8 +6,49 @@
     <description>Recent content on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 09 Aug 2016 09:58:11 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 03 Sep 2016 10:56:35 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Type sound with Tickeys</title>
+      <link>http://yukimemi.github.io/post/2016-09-03_Type%20sound%20with%20Tickeys/</link>
+      <pubDate>Sat, 03 Sep 2016 10:56:35 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-03_Type%20sound%20with%20Tickeys/</guid>
+      <description>
+
+&lt;p&gt;最近、
+&lt;a href=&#34;http://rubikitch.com/2016/08/17/sound-wav/&#34;&gt;Emacsで効果音(SE)を付けて作業効率を3倍にする方法&lt;/a&gt;
+という記事を見つけた。&lt;/p&gt;
+
+&lt;p&gt;やっぱ音があった方がやる気が出るし、コードもすらすら書けるのではないか？
+僕は形から入るタイプなのである・・・。&lt;/p&gt;
+
+&lt;p&gt;そこで、Emacsと限らず他のものでもすべて音が出るようなソフトはないかと探してみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yingDev/Tickeys&#34;&gt;yingDev/Tickeys&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Rust&lt;/code&gt; で書かれてるらしい。&lt;/p&gt;
+
+&lt;p&gt;インストール方法は homebrew cask で一発。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew cask install tickeys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとはシステム環境設定のアクセシビリティから許可するだけ。&lt;/p&gt;
+
+&lt;p&gt;起動したら &lt;code&gt;QAZ123&lt;/code&gt; とタイプすることで設定画面が開く。&lt;/p&gt;
+
+&lt;p&gt;音を選択出来るので、 &lt;code&gt;Cherry G80-3000&lt;/code&gt; ってやつにした。
+良い音！たくさんタイプしたくなるので、コード書くのが捗ること間違いなし。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.softantenna.com/wp/mac/tickeys/&#34;&gt;Tickeys – メカニカルキーボードのタイプ音を堪能できるMacアプリ&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Mapping with &lt;nowait&gt; option in vim</title>
@@ -978,84 +1019,6 @@ endfunction
 また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
 
 &lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Add --runcmd option to coffee-script-on-jscript</title>
-      <link>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</link>
-      <pubDate>Tue, 15 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</guid>
-      <description>
-
-&lt;p&gt;先日の &lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh.html&#34;&gt;記事&lt;/a&gt; のthincaさんフォーク版、僕々仕様のWindows上でのCoffeeScriptコンパイラに &lt;code&gt;--runcmd&lt;/code&gt; オプションを加えた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee
-Usage: coffee [options] path/to/script.coffee
-
-  -b, --bare         compile without the top-level function wrapper
-  -c, --compile      compile to JavaScript and save as .js files
-      --encoding     character encoding used by source files
-  -e, --eval         compile a string from the command line
-  -h, --help         display this help message
-  -j, --join         concatenate the scripts before compiling
-  -n, --nodes        print out the parse tree that the parser produces
-  -o, --output       set the directory for compiled JavaScript
-  -p, --print        print the compiled JavaScript to stdout
-  -s, --stdio        listen for and compile scripts over stdio
-  -t, --tokens       print the tokens that the lexer produces
-  -v, --version      display CoffeeScript version
-  -w, --watch        watch scripts for changes, and recompile
-  -r, --runcmd       run the compiled scripts as JScript
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最後の行のやつ。&lt;/p&gt;
-
-&lt;p&gt;オプションで &lt;code&gt;-r&lt;/code&gt; もしくは、 &lt;code&gt;--runcmd&lt;/code&gt; を指定すると、自動でコンパイルされて実行形式 (.cmd) になったファイルが実行される。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;hello.coffee&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;do (name = &amp;quot;CoffeeScript&amp;quot;) -&amp;gt;
-  WScript.Echo &amp;quot;はろー, \#{name} !&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記の &lt;code&gt;hello.coffee&lt;/code&gt; を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -r hello.coffee
-はろー, CoffeeScript !
-
-ExitCode = [0]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動でコンパイルしてJScriptとして実行される。(あと一応戻り値もEchoするようにしておいた。)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;--watch&lt;/code&gt; オプションと一緒に使うとかなり便利。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -rw hello.coffee
-はろー, CoffeeScript !
-
-ExitCode = [0]
-
-
-へろー, CoffeeScript !
-
-ExitCode = [0]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;保存する度に自動でコンパイル、実行まで行ってくれる。&lt;/p&gt;
-
-&lt;p&gt;便利なのはいいんだけど、今どきJScriptとか、時代に逆行してるなぁ・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://msdn.microsoft.com/ja-jp/library/cc364356.aspx&#34;&gt;Exec メソッド&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
