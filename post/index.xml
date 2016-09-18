@@ -6,8 +6,73 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 18 Sep 2016 13:03:18 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Sep 2016 00:30:00 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>True color in iTerm2 Tmux Neovim</title>
+      <link>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</link>
+      <pubDate>Mon, 19 Sep 2016 00:30:00 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</guid>
+      <description>
+
+&lt;p&gt;今時 &lt;code&gt;macbook&lt;/code&gt; のキレイな画面で256色なんて・・・&lt;/p&gt;
+
+&lt;p&gt;っということで、 &lt;code&gt;True color&lt;/code&gt; が使えるそうなので設定してみた。&lt;/p&gt;
+
+&lt;p&gt;まず、 &lt;code&gt;iTerm2&lt;/code&gt; の設定。&lt;/p&gt;
+
+&lt;p&gt;は特になく、 &lt;code&gt;homebrew cask&lt;/code&gt; でインストールすればそのまま &lt;code&gt;true color&lt;/code&gt; が使えるらしい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew cask install iterm2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次に &lt;code&gt;tmux&lt;/code&gt; の設定。
+&lt;code&gt;tmux&lt;/code&gt; はバージョン &lt;code&gt;2.2&lt;/code&gt; 以上ならOKっぽい。普通に &lt;code&gt;homebrew&lt;/code&gt; でインストールしたら &lt;code&gt;2.2&lt;/code&gt; だった。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install tmux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;で、設定ファイル &lt;code&gt;tmux.conf&lt;/code&gt; に以下を追加。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tmux&#34;&gt;set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もし、以下の設定が書いてあったらコメントアウト。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tmux&#34;&gt;# set -g default-terminal xterm-256color
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、 &lt;code&gt;neovim&lt;/code&gt; の設定 ( &lt;code&gt;init.vim&lt;/code&gt; )。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;patch-7.4.1778&#39;)
+  set guicolors
+endif
+if has(&#39;nvim&#39;)
+  set termguicolors
+endif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでOK。
+昔の設定は、
+&lt;code&gt;let $NVIM_TUI_ENABLE_TRUE_COLOR=1&lt;/code&gt;
+とかだったらしいけど、2016/5/11から変わったっぽい。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;terminal&lt;/code&gt; で &lt;code&gt;true color&lt;/code&gt; なのすごいべんり。
+&lt;code&gt;iTerm2&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; に関係せずに &lt;code&gt;vim&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; を変えられる。&lt;/p&gt;
+
+&lt;p&gt;設定方法を書いてくれた人たちに感謝。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/&#34;&gt;True HEX Colors with Neovim and iTerm2 - Prevent Default&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>flowtype in vim</title>
@@ -1038,65 +1103,6 @@ EndSection
 &lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://rakuishi.com/archives/wordpress-to-hugo/&#34;&gt;WordPress から Hugo に乗り換えました&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Set cursorline as needed</title>
-      <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
-      <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
-      <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;
-
-&lt;p&gt;よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに &lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; でもとのバッファに戻ったときに、 &lt;code&gt;s:cursorline_lock&lt;/code&gt; 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと &lt;code&gt;set nocursorline&lt;/code&gt; されなくなるようだった。&lt;/p&gt;
-
-&lt;p&gt;そこで、 Lingr のvim部屋で初めて質問してみた。&lt;/p&gt;
-
-&lt;p&gt;そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; では、 &lt;code&gt;WinEnter&lt;/code&gt; イベントは発生しないが、 &lt;code&gt;BufEnter&lt;/code&gt; イベントは発生するらしい。
-また、僕は、 &lt;code&gt;nnoremap : q:i&lt;/code&gt; のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。
-そこで、thincaさんの &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;設定&lt;/a&gt; を以下のように、変更した。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline(&#39;CursorMoved&#39;)
-au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline(&#39;CursorHold&#39;)
-au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline(&#39;WinEnter,BufEnter,CmdwinLeave&#39;)
-au MyAutoCmd WinLeave * call s:auto_cursorline(&#39;WinLeave&#39;)
-
-let s:cursorline_lock = 0
-function! s:auto_cursorline(event)
-  if a:event ==# &#39;WinEnter,BufEnter,CmdwinLeave&#39;
-    setlocal cursorline
-    setlocal cursorcolumn
-    let s:cursorline_lock = 2
-  elseif a:event ==# &#39;WinLeave&#39;
-    setlocal nocursorline
-    setlocal nocursorcolumn
-  elseif a:event ==# &#39;CursorMoved&#39;
-    if s:cursorline_lock
-      if 1 &amp;lt; s:cursorline_lock
-        let s:cursorline_lock = 1
-      else
-        setlocal nocursorline
-        setlocal nocursorcolumn
-        let s:cursorline_lock = 0
-      endif
-    endif
-  elseif a:event ==# &#39;CursorHold&#39;
-    if &amp;amp;updatetime &amp;gt;= 4000
-      setlocal cursorline
-      setlocal cursorcolumn
-    endif
-    let s:cursorline_lock = 1
-  endif
-endfunction
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ついでに &lt;code&gt;cursorcolumn&lt;/code&gt; も追加しといた。
-また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
-
-&lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
 </description>
     </item>
     

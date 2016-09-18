@@ -6,8 +6,161 @@
     <description>Recent content in Vim on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 09 Aug 2016 09:58:11 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Sep 2016 00:30:00 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/categories/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>True color in iTerm2 Tmux Neovim</title>
+      <link>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</link>
+      <pubDate>Mon, 19 Sep 2016 00:30:00 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</guid>
+      <description>
+
+&lt;p&gt;今時 &lt;code&gt;macbook&lt;/code&gt; のキレイな画面で256色なんて・・・&lt;/p&gt;
+
+&lt;p&gt;っということで、 &lt;code&gt;True color&lt;/code&gt; が使えるそうなので設定してみた。&lt;/p&gt;
+
+&lt;p&gt;まず、 &lt;code&gt;iTerm2&lt;/code&gt; の設定。&lt;/p&gt;
+
+&lt;p&gt;は特になく、 &lt;code&gt;homebrew cask&lt;/code&gt; でインストールすればそのまま &lt;code&gt;true color&lt;/code&gt; が使えるらしい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew cask install iterm2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;次に &lt;code&gt;tmux&lt;/code&gt; の設定。
+&lt;code&gt;tmux&lt;/code&gt; はバージョン &lt;code&gt;2.2&lt;/code&gt; 以上ならOKっぽい。普通に &lt;code&gt;homebrew&lt;/code&gt; でインストールしたら &lt;code&gt;2.2&lt;/code&gt; だった。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install tmux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;で、設定ファイル &lt;code&gt;tmux.conf&lt;/code&gt; に以下を追加。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tmux&#34;&gt;set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;もし、以下の設定が書いてあったらコメントアウト。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tmux&#34;&gt;# set -g default-terminal xterm-256color
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、 &lt;code&gt;neovim&lt;/code&gt; の設定 ( &lt;code&gt;init.vim&lt;/code&gt; )。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;patch-7.4.1778&#39;)
+  set guicolors
+endif
+if has(&#39;nvim&#39;)
+  set termguicolors
+endif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでOK。
+昔の設定は、
+&lt;code&gt;let $NVIM_TUI_ENABLE_TRUE_COLOR=1&lt;/code&gt;
+とかだったらしいけど、2016/5/11から変わったっぽい。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;terminal&lt;/code&gt; で &lt;code&gt;true color&lt;/code&gt; なのすごいべんり。
+&lt;code&gt;iTerm2&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; に関係せずに &lt;code&gt;vim&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; を変えられる。&lt;/p&gt;
+
+&lt;p&gt;設定方法を書いてくれた人たちに感謝。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/&#34;&gt;True HEX Colors with Neovim and iTerm2 - Prevent Default&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>flowtype in vim</title>
+      <link>http://yukimemi.github.io/post/2016-09-18_flowtype%20in%20vim/</link>
+      <pubDate>Sun, 18 Sep 2016 13:03:18 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-18_flowtype%20in%20vim/</guid>
+      <description>
+
+&lt;p&gt;最近 &lt;code&gt;flowtype&lt;/code&gt; という &lt;code&gt;Altjs&lt;/code&gt; があるのを知った。&lt;/p&gt;
+
+&lt;p&gt;facebookが作っているらしく、 &lt;code&gt;typescript&lt;/code&gt; と違って、既存のjavascriptをそのまま使うことも出来、型エラーがあってもコンパイル、実行が出来る。&lt;/p&gt;
+
+&lt;p&gt;導入は &lt;code&gt;npm&lt;/code&gt; で簡単にインストール出来る。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -g flow-bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;flowtype&lt;/code&gt; 自体の説明は
+&lt;a href=&#34;http://qiita.com/mizchi/items/95ee0101ac22e4b7b662&#34;&gt;型なき世界のためのflowtype入門 - Qiita&lt;/a&gt;
+とか、公式の
+&lt;a href=&#34;https://flowtype.org/&#34;&gt;Flow | A static type checker for JavaScript&lt;/a&gt;
+とか見ればいいと思う。&lt;/p&gt;
+
+&lt;p&gt;んで、公式にも書いてあるように、vimやemacsのプラギンが提供されている。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/flowtype/vim-flow&#34;&gt;flowtype/vim-flow: A vim plugin for Flow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;neovim&lt;/code&gt; &lt;code&gt;dein&lt;/code&gt; でのインストール手順。
+&lt;code&gt;toml&lt;/code&gt; を使っている前提。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;[[plugins]]
+repo = &#39;flowtype/vim-flow&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+build = &#39;npm install -g flow-bin&#39;
+hook_add = &#39;&#39;&#39;
+  let g:flow#autoclose = 1
+&#39;&#39;&#39;
+
+[[plugins]]
+repo = &#39;Shougo/deoplete.nvim&#39;
+if = &amp;quot;has(&#39;nvim&#39;)&amp;quot;
+on_i = 1
+hook_add = &#39;&#39;&#39;
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#omni_patterns = {}
+  let g:deoplete#omni_patterns.javascript = &#39;[^. *\t]\.\w*&#39;
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 &lt;code&gt;deoplete&lt;/code&gt; を使って自動補完が出来、 &lt;code&gt;flowtype&lt;/code&gt; が記述出来た。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、 &lt;code&gt;javascript&lt;/code&gt; の &lt;code&gt;syntax&lt;/code&gt; とかは、以下の設定がいいもよう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;[[plugins]]
+repo = &#39;pangloss/vim-javascript&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;mxw/vim-jsx&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/yajs.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;maxmellon/vim-jsx-pretty&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/javascript-libraries-syntax.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/es.next.syntax.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/flowtype/vim-flow&#34;&gt;flowtype/vim-flow: A vim plugin for Flow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/maxmellon/items/0e6173cdd51843053839&#34;&gt;vimのECMASCript2015環境をイイ感じにする - Qiita&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Mapping with &lt;nowait&gt; option in vim</title>

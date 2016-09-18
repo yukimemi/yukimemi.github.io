@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tmux on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/tmux/</link>
-    <description>Recent content in Tmux on YUKIMEMI</description>
+    <title>Iterm on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/iterm/</link>
+    <description>Recent content in Iterm on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Mon, 19 Sep 2016 00:30:00 +0900</lastBuildDate>
-    <atom:link href="http://yukimemi.github.io/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://yukimemi.github.io/tags/iterm/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>True color in iTerm2 Tmux Neovim</title>
@@ -71,57 +71,6 @@ endif
 &lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/&#34;&gt;True HEX Colors with Neovim and iTerm2 - Prevent Default&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>tmuxで一時的にpaneを最大化する</title>
-      <link>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</link>
-      <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</guid>
-      <description>&lt;p&gt;知らんかった。便利&lt;/p&gt;
-
-&lt;p&gt;tmux 1.8 以降だと、 &lt;code&gt;prefix z&lt;/code&gt; で最大化をトグルできるみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rhysd.hatenablog.com/entry/2013/09/16/003620&#34;&gt;tmux で一時的に pane を最大化する - sorry, uninuplemented:&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ちなみに、vimでは、以下のような設定で似たようなことも出来るみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap so &amp;lt;C-w&amp;gt;_&amp;lt;C-w&amp;gt;|
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2個目の &lt;code&gt;&amp;lt;C-w&amp;gt;&lt;/code&gt; と &lt;code&gt;|&lt;/code&gt; の間には、 &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; があり。( &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; を2回入力する)&lt;/p&gt;
-
-&lt;p&gt;トグルではないけど。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>tmuxで画面サイズをリセットしてアタッチ</title>
-      <link>http://yukimemi.github.io/post/2013-06-16-tmux_detach_before_attach/</link>
-      <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2013-06-16-tmux_detach_before_attach/</guid>
-      <description>
-
-&lt;p&gt;tmux で attach する場合、事前に attach されていた
-画面がある時、その画面サイズに固定されてしまう。&lt;/p&gt;
-
-&lt;p&gt;そのため、 attach する前にオプションで detach させるようにする。&lt;/p&gt;
-
-&lt;p&gt;zsh で自動 attach するには、 .zshrc にこんな感じで書いてる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;if [ -z $TMUX ]; then
-  tmux attach -d || tmux
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/items/fa28ae844bc820c2da57&#34;&gt;tmuxでアタッチした時、画面がおかしくなるのを直した #tmux - Qiita [キータ]&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://filmlang.org/computer/tmux&#34;&gt;Tmuxの設定とメモ&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
