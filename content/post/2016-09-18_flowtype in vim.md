@@ -1,7 +1,7 @@
 +++
-Categories = []
+Categories = ["vim"]
 Description = ""
-Tags = []
+Tags = ["vim", "flowtype"]
 date = "2016-09-18T13:03:18+09:00"
 title = "flowtype in vim"
 
