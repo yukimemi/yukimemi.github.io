@@ -46,10 +46,7 @@
 
 &lt;p&gt;それから、 &lt;code&gt;neovim&lt;/code&gt; の設定 ( &lt;code&gt;init.vim&lt;/code&gt; )。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;patch-7.4.1778&#39;)
-  set guicolors
-endif
-if has(&#39;nvim&#39;)
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;nvim&#39;)
   set termguicolors
 endif
 &lt;/code&gt;&lt;/pre&gt;
