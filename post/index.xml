@@ -6,8 +6,96 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 03 Sep 2016 10:56:35 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 Sep 2016 13:03:18 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>flowtype in vim</title>
+      <link>http://yukimemi.github.io/post/2016-09-18_flowtype%20in%20vim/</link>
+      <pubDate>Sun, 18 Sep 2016 13:03:18 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-18_flowtype%20in%20vim/</guid>
+      <description>
+
+&lt;p&gt;最近 &lt;code&gt;flowtype&lt;/code&gt; という &lt;code&gt;Altjs&lt;/code&gt; があるのを知った。&lt;/p&gt;
+
+&lt;p&gt;facebookが作っているらしく、 &lt;code&gt;typescript&lt;/code&gt; と違って、既存のjavascriptをそのまま使うことも出来、型エラーがあってもコンパイル、実行が出来る。&lt;/p&gt;
+
+&lt;p&gt;導入は &lt;code&gt;npm&lt;/code&gt; で簡単にインストール出来る。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -g flow-bin
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;flowtype&lt;/code&gt; 自体の説明は
+&lt;a href=&#34;http://qiita.com/mizchi/items/95ee0101ac22e4b7b662&#34;&gt;型なき世界のためのflowtype入門 - Qiita&lt;/a&gt;
+とか、公式の
+&lt;a href=&#34;https://flowtype.org/&#34;&gt;Flow | A static type checker for JavaScript&lt;/a&gt;
+とか見ればいいと思う。&lt;/p&gt;
+
+&lt;p&gt;んで、公式にも書いてあるように、vimやemacsのプラギンが提供されている。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/flowtype/vim-flow&#34;&gt;flowtype/vim-flow: A vim plugin for Flow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;neovim&lt;/code&gt; &lt;code&gt;dein&lt;/code&gt; でのインストール手順。
+&lt;code&gt;toml&lt;/code&gt; を使っている前提。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;[[plugins]]
+repo = &#39;flowtype/vim-flow&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+build = &#39;npm install -g flow-bin&#39;
+hook_add = &#39;&#39;&#39;
+  let g:flow#autoclose = 1
+&#39;&#39;&#39;
+
+[[plugins]]
+repo = &#39;Shougo/deoplete.nvim&#39;
+if = &amp;quot;has(&#39;nvim&#39;)&amp;quot;
+on_i = 1
+hook_add = &#39;&#39;&#39;
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#omni_patterns = {}
+  let g:deoplete#omni_patterns.javascript = &#39;[^. *\t]\.\w*&#39;
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで、 &lt;code&gt;deoplete&lt;/code&gt; を使って自動補完が出来、 &lt;code&gt;flowtype&lt;/code&gt; が記述出来た。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、 &lt;code&gt;javascript&lt;/code&gt; の &lt;code&gt;syntax&lt;/code&gt; とかは、以下の設定がいいもよう。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;[[plugins]]
+repo = &#39;pangloss/vim-javascript&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;mxw/vim-jsx&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/yajs.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;maxmellon/vim-jsx-pretty&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/javascript-libraries-syntax.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/es.next.syntax.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/flowtype/vim-flow&#34;&gt;flowtype/vim-flow: A vim plugin for Flow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/maxmellon/items/0e6173cdd51843053839&#34;&gt;vimのECMASCript2015環境をイイ感じにする - Qiita&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Type sound with Tickeys</title>
@@ -1009,84 +1097,6 @@ endfunction
 また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
 
 &lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Add --runcmd option to coffee-script-on-jscript</title>
-      <link>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</link>
-      <pubDate>Tue, 15 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2014-07-15_Add%20--runcmd%20option%20to%20coffee-script-on-jscript/</guid>
-      <description>
-
-&lt;p&gt;先日の &lt;a href=&#34;http://yukimemi.github.io/posts/2014-07-14_CoffeeScript%20on%20Windows%20as%20wsh.html&#34;&gt;記事&lt;/a&gt; のthincaさんフォーク版、僕々仕様のWindows上でのCoffeeScriptコンパイラに &lt;code&gt;--runcmd&lt;/code&gt; オプションを加えた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee
-Usage: coffee [options] path/to/script.coffee
-
-  -b, --bare         compile without the top-level function wrapper
-  -c, --compile      compile to JavaScript and save as .js files
-      --encoding     character encoding used by source files
-  -e, --eval         compile a string from the command line
-  -h, --help         display this help message
-  -j, --join         concatenate the scripts before compiling
-  -n, --nodes        print out the parse tree that the parser produces
-  -o, --output       set the directory for compiled JavaScript
-  -p, --print        print the compiled JavaScript to stdout
-  -s, --stdio        listen for and compile scripts over stdio
-  -t, --tokens       print the tokens that the lexer produces
-  -v, --version      display CoffeeScript version
-  -w, --watch        watch scripts for changes, and recompile
-  -r, --runcmd       run the compiled scripts as JScript
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最後の行のやつ。&lt;/p&gt;
-
-&lt;p&gt;オプションで &lt;code&gt;-r&lt;/code&gt; もしくは、 &lt;code&gt;--runcmd&lt;/code&gt; を指定すると、自動でコンパイルされて実行形式 (.cmd) になったファイルが実行される。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;hello.coffee&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-coffeescript&#34;&gt;do (name = &amp;quot;CoffeeScript&amp;quot;) -&amp;gt;
-  WScript.Echo &amp;quot;はろー, \#{name} !&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記の &lt;code&gt;hello.coffee&lt;/code&gt; を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -r hello.coffee
-はろー, CoffeeScript !
-
-ExitCode = [0]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動でコンパイルしてJScriptとして実行される。(あと一応戻り値もEchoするようにしておいた。)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;--watch&lt;/code&gt; オプションと一緒に使うとかなり便利。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -rw hello.coffee
-はろー, CoffeeScript !
-
-ExitCode = [0]
-
-
-へろー, CoffeeScript !
-
-ExitCode = [0]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;保存する度に自動でコンパイル、実行まで行ってくれる。&lt;/p&gt;
-
-&lt;p&gt;便利なのはいいんだけど、今どきJScriptとか、時代に逆行してるなぁ・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://msdn.microsoft.com/ja-jp/library/cc364356.aspx&#34;&gt;Exec メソッド&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
