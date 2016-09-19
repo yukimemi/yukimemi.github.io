@@ -6,8 +6,37 @@
     <description>Recent content on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 19 Sep 2016 00:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Sep 2016 11:15:50 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use solarized colorscheme in true color</title>
+      <link>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</link>
+      <pubDate>Mon, 19 Sep 2016 11:15:50 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</guid>
+      <description>
+
+&lt;p&gt;前回の記事(&lt;a href=&#34;http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/&#34;&gt;True color in iTerm2 Tmux Neovim | YUKIMEMI&lt;/a&gt;)で、 &lt;code&gt;iterm&lt;/code&gt; と &lt;code&gt;neovim&lt;/code&gt; でtrue colorを使う方法はわかったんだけど、なぜか、 &lt;code&gt;solarized&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; が有効にならなかった。&lt;/p&gt;
+
+&lt;p&gt;通常の &lt;code&gt;solarized&lt;/code&gt; ではダメなようで、true color対応したやつを使えばいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
+repo = &#39;lifepillar/vim-solarized8&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme solarized8_dark
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでできた。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>True color in iTerm2 Tmux Neovim</title>
@@ -1068,38 +1097,6 @@ EndSection
 &lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-colors&#34;&gt;vimpr/vimperator-colors&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>hello hugo</title>
-      <link>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</link>
-      <pubDate>Sun, 15 Feb 2015 10:28:27 +0900</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</guid>
-      <description>
-
-&lt;p&gt;これまでいろいろ静的サイトジェネレーターを試してきた。&lt;/p&gt;
-
-&lt;h5 id=&#34;tinkerer-http-tinkerer-me&#34;&gt;&lt;a href=&#34;http://tinkerer.me&#34;&gt;Tinkerer&lt;/a&gt;&lt;/h5&gt;
-
-&lt;h5 id=&#34;roots-http-roots-cx&#34;&gt;&lt;a href=&#34;http://roots.cx&#34;&gt;roots&lt;/a&gt;&lt;/h5&gt;
-
-&lt;p&gt;そして今回はgolang製の &lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/p&gt;
-
-&lt;h5 id=&#34;hugo-http-gohugo-io&#34;&gt;&lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/h5&gt;
-
-&lt;p&gt;流行りに乗ってみたいってのもあるけど、なによりサイト生成がはやい！！&lt;/p&gt;
-
-&lt;p&gt;これだけでも乗り換える価値があると思う。&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rakuishi.com/archives/wordpress-to-hugo/&#34;&gt;WordPress から Hugo に乗り換えました&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

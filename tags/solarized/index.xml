@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Solarized on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/solarized/</link>
+    <description>Recent content in Solarized on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 19 Sep 2016 11:15:50 +0900</lastBuildDate>
+    <atom:link href="http://yukimemi.github.io/tags/solarized/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use solarized colorscheme in true color</title>
+      <link>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</link>
+      <pubDate>Mon, 19 Sep 2016 11:15:50 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</guid>
+      <description>
+
+&lt;p&gt;前回の記事(&lt;a href=&#34;http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/&#34;&gt;True color in iTerm2 Tmux Neovim | YUKIMEMI&lt;/a&gt;)で、 &lt;code&gt;iterm&lt;/code&gt; と &lt;code&gt;neovim&lt;/code&gt; でtrue colorを使う方法はわかったんだけど、なぜか、 &lt;code&gt;solarized&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; が有効にならなかった。&lt;/p&gt;
+
+&lt;p&gt;通常の &lt;code&gt;solarized&lt;/code&gt; ではダメなようで、true color対応したやつを使えばいいみたい。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
+repo = &#39;lifepillar/vim-solarized8&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme solarized8_dark
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これでできた。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
