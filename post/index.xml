@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/post/</link>
-    <description>Recent content in Posts on YUKIMEMI</description>
+    <title>Post-rsses on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/post/index.xml</link>
+    <description>Recent content in Post-rsses on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 19 Sep 2016 11:15:50 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 25 Sep 2016 23:53:12 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Zsh autosuggestions</title>
+      <link>http://yukimemi.github.io/post/2016-09-25_zsh-autosuggestions/</link>
+      <pubDate>Sun, 25 Sep 2016 23:53:12 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-09-25_zsh-autosuggestions/</guid>
+      <description>&lt;p&gt;&lt;code&gt;zsh-autosuggestions&lt;/code&gt; という便利な &lt;em&gt;zsh&lt;/em&gt; のプラギンを見つけた。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;zplug&lt;/code&gt; を使って簡単にインストール可能。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;zplug &amp;quot;zsh-users/zsh-autosuggestions&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;あとは、表示された補完を決定するキーの設定を追加。
+ちなみにデフォルトだと、右矢印が割り当てられてる模様。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;bindkey &#39;^ &#39; autosuggest-accept
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;で、 &lt;code&gt;Ctrl + Space&lt;/code&gt; で、補完候補が確定する。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/zsh-autosuggestions.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;べんり。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Use solarized colorscheme in true color</title>
@@ -1058,45 +1085,6 @@ EndSection
 &lt;p&gt;&lt;a href=&#34;http://variedtastefinder.jpn.ph/diary/395/&#34;&gt;MacBook Air Late 2010 on Ubuntu 14.04 (※05/30追記)&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www.ubuntuforums.org/showthread.php?t=2209602&#34;&gt;[SOLVED] Installing Ubuntu from USB on a MacBook Air 3,1-3,2 (nvidia card)&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>vimperator colorscheme</title>
-      <link>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</link>
-      <pubDate>Mon, 02 Mar 2015 02:00:14 +0900</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</guid>
-      <description>
-
-&lt;p&gt;vimperatorでcolorschemeを使う方法。&lt;/p&gt;
-
-&lt;p&gt;自分で作ってもいいけど、大変なので・・・&lt;/p&gt;
-
-&lt;h3 id=&#34;リポジトリクローン&#34;&gt;リポジトリクローン&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;ghq&lt;/code&gt; については、&lt;a href=&#34;http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/&#34;&gt;この記事&lt;/a&gt;で。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/vimpr/vimperator-colors.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;シンボリックリンク&#34;&gt;シンボリックリンク&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;vimperatorrc編集&#34;&gt;.vimperatorrc編集&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme sweets_snaka
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;かっこいい！！&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-colors&#34;&gt;vimpr/vimperator-colors&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
