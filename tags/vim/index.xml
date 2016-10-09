@@ -9,6 +9,100 @@
     <atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>js beautify with vim</title>
+      <link>http://yukimemi.github.io/post/2016-10-09_js-beautify%20with%20vim/</link>
+      <pubDate>Sun, 09 Oct 2016 11:23:19 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-10-09_js-beautify%20with%20vim/</guid>
+      <description>
+
+&lt;p&gt;vimでjavascriptを書くときの設定。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dein.toml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Filetype (javascript) ===== {{{1
+[[plugins]]
+repo = &#39;pangloss/vim-javascript&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;maxmellon/vim-jsx-pretty&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/javascript-libraries-syntax.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+[[plugins]]
+repo = &#39;othree/es.next.syntax.vim&#39;
+on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
+
+# ==================== Utility =================== {{{1
+[[plugins]]
+repo = &#39;Chiel92/vim-autoformat&#39;
+hook_add = &#39;&#39;&#39;
+  let g:autoformat_autoindent = 0
+  let g:autoformat_retab = 0
+  let g:autoformat_remove_trailing_spaces = 0
+  au MyAutoCmd BufWrite *.js,*.jsx :Autoformat
+  nnoremap [Space]f :&amp;lt;C-u&amp;gt;Autoformat&amp;lt;CR&amp;gt;
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記設定で、かつ、 &lt;code&gt;js-beautify&lt;/code&gt; を別途インストールする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -g js-beautify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;便利なのが、 &lt;code&gt;vim-autoformat&lt;/code&gt; プラグイン。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;js-beautify&lt;/code&gt; をインストールして上記設定をしていると、javascriptを書いて保存したら自動でインデントを整えてくれる。&lt;br /&gt;
+ただ、ES2015のimportやjsx表記などでインデントが変になってしまうので、&lt;code&gt;js-beautify&lt;/code&gt; 用の設定ファイルを作成する。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;.jsbeautifyrc&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;indent_size&amp;quot;: 2,
+  &amp;quot;indent_char&amp;quot;: &amp;quot; &amp;quot;,
+  &amp;quot;eol&amp;quot;: &amp;quot;\n&amp;quot;,
+  &amp;quot;indent_level&amp;quot;: 0,
+  &amp;quot;indent_with_tabs&amp;quot;: false,
+  &amp;quot;preserve_newlines&amp;quot;: true,
+  &amp;quot;max_preserve_newlines&amp;quot;: 10,
+  &amp;quot;jslint_happy&amp;quot;: false,
+  &amp;quot;space_after_anon_function&amp;quot;: false,
+  &amp;quot;brace_style&amp;quot;: &amp;quot;collapse-preserve-inline&amp;quot;,
+  &amp;quot;keep_array_indentation&amp;quot;: false,
+  &amp;quot;keep_function_indentation&amp;quot;: false,
+  &amp;quot;space_before_conditional&amp;quot;: true,
+  &amp;quot;break_chained_methods&amp;quot;: false,
+  &amp;quot;eval_code&amp;quot;: false,
+  &amp;quot;unescape_strings&amp;quot;: false,
+  &amp;quot;wrap_line_length&amp;quot;: 0,
+  &amp;quot;wrap_attributes&amp;quot;: &amp;quot;auto&amp;quot;,
+  &amp;quot;wrap_attributes_indent_size&amp;quot;: 4,
+  &amp;quot;e4x&amp;quot;: true,
+  &amp;quot;end_with_newline&amp;quot;: false
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これで快適なエディットができる。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/beautify-web/js-beautify/issues/382&#34;&gt;Newline inserted after ES6 module import/export · Issue #382 · beautify-web/js-beautify · GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/MaxMEllon/vim-jsx-pretty&#34;&gt;GitHub - MaxMEllon/vim-jsx-pretty: [VimL] React JSX syntax pretty highlighting for vim.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Use solarized colorscheme in true color</title>
       <link>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</link>
       <pubDate>Mon, 19 Sep 2016 11:15:50 +0900</pubDate>
