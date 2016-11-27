@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fish on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/fish/index.xml</link>
+    <description>Recent content in Fish on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <atom:link href="http://yukimemi.github.io/tags/fish/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use fish instead of zsh</title>
+      <link>http://yukimemi.github.io/post/2016-11-27_Use%20fish%20instead%20of%20zsh/</link>
+      <pubDate>Sun, 27 Nov 2016 00:49:25 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-11-27_Use%20fish%20instead%20of%20zsh/</guid>
+      <description>
+
+&lt;p&gt;ちまたで(？)話題の &lt;code&gt;fish&lt;/code&gt; を使ってみた。&lt;/p&gt;
+
+&lt;p&gt;長年使ってきた &lt;code&gt;zsh&lt;/code&gt; のかわりにはならないだろうなーと思いながら・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;・・・が、いざ使ってみると非常に使いやすい！&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;zsh&lt;/code&gt; のかわりになるどころか置き換えてしまった。&lt;br /&gt;
+(つまり、自分は結局そこまで &lt;code&gt;zsh&lt;/code&gt; を使いこなしていなかったんだろう・・・。)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;fish&lt;/code&gt; のチュートリアルは、以下にある。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://fishshell.com/docs/current/tutorial.html&#34;&gt;fish tutorial&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;日本語でもqiitaとかにいっぱい解説記事があるので難しいことはないと思う。
+唯一はまったのは、上記tutorialにある、 &lt;code&gt;hybrid_bindings&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;p&gt;vi っぽいキーバインドで、 insert モードの場合は emacs っぽくするって感じなんだろうけど、使用できなかった。
+なんか issue 上がってたりしたので、そのうち修正されるのかもしれない。&lt;/p&gt;
+
+&lt;p&gt;とりあえずは、必要なキーバインドのみを自分で再定義してやることで要望は満たせた。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;fish&lt;/code&gt; では、 &lt;a href=&#34;https://github.com/fisherman/fisherman&#34;&gt;fisherman&lt;/a&gt; というプラグインマネージャーが存在しており、これを使って各種プラグインを管理する。
+日本語での解説も書いてあるので導入は簡単。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上記を実行するだけ。&lt;/p&gt;
+
+&lt;p&gt;自分が入れたパッケージはとりあえずこんだけ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;simple&lt;/code&gt; :
+シンプルなテーマ&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;omf/gi&lt;/code&gt; :
+gitignore を管理できるやつ。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2個だけ。 &lt;code&gt;fish&lt;/code&gt; が単体で色々出来るやつだからこそかも。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;fish&lt;/code&gt; は、設定を &lt;code&gt;~/.config/fish&lt;/code&gt; 配下で管理する。
+こんな感じ。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree fish
+fish
+├── completions
+├── conf.d
+├── config.fish -&amp;gt; /Users/yukimemi/.dotfiles/.config/fish/config.fish
+├── fishd.xxxxxxxxxxxx
+├── fishfile -&amp;gt; /Users/yukimemi/.dotfiles/.config/fish/fishfile
+├── functions
+└── my_functions -&amp;gt; /Users/yukimemi/.dotfiles/.config/fish/my_functions
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree my_functions
+my_functions
+├── __cdup.fish
+├── __filter_command.fish
+├── __filter_command_execute.fish
+├── __filter_command_history_execute.fish
+├── __filter_command_history_select.fish
+├── __filter_command_select.fish
+└── fish_user_key_bindings.fish
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;それから、上記 &lt;code&gt;fisherman&lt;/code&gt; を使っている場合、 &lt;code&gt;~/.config/fish/functions&lt;/code&gt; 配下がどんどん侵されていくので、自分で作成した &lt;code&gt;function&lt;/code&gt; は &lt;code&gt;my_functions&lt;/code&gt; というディレクトリ配下で管理することにした。
+(シンボリックリンクが嫌な場合、それを解決した &lt;a href=&#34;http://qiita.com/masa0x80/items/142bc668ea8e5084ce7c&#34;&gt;fresco&lt;/a&gt; というものもあるらしい。)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;config.fish&lt;/code&gt; から、 &lt;code&gt;my_functions&lt;/code&gt; の内容を読み込む。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/config.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;### Load my_functions.
+for func in ~/.config/fish/my_functions/*.fish
+  source $func
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;かんたん♪&lt;/p&gt;
+
+&lt;p&gt;あとは、 &lt;code&gt;peco&lt;/code&gt; や &lt;code&gt;fzf&lt;/code&gt; などのフィルター系コマンドが使えるようにする。
+zsh の時は、&lt;code&gt;fzf&lt;/code&gt; を使っていたんだけど、 &lt;code&gt;fzy&lt;/code&gt; ってのがあって、 &lt;code&gt;enhancd&lt;/code&gt; でおすすめって書いてあったから、とりあえずそれを使ってみる。&lt;/p&gt;
+
+&lt;p&gt;まずは、コマンド定義。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;function __filter_command
+  fzy -l 200
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;fzy&lt;/code&gt; を使うよってだけ。 &lt;code&gt;-l&lt;/code&gt; オプションは表示する候補数。&lt;/p&gt;
+
+&lt;p&gt;それから、これを使って、選択だけするやつと、実行するやつを定義。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_select.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;function __filter_command_select
+  __filter_command | read -l line
+  and commandline $line
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_execute.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;function __filter_command_execute
+  __filter_command | read -l line
+  and echo &amp;quot;
+  ------
+  Running command: $line
+  ------&amp;quot;
+  and eval $line
+  commandline -f repaint
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;今度はこれで履歴検索するやつを作る。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_history_select.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;function __filter_command_history_select
+  history | sort -u | __filter_command_select
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_history_execute.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;function __filter_command_history_execute
+  history | sort -u | __filter_command_execute
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんな感じ。
+簡単でわかりやすい。&lt;/p&gt;
+
+&lt;p&gt;あとはこれをキーに割り当てる。
+&lt;code&gt;fish&lt;/code&gt; では、キーバインドは &lt;code&gt;fish_user_key_bindings&lt;/code&gt; という関数で行うのが通例っぽい。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/fish_user_key_bindings.fish&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-fish&#34;&gt;function fish_user_key_bindings
+
+  bind -M insert \cf accept-autosuggestion
+  bind -M insert \cn down-or-search
+  bind -M insert \cp up-or-search
+  # TODO: Not work.
+  bind -M insert \c\^ __cdup
+
+  # filter command.
+  bind -M insert \cr __filter_command_history_select
+  bind sul __filter_command_history_execute
+
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;-M&lt;/code&gt; オプションでモードを指定できる。&lt;/p&gt;
+
+&lt;p&gt;べんりー！
+あとは、前使ってた &lt;code&gt;enhancd&lt;/code&gt; を使いたい。
+それから、 &lt;code&gt;C-^&lt;/code&gt; で親ディレクトリに移動するってのを &lt;code&gt;zsh&lt;/code&gt; のときにやってたんだけど、それが &lt;code&gt;fish&lt;/code&gt; だとうまくできない。&lt;/p&gt;
+
+&lt;p&gt;どうやってやればいいんだろ・・・。知ってる人いたら教えてください。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://fishshell.com/docs/current/index.html&#34;&gt;fish - Documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/nutsinshell/items/5f111184b50f7081c92f&#34;&gt;初心者がShellを知りFish〜Fishermanを導入するまで&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/sotayamashita/items/61d49431053c44f01714&#34;&gt;fish-shell と fisherman の tips&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
