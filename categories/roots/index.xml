@@ -248,25 +248,19 @@ jade ファイルを保存したら、自動でブラウザが更新され、す
 
 &lt;h3 id=&#34;ブログ作成手順&#34;&gt;ブログ作成手順&lt;/h3&gt;
 
-&lt;ol&gt;
-&lt;li&gt;npmでグローバルにインストール&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;1-npmでグローバルにインストール&#34;&gt;1. npmでグローバルにインストール&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g roots
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;ブログテンプレートでプロジェクト作成&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;2-ブログテンプレートでプロジェクト作成&#34;&gt;2. ブログテンプレートでプロジェクト作成&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots new yukimemi.github.io --blog
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;これでブログ完成。&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;3-roots-コマンドでコンパイル-ウォッチ&#34;&gt;3. roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd yukimemi.github.io
 $ roots watch
@@ -275,11 +269,9 @@ $ roots watch
 &lt;p&gt;自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
 を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;ブログ記事を修正&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;4-ブログ記事を修正&#34;&gt;4. ブログ記事を修正&lt;/h4&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd posts
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cdk posts
 $ vim hello_world.jade
 &lt;/code&gt;&lt;/pre&gt;
 

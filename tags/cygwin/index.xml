@@ -26,12 +26,12 @@
 
 &lt;p&gt;以下のバッチスクリプトを作っておくと簡単にインストールできる。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;setup-x86.exe -q -d -D -L -s http://ftp.jaist.ac.jp/pub/cygwin/ -l &amp;quot;%USERPROFILE%\.cygwin&amp;quot; -R c:\cygwin -P gcc,git,git-completion,git-svn,make,vim,wget,ruby,screen,zsh,subversion
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;setup-x86.exe -q -d -D -L -s http://ftp.jaist.ac.jp/pub/cygwin/ -l &amp;quot;%USERPROFILE%\.cygwin&amp;quot; -R c:\cygwin -P gcc,git,git-completion,git-svn,make,vim,wget,ruby,screen,zsh,subversion
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;それぞれのオプションの意味は以下の通り&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;Command Line Options:
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;Command Line Options:
  -A --disable-buggy-antivirus           Disable known or suspected buggy antivirus software packages during execution.
  -C --categories                        Specify entire categories to install
  -D --download                          Download from internet

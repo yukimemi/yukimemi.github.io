@@ -124,9 +124,7 @@ Mac以外にも対応出来るように今後は拡張していきたい。&lt;/
 
 &lt;p&gt;インストールした後は、以下のステップで環境を構築。&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;github と bitbucket にsshキーを登録&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id=&#34;1-github-と-bitbucket-にsshキーを登録&#34;&gt;1. github と bitbucket にsshキーを登録&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh-keygen
   Generating public/private rsa key pair.
@@ -142,9 +140,7 @@ $ cat ~/.ssh/id_rsa.pub | pbcopy
 
 &lt;p&gt;(このsshキーの登録もコマンドから出来たりせんのかな・・・)&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;github から、 dotfiles をクローン&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id=&#34;2-github-から-dotfiles-をクローン&#34;&gt;2. github から、 dotfiles をクローン&lt;/h3&gt;
 
 &lt;p&gt;自分の環境構築用 dotfiles をクローンする。&lt;/p&gt;
 

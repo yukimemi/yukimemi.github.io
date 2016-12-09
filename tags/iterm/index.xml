@@ -35,12 +35,12 @@
 
 &lt;p&gt;で、設定ファイル &lt;code&gt;tmux.conf&lt;/code&gt; に以下を追加。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-tmux&#34;&gt;set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;もし、以下の設定が書いてあったらコメントアウト。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-tmux&#34;&gt;# set -g default-terminal xterm-256color
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# set -g default-terminal xterm-256color
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;それから、 &lt;code&gt;neovim&lt;/code&gt; の設定 ( &lt;code&gt;init.vim&lt;/code&gt; )。&lt;/p&gt;

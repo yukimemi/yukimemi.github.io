@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>cygwin インストールコマンド | YUKIMEMI</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+		<title>cygwin インストールコマンド | YUKIMEMI</title>
 
-    
-    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
-    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  </head>
-  <body>
-    <nav class="red lighten-3 valign-wrapper" role="navigation">
-      <div class="container">
-        <div class="nav-wrapper center-align">
-          <a href="/" id="title" class="valign">YUKIMEMI</a>
-        </div>
-      </div>
-    </nav>
-    
-    
-    
-    
-    
-    
-    
+		
+		<link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+		<link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+		
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/atom-one-dark.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/vim.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/dos.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/powershell.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/haskell.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+	<body>
+		<nav class="red lighten-3 valign-wrapper" role="navigation">
+			<div class="container">
+				<div class="nav-wrapper center-align">
+					<a href="/" id="title" class="valign">YUKIMEMI</a>
+				</div>
+			</div>
+		</nav>
 
 <div id="post" class="container">
   <div class="row">
@@ -55,12 +57,12 @@
 
 <p>以下のバッチスクリプトを作っておくと簡単にインストールできる。</p>
 
-<pre><code class="language-bat">setup-x86.exe -q -d -D -L -s http://ftp.jaist.ac.jp/pub/cygwin/ -l &quot;%USERPROFILE%\.cygwin&quot; -R c:\cygwin -P gcc,git,git-completion,git-svn,make,vim,wget,ruby,screen,zsh,subversion
+<pre><code class="language-dos">setup-x86.exe -q -d -D -L -s http://ftp.jaist.ac.jp/pub/cygwin/ -l &quot;%USERPROFILE%\.cygwin&quot; -R c:\cygwin -P gcc,git,git-completion,git-svn,make,vim,wget,ruby,screen,zsh,subversion
 </code></pre>
 
 <p>それぞれのオプションの意味は以下の通り</p>
 
-<pre><code class="language-bat">Command Line Options:
+<pre><code class="language-dos">Command Line Options:
  -A --disable-buggy-antivirus           Disable known or suspected buggy antivirus software packages during execution.
  -C --categories                        Specify entire categories to install
  -D --download                          Download from internet
@@ -122,7 +124,6 @@ $ chmod +x /bin/apt-cyg
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
-<script src="/js/prettify.js"></script>
 <script src="/js/main.js"></script>
 <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
 <script>

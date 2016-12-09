@@ -41,9 +41,7 @@ fi
 
 &lt;h3 id=&#34;pyenv-使用方法&#34;&gt;pyenv 使用方法&lt;/h3&gt;
 
-&lt;ol&gt;
-&lt;li&gt;python のインストール&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;1-python-のインストール&#34;&gt;1. python のインストール&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv install -l
 Available versions:
@@ -60,16 +58,12 @@ Available versions:
 $ pyenv install 3.3.2
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;virtualenv 環境の作成&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;2-virtualenv-環境の作成&#34;&gt;2. virtualenv 環境の作成&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv virtualenv --distribute 3.3.2 sample_project
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ol&gt;
-&lt;li&gt;使用する環境の選択&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h4 id=&#34;3-使用する環境の選択&#34;&gt;3. 使用する環境の選択&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pyenv global 3.3.2    # デフォルトの設定
 

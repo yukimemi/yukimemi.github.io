@@ -376,12 +376,14 @@ $ pip install Tinkerer
 
 &lt;p&gt;bitbucketでgit repositoryを作成したら、それを clone する。&lt;/p&gt;
 
-&lt;p&gt;$ git clone ssh://git@bitbucket.org/yukimemi/yukimemi.bitbucket.org.git
-$ cd yukimemi.bitbucket.org&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ git clone ssh://git@bitbucket.org/yukimemi/yukimemi.bitbucket.org.git
+$ cd yukimemi.bitbucket.org
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;clone した後は、 Tinkerer でブログを初期化する。&lt;/p&gt;
 
-&lt;p&gt;$ tinker -s&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tinker -s
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;そして、 同ディレクトリに作成された、 conf.py を適当に修正する。&lt;/p&gt;
 
@@ -420,7 +422,8 @@ disqus_shortname = &#39;yukimemi&#39;
 
 &lt;p&gt;ブログの作成は以下のコマンドで&lt;/p&gt;
 
-&lt;p&gt;$ tinker -p &amp;ldquo;First Tinkerer&amp;rdquo;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tinker -p &amp;quot;First Tinkerer&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;これで、&lt;/p&gt;
 

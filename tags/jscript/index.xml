@@ -238,7 +238,7 @@ gulp.task(&#39;default&#39;, [&#39;build&#39;]);
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/coffee-script-on-jscript&#34;&gt;yukimemi/coffee-script-on-jscript&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;&amp;gt; coffee
 Usage: coffee [options] path/to/script.coffee
 
   -b, --bare         compile without the top-level function wrapper
@@ -271,7 +271,7 @@ Usage: coffee [options] path/to/script.coffee
 
 &lt;p&gt;上記の &lt;code&gt;hello.coffee&lt;/code&gt; を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -r hello.coffee
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;&amp;gt; coffee -r hello.coffee
 はろー, CoffeeScript !
 
 ExitCode = [0]
@@ -281,7 +281,7 @@ ExitCode = [0]
 
 &lt;p&gt;&lt;code&gt;--watch&lt;/code&gt; オプションと一緒に使うとかなり便利。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;&amp;gt; coffee -rw hello.coffee
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;&amp;gt; coffee -rw hello.coffee
 はろー, CoffeeScript !
 
 ExitCode = [0]
@@ -368,7 +368,7 @@ Usage: coffee [options] path/to/script.coffee
 
 &lt;p&gt;上記までで、 &lt;code&gt;coffeescript&lt;/code&gt; を &lt;code&gt;jscript&lt;/code&gt; に変換することは簡単に出来るんだけど、どうせなら &lt;code&gt;jscript&lt;/code&gt; からさらにバッチとして実行出来る状態に変換したい。 &lt;code&gt;jscript&lt;/code&gt; をバッチとして実行するには、まさに &lt;code&gt;coffee.bat&lt;/code&gt; がそうなっていて、ソースの一番最初に以下の4行を追加すればいいみたい。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-dosbatch&#34;&gt;@set @junk=1 /* vim:set ft=javascript:
+&lt;pre&gt;&lt;code class=&#34;language-dos&#34;&gt;@set @junk=1 /* vim:set ft=javascript:
 @cscript //nologo //e:jscript &amp;quot;%~dpn0.bat&amp;quot; %*
 @goto :eof
 */
