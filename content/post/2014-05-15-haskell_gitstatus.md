@@ -28,12 +28,6 @@ getAllFiles dir = do
 
 takeLast list n = reverse . take n $ reverse list
 
-split :: (Char -> Bool) -> String -> [String]
-split p s =  case dropWhile p s of
-                  "" -> []
-                  s' -> w : split p s''
-                    where (w, s'') = break p s'
-
 join :: String -> [String] -> String
 join sep [] = []
 join sep [x] = x

@@ -11,7 +11,7 @@ title = "Add --runcmd option to coffee-script-on-jscript"
 
 [yukimemi/coffee-script-on-jscript](https://github.com/yukimemi/coffee-script-on-jscript)
 
-```dosbatch
+```dos
 > coffee
 Usage: coffee [options] path/to/script.coffee
 
@@ -44,7 +44,7 @@ do (name = "CoffeeScript") ->
 
 上記の ```hello.coffee``` を、文字コード: UTF-8 改行コード: LF で作成し、次のようにコンパイル。
 
-```dosbatch
+```dos
 > coffee -r hello.coffee
 はろー, CoffeeScript !
 
@@ -55,7 +55,7 @@ ExitCode = [0]
 
 `--watch` オプションと一緒に使うとかなり便利。
 
-```dosbatch
+```dos
 > coffee -rw hello.coffee
 はろー, CoffeeScript !
 

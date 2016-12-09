@@ -15,7 +15,7 @@ Mavericks がなんと無料で出たので、早速アップデートしまし�
 
 インストールした後は、以下のステップで環境を構築。
 
-1. github と bitbucket にsshキーを登録
+### 1. github と bitbucket にsshキーを登録
 
 ```sh
 $ ssh-keygen
@@ -32,7 +32,7 @@ github と bitbucket に元々登録してあったsshキーを削除して
 
 (このsshキーの登録もコマンドから出来たりせんのかな・・・)
 
-2. github から、 dotfiles をクローン
+### 2. github から、 dotfiles をクローン
 
 自分の環境構築用 dotfiles をクローンする。
 

@@ -90,8 +90,8 @@ my_functions
 
 - `~/.config/fish/config.fish`
 
-```fish
-### Load my_functions.
+```sh
+# Load my_functions.
 for func in ~/.config/fish/my_functions/*.fish
   source $func
 end
@@ -106,7 +106,7 @@ zsh の時は、`fzf` を使っていたんだけど、 `fzy` ってのがあっ
 
 - `~/.config/fish/my_functions/__filter_command.fish`
 
-```fish
+```sh
 function __filter_command
   fzy -l 200
 end
@@ -118,7 +118,7 @@ end
 
 - `~/.config/fish/my_functions/__filter_command_select.fish`
 
-```fish
+```sh
 function __filter_command_select
   __filter_command | read -l line
   and commandline $line
@@ -127,7 +127,7 @@ end
 
 - `~/.config/fish/my_functions/__filter_command_execute.fish`
 
-```fish
+```sh
 function __filter_command_execute
   __filter_command | read -l line
   and echo "
@@ -143,7 +143,7 @@ end
 
 - `~/.config/fish/my_functions/__filter_command_history_select.fish`
 
-```fish
+```sh
 function __filter_command_history_select
   history | sort -u | __filter_command_select
 end
@@ -151,7 +151,7 @@ end
 
 - `~/.config/fish/my_functions/__filter_command_history_execute.fish`
 
-```fish
+```sh
 function __filter_command_history_execute
   history | sort -u | __filter_command_execute
 end
@@ -165,7 +165,7 @@ end
 
 - `~/.config/fish/my_functions/fish_user_key_bindings.fish`
 
-```fish
+```sh
 function fish_user_key_bindings
 
   bind -M insert \cf accept-autosuggestion

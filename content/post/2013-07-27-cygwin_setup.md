@@ -17,13 +17,13 @@ cygwin のインストールは setup.exe というインストーラーがあ�
 
 以下のバッチスクリプトを作っておくと簡単にインストールできる。
 
-```bat
+```dos
 setup-x86.exe -q -d -D -L -s http://ftp.jaist.ac.jp/pub/cygwin/ -l "%USERPROFILE%\.cygwin" -R c:\cygwin -P gcc,git,git-completion,git-svn,make,vim,wget,ruby,screen,zsh,subversion
 ```
 
 それぞれのオプションの意味は以下の通り
 
-```bat
+```dos
 Command Line Options:
  -A --disable-buggy-antivirus           Disable known or suspected buggy antivirus software packages during execution.
  -C --categories                        Specify entire categories to install

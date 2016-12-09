@@ -28,12 +28,12 @@ $ brew install tmux
 
 で、設定ファイル `tmux.conf` に以下を追加。
 
-```tmux
+```sh
 set -ga terminal-overrides ",xterm-256color:Tc"
 ```
 
 もし、以下の設定が書いてあったらコメントアウト。
-```tmux
+```sh
 # set -g default-terminal xterm-256color
 ```
 

@@ -4,6 +4,12 @@ languageCode = "ja"
 title = "YUKIMEMI"
 theme = "yukimemi"
 
+# pygmentscodefences = true
+# pygmentsstyle = "colorful"
+# pygmentsoptions = "linenos=table"
+
 [permalinks]
   page = "/:title/"
   about = "/:filename/"
+
+

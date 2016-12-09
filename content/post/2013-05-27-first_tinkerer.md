@@ -40,12 +40,16 @@ $ pip install Tinkerer
 
 bitbucketでgit repositoryを作成したら、それを clone する。
 
+```sh
 $ git clone ssh://git@bitbucket.org/yukimemi/yukimemi.bitbucket.org.git
 $ cd yukimemi.bitbucket.org
+```
 
 clone した後は、 Tinkerer でブログを初期化する。
 
+```sh
 $ tinker -s
+```
 
 そして、 同ディレクトリに作成された、 conf.py を適当に修正する。
 
@@ -85,7 +89,9 @@ disqus_shortname = 'yukimemi'
 
 ブログの作成は以下のコマンドで
 
+```sh
 $ tinker -p "First Tinkerer"
+```
 
 これで、
 

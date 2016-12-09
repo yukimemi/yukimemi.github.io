@@ -67,7 +67,7 @@ Usage: coffee [options] path/to/script.coffee
 ### jscriptをバッチとして実行
 上記までで、 `coffeescript` を `jscript` に変換することは簡単に出来るんだけど、どうせなら `jscript` からさらにバッチとして実行出来る状態に変換したい。 `jscript` をバッチとして実行するには、まさに `coffee.bat` がそうなっていて、ソースの一番最初に以下の4行を追加すればいいみたい。
 
-```dosbatch
+```dos
 @set @junk=1 /* vim:set ft=javascript:
 @cscript //nologo //e:jscript "%~dpn0.bat" %*
 @goto :eof
