@@ -9,6 +9,60 @@
     <atom:link href="http://yukimemi.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Use highlight.js with CDN</title>
+      <link>http://yukimemi.github.io/post/2016-12-10_Use%20highlight.js%20with%20CDN/</link>
+      <pubDate>Sat, 10 Dec 2016 22:01:28 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2016-12-10_Use%20highlight.js%20with%20CDN/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://highlightjs.org/&#34;&gt;highlight.js&lt;/a&gt; を、 CDN で使用する方法。&lt;/p&gt;
+
+&lt;p&gt;このブログを書くのに今までは &lt;a href=&#34;https://github.com/google/code-prettify&#34;&gt;google/code-prettify&lt;/a&gt; を使っていたんだけど、うまく hightlight されないのがあったりしたので、 &lt;a href=&#34;https://highlightjs.org/&#34;&gt;highlight.js&lt;/a&gt; に乗り換えてみた。&lt;/p&gt;
+
+&lt;p&gt;使い方は非常に簡単。&lt;/p&gt;
+
+&lt;p&gt;ヘッダーに以下3行を追加するだけ。(スタイルは &lt;code&gt;onedark&lt;/code&gt; を使用)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/atom-one-dark.min.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ただ、これでは基本的な言語のハイライトしか設定出来ない。
+&lt;code&gt;powershell&lt;/code&gt; とか、 &lt;code&gt;golang&lt;/code&gt; とかも対応したい場合、個別に追加する必要がある。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://highlightjs.org/&#34;&gt;highlight.js&lt;/a&gt; のサイトで個別に言語を指定してダウンロードすることもできるが、全部ポチポチ指定してダウンロードするのは面倒だったので、直接 CDN から使いたかった。&lt;/p&gt;
+
+&lt;p&gt;調べると、 &lt;a href=&#34;https://github.com/isagalaev/highlight.js&#34;&gt;isagalaev/highlight.js&lt;/a&gt; の README に書いてあった。
+個別に使いたい言語を CDN から使うように指定すればいいみたい。&lt;/p&gt;
+
+&lt;p&gt;ということで、以下のようになりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;&amp;lt;!-- hilight.js --&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/atom-one-dark.min.css&amp;quot;&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/vim.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/dos.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/powershell.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/haskell.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script&amp;gt;hljs.initHighlightingOnLoad();&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;べんり。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/tadnakam/items/99088d78512a20e75ff3&#34;&gt;コードのハイライト表示用 JS ライブラリ highlight.js の使い方&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://glatchdesign.com/blog/web/javascript/296&#34;&gt;軽量で多言語なコードハイライトhighlight.jsの使い方&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>hello hugo</title>
       <link>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</link>
       <pubDate>Sun, 15 Feb 2015 10:28:27 +0900</pubDate>

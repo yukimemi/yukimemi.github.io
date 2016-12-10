@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yukimemi.github.io/post/2016-12-10_Use%20highlight.js%20with%20CDN/</loc>
+    <lastmod>2016-12-10T22:01:28+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</loc>
     <lastmod>2016-12-09T10:20:28+09:00</lastmod>
   </url>
@@ -532,6 +537,12 @@
   </url>
   
   <url>
+    <loc>http://yukimemi.github.io/tags/highlight/</loc>
+    <lastmod>2016-12-10T22:01:28+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://yukimemi.github.io/tags/homebrew/</loc>
     <lastmod>2013-09-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -539,13 +550,13 @@
   
   <url>
     <loc>http://yukimemi.github.io/tags/hugo/</loc>
-    <lastmod>2015-02-15T10:28:27+09:00</lastmod>
+    <lastmod>2016-12-10T22:01:28+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/hugo/</loc>
-    <lastmod>2015-02-15T10:28:27+09:00</lastmod>
+    <lastmod>2016-12-10T22:01:28+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -731,7 +742,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/post/</loc>
-    <lastmod>2016-12-09T10:20:28+09:00</lastmod>
+    <lastmod>2016-12-10T22:01:28+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1000,7 +1011,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/</loc>
-    <lastmod>2016-12-09T10:20:28+09:00</lastmod>
+    <lastmod>2016-12-10T22:01:28+09:00</lastmod>
     <priority>0</priority>
   </url>
   
