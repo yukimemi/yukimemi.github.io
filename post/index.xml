@@ -6,8 +6,66 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 10 Dec 2016 22:01:28 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 19 Mar 2017 00:00:07 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Git status recurse</title>
+      <link>http://yukimemi.github.io/post/2017-03-19_Git%20status%20recurse/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:07 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-03-19_Git%20status%20recurse/</guid>
+      <description>&lt;p&gt;&lt;code&gt;git status&lt;/code&gt; を再帰的に全Gitディレクトリで実行したい。&lt;/p&gt;
+
+&lt;p&gt;と思ったので作りました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/gsr&#34;&gt;yukimemi/gsr&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;go get&lt;/code&gt; でインストールできます。&lt;/p&gt;
+
+&lt;p&gt;(バイナリファイルもそのうち用意する)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get github.com/yukimemi/gsr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使い方は簡単で&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gsr [再帰的にチェックしたいディレクトリ]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とすると、 &lt;code&gt;git status&lt;/code&gt; で変更のあるディレクトリだけ出力されます。
+デフォルトでは、ディレクトリ名だけが出力されます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gsr --status [再帰的にチェックしたいディレクトリ]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;と、オプションをつけると、 &lt;code&gt;git status --short&lt;/code&gt; の出力結果も出力されます。&lt;/p&gt;
+
+&lt;p&gt;ちなみに、 [再帰的にチェックしたいディレクトリ] を指定しなかった場合、
+&lt;code&gt;ghq root&lt;/code&gt; を対象にチェックします。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;motemen/ghq&lt;/a&gt; を使っている人には便利です。&lt;/p&gt;
+
+&lt;p&gt;デフォルトの出力がディレクトリ名なのは、pecoとか使って移動したいからです。&lt;/p&gt;
+
+&lt;p&gt;例えば、 &lt;code&gt;.zshrc&lt;/code&gt; に、こんな設定を書いてやると、&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;function __filter() {
+  peco | while read line
+  do
+    echo &amp;quot;Exec: [$@ $line]&amp;quot;
+    $@ $line
+  done
+}
+alias gsrl=&#39;gsr | __filter cd&#39;
+alias ghl=&#39;gsr --all | __filter cd&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;gsrl&lt;/code&gt; で、変更のあるgitディレクトリに移動出来るようになり、 &lt;code&gt;ghl&lt;/code&gt; で &lt;code&gt;ghq&lt;/code&gt; で管理されたディレクトリに移動出来るようになります。&lt;/p&gt;
+
+&lt;p&gt;非常にべんり。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Use highlight.js with CDN</title>
@@ -1095,48 +1153,6 @@ Mac以外にも対応出来るように今後は拡張していきたい。&lt;/
 &lt;p&gt;驚いたのが、こんなに薄いのに、思った以上に良い音が出るということ。&lt;/p&gt;
 
 &lt;p&gt;性能も十分だしすばらしい。ほんとAppleはすごい。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PalmDetect in Ubuntu</title>
-      <link>http://yukimemi.github.io/post/2015-05-10_PalmDetect%20in%20Ubuntu/</link>
-      <pubDate>Sun, 10 May 2015 08:57:44 +0900</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2015-05-10_PalmDetect%20in%20Ubuntu/</guid>
-      <description>
-
-&lt;p&gt;MacBook AirにUbuntu 15.04をインストールした。
-だいたい使いやすくはなっているのだけど、たまにキーボード入力をしている時にタッチパッドが誤反応してしまう時があった。&lt;/p&gt;
-
-&lt;p&gt;そこで、手のひら検出？とかいうのを入れてみることにした。&lt;/p&gt;
-
-&lt;p&gt;以下のファイルを作成する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim ~/.config/autostart/synclient.desktop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;内容は以下の通り&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Desktop Entry]
-Type=Application
-Exec=synclient PalmDetect=1
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[ja]=synclient(PalmDetect)
-Name=synclient(PalmDetect)
-Comment[ja]=
-Comment=
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Superキーを押して出てくる検索メニューから「自動起動するアプリケーション」を選択して、そこで記載するのと同じ。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/kaz8/items/51a43a7290c29919bc2e&#34;&gt;安全にsynclientでUbuntuのタッチパッド設定を変更する - Qiita&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
