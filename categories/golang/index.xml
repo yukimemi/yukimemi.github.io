@@ -14,7 +14,9 @@
       <pubDate>Sun, 19 Mar 2017 00:00:07 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2017-03-19_Git%20status%20recurse/</guid>
-      <description>&lt;p&gt;&lt;code&gt;git status&lt;/code&gt; を再帰的に全Gitディレクトリで実行したい。&lt;/p&gt;
+      <description>
+
+&lt;p&gt;&lt;code&gt;git status&lt;/code&gt; を再帰的に全Gitディレクトリで実行して、変更のあるリポジトリを簡単に見つけたい。&lt;/p&gt;
 
 &lt;p&gt;と思ったので作りました。&lt;/p&gt;
 
@@ -60,9 +62,52 @@ alias gsrl=&#39;gsr | __filter cd&#39;
 alias ghl=&#39;gsr --all | __filter cd&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;code&gt;gsrl&lt;/code&gt; で、変更のあるgitディレクトリに移動出来るようになり、 &lt;code&gt;ghl&lt;/code&gt; で &lt;code&gt;ghq&lt;/code&gt; で管理されたディレクトリに移動出来るようになります。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gsrl&lt;/code&gt; で、 &lt;code&gt;ghq&lt;/code&gt; で管理された変更のあるgitディレクトリに移動出来るようになり、 &lt;code&gt;ghl&lt;/code&gt; で &lt;code&gt;ghq&lt;/code&gt; で管理されたすべてのディレクトリに移動出来るようになります。&lt;/p&gt;
 
 &lt;p&gt;非常にべんり。&lt;/p&gt;
+
+&lt;p&gt;さらに、 リモートと差分のあるリポジトリも対象としたい場合、以下のオプションが使用できます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gsr --ahead --behind
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;オプション&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;出力対象&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;ndash;ahead&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;リモートより新しいものも対象にする&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&amp;ndash;behind&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;リモートより古いものも対象にする&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;僕は常にこのオプションを有効化して使うので、環境変数に指定しています。
+&lt;code&gt;.zshenv&lt;/code&gt; とかに書いておくと、実行時にオプションをいちいち指定しなくても有効化されます。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;export GSR_SHOW_AHEAD=1
+export GSR_SHOW_BEHIND=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;これは、使ってるライブラリ &lt;a href=&#34;https://github.com/urfave/cli&#34;&gt;urfave/cli&lt;/a&gt; の機能みたいです。すごい。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/urfave/cli&#34;&gt;urfave/cli&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://int128.hatenablog.com/entry/2015/07/15/003851&#34;&gt;git statusを利用したリポジトリ情報のプロンプト表示&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

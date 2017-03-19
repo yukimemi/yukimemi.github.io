@@ -45,7 +45,9 @@
 </div>
 </div>
       </div>
-      <p><code>git status</code> を再帰的に全Gitディレクトリで実行したい。</p>
+      
+
+<p><code>git status</code> を再帰的に全Gitディレクトリで実行して、変更のあるリポジトリを簡単に見つけたい。</p>
 
 <p>と思ったので作りました。</p>
 
@@ -91,9 +93,52 @@ alias gsrl='gsr | __filter cd'
 alias ghl='gsr --all | __filter cd'
 </code></pre>
 
-<p><code>gsrl</code> で、変更のあるgitディレクトリに移動出来るようになり、 <code>ghl</code> で <code>ghq</code> で管理されたディレクトリに移動出来るようになります。</p>
+<p><code>gsrl</code> で、 <code>ghq</code> で管理された変更のあるgitディレクトリに移動出来るようになり、 <code>ghl</code> で <code>ghq</code> で管理されたすべてのディレクトリに移動出来るようになります。</p>
 
 <p>非常にべんり。</p>
+
+<p>さらに、 リモートと差分のあるリポジトリも対象としたい場合、以下のオプションが使用できます。</p>
+
+<pre><code class="language-sh">$ gsr --ahead --behind
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="center">オプション</th>
+<th align="center">出力対象</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">&ndash;ahead</td>
+<td align="center">リモートより新しいものも対象にする</td>
+</tr>
+
+<tr>
+<td align="center">&ndash;behind</td>
+<td align="center">リモートより古いものも対象にする</td>
+</tr>
+</tbody>
+</table>
+
+<p>僕は常にこのオプションを有効化して使うので、環境変数に指定しています。
+<code>.zshenv</code> とかに書いておくと、実行時にオプションをいちいち指定しなくても有効化されます。</p>
+
+<pre><code class="language-zsh">export GSR_SHOW_AHEAD=1
+export GSR_SHOW_BEHIND=1
+</code></pre>
+
+<p>これは、使ってるライブラリ <a href="https://github.com/urfave/cli">urfave/cli</a> の機能みたいです。すごい。</p>
+
+<hr />
+
+<h5 id="参考">参考</h5>
+
+<p><a href="https://github.com/urfave/cli">urfave/cli</a></p>
+
+<p><a href="http://int128.hatenablog.com/entry/2015/07/15/003851">git statusを利用したリポジトリ情報のプロンプト表示</a></p>
 
       <hr />
       <div id="disqus">
