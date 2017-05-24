@@ -73,13 +73,13 @@ hook_add = '''
 '''
 hook_post_source = '''
   &quot; Default options.
-	call denite#custom#option('default', {
+  call denite#custom#option('default', {
         \ 'prompt': '»',
         \ 'cursor_wrap': v:true,
         \ 'auto_resize': v:true,
         \ 'highlight_mode_insert': 'WildMenu'
         \ })
-	&quot; Pt command on grep source
+  &quot; Pt command on grep source
   if executable('pt')
     call denite#custom#var('grep', 'command', ['pt'])
     call denite#custom#var('grep', 'default_opts',
