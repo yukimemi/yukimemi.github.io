@@ -6,8 +6,75 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 19 Mar 2017 00:00:07 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 24 May 2017 18:15:16 +0900</lastBuildDate>
     <atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Use denite instead of unite</title>
+      <link>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</link>
+      <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</guid>
+      <description>&lt;p&gt;やろうやろうと思っていた、 &lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; をついに使ってみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein&lt;/a&gt; を使って toml で設定。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
+[[plugins]]
+repo = &#39;Shougo/denite.nvim&#39;
+on_cmd = &#39;Denite&#39;
+if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
+hook_add = &#39;&#39;&#39;
+  &amp;quot; Use plefix s
+  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
+  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
+  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
+  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
+  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
+  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
+  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
+  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
+  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
+  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
+  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
+
+  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
+
+&#39;&#39;&#39;
+hook_post_source = &#39;&#39;&#39;
+  &amp;quot; Default options.
+	call denite#custom#option(&#39;default&#39;, {
+        \ &#39;prompt&#39;: &#39;»&#39;,
+        \ &#39;cursor_wrap&#39;: v:true,
+        \ &#39;auto_resize&#39;: v:true,
+        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
+        \ })
+	&amp;quot; Pt command on grep source
+  if executable(&#39;pt&#39;)
+    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
+          \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
+  endif
+  &amp;quot; custom mappings.
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とりあえず unite の時に使ってたのと似た感じで設定してみた。&lt;/p&gt;
+
+&lt;p&gt;デフォルトオプションの設定と、キーマッピングの設定を追加でしている。
+あと、 grep に pt を使って。&lt;/p&gt;
+
+&lt;p&gt;jvgrep を使う設定にもしてみたんだけど、設定方法が悪いのかうまく出来なかったので、放置。 とりあえず pt でいい感じに使える。&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Git status recurse</title>
@@ -1171,33 +1238,6 @@ Mac以外にも対応出来るように今後は拡張していきたい。&lt;/
 &lt;p&gt;&lt;a href=&#34;http://goo.gl/SrOGry&#34;&gt;MacだってAnsibleで構成管理したい！ - Qiita&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://goo.gl/xczLlf&#34;&gt;Mac の開発環境構築を自動化する (2015 年初旬編) - t-wadaのブログ&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>New MacBook 12</title>
-      <link>http://yukimemi.github.io/post/2015-07-26_New%20MacBook%2012/</link>
-      <pubDate>Sun, 26 Jul 2015 15:17:39 +0900</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2015-07-26_New%20MacBook%2012/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/NewMacbook12.png&#34; alt=&#34;NewMacBook12&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ついに・・・ついに買ってしまった。New MacBook 12インチ。&lt;/p&gt;
-
-&lt;p&gt;今まで使ってたMacbook Air Late 2010のキーボードが急に反応しなくなってしまったため、
-急遽New Macbook 12インチを新調した。&lt;/p&gt;
-
-&lt;p&gt;なんにもカスタマイズせずに一番安いのをヤマダ電機で購入した。&lt;/p&gt;
-
-&lt;p&gt;ヤマダのポイントが10パーついて、14000もポイントがある。
-何に使おうか・・・。&lt;/p&gt;
-
-&lt;p&gt;肝心のMacbookの使い勝手は、もう文句なしに素晴らしい。
-心配してた熱も特になし。&lt;/p&gt;
-
-&lt;p&gt;驚いたのが、こんなに薄いのに、思った以上に良い音が出るということ。&lt;/p&gt;
-
-&lt;p&gt;性能も十分だしすばらしい。ほんとAppleはすごい。&lt;/p&gt;
 </description>
     </item>
     

@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</loc>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yukimemi.github.io/post/2017-03-19_Git%20status%20recurse/</loc>
     <lastmod>2017-03-19T00:00:07+09:00</lastmod>
   </url>
@@ -380,6 +385,12 @@
   </url>
   
   <url>
+    <loc>http://yukimemi.github.io/tags/denite/</loc>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://yukimemi.github.io/tags/deploy/</loc>
     <lastmod>2014-07-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -705,13 +716,13 @@
   
   <url>
     <loc>http://yukimemi.github.io/tags/neovim/</loc>
-    <lastmod>2016-12-09T10:20:28+09:00</lastmod>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/neovim/</loc>
-    <lastmod>2016-12-09T10:20:28+09:00</lastmod>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -747,7 +758,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/post/</loc>
-    <lastmod>2017-03-19T00:00:07+09:00</lastmod>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -944,13 +955,13 @@
   
   <url>
     <loc>http://yukimemi.github.io/tags/vim/</loc>
-    <lastmod>2016-12-09T10:20:28+09:00</lastmod>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/vim/</loc>
-    <lastmod>2016-12-09T10:20:28+09:00</lastmod>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1016,7 +1027,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/</loc>
-    <lastmod>2017-03-19T00:00:07+09:00</lastmod>
+    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
     <priority>0</priority>
   </url>
   

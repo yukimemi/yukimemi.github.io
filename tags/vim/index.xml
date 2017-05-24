@@ -9,6 +9,73 @@
     <atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Use denite instead of unite</title>
+      <link>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</link>
+      <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</guid>
+      <description>&lt;p&gt;やろうやろうと思っていた、 &lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; をついに使ってみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein&lt;/a&gt; を使って toml で設定。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
+[[plugins]]
+repo = &#39;Shougo/denite.nvim&#39;
+on_cmd = &#39;Denite&#39;
+if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
+hook_add = &#39;&#39;&#39;
+  &amp;quot; Use plefix s
+  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
+  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
+  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
+  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
+  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
+  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
+  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
+  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
+  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
+  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
+  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
+
+  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
+
+&#39;&#39;&#39;
+hook_post_source = &#39;&#39;&#39;
+  &amp;quot; Default options.
+	call denite#custom#option(&#39;default&#39;, {
+        \ &#39;prompt&#39;: &#39;»&#39;,
+        \ &#39;cursor_wrap&#39;: v:true,
+        \ &#39;auto_resize&#39;: v:true,
+        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
+        \ })
+	&amp;quot; Pt command on grep source
+  if executable(&#39;pt&#39;)
+    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
+          \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
+  endif
+  &amp;quot; custom mappings.
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;とりあえず unite の時に使ってたのと似た感じで設定してみた。&lt;/p&gt;
+
+&lt;p&gt;デフォルトオプションの設定と、キーマッピングの設定を追加でしている。
+あと、 grep に pt を使って。&lt;/p&gt;
+
+&lt;p&gt;jvgrep を使う設定にもしてみたんだけど、設定方法が悪いのかうまく出来なかったので、放置。 とりあえず pt でいい感じに使える。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>dein and vim singleton</title>
       <link>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</link>
       <pubDate>Fri, 09 Dec 2016 10:20:28 +0900</pubDate>
@@ -1045,84 +1112,6 @@ pyflake と coffeelint をインストールしてくれる。 NeoBundle
    message: &#39;Line exceeds maximum allowed length&#39;
  },
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>qfixhowm Vim でメモ</title>
-      <link>http://yukimemi.github.io/post/2013-06-29-qfixhowm/</link>
-      <pubDate>Sat, 29 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2013-06-29-qfixhowm/</guid>
-      <description>
-
-&lt;p&gt;vimでメモをとる場合、簡単な設定では vimrc に JunkFile
-コマンドを定義するなどする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; JunkFile {{{
-&amp;quot; http://vim-users.jp/2010/11/hack181/
-  &amp;quot;&amp;quot; Open junk file.
-  command! -nargs=0 JunkFile call s:open_junk_file()
-  function! s:open_junk_file()
-    let l:junk_dir = $HOME . &#39;/.vim_junk&#39;. strftime(&#39;/%Y/%m&#39;)
-    if !isdirectory(l:junk_dir)
-      call mkdir(l:junk_dir, &#39;p&#39;)
-    endif
-
-    let l:filename = input(&#39;Junk Code: &#39;, l:junk_dir.strftime(&#39;/%Y-%m-%d-%H%M%S.&#39;))
-    if l:filename != &#39;&#39;
-      execute &#39;edit &#39; . l:filename
-    endif
-  endfunction
-  &amp;quot; }}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これは実行時に拡張子が自由に設定出来るので、簡単にスクリプトを試してみたい場合
-はとても便利。&lt;/p&gt;
-
-&lt;p&gt;でも、やっぱり最近、メモは統合的に管理したいと思い、 QfixHowm
-を導入することにした。&lt;/p&gt;
-
-&lt;h3 id=&#34;インストール&#34;&gt;インストール&lt;/h3&gt;
-
-&lt;p&gt;Neobundle で一発&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundle &#39;fuenor/qfixgrep&#39;
-NeoBundle &#39;fuenor/qfixhowm&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;qfixgrep もいれとくと何かといいみたい。&lt;/p&gt;
-
-&lt;h3 id=&#34;設定&#34;&gt;設定&lt;/h3&gt;
-
-&lt;p&gt;デフォルトだと拡張子 txt で作成されるため、 markdown
-で記録するように 変更する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot;&amp;quot; qfixhowm {{{
-&amp;quot; ファイル拡張子をmdにする
-let howm_filename = &#39;%Y/%m/%Y-%m-%d-%H%M%S.md&#39;
-&amp;quot; ファイルタイプをmarkdownにする
-let QFixHowm_FileType = &#39;markdown&#39;
-&amp;quot; タイトル記号
-let QFixHowm_Title = &#39;#&#39;
-&amp;quot; タイトル行検索正規表現の辞書を初期化
-let QFixMRU_Title = {}
-&amp;quot; MRUでタイトル行とみなす正規表現(Vimの正規表現で指定)
-let QFixMRU_Title[&#39;mkd&#39;] = &#39;^###[^#]&#39;
-&amp;quot; grepでタイトル行とみなす正規表現(使用するgrepによっては変更する必要があります)
-let QFixMRU_Title[&#39;mkd_regxp&#39;] = &#39;^###[^#]&#39;
-&amp;quot; }}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こんなんでいいっぽい。&lt;/p&gt;
-
-&lt;p&gt;使い方、細かい設定は作者さんのページ参照&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sites.google.com/site/fudist/Home/qfixhowm&#34;&gt;QFixHowm - vim用howmプラグイン - fudist&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://vim-users.jp/2010/11/hack181/&#34;&gt;Vim-users.jp - Hack #181: Vimで使い捨てのファイルを作成する&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
