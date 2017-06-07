@@ -9,6 +9,159 @@
     <atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Setting of the vim-plug</title>
+      <link>http://yukimemi.github.io/post/2017-06-08_vim-plug/</link>
+      <pubDate>Thu, 08 Jun 2017 07:43:37 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-06-08_vim-plug/</guid>
+      <description>
+
+&lt;p&gt;ずっと &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; を使っていたのだけれど、ちょっと他のも試しに使ってみるかと思って、こっちも人気のある、 &lt;a href=&#34;https://github.com/junegunn/vim-plug&#34;&gt;vim-plug&lt;/a&gt; を試しに使ってみた。&lt;/p&gt;
+
+&lt;p&gt;設定は公式のREADMEとかを参考にして、こんな感じになった。
+(全部じゃないけど、抜粋して)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Plugin: {{{1
+&amp;quot; Use vim-plug.
+let s:cache_home = expand(&#39;~/.cache/nvim&#39;)
+let s:plug_dir = s:cache_home . &#39;/plugs&#39;
+let s:vim_plug_dir = s:cache_home . &#39;/vim-plug&#39;
+if has(&#39;vim_starting&#39;)
+  if !isdirectory(s:vim_plug_dir)
+    echo &amp;quot;Install vim-plug ...&amp;quot;
+    execute &#39;!git clone --depth 1 https://github.com/junegunn/vim-plug.git &#39; . s:vim_plug_dir . &#39;/autoload&#39;
+  endif
+  execute &#39;set runtimepath^=&#39; . fnamemodify(s:vim_plug_dir, &#39;:p&#39;)
+endif
+
+&amp;quot; Helper function.
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : { &#39;on&#39;: [], &#39;for&#39;: [] }
+endfunction
+
+function! MakeVimproc(info) abort &amp;quot;{{{2
+  if a:info.status == &#39;updated&#39; &amp;amp;&amp;amp; g:is_windows &amp;amp;&amp;amp; !has(&#39;kaoriya&#39;)
+    let g:vimproc#download_windows_dll = 1
+  endif
+  if !g:is_windows
+    !make
+  endif
+endfunction
+
+&amp;quot; Plugin list. {{{2
+call plug#begin(s:plug_dir)
+
+Plug &#39;joshdick/onedark.vim&#39;
+Plug &#39;itchyny/vim-cursorword&#39;
+Plug &#39;taku-o/vim-zoom&#39;, Cond(has(&#39;gui&#39;))
+Plug &#39;Yggdroot/indentLine&#39;
+Plug &#39;Shougo/deoplete.nvim&#39;, Cond(has(&#39;nvim&#39;), { &#39;do&#39;: &#39;UpdateRemotePlugins&#39; })
+Plug &#39;Shougo/neocomplete.vim&#39;, Cond(!has(&#39;nvim&#39;))
+Plug &#39;Shougo/context_filetype.vim&#39;
+Plug &#39;Shougo/denite.nvim&#39;, { &#39;on&#39;: &#39;Denite&#39; }
+Plug &#39;airblade/vim-rooter&#39;
+Plug &#39;Shougo/vimproc.vim&#39;, Cond(!has(&#39;kaoriya&#39;), { &#39;do&#39;: function(&#39;MakeVimproc&#39;) })
+Plug &#39;glidenote/memolist.vim&#39;, { &#39;on&#39;: [&#39;Memolist&#39;, &#39;MemoNew&#39;] }
+Plug &#39;mattn/sonictemplate-vim&#39;, { &#39;on&#39;: &#39;Templete&#39; }
+Plug &#39;junegunn/vim-easy-align&#39;, { &#39;on&#39;: &#39;&amp;lt;Plug&amp;gt;(EasyAlign)&#39; }
+Plug &#39;fatih/vim-go&#39;, { &#39;for&#39;: &#39;go&#39; }
+Plug &#39;rust-lang/rust.vim&#39;, Cond(executable(&#39;cargo&#39;), { &#39;for&#39;: &#39;rust&#39; })
+Plug &#39;b4b4r07/vim-sqlfmt&#39;, { &#39;for&#39;: &#39;sql&#39;, &#39;do&#39;: &#39;go get github.com/jackc/sqlfmt&#39; }
+
+call plug#end()
+
+&amp;quot; Plugin settings: {{{1
+let s:p = { &#39;plugs&#39;: get(g:, &#39;plugs&#39;, {}) }
+function! s:p.is_installed(name) abort
+  return has_key(self.plugs, a:name) ? isdirectory(self.plugs[a:name].dir) : 0
+endfunction
+
+&amp;quot; vim-cursorword {{{2
+if s:p.is_installed(&#39;vim-cursorword&#39;)
+  function! s:ToggleCursorWord() abort
+    let b:cursorword = !get(b:, &#39;cursorword&#39;, 1)
+  endfunction
+
+  com! ToggleCursorWord call s:ToggleCursorWord()
+endif
+
+&amp;quot; deoplete.nvim {{{2
+if s:p.is_installed(&#39;deoplete.nvim&#39;)
+  let g:deoplete#enable_at_startup = 1
+endif
+
+&amp;quot; neocomplete.vim {{{2
+if s:p.is_installed(&#39;neocomplete.vim&#39;)
+  let g:neocomplete#enable_at_startup = 1
+endif
+
+&amp;quot; denite.nvim {{{2
+if s:p.is_installed(&#39;denite.nvim&#39;)
+  &amp;quot; Use plefix s
+  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
+  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
+  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
+  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
+  &amp;quot; nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
+  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_mru&amp;lt;CR&amp;gt;
+  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
+  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
+  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
+  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
+  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line -no-quit&amp;lt;CR&amp;gt;
+  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
+
+  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
+
+  &amp;quot; Incremental search in cmdline history.
+  inoremap &amp;lt;C-l&amp;gt; &amp;lt;ESC&amp;gt;:&amp;lt;C-u&amp;gt;Denite command&amp;lt;CR&amp;gt;
+
+  au! User denite.nvim call s:denite_cfg()
+
+  function! s:denite_cfg() abort
+    &amp;quot; Load dependent plugins.
+    call plug#load(&#39;neomru.vim&#39;)
+    &amp;quot; Default options.
+    call denite#custom#option(&#39;default&#39;, {
+          \ &#39;prompt&#39;: &#39;»&#39;,
+          \ &#39;cursor_wrap&#39;: v:true,
+          \ &#39;auto_resize&#39;: v:true,
+          \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
+          \ })
+    &amp;quot; Pt command on grep source
+    if executable(&#39;pt&#39;)
+      call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
+      call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
+            \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
+      call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
+      call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
+      call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
+      call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
+    endif
+    &amp;quot; custom mappings.
+    call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
+    call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
+    call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
+    call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
+  endfunction
+endif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; のが色々出来るけど、 &lt;a href=&#34;https://github.com/junegunn/vim-plug&#34;&gt;vim-plug&lt;/a&gt; もけっこう色々出来てびっくり。
+何より、インストール画面がかっちょいいのがいいｗ&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/junegunn/vim-plug/wiki/faq&#34;&gt;faq · junegunn/vim-plug Wiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://qiita.com/b4b4r07/items/fa9c8cceb321edea5da0&#34;&gt;おい、NeoBundle もいいけど vim-plug 使えよ - Qiita&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Use denite instead of unite</title>
       <link>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</link>
       <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
@@ -1057,61 +1210,6 @@ let g:automatic_config = [
 &lt;p&gt;&lt;a href=&#34;http://blog.supermomonga.com/articles/vim/automatic.html&#34;&gt;automatic.vimでウィンドウの一時的分割をハンドリングしよう |かなりすごいブログ&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/osyo-manga/vim-automatic&#34;&gt;osyo-manga/vim-automatic GitHub&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vim coffeescript syntastic</title>
-      <link>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</link>
-      <pubDate>Sun, 11 Aug 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</guid>
-      <description>&lt;p&gt;vim で保存時に自動で構文チェックとかを行なってくれるプラギンに
-Syntastic というものがある。&lt;/p&gt;
-
-&lt;p&gt;coffeescript を書く時も、これを使うと便利。&lt;/p&gt;
-
-&lt;p&gt;インストールは NeoBundle で一発。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundle &#39;scrooloose/syntastic.git&#39;, {
-            \ &#39;build&#39;: {
-            \   &#39;mac&#39;: [&#39;pip install pyflake&#39;, &#39;npm -g install coffeelint&#39;],
-            \   &#39;unix&#39;: [&#39;pip install pyflake&#39;, &#39;npm -g install coffeelint&#39;]
-            \ }}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記のように書いておけば、 Syntastic をインストールする時に自動で、
-pyflake と coffeelint をインストールしてくれる。 NeoBundle
-すごい。&lt;/p&gt;
-
-&lt;p&gt;後は普通にコードを書いて、保存すると、自動でエラー行にチェックがつく。
-エラーの内容を見たい時は、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;:Errors
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;コマンドでおｋ&lt;/p&gt;
-
-&lt;p&gt;coffeelint はデフォルトでインデントは 2 みたい。&lt;/p&gt;
-
-&lt;p&gt;.vimrc に以下のように書いておいた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;autocmd MyAutoCmd BufNewFile,BufRead .coffee setl ft=coffee fenc=utf8 ff=unix tabstop=4 shiftwidth=2 softtabstop=2 expandtab
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;また、1行の長さが 80文字
-を超えてもエラーになるのが邪魔だったので、これは無視したい。&lt;/p&gt;
-
-&lt;p&gt;以下のファイルの内容を変更すれば、無視することが出来た。(もっとスマートなやり方があるかもしれない。誰か教えてください。)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-diff&#34;&gt;$ vim ~/.nodebrew/current/lib/node_modules/coffeelint/lib/coffeelint.js
- max_line_length: {
-   value: 80,
-   -level: ERROR,
-   +level: IGNORE,
-   message: &#39;Line exceeds maximum allowed length&#39;
- },
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

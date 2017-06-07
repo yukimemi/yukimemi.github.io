@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Plugin on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/plugin/index.xml</link>
-    <description>Recent content in Plugin on YUKIMEMI</description>
+    <title>Vim Plug on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/vim-plug/index.xml</link>
+    <description>Recent content in Vim Plug on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/plugin/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://yukimemi.github.io/tags/vim-plug/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Setting of the vim-plug</title>
@@ -158,33 +158,6 @@ endif
 &lt;p&gt;&lt;a href=&#34;https://github.com/junegunn/vim-plug/wiki/faq&#34;&gt;faq · junegunn/vim-plug Wiki&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://qiita.com/b4b4r07/items/fa9c8cceb321edea5da0&#34;&gt;おい、NeoBundle もいいけど vim-plug 使えよ - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Zsh autosuggestions</title>
-      <link>http://yukimemi.github.io/post/2016-09-25_zsh-autosuggestions/</link>
-      <pubDate>Sun, 25 Sep 2016 23:53:12 +0900</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2016-09-25_zsh-autosuggestions/</guid>
-      <description>&lt;p&gt;&lt;code&gt;zsh-autosuggestions&lt;/code&gt; という便利な &lt;em&gt;zsh&lt;/em&gt; のプラギンを見つけた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;zplug&lt;/code&gt; を使って簡単にインストール可能。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;zplug &amp;quot;zsh-users/zsh-autosuggestions&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとは、表示された補完を決定するキーの設定を追加。
-ちなみにデフォルトだと、右矢印が割り当てられてる模様。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;bindkey &#39;^ &#39; autosuggest-accept
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;で、 &lt;code&gt;Ctrl + Space&lt;/code&gt; で、補完候補が確定する。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/zsh-autosuggestions.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;べんり。&lt;/p&gt;
 </description>
     </item>
     
