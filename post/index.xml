@@ -168,7 +168,9 @@ endif
       <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</guid>
-      <description>&lt;p&gt;やろうやろうと思っていた、 &lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; をついに使ってみた。&lt;/p&gt;
+      <description>
+
+&lt;p&gt;やろうやろうと思っていた、 &lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; をついに使ってみた。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein&lt;/a&gt; を使って toml で設定。&lt;/p&gt;
 
@@ -225,7 +227,85 @@ hook_post_source = &#39;&#39;&#39;
 &lt;p&gt;デフォルトオプションの設定と、キーマッピングの設定を追加でしている。
 あと、 grep に pt を使って。&lt;/p&gt;
 
-&lt;p&gt;jvgrep を使う設定にもしてみたんだけど、設定方法が悪いのかうまく出来なかったので、放置。 とりあえず pt でいい感じに使える。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/mattn/jvgrep&#34;&gt;jvgrep&lt;/a&gt; を使う設定にもしてみたんだけど、設定方法が悪いのかうまく出来なかったので、放置。 とりあえず pt でいい感じに使える。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;2017-06-10-追記&#34;&gt;2017/06/10 追記&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; の help を見ると、 &lt;a href=&#34;https://github.com/mattn/jvgrep&#34;&gt;jvgrep&lt;/a&gt; を使う例が載ってた！！
+さすが Shougo さん、ありがとうございます！！&lt;/p&gt;
+
+&lt;p&gt;ということで、こんな設定になりました。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
+[[plugins]]
+repo = &#39;Shougo/denite.nvim&#39;
+on_cmd = &#39;Denite&#39;
+if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
+hook_add = &#39;&#39;&#39;
+  &amp;quot; Use plefix s
+  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
+  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
+  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
+  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
+  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
+  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
+  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
+  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
+  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
+  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
+  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
+
+  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
+
+&#39;&#39;&#39;
+hook_post_source = &#39;&#39;&#39;
+  &amp;quot; Default options.
+  call denite#custom#option(&#39;default&#39;, {
+        \ &#39;prompt&#39;: &#39;»&#39;,
+        \ &#39;cursor_wrap&#39;: v:true,
+        \ &#39;auto_resize&#39;: v:true,
+        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
+        \ })
+  if executable(&#39;jvgrep&#39;)
+    &amp;quot; jvgrep command on grep source
+    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;jvgrep&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [&#39;-R&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
+
+  elseif executable(&#39;rg&#39;)
+    &amp;quot; Ripgrep command on grep source
+    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;rg&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
+      \ [&#39;--vimgrep&#39;, &#39;--no-heading&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [&#39;--regexp&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
+
+  elseif executable(&#39;pt&#39;)
+    &amp;quot; Pt command on grep source
+    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
+      \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
+    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
+    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
+  endif
+  &amp;quot; custom mappings.
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
+  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;さりげなく、 &lt;a href=&#34;https://github.com/BurntSushi/ripgrep&#34;&gt;ripgrep&lt;/a&gt; も入れといた。&lt;/p&gt;
 </description>
     </item>
     
