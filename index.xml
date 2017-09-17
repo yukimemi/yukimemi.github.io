@@ -15,7 +15,9 @@
       <pubDate>Sun, 17 Sep 2017 23:30:20 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</guid>
-      <description>&lt;p&gt;vim や neovim で標準で用意されている &lt;code&gt;package&lt;/code&gt; 機能。まだ一度も触ったことがなかったので使ってみた。&lt;/p&gt;
+      <description>
+
+&lt;p&gt;vim や neovim で標準で用意されている &lt;code&gt;package&lt;/code&gt; 機能。まだ一度も触ったことがなかったので使ってみた。&lt;/p&gt;
 
 &lt;p&gt;使ってみるに当たって、 &lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac&lt;/a&gt; が
 便利そうなので、利用してみた。&lt;/p&gt;
@@ -190,6 +192,16 @@ com! PackNameOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpac
 &lt;p&gt;これで、起動時間を計測したところ・・・ &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; より、少し遅いくらいになった・・・。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; めちゃ早いことがわかった・・・。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac: A minimal package manager for Vim 8 (and Neovim)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://h-miyako.hatenablog.com/entry/2016/02/29/211534&#34;&gt;Vimのパッケージ機能を試してみました - Blank File&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
