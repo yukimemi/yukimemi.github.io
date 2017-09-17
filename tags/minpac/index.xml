@@ -49,6 +49,7 @@ let s:lazy_plugs = [
       \ [&#39;Konfekt/FastFold&#39;, {&#39;type&#39;: &#39;opt&#39;}],
       \ [&#39;thinca/vim-submode&#39;, {&#39;type&#39;: &#39;opt&#39;}],
       \ [&#39;LeafCage/yankround.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;tyru/capture.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
       \ [&#39;Shougo/context_filetype.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
       \ [&#39;Shougo/denite.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;python3&#39;)],
       \ [&#39;Shougo/deoplete.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;nvim&#39;)],
