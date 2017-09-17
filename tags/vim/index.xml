@@ -9,6 +9,189 @@
     <atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Use minpac.vim</title>
+      <link>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</link>
+      <pubDate>Sun, 17 Sep 2017 23:30:20 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</guid>
+      <description>&lt;p&gt;vim や neovim で標準で用意されている &lt;code&gt;package&lt;/code&gt; 機能。まだ一度も触ったことがなかったので使ってみた。&lt;/p&gt;
+
+&lt;p&gt;使ってみるに当たって、 &lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac&lt;/a&gt; が
+便利そうなので、利用してみた。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Plugin:
+&amp;quot; Use minpac. {{{1
+set packpath^=&#39;~/.cache/nvim/&#39;
+let s:minpac_dir = &#39;~/.cache/nvim/pack/minpac/opt/minpac&#39;
+if has(&#39;vim_starting&#39;)
+  if !isdirectory(s:minpac_dir)
+    echo &amp;quot;Install minpac ...&amp;quot;
+    execute &#39;!git clone --depth 1 https://github.com/k-takata/minpac &#39; . s:minpac_dir
+  endif
+endif
+
+&amp;quot; pack list. {{{1
+&amp;quot; start plugins. {{{2
+let s:start_plugs = [
+      \ [&#39;Yggdroot/indentLine&#39;, {}],
+      \ [&#39;itchyny/lightline.vim&#39;, {}],
+      \ ]
+
+&amp;quot; opt plugins. {{{2
+let s:opt_plugs = [
+      \ [&#39;fatih/vim-go&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;zchee/deoplete-go&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! !make&#39;}],
+      \ [&#39;kristijanhusak/vim-hybrid-material&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ ]
+
+&amp;quot; lazy load plugins. {{{2
+let s:lazy_plugs = [
+      \ [&#39;Konfekt/FastFold&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;thinca/vim-submode&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;LeafCage/yankround.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;Shougo/context_filetype.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;Shougo/denite.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;python3&#39;)],
+      \ [&#39;Shougo/deoplete.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;nvim&#39;)],
+      \ [&#39;Shougo/echodoc.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
+      \ [&#39;Shougo/vimproc.vim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! !make&#39;}],
+      \ ]
+
+&amp;quot; minpac init. {{{1
+if exists(&#39;*minpac#init&#39;)
+  &amp;quot; minpac is loaded.
+  call minpac#init()
+  call minpac#add(&#39;k-takata/minpac&#39;, {&#39;type&#39;: &#39;opt&#39;})
+
+  function! s:minpac_add(plugs)
+    for plug in a:plugs
+      let cond = len(plug) &amp;gt; 2 ? plug[2] : 1
+      if cond
+        exe &#39;call minpac#add(&amp;quot;&#39; . plug[0] . &#39;&amp;quot;, &#39; . string(plug[1]) . &#39;)&#39;
+      endif
+    endfor
+  endfunction
+
+  &amp;quot; start. {{{2
+  call &amp;lt;SID&amp;gt;minpac_add(s:start_plugs)
+
+  &amp;quot; opt. {{{2
+  call &amp;lt;SID&amp;gt;minpac_add(s:opt_plugs)
+
+  &amp;quot; lazy. {{{2
+  call &amp;lt;SID&amp;gt;minpac_add(s:lazy_plugs)
+endif
+
+&amp;quot; Async load lazy plugins. {{{1
+let s:idx = 0
+function! PackAddHandler(timer)
+  let plug = s:lazy_plugs[s:idx]
+  let name = split(plug[0], &#39;/&#39;)[1]
+  let cond = len(plug) &amp;gt; 2 ? plug[2] : 1
+  if cond
+    &amp;quot; exe &amp;quot;echom &#39;packadd &amp;quot; . name . &amp;quot;&#39;&amp;quot;
+    exe &#39;packadd &#39; . name
+  endif
+  let s:idx += 1
+  &amp;quot; doautocmd BufReadPost
+  au! lazy_load_bundle
+endfunction
+
+aug lazy_load_bundle
+  au MyAutoCmd VimEnter * call timer_start(1, &#39;PackAddHandler&#39;, {&#39;repeat&#39;: len(s:lazy_plugs)})
+aug END
+
+&amp;quot; Plugin settings. {{{1
+&amp;quot; lightline. {{{2
+let g:lightline = {
+      \ &#39;colorscheme&#39;: &#39;jellybeans&#39;,
+      \ }
+
+&amp;quot; deoplete.nvim. {{{2
+let g:deoplete#enable_at_startup = 1
+
+&amp;quot; vim-submode. {{{2
+let g:submode_leave_with_key = 1
+
+au MyAutoCmd VimEnter * call &amp;lt;SID&amp;gt;vim_submode_aft()
+function! s:vim_submode_aft() abort
+  packadd vim-submode
+  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s&amp;gt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;gt;&#39;)
+  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s&amp;lt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;lt;&#39;)
+  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s+&#39;, &#39;&amp;lt;C-w&amp;gt;+&#39;)
+  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s-&#39;, &#39;&amp;lt;C-w&amp;gt;-&#39;)
+  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;&amp;gt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;gt;&#39;)
+  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;&amp;lt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;lt;&#39;)
+  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;+&#39;, &#39;&amp;lt;C-w&amp;gt;+&#39;)
+  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;-&#39;, &#39;&amp;lt;C-w&amp;gt;-&#39;)
+endfunction
+
+&amp;quot; yankround.vim. {{{2
+nmap p &amp;lt;Plug&amp;gt;(yankround-p)
+nmap P &amp;lt;Plug&amp;gt;(yankround-P)
+nmap &amp;lt;C-p&amp;gt; &amp;lt;Plug&amp;gt;(yankround-prev)
+nmap &amp;lt;C-n&amp;gt; &amp;lt;Plug&amp;gt;(yankround-next)
+let g:yankround_max_history = 100
+
+&amp;quot; vim-go. {{{2
+let g:go_auto_type_info = 1
+let g:go_snippet_engine = &amp;quot;neosnippet&amp;quot;
+let g:go_fmt_command = &amp;quot;goimports&amp;quot;
+
+let g:go_metalinter_autosave = 1
+let g:go_fmt_autosave = 0
+let g:go_gocode_unimported_packages = 1
+&amp;quot; au MyAutoCmd BufWritePost *.go GoMetaLinter
+&amp;quot; au MyAutoCmd BufWritePre *.go silent GoFmt
+
+au MyAutoCmd BufNew,BufRead *.go call &amp;lt;SID&amp;gt;vim_go_cfg()
+
+function! s:vim_go_cfg() abort
+  packadd vim-go
+
+  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gd &amp;lt;Plug&amp;gt;(go-doc)
+  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gs &amp;lt;Plug&amp;gt;(go-doc-split)
+  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gv &amp;lt;Plug&amp;gt;(go-doc-vertical)
+  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gb &amp;lt;Plug&amp;gt;(go-doc-browser)
+  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gr &amp;lt;Plug&amp;gt;(go-rename)
+  nnoremap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gi :&amp;lt;C-u&amp;gt;GoImport&amp;lt;Space&amp;gt;
+  setl completeopt=menu,preview
+endfunction
+
+&amp;quot; Define user commands for updating/cleaning the plugins. {{{1
+&amp;quot; Each of them loads minpac, reloads .vimrc to register the
+&amp;quot; information of plugins, then performs the task.
+com! PackClean     packadd minpac | source $MYVIMRC | call minpac#clean()
+com! PackUpdate    packadd minpac | source $MYVIMRC | call minpac#clean() | call minpac#update()
+com! PackListStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;start&amp;quot;)
+com! PackListOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;opt&amp;quot;)
+com! PackNameStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;start&amp;quot;, &amp;quot;&amp;quot;, 1)
+com! PackNameOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;opt&amp;quot;, &amp;quot;&amp;quot;, 1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;設定するに当たって、 &lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt; を参考に (というかほぼパク・・・) した。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;package&lt;/code&gt; には、 &lt;code&gt;start&lt;/code&gt; と、 &lt;code&gt;opt&lt;/code&gt; がある。 &lt;code&gt;start&lt;/code&gt; は、デフォルトで読み込まれるプラグインで、 &lt;code&gt;opt&lt;/code&gt; なものは、別途 &lt;code&gt;packadd&lt;/code&gt; をすることで
+遅延ロードすることが出来る。&lt;/p&gt;
+
+&lt;p&gt;僕は 3つの 種類に分けて設定してみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;s:start_plugs&lt;/code&gt; に記載しているプラグインは、文字通り &lt;code&gt;start&lt;/code&gt; でデフォルトで読み込まれるプラグインたち。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;s:opt_plugs&lt;/code&gt; に記載しているプラグインは、 特定の &lt;code&gt;filetype&lt;/code&gt; で有効化するようなやつ。これらはその &lt;code&gt;filetype&lt;/code&gt; の
+&lt;code&gt;autocmd&lt;/code&gt; で個別に &lt;code&gt;packadd&lt;/code&gt; する。
+ちなみに、 &lt;code&gt;colorscheme&lt;/code&gt; も、 &lt;code&gt;opt&lt;/code&gt; でいいらしい。 &lt;code&gt;colorscheme&lt;/code&gt; コマンドが使用される時に自動的に &lt;code&gt;packadd&lt;/code&gt; されるよう。&lt;/p&gt;
+
+&lt;p&gt;んで、 &lt;code&gt;s:lazy_plugs&lt;/code&gt; に記載しているのが、遅延ロードするやつ。
+&lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt; で書かれているように、
+タイマー機能を使用して、 &lt;code&gt;vim&lt;/code&gt; が起動した後に遅延で &lt;code&gt;packadd&lt;/code&gt; する。&lt;/p&gt;
+
+&lt;p&gt;これで、起動時間を計測したところ・・・ &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; より、少し遅いくらいになった・・・。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; めちゃ早いことがわかった・・・。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Setting of the vim-plug</title>
       <link>http://yukimemi.github.io/post/2017-06-08_vim-plug/</link>
       <pubDate>Thu, 08 Jun 2017 07:43:37 +0900</pubDate>
@@ -1204,92 +1387,6 @@ import文みたいなのを入れておけば、動的に複数のpowershell
       \   &#39;autoload&#39; : {&#39;filetypes&#39;: [&#39;ps1&#39;]}
       \ }
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ</title>
-      <link>http://yukimemi.github.io/post/2013-09-15-automatic_vim/</link>
-      <pubDate>Sun, 15 Sep 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2013-09-15-automatic_vim/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/osyo-manga/vim-automatic&#34;&gt;automatic.vim&lt;/a&gt;
-という便利なプラギンがある。&lt;/p&gt;
-
-&lt;p&gt;これを利用すると、 Unite や QuickFix や help
-など、様々なウィンドウを一元管理出来るっぽい。&lt;/p&gt;
-
-&lt;p&gt;そこで、いろんなサイトを参考にやってみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; ESC2回押しで検索ハイライトを消去
-autocm MyAutoCmd VimEnter,WinEnter,WinLeave * nmap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;&amp;lt;Plug&amp;gt;(anzu-clear-search-status)
-
-&amp;quot; vim-automatic {{{
-function! s:my_temporary_window_init(config, context)
-    silent! nunmap &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt;
-    nmap &amp;lt;buffer&amp;gt; &amp;lt;C-[&amp;gt; :&amp;lt;C-u&amp;gt;q&amp;lt;CR&amp;gt;
-    nmap &amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;q&amp;lt;CR&amp;gt;
-endfunction
-
-let g:automatic_default_match_config = {
-            \   &#39;is_open_other_window&#39;: 1
-            \ }
-let g:automatic_default_set_config = {
-            \   &#39;height&#39;: &#39;60%&#39;,
-            \   &#39;move&#39;: &#39;bottom&#39;,
-            \   &#39;apply&#39;: function(&#39;s:my_temporary_window_init&#39;)
-            \ }
-let g:automatic_config = [
-            \   {&#39;match&#39;: {&#39;buftype&#39;: &#39;help&#39;}},
-            \   {&#39;match&#39;: {&#39;bufname&#39;: &#39;^.vimshell&#39;}},
-            \   {&#39;match&#39;: {&#39;bufname&#39;: &#39;[\[\*]unite[\]\*]&#39;}},
-            \   {
-            \       &#39;match&#39;: {
-            \           &#39;filetype&#39;: &#39;qf&#39;,
-            \           &#39;autocmds&#39;: [&#39;FileType&#39;]
-            \       },
-            \   },
-            \   {
-            \       &#39;match&#39;: {
-            \           &#39;filetype&#39;: &#39;\v^ref-.+&#39;,
-            \           &#39;autocmds&#39;: [&#39;FileType&#39;]
-            \       }
-            \   },
-            \   {
-            \       &#39;match&#39;: {
-            \           &#39;bufname&#39;: &#39;\[quickrun output\]&#39;
-            \       },
-            \       &#39;set&#39;: {
-            \           &#39;height&#39;: 8
-            \       }
-            \   },
-            \   {
-            \       &#39;match&#39;: {
-            \           &#39;autocmds&#39;: [&#39;CmdwinEnter&#39;]
-            \       },
-            \       &#39;set&#39;: {
-            \           &#39;is_close_focus_out&#39;: 1,
-            \           &#39;unsettings&#39;: [&#39;move&#39;, &#39;resize&#39;]
-            \       }
-            \   }
-            \ ]
-&amp;quot; }}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、 Unite 、 QuickFix 、 help で、 &lt;code&gt;&amp;lt;C-[&amp;gt;&amp;lt;C-[&amp;gt;&lt;/code&gt;
-を押すと閉じることが出来る。 &lt;code&gt;&amp;lt;C-[&amp;gt;&amp;lt;C-[&amp;gt;&lt;/code&gt;
-で検索後のハイライトを消すというマッピングを行っているため、わざわざ一回マッピング削除して
-さらにもう一回設定みたいなことをやってるのがなんかカッコ悪い・・・。&lt;/p&gt;
-
-&lt;p&gt;もうちょっとうまく出来ると思うんだけど、 vim 力足りず・・・。&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.supermomonga.com/articles/vim/automatic.html&#34;&gt;automatic.vimでウィンドウの一時的分割をハンドリングしよう |かなりすごいブログ&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/osyo-manga/vim-automatic&#34;&gt;osyo-manga/vim-automatic GitHub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
