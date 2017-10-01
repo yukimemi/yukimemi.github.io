@@ -2,429 +2,75 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ubuntu on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/ubuntu/index.xml</link>
+    <link>http://yukimemi.github.io/tags/ubuntu/</link>
     <description>Recent content in Ubuntu on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 May 2015 08:57:44 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>PalmDetect in Ubuntu</title>
-      <link>http://yukimemi.github.io/post/2015-05-10_PalmDetect%20in%20Ubuntu/</link>
+      <link>http://yukimemi.github.io/post/2015-05-10_palmdetect-in-ubuntu/</link>
       <pubDate>Sun, 10 May 2015 08:57:44 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-10_PalmDetect%20in%20Ubuntu/</guid>
-      <description>
-
-&lt;p&gt;MacBook AirにUbuntu 15.04をインストールした。
-だいたい使いやすくはなっているのだけど、たまにキーボード入力をしている時にタッチパッドが誤反応してしまう時があった。&lt;/p&gt;
-
-&lt;p&gt;そこで、手のひら検出？とかいうのを入れてみることにした。&lt;/p&gt;
-
-&lt;p&gt;以下のファイルを作成する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim ~/.config/autostart/synclient.desktop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;内容は以下の通り&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Desktop Entry]
-Type=Application
-Exec=synclient PalmDetect=1
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[ja]=synclient(PalmDetect)
-Name=synclient(PalmDetect)
-Comment[ja]=
-Comment=
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Superキーを押して出てくる検索メニューから「自動起動するアプリケーション」を選択して、そこで記載するのと同じ。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/kaz8/items/51a43a7290c29919bc2e&#34;&gt;安全にsynclientでUbuntuのタッチパッド設定を変更する - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-10_palmdetect-in-ubuntu/</guid>
+      <description>MacBook AirにUbuntu 15.04をインストールした。 だいたい使いやすくはなっているのだけど、たまにキーボード入力をしている時にタッチパッドが誤反応してしまう時があった。
+そこで、手のひら検出？とかいうのを入れてみることにした。
+以下のファイルを作成する。
+$ vim ~/.config/autostart/synclient.desktop  内容は以下の通り
+[Desktop Entry] Type=Application Exec=synclient PalmDetect=1 Hidden=false NoDisplay=false X-GNOME-Autostart-enabled=true Name[ja]=synclient(PalmDetect) Name=synclient(PalmDetect) Comment[ja]= Comment=  Superキーを押して出てくる検索メニューから「自動起動するアプリケーション」を選択して、そこで記載するのと同じ。
+参考 安全にsynclientでUbuntuのタッチパッド設定を変更する - Qiita</description>
     </item>
     
     <item>
       <title>Mayu for IME off in vim</title>
-      <link>http://yukimemi.github.io/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</link>
+      <link>http://yukimemi.github.io/post/2015-05-02_mayu-for-ime-off-in-vim/</link>
       <pubDate>Sat, 02 May 2015 22:59:12 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</guid>
-      <description>
-
-&lt;p&gt;vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。
-Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。&lt;/p&gt;
-
-&lt;p&gt;Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。
-そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。&lt;/p&gt;
-
-&lt;p&gt;Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。&lt;/p&gt;
-
-&lt;p&gt;設定自体は単純なんだけど、キーボードのキーコードを全部定義しなきゃいけないみたいで、それがめんどくさそうだった。
-幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。
-一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。&lt;/p&gt;
-
-&lt;h3 id=&#34;mayuのインストール&#34;&gt;Mayuのインストール&lt;/h3&gt;
-
-&lt;p&gt;Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。
-Ubuntu 15.04では以下の通りにやるとビルド出来た。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/kenhys/mayu.git
-$ cd ~/.ghq/src/github.com/kenhys/mayu
-$ sudo aptitude install build-essential libboost-iostreams-dev libudev-dev libusb-1.0-0-dev
-$ ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu/
-$ make
-$ sudo make install
-$ sudo chmod +s /usr/local/bin/mayu
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。
-本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。&lt;/p&gt;
-
-&lt;h3 id=&#34;fcitx設定&#34;&gt;fcitx設定&lt;/h3&gt;
-
-&lt;p&gt;今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。
-前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。&lt;/p&gt;
-
-&lt;p&gt;それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;mayu設定&#34;&gt;Mayu設定&lt;/h3&gt;
-
-&lt;p&gt;次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;def key Esc Escape = 0x01
-def key Eisu = 0x7b
-
-key Esc = Esc Eisu
-key C-OpenBracket = C-OpenBracket Eisu
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;「Escape」が押された時に、「Escape」、「英数」を押し、「Ctrl-[」が押された時に、「Ctrl-[」、「英数」を押すという設定。&lt;/p&gt;
-
-&lt;p&gt;ただ、mayuでは、一通りキーボード上のキーは全てdefしなきゃいけないみたいで、ネット上に公開してくださっているありがたい方の &lt;a href=&#34;http://d.hatena.ne.jp/OKIIZO/20080106/1199639459&#34;&gt;キーコード一覧&lt;/a&gt; を使用させてもらった。&lt;/p&gt;
-
-&lt;p&gt;一部、MacBookAirのキーコードと違う部分があったので、改変している。 &lt;a href=&#34;https://raw.githubusercontent.com/yukimemi/dotfiles/master/.mayu&#34;&gt;mayu&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この設定ファイルをHOMEに「.mayu」として置く。
-その後、mayuをルート権限で実行する。&lt;/p&gt;
-
-&lt;p&gt;これでvim上でもシェル上でも、どこでも同じようにIMEがオフになるようになる。&lt;/p&gt;
-
-&lt;p&gt;あと、キーボードでキーコード一覧に記載されていないものがあった場合、mayuの標準出力にキーコードが表示される。それをメモして、設定ファイルに適当な名前で「def key hoge = 0xXX」とかしてやれば大丈夫。&lt;/p&gt;
-
-&lt;h3 id=&#34;mayu自動起動&#34;&gt;Mayu自動起動&lt;/h3&gt;
-
-&lt;p&gt;システム起動時に自動でmayuが起動するように、systemdに登録する。&lt;/p&gt;
-
-&lt;p&gt;userごとの自動起動設定としたいため、以下のファイルをまず作成する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mkdir -p ~/.config/systemd/user
-$ vim ~/.config/systemd/user/mayu.service
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;「mayu.service」の中身はこんな感じ&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Unit]
-Description=mayu keyboard hack
-
-[Service]
-ExecStart=/usr/local/bin/mayu
-
-[Install]
-WantedBy=default.target
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、以下のようにして登録する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ systemctl --user daemon-reload
-$ systemctl --user list-unit-files
-UNIT FILE            STATE
-mayu.service         disabled
-systemd-exit.service static
-basic.target         static
-bluetooth.target     static
-default.target       static
-exit.target          disabled
-paths.target         static
-printer.target       static
-shutdown.target      static
-smartcard.target     static
-sockets.target       static
-sound.target         static
-timers.target        static
-
-13 unit files listed.
-
-$ systemctl --user enable mayu.service
-$ systemctl --user list-unit-files
-UNIT FILE            STATE
-mayu.service         enabled
-systemd-exit.service static
-basic.target         static
-bluetooth.target     static
-default.target       static
-exit.target          disabled
-paths.target         static
-printer.target       static
-shutdown.target      static
-smartcard.target     static
-sockets.target       static
-sound.target         static
-timers.target        static
-
-13 unit files listed.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;systemdとして正しく起動しているか確かめる場合は、ログを見る。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ journalctl
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Basic System.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Started mayu keyboard hack.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting mayu keyboard hack...
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Reached target Default.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Startup finished in 44ms.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1]: Started User Manager for UID 1000.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Default.
-5月 02 08:57:56 yukimemi-MacBookAir kernel: input: mayu uinpt as /devices/virtual/input/input14
-5月 02 08:57:56 yukimemi-MacBookAir mayu[1386]: loading: /home/yukimemi/.mayu
-5月 02 08:57:58 yukimemi-MacBookAir mayu[1386]: successfully loaded.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こんな感じ。
-だいぶ使いやすくなった。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/sharow/items/e8f7d3e0628d7ee925db&#34;&gt;systemdでの定期実行(timerユニット) - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/OKIIZO/20080106/1199639459&#34;&gt;新型Apple Keyboard微妙 - どんごどんご&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/kenhys/mayu&#34;&gt;kenhys/mayu&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://symfoware.blog68.fc2.com/blog-entry-1397.html&#34;&gt;Ubuntu 14.04にMozcと窓使いの憂鬱をインストールする - Symfoware&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-02_mayu-for-ime-off-in-vim/</guid>
+      <description>vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。 Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。
+Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。 そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。
+Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。
+設定自体は単純なんだけど、キーボードのキーコードを全部定義しなきゃいけないみたいで、それがめんどくさそうだった。 幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。 一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。
+Mayuのインストール Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。 Ubuntu 15.04では以下の通りにやるとビルド出来た。
+$ ghq get https://github.com/kenhys/mayu.git $ cd ~/.ghq/src/github.com/kenhys/mayu $ sudo aptitude install build-essential libboost-iostreams-dev libudev-dev libusb-1.0-0-dev $ ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu/ $ make $ sudo make install $ sudo chmod +s /usr/local/bin/mayu  mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。 本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。
+fcitx設定 今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。 前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。
+それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。
+Mayu設定 次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。
+def key Esc Escape = 0x01 def key Eisu = 0x7b key Esc = Esc Eisu key C-OpenBracket = C-OpenBracket Eisu  「Escape」が押された時に、「Escape」、「英数」を押し、「Ctrl-[」が押された時に、「Ctrl-[」、「英数」を押すという設定。</description>
     </item>
     
     <item>
       <title>Guake terminal in ubuntu</title>
-      <link>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</link>
+      <link>http://yukimemi.github.io/post/2015-05-02_guake-terminal/</link>
       <pubDate>Sat, 02 May 2015 22:03:13 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-02_guake%20terminal/</guid>
-      <description>
-
-&lt;p&gt;macでiTerm2を使っていたので、同じように使えるterminalがないか探していたところ、あんまこれ！ってのが見つからなかったので、昔使ってたguakeを入れた。けっこう普通につかえて便利。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo apt-get install guake
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;デフォルトでは、「F12」で起動する。&lt;/p&gt;
-
-&lt;p&gt;おすすめ設定は、こんな感じ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;全般&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-general_min.png&#34; alt=&#34;guake-general&#34; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;スクロール&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-scroll_min.png&#34; alt=&#34;guake-scroll&#34; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;外観&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-style_min.png&#34; alt=&#34;guake-style&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/guake-terminal_min.png&#34; alt=&#34;guake&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;あとは、fontをRicty for Powerlineにする。&lt;/p&gt;
-
-&lt;p&gt;Ricty for Powerlineのインストールは以下の通り。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
-mkdir -p ~/tmp
-mkdir -p ~/.fonts
-pushd ~/tmp
-
-sudo apt-get install fontforge
-
-wget http://levien.com/type/myfonts/Inconsolata.otf
-wget http://iij.dl.sourceforge.jp/mix-mplus-ipa/59022/migu-1m-20130617.zip
-
-unzip migu-1m-20130617.zip
-
-git clone https://github.com/yascentur/Ricty.git
-
-pushd Ricty
-
-./ricty_generator.sh ~/tmp/Inconsolata.otf ~/tmp/migu-1m-20130617/migu-1m-regular.ttf ~/tmp/migu-1m-20130617/migu-1m-bold.ttf
-
-mv Ricty*.ttf ~/.fonts
-
-popd
-
-git clone https://github.com/Lokaltog/vim-powerline.git
-fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Regular.ttf
-fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Bold.ttf
-mv Ricty-Regular-Powerline.ttf ~/.fonts
-mv Ricty-Bold-Powerline.ttf ~/.fonts
-
-popd
-
-fc-cache -vf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでかなり良くなる。
-あとは、色を設定する。iTerm2でもテーマがあったように、guakeでも、ネットにテーマを作ってくださっているありがたい方がいらっしゃるので、使用させてもらう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/coolwanglu/guake-colors-solarized.git
-$ ghq get https://github.com/erroneousboat/guake-colors-monokai.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;有名なsolarizedとmonokaiのテーマ。
-適用は、どちらもシェルスクリプトを実行するだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-solarized
-$ ./set_dark.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;もしくは、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd guake-colors-monokai
-$ ./setup.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一瞬で変わる。べんり。&lt;/p&gt;
-
-&lt;p&gt;あとは、なぜかtmuxが256-color表示出来ていなかった。これは、オプションを指定して起動すればいいみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tmux -2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、guake上で実行したvimの背景が透過されていなかった。
-こちらは、.vimrcに以下を追加して解決。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;highlight Normal ctermbg=none
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://uonl.tumblr.com/post/53433544404&#34;&gt;Ubuntu on Let&amp;rsquo;s Note vimの背景を半透明にする&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux&#34;&gt;Getting 256 colors to work in tmux - Unix &amp;amp; Linux Stack Exchange&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-02_guake-terminal/</guid>
+      <description>macでiTerm2を使っていたので、同じように使えるterminalがないか探していたところ、あんまこれ！ってのが見つからなかったので、昔使ってたguakeを入れた。けっこう普通につかえて便利。
+$ sudo apt-get install guake  デフォルトでは、「F12」で起動する。
+おすすめ設定は、こんな感じ。
+ 全般   スクロール   外観  タブバーを表示しないようにして、start fullscreenにして、スクロールバーを非表示にして、透明度を下から2個目くらいにしたらちょうどいい感じ。
+あとは、fontをRicty for Powerlineにする。
+Ricty for Powerlineのインストールは以下の通り。
+#!/bin/bash mkdir -p ~/tmp mkdir -p ~/.fonts pushd ~/tmp sudo apt-get install fontforge wget http://levien.com/type/myfonts/Inconsolata.otf wget http://iij.dl.sourceforge.jp/mix-mplus-ipa/59022/migu-1m-20130617.zip unzip migu-1m-20130617.zip git clone https://github.com/yascentur/Ricty.git pushd Ricty ./ricty_generator.sh ~/tmp/Inconsolata.otf ~/tmp/migu-1m-20130617/migu-1m-regular.ttf ~/tmp/migu-1m-20130617/migu-1m-bold.ttf mv Ricty*.ttf ~/.fonts popd git clone https://github.com/Lokaltog/vim-powerline.git fontforge -lang=py -script ./vim-powerline/fontpatcher/fontpatcher $HOME/.fonts/Ricty-Regular.ttf fontforge -lang=py -script .</description>
     </item>
     
     <item>
       <title>Install Ubuntu 15.04 to MacBook Air (11-inch, Late 2010)</title>
-      <link>http://yukimemi.github.io/post/2015-05-02_install%20ubuntu%20to%20macbook%20air/</link>
+      <link>http://yukimemi.github.io/post/2015-05-02_install-ubuntu-to-macbook-air/</link>
       <pubDate>Sat, 02 May 2015 09:23:30 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-02_install%20ubuntu%20to%20macbook%20air/</guid>
-      <description>
-
-&lt;p&gt;使ってるMacBook Airが最近遅くて耐えられなくなってきたので、Ubuntuに乗り換えてみた。&lt;/p&gt;
-
-&lt;p&gt;nvidiaのドライバ関係でいろいろ大変だったのでメモ。&lt;/p&gt;
-
-&lt;h3 id=&#34;install-usbメモリの作成&#34;&gt;Install Usbメモリの作成&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo dd if=./ubuntu-15.04-desktop-amd64.iso of=/dev/sdb bs=4M
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;ubuntu-インストール&#34;&gt;Ubuntu インストール&lt;/h3&gt;
-
-&lt;p&gt;nvidiaのグラフィックドライバをインストールする場合、grubがefiモードじゃなくてbiosモードでインストールされる必要があるっぽい。
-そこで、通常とはちょっと違う方法でインストールする。&lt;/p&gt;
-
-&lt;p&gt;まず、最初の選択で、 &amp;ldquo;Try Ubuntu without installing it&amp;rdquo; を選ぶ。
-その後、 &amp;ldquo;Ctrl + Alt + T&amp;rdquo; を押して端末を起動し、インストーラを起動する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo ubiquity
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 &amp;ldquo;それ以外&amp;rdquo; ってのを選んで、自分でパーティションを作成する。
-必要なパーティションは以下の3つ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;予約されたBIOSブート領域: 1M&lt;/li&gt;
-&lt;li&gt;ext4(/): swap以外全部&lt;/li&gt;
-&lt;li&gt;swap: 2048M&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;その後はそのままインストールを続ける。
-全部終わると再起動が促されるが、そのまま再起動せずに、端末を起動し、grubをインストールする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ sudo mount /dev/sda2 /mnt # rootパーティション
-$ sudo grub-install --root-directory=/mnt /dev/sda
-$ sudo grub-install --root-directory=/mnt --recheck /dev/sda
-
-$ sudo mount --bind /dev /mnt/dev
-$ sudo mount --bind /dev/pts /mnt/dev/pts
-$ sudo mount --bind /proc /mnt/proc
-$ sudo mount --bind /sys /mnt/sys
-$ sudo chroot /mnt
-$ update-grub
-$ exit
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;usbをさしたままだと、sdbにはインストールできないとかなんとかのエラーが出るけど、むし。
-コマンドが全部終わったら再起動してusbを抜く。&lt;/p&gt;
-
-&lt;p&gt;普通にubuntuが起動するのでログインし、システム設定より、ソフトウェアとアップデートを開き、追加のドライバータブより、NVIDIAのドライバーにチェックを入れて適用する。
-ここのバージョンは変わるっぽいけど、現時点では、「NVIDIA binary driver -version 340.76をnvidia-340から使用します(プロプライエタリ、検証済み)」ってやつだった。&lt;/p&gt;
-
-&lt;p&gt;あと、Wi-Fiのドライバは、使用しない方が安定してた。使用すると、スリープ復帰後にWi-Fiが切断される。&lt;/p&gt;
-
-&lt;p&gt;プロプライエタリのドライバをインストール後は、以下のコマンドを実行して、xorg.confファイルを作成する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;sudo nvidia-xconfig
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;バックライトの調整ができるように、xorg.confファイルに1行追加する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Section &amp;quot;Device&amp;quot;
-    Identifier     &amp;quot;Device0&amp;quot;
-    Driver         &amp;quot;nvidia&amp;quot;
-    VendorName     &amp;quot;NVIDIA Corporation&amp;quot;
-    BoardName      &amp;quot;GeForce 320M&amp;quot;
-    Option         &amp;quot;RegistryDwords&amp;quot; &amp;quot;EnableBrightnessControl=1&amp;quot; # この行
-EndSection
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;終わったら再起動して完了。&lt;/p&gt;
-
-&lt;p&gt;あとは細かい設定をしていくだけ。
-インストールして使えるようになるのはここまで。
-デフォルト状態でもかなり使える。ubuntuすごい。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://variedtastefinder.jpn.ph/diary/395/&#34;&gt;MacBook Air Late 2010 on Ubuntu 14.04 (※05/30追記)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.ubuntuforums.org/showthread.php?t=2209602&#34;&gt;[SOLVED] Installing Ubuntu from USB on a MacBook Air 3,1-3,2 (nvidia card)&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-02_install-ubuntu-to-macbook-air/</guid>
+      <description>使ってるMacBook Airが最近遅くて耐えられなくなってきたので、Ubuntuに乗り換えてみた。
+nvidiaのドライバ関係でいろいろ大変だったのでメモ。
+Install Usbメモリの作成 $ sudo dd if=./ubuntu-15.04-desktop-amd64.iso of=/dev/sdb bs=4M  Ubuntu インストール nvidiaのグラフィックドライバをインストールする場合、grubがefiモードじゃなくてbiosモードでインストールされる必要があるっぽい。 そこで、通常とはちょっと違う方法でインストールする。
+まず、最初の選択で、 &amp;ldquo;Try Ubuntu without installing it&amp;rdquo; を選ぶ。 その後、 &amp;ldquo;Ctrl + Alt + T&amp;rdquo; を押して端末を起動し、インストーラを起動する。
+$ sudo ubiquity  それから、 &amp;ldquo;それ以外&amp;rdquo; ってのを選んで、自分でパーティションを作成する。 必要なパーティションは以下の3つ
+ 予約されたBIOSブート領域: 1M ext4(/): swap以外全部 swap: 2048M  その後はそのままインストールを続ける。 全部終わると再起動が促されるが、そのまま再起動せずに、端末を起動し、grubをインストールする。
+$ sudo mount /dev/sda2 /mnt # rootパーティション $ sudo grub-install --root-directory=/mnt /dev/sda $ sudo grub-install --root-directory=/mnt --recheck /dev/sda $ sudo mount --bind /dev /mnt/dev $ sudo mount --bind /dev/pts /mnt/dev/pts $ sudo mount --bind /proc /mnt/proc $ sudo mount --bind /sys /mnt/sys $ sudo chroot /mnt $ update-grub $ exit  usbをさしたままだと、sdbにはインストールできないとかなんとかのエラーが出るけど、むし。 コマンドが全部終わったら再起動してusbを抜く。</description>
     </item>
     
   </channel>

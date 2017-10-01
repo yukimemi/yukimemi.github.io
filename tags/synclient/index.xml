@@ -2,52 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Synclient on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/synclient/index.xml</link>
+    <link>http://yukimemi.github.io/tags/synclient/</link>
     <description>Recent content in Synclient on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/synclient/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 May 2015 08:57:44 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/synclient/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>PalmDetect in Ubuntu</title>
-      <link>http://yukimemi.github.io/post/2015-05-10_PalmDetect%20in%20Ubuntu/</link>
+      <link>http://yukimemi.github.io/post/2015-05-10_palmdetect-in-ubuntu/</link>
       <pubDate>Sun, 10 May 2015 08:57:44 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-10_PalmDetect%20in%20Ubuntu/</guid>
-      <description>
-
-&lt;p&gt;MacBook AirにUbuntu 15.04をインストールした。
-だいたい使いやすくはなっているのだけど、たまにキーボード入力をしている時にタッチパッドが誤反応してしまう時があった。&lt;/p&gt;
-
-&lt;p&gt;そこで、手のひら検出？とかいうのを入れてみることにした。&lt;/p&gt;
-
-&lt;p&gt;以下のファイルを作成する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ vim ~/.config/autostart/synclient.desktop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;内容は以下の通り&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Desktop Entry]
-Type=Application
-Exec=synclient PalmDetect=1
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[ja]=synclient(PalmDetect)
-Name=synclient(PalmDetect)
-Comment[ja]=
-Comment=
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Superキーを押して出てくる検索メニューから「自動起動するアプリケーション」を選択して、そこで記載するのと同じ。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/kaz8/items/51a43a7290c29919bc2e&#34;&gt;安全にsynclientでUbuntuのタッチパッド設定を変更する - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-10_palmdetect-in-ubuntu/</guid>
+      <description>MacBook AirにUbuntu 15.04をインストールした。 だいたい使いやすくはなっているのだけど、たまにキーボード入力をしている時にタッチパッドが誤反応してしまう時があった。
+そこで、手のひら検出？とかいうのを入れてみることにした。
+以下のファイルを作成する。
+$ vim ~/.config/autostart/synclient.desktop  内容は以下の通り
+[Desktop Entry] Type=Application Exec=synclient PalmDetect=1 Hidden=false NoDisplay=false X-GNOME-Autostart-enabled=true Name[ja]=synclient(PalmDetect) Name=synclient(PalmDetect) Comment[ja]= Comment=  Superキーを押して出てくる検索メニューから「自動起動するアプリケーション」を選択して、そこで記載するのと同じ。
+参考 安全にsynclientでUbuntuのタッチパッド設定を変更する - Qiita</description>
     </item>
     
   </channel>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/categories/</link>
+    <description>Recent content in Categories on YUKIMEMI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 26 Jul 2015 16:08:23 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ansible</title>
+      <link>http://yukimemi.github.io/categories/ansible/</link>
+      <pubDate>Sun, 26 Jul 2015 16:08:23 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Coffeescript</title>
+      <link>http://yukimemi.github.io/categories/coffeescript/</link>
+      <pubDate>Sun, 11 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/coffeescript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cygwin</title>
+      <link>http://yukimemi.github.io/categories/cygwin/</link>
+      <pubDate>Sat, 27 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/cygwin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Es2015</title>
+      <link>http://yukimemi.github.io/categories/es2015/</link>
+      <pubDate>Tue, 26 Jul 2016 00:58:51 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/es2015/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fcitx</title>
+      <link>http://yukimemi.github.io/categories/fcitx/</link>
+      <pubDate>Sat, 02 May 2015 22:59:12 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/fcitx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fish</title>
+      <link>http://yukimemi.github.io/categories/fish/</link>
+      <pubDate>Sun, 27 Nov 2016 00:49:25 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/fish/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Font</title>
+      <link>http://yukimemi.github.io/categories/font/</link>
+      <pubDate>Sat, 14 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/font/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://yukimemi.github.io/categories/git/</link>
+      <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>http://yukimemi.github.io/categories/golang/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:07 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Haskell</title>
+      <link>http://yukimemi.github.io/categories/haskell/</link>
+      <pubDate>Thu, 15 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://yukimemi.github.io/categories/hugo/</link>
+      <pubDate>Sat, 10 Dec 2016 22:01:28 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Iterm</title>
+      <link>http://yukimemi.github.io/categories/iterm/</link>
+      <pubDate>Mon, 19 Sep 2016 00:30:00 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/iterm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jscript</title>
+      <link>http://yukimemi.github.io/categories/jscript/</link>
+      <pubDate>Tue, 26 Jul 2016 00:58:51 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/jscript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac</title>
+      <link>http://yukimemi.github.io/categories/mac/</link>
+      <pubDate>Sun, 01 Oct 2017 18:21:37 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mongodb</title>
+      <link>http://yukimemi.github.io/categories/mongodb/</link>
+      <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mosh</title>
+      <link>http://yukimemi.github.io/categories/mosh/</link>
+      <pubDate>Sun, 06 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/mosh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neovim</title>
+      <link>http://yukimemi.github.io/categories/neovim/</link>
+      <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/neovim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nvim</title>
+      <link>http://yukimemi.github.io/categories/nvim/</link>
+      <pubDate>Thu, 08 Jun 2017 07:43:37 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/nvim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Powershell</title>
+      <link>http://yukimemi.github.io/categories/powershell/</link>
+      <pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://yukimemi.github.io/categories/python/</link>
+      <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Roots</title>
+      <link>http://yukimemi.github.io/categories/roots/</link>
+      <pubDate>Wed, 09 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/roots/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tmux</title>
+      <link>http://yukimemi.github.io/categories/tmux/</link>
+      <pubDate>Mon, 19 Sep 2016 00:30:00 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/tmux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>http://yukimemi.github.io/categories/ubuntu/</link>
+      <pubDate>Sun, 10 May 2015 08:57:44 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>http://yukimemi.github.io/categories/vim/</link>
+      <pubDate>Sun, 01 Oct 2017 18:21:37 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vimperator</title>
+      <link>http://yukimemi.github.io/categories/vimperator/</link>
+      <pubDate>Mon, 02 Mar 2015 02:00:14 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/vimperator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wsh</title>
+      <link>http://yukimemi.github.io/categories/wsh/</link>
+      <pubDate>Tue, 15 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/wsh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zsh</title>
+      <link>http://yukimemi.github.io/categories/zsh/</link>
+      <pubDate>Sun, 25 Sep 2016 23:53:12 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/categories/zsh/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -2,516 +2,90 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/golang/index.xml</link>
+    <link>http://yukimemi.github.io/tags/golang/</link>
     <description>Recent content in Golang on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Mar 2017 00:00:07 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Git status recurse</title>
-      <link>http://yukimemi.github.io/post/2017-03-19_Git%20status%20recurse/</link>
+      <link>http://yukimemi.github.io/post/2017-03-19_git-status-recurse/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:07 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2017-03-19_Git%20status%20recurse/</guid>
-      <description>
-
-&lt;p&gt;&lt;code&gt;git status&lt;/code&gt; を再帰的に全Gitディレクトリで実行して、変更のあるリポジトリを簡単に見つけたい。&lt;/p&gt;
-
-&lt;p&gt;と思ったので作りました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/gsr&#34;&gt;yukimemi/gsr&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;go get&lt;/code&gt; でインストールできます。&lt;/p&gt;
-
-&lt;p&gt;(バイナリファイルもそのうち用意する)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get github.com/yukimemi/gsr
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使い方は簡単で&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gsr [再帰的にチェックしたいディレクトリ]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;とすると、 &lt;code&gt;git status&lt;/code&gt; で変更のあるディレクトリだけ出力されます。
-デフォルトでは、ディレクトリ名だけが出力されます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gsr --status [再帰的にチェックしたいディレクトリ]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;と、オプションをつけると、 &lt;code&gt;git status --short&lt;/code&gt; の出力結果も出力されます。&lt;/p&gt;
-
-&lt;p&gt;ちなみに、 [再帰的にチェックしたいディレクトリ] を指定しなかった場合、
-&lt;code&gt;ghq root&lt;/code&gt; を対象にチェックします。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;motemen/ghq&lt;/a&gt; を使っている人には便利です。&lt;/p&gt;
-
-&lt;p&gt;デフォルトの出力がディレクトリ名なのは、pecoとか使って移動したいからです。&lt;/p&gt;
-
-&lt;p&gt;例えば、 &lt;code&gt;.zshrc&lt;/code&gt; に、こんな設定を書いてやると、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;function __filter() {
-  peco | while read line
-  do
-    echo &amp;quot;Exec: [$@ $line]&amp;quot;
-    $@ $line
-  done
-}
-alias gsrl=&#39;gsr | __filter cd&#39;
-alias ghl=&#39;gsr --all | __filter cd&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;gsrl&lt;/code&gt; で、 &lt;code&gt;ghq&lt;/code&gt; で管理された変更のあるgitディレクトリに移動出来るようになり、 &lt;code&gt;ghl&lt;/code&gt; で &lt;code&gt;ghq&lt;/code&gt; で管理されたすべてのディレクトリに移動出来るようになります。&lt;/p&gt;
-
-&lt;p&gt;非常にべんり。&lt;/p&gt;
-
-&lt;p&gt;さらに、 リモートと差分のあるリポジトリも対象としたい場合、以下のオプションが使用できます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gsr --ahead --behind
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;オプション&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;出力対象&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;ndash;ahead&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;リモートより新しいものも対象にする&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;&amp;ndash;behind&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;リモートより古いものも対象にする&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;僕は常にこのオプションを有効化して使うので、環境変数に指定しています。
-&lt;code&gt;.zshenv&lt;/code&gt; とかに書いておくと、実行時にオプションをいちいち指定しなくても有効化されます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;export GSR_SHOW_AHEAD=1
-export GSR_SHOW_BEHIND=1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これは、使ってるライブラリ &lt;a href=&#34;https://github.com/urfave/cli&#34;&gt;urfave/cli&lt;/a&gt; の機能みたいです。すごい。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/urfave/cli&#34;&gt;urfave/cli&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://int128.hatenablog.com/entry/2015/07/15/003851&#34;&gt;git statusを利用したリポジトリ情報のプロンプト表示&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2017-03-19_git-status-recurse/</guid>
+      <description>git status を再帰的に全Gitディレクトリで実行して、変更のあるリポジトリを簡単に見つけたい。
+と思ったので作りました。
+yukimemi/gsr
+go get でインストールできます。
+(バイナリファイルもそのうち用意する)
+$ go get github.com/yukimemi/gsr  使い方は簡単で
+$ gsr [再帰的にチェックしたいディレクトリ]  とすると、 git status で変更のあるディレクトリだけ出力されます。 デフォルトでは、ディレクトリ名だけが出力されます。
+$ gsr --status [再帰的にチェックしたいディレクトリ]  と、オプションをつけると、 git status --short の出力結果も出力されます。
+ちなみに、 [再帰的にチェックしたいディレクトリ] を指定しなかった場合、 ghq root を対象にチェックします。
+motemen/ghq を使っている人には便利です。
+デフォルトの出力がディレクトリ名なのは、pecoとか使って移動したいからです。
+例えば、 .zshrc に、こんな設定を書いてやると、
+function __filter() { peco | while read line do echo &amp;quot;Exec: [$@ $line]&amp;quot; $@ $line done } alias gsrl=&#39;gsr | __filter cd&#39; alias ghl=&#39;gsr --all | __filter cd&#39;  gsrl で、 ghq で管理された変更のあるgitディレクトリに移動出来るようになり、 ghl で ghq で管理されたすべてのディレクトリに移動出来るようになります。</description>
     </item>
     
     <item>
       <title>Use gomi instead of rm</title>
-      <link>http://yukimemi.github.io/post/2015-05-04_Use%20gomi/</link>
+      <link>http://yukimemi.github.io/post/2015-05-04_use-gomi/</link>
       <pubDate>Mon, 04 May 2015 17:14:11 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-04_Use%20gomi/</guid>
-      <description>&lt;p&gt;rmを安全に行うツールとして、Macでは「rmtrash」、Linuxでは「trash-cli」を使ってきたけど、最近Golangで「gomi」というツールが作成されたとのことなので使用してみた。
-とても便利。&lt;/p&gt;
-
-&lt;p&gt;インストールはgo get。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ go get -u github.com/b4b4r07/gomi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;さっそくaliasした。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ alias rm=&#39;gomi&#39;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-04_use-gomi/</guid>
+      <description>rmを安全に行うツールとして、Macでは「rmtrash」、Linuxでは「trash-cli」を使ってきたけど、最近Golangで「gomi」というツールが作成されたとのことなので使用してみた。 とても便利。
+インストールはgo get。
+$ go get -u github.com/b4b4r07/gomi  さっそくaliasした。
+$ alias rm=&#39;gomi&#39;  </description>
     </item>
     
     <item>
       <title>hello hugo</title>
-      <link>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</link>
+      <link>http://yukimemi.github.io/post/2015-02-15_hello-hugo/</link>
       <pubDate>Sun, 15 Feb 2015 10:28:27 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-02-15_hello%20hugo/</guid>
-      <description>
-
-&lt;p&gt;これまでいろいろ静的サイトジェネレーターを試してきた。&lt;/p&gt;
-
-&lt;h5 id=&#34;tinkerer-http-tinkerer-me&#34;&gt;&lt;a href=&#34;http://tinkerer.me&#34;&gt;Tinkerer&lt;/a&gt;&lt;/h5&gt;
-
-&lt;h5 id=&#34;roots-http-roots-cx&#34;&gt;&lt;a href=&#34;http://roots.cx&#34;&gt;roots&lt;/a&gt;&lt;/h5&gt;
-
-&lt;p&gt;そして今回はgolang製の &lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/p&gt;
-
-&lt;h5 id=&#34;hugo-http-gohugo-io&#34;&gt;&lt;a href=&#34;http://gohugo.io&#34;&gt;hugo&lt;/a&gt;&lt;/h5&gt;
-
-&lt;p&gt;流行りに乗ってみたいってのもあるけど、なによりサイト生成がはやい！！&lt;/p&gt;
-
-&lt;p&gt;これだけでも乗り換える価値があると思う。&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://deeeet.com/writing/2014/12/25/hugo/&#34;&gt;OctopressからHugoへ移行した&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rakuishi.com/archives/wordpress-to-hugo/&#34;&gt;WordPress から Hugo に乗り換えました&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-02-15_hello-hugo/</guid>
+      <description>これまでいろいろ静的サイトジェネレーターを試してきた。
+Tinkerer roots そして今回はgolang製の hugo
+hugo 流行りに乗ってみたいってのもあるけど、なによりサイト生成がはやい！！
+これだけでも乗り換える価値があると思う。
+参考 OctopressからHugoへ移行した
+WordPress から Hugo に乗り換えました</description>
     </item>
     
     <item>
       <title>direnv for npm local commands</title>
-      <link>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</link>
+      <link>http://yukimemi.github.io/post/2014-07-02_direnv-for-npm-local-commands/</link>
       <pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-07-02_direnv%20for%20npm%20local%20commands/</guid>
-      <description>
-
-&lt;p&gt;通常、 npm で実行コマンドをインストールするときは、以下のようにグローバルオプションを
-つけてインストールすることが多いと思う。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g gulp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;だけど、これではプロジェクトごとに違うバージョンを使いたい！などの場合にこまる。
-そこで &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; 。&lt;/p&gt;
-
-&lt;p&gt;これを使うとあるディレクトリでは、「〜〜する」というのが簡単に出来る。&lt;/p&gt;
-
-&lt;h3 id=&#34;導入方法&#34;&gt;導入方法&lt;/h3&gt;
-
-&lt;p&gt;まず、 &lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; はgoを使うので、goをインストールしておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshenv&lt;/code&gt; に記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# direnv
-if which go &amp;gt; /dev/null; then
-    if [ ! -d $HOME/.direnv ]; then
-        git clone https://github.com/zimbatm/direnv ~/.direnv
-        pushd ~/.direnv
-        make install
-        popd
-    fi
-    eval &amp;quot;$(direnv hook zsh)&amp;quot;
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとはシェルを再起動したらインストール完了。&lt;/p&gt;
-
-&lt;h3 id=&#34;使い方&#34;&gt;使い方&lt;/h3&gt;
-
-&lt;p&gt;プロジェクトのディレクトリでローカルにnpmのコマンドをインストールする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install gulp
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ローカルにインストールした場合、通常以下の場所に実行コマンドが配置される。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls node_modules/.bin
-bower  cake  coffee  gulp  nodemon  nodewebkit  wiredep
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;なので、この場所をPATHに追加すればよい。
-&lt;a href=&#34;https://github.com/zimbatm/direnv&#34;&gt;direnv&lt;/a&gt; では、以下のようにする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ direnv edit .
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、エディタで &lt;code&gt;.envrc&lt;/code&gt; というファイルが開くので、以下の行を記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export PATH=$PWD/node_modules/.bin:$PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでOK。こうすると、このディレクトリに来た場合は自動的にPATHに追加され、
-反対にディレクトリから出た場合、自動的にPATHから削除される。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd ~/.ghq/github.com/yukimemi/hogehoge
-direnv: loading .envrc
-direnv: export ~PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd
-direnv: unloading
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、プロジェクトローカルなコマンドをかんたんに実行出来る。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/kompiro/items/5fc46089247a56243a62&#34;&gt;direnvを使おう - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://doloopwhile.hatenablog.com/entry/2014/06/18/010449&#34;&gt;direnvで解決するGOPATHの3つの問題点 - None is None is None&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/lang/ruby/20140314032519.htm&#34;&gt;Big Sky :: bundle exec がウザい&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-07-02_direnv-for-npm-local-commands/</guid>
+      <description>通常、 npm で実行コマンドをインストールするときは、以下のようにグローバルオプションを つけてインストールすることが多いと思う。
+$ npm install -g gulp  だけど、これではプロジェクトごとに違うバージョンを使いたい！などの場合にこまる。 そこで direnv 。
+これを使うとあるディレクトリでは、「〜〜する」というのが簡単に出来る。
+導入方法 まず、 direnv はgoを使うので、goをインストールしておく。
+$ brew install go --cross-compile-common  以下を .zshenv に記載。
+# direnv if which go &amp;gt; /dev/null; then if [ ! -d $HOME/.direnv ]; then git clone https://github.com/zimbatm/direnv ~/.direnv pushd ~/.direnv make install popd fi eval &amp;quot;$(direnv hook zsh)&amp;quot; fi  あとはシェルを再起動したらインストール完了。
+使い方 プロジェクトのディレクトリでローカルにnpmのコマンドをインストールする。
+$ npm install gulp  ローカルにインストールした場合、通常以下の場所に実行コマンドが配置される。
+$ ls node_modules/.</description>
     </item>
     
     <item>
       <title>All You Need Is Peco</title>
-      <link>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</link>
+      <link>http://yukimemi.github.io/post/2014-06-29_all-you-need-is-peco/</link>
       <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</guid>
-      <description>
-
-&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; がかなり流行りっぽい。
-そこで導入してみた。思ったより使い心地よくて、 &lt;a href=&#34;https://github.com/zsh-users/zaw&#34;&gt;zaw&lt;/a&gt; から乗り換えた。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;導入手順&#34;&gt;導入手順&lt;/h3&gt;
-
-&lt;p&gt;homebrewでgoをインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;.zshenv&lt;/code&gt; に以下を記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# go
-export GOPATH=$HOME/.go
-export PATH=$GOPATH/bin:$PATH
-
-[ ! -d $GOPATH ] &amp;amp;&amp;amp; mkdir $GOPATH
-if which go &amp;gt; /dev/null; then
-    export GOROOT=$(go env GOROOT)
-
-    # ghq
-    go get github.com/motemen/ghq
-    git config --global ghq.root ~/.ghq
-    # peco
-    go get github.com/peco/peco/cmd/peco
-    # gh-open
-    go get github.com/typester/gh-open
-
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;.zshenv&lt;/code&gt; を読み込み直す&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.zshenv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;インストール完了。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls -l | peco
-QUERY&amp;gt;                                                         IgnoreCase [1/1]
-total 96100
-drwxr-xr-x  13 yukimemi staff      442  6 27 05:07 Applications
-drwx------+  3 yukimemi staff      102  6 23 22:00 Desktop
-drwx------+  6 yukimemi staff      204  5 25 10:58 Documents
-drwx------+ 20 yukimemi staff      680  6 22 08:20 Downloads
-drwx------  94 yukimemi staff     3196  6 29 00:23 Dropbox
-drwx------+ 47 yukimemi staff     1598  5 18 12:26 Library
-drwx------+  3 yukimemi staff      102  5 17 18:13 Movies
-drwx------+  4 yukimemi staff      136  5 18 00:35 Music
-drwx------+  3 yukimemi staff      102  6  8 18:24 Pictures
-drwxr-xr-x+  5 yukimemi staff      170  5 17 18:13 Public
-drwxr-xr-x   5 yukimemi staff      170  6 29 00:07 bin
-drwxr-xr-x  35 yukimemi staff     1190  6 28 17:20 dotfiles
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;peco-使い方&#34;&gt;&lt;strong&gt;peco&lt;/strong&gt; 使い方&lt;/h3&gt;
-
-&lt;h4 id=&#34;history&#34;&gt;history&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-select-history() {
-  local tac
-  if which tac &amp;gt; /dev/null; then
-      tac=&amp;quot;tac&amp;quot;
-  else
-      tac=&amp;quot;tail -r&amp;quot;
-  fi
-  BUFFER=$(history -n 1 | \
-      eval $tac | \
-      peco --query &amp;quot;$LBUFFER&amp;quot;)
-  CURSOR=$#BUFFER
-  zle clear-screen
-}
-zle -N peco-select-history
-bindkey &#39;^r&#39; peco-select-history
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-r&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/189]
-ls   -l | peco
-cd
-go env
-env G -i go
-pvim
-pwd
-git co drafts; roots watch
-mux github
-exit
-pn
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;resent-dirs&#34;&gt;resent dirs&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;zstyle &#39;:filter-select&#39; case-insensitive yes
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-zstyle &#39;:chpwd:*&#39; recent-dirs-max 5000
-zstyle &#39;:chpwd:*&#39; recent-dirs-default yes
-zstyle &#39;:completion:*&#39; recent-dirs-insert both
-
-function peco-cdr () {
-    local selected_dir=$(cdr -l | awk &#39;{ print $2 }&#39; | peco)
-    if [ -n &amp;quot;$selected_dir&amp;quot; ]; then
-        BUFFER=&amp;quot;cd ${selected_dir}&amp;quot;
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-cdr
-bindkey &#39;^@&#39; peco-cdr
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-@&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/4]
-~
-~/.ghq
-~/.ghq/bitbucket.org/yukimemi/haskell
-~/.ghq/github.com/yukimemi/yukimemi.github.io
-~/.cabal/bin
-~/.ghq/bitbucket.org/yukimemi/yukimemi.bitbucket.org
-~/dotfiles
-~/dotfiles/.tmuxinator
-~/Documents/git/yukimemi.github.io
-~/.ghq/github.com/zcbenz/nw-sample-apps
-~/.go
-~/Pictures
-~/Downloads
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;snippets&#34;&gt;snippets&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-snippets() {
-    BUFFER=$(grep -v &amp;quot;^#&amp;quot; ~/.peco-snippets | peco --query &amp;quot;$LBUFFER&amp;quot;)
-    zle clear-screen
-}
-zle -N peco-snippets
-bindkey &#39;^s&#39; peco-snippets
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;~/.peco-snippets&lt;/code&gt; によく使うコマンドを記載しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# find
-find . -type f -mtime +10
-find . -mtime +50 -exec mv {} del \;
-
-# date
-date +%Y%m%d
-
-# kill
-kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
-kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
-
-# screensaver
-open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
-
-# exiftool
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
-
-# neobundle
-vim +NeoBundleInstall! +q
-
-# ghq
-# github
-ghq get git@github.com:yukimemi/md2docx.git
-ghq get git@github.com:yukimemi/gitstatus.git
-
-# bitbucket
-ghq get git@bitbucket.org:yukimemi/haskell.git
-ghq get git@bitbucket.org:yukimemi/node-webkit.git
-ghq get git@bitbucket.org:yukimemi/clojure.git
-ghq get git@bitbucket.org:yukimemi/go.git
-ghq get git@bitbucket.org:yukimemi/scripts.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-s&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/1]
-find . -type f -mtime +10
-find . -mtime +50 -exec mv {} del \;
-
-date +%Y%m%d
-
-kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
-kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
-
-open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
-
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
-
-vim +NeoBundleInstall! +q
-
-ghq get git@github.com:yukimemi/md2docx.git
-ghq get git@github.com:yukimemi/gitstatus.git
-
-ghq get git@bitbucket.org:yukimemi/haskell.git
-ghq get git@bitbucket.org:yukimemi/node-webkit.git
-ghq get git@bitbucket.org:yukimemi/clojure.git
-ghq get git@bitbucket.org:yukimemi/go.git
-ghq get git@bitbucket.org:yukimemi/scripts.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;ghq&#34;&gt;ghq&lt;/h4&gt;
-
-&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; も流行りだけど、 &lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;ghq&lt;/a&gt; も流行り。ちょうべんり。
-上記で記載済みの導入手順に従っていればインストールされているはず。&lt;/p&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias ghl=&#39;cd $(ghq list -p | peco)&#39;
-alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、 ghq のどれかに &lt;code&gt;cd&lt;/code&gt; したり、該当のgithubをブラウザで開いたり出来る。&lt;/p&gt;
-
-&lt;h4 id=&#34;vim&#34;&gt;vim&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias pvim=&#39;vim &amp;quot;$(find . -type f | peco)&amp;quot;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、カレントディレクトリ以下のファイルをすぐにvimで開ける。ちょうべんり。&lt;/p&gt;
-
-&lt;p&gt;いろんな参考ページの方々ありがとうございます。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/peco.htm&#34;&gt;Big Sky :: Windows のコマンドプロンプトを10倍便利にするコマンド「peco」&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://shibayu36.hatenablog.com/entry/2014/06/27/223538&#34;&gt;pecoを使い始めた - $shibayu36-&amp;gt;blog;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://webtech-walker.com/archive/2014/06/peco-ghq-gh-open.html&#34;&gt;peco、ghq、gh-openの組み合わせが捗る - Webtech Walker&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.glidenote.com/blog/2014/06/26/snippets-peco-percol/&#34;&gt;peco/percolでCUIなスニペットツールを作ってみる - Glide Note - グライドノート&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-06-29_all-you-need-is-peco/</guid>
+      <description>最近 peco がかなり流行りっぽい。 そこで導入してみた。思ったより使い心地よくて、 zaw から乗り換えた。
+導入手順 homebrewでgoをインストール。
+$ brew install go --cross-compile-common  .zshenv に以下を記載。
+# go export GOPATH=$HOME/.go export PATH=$GOPATH/bin:$PATH [ ! -d $GOPATH ] &amp;amp;&amp;amp; mkdir $GOPATH if which go &amp;gt; /dev/null; then export GOROOT=$(go env GOROOT) # ghq go get github.com/motemen/ghq git config --global ghq.root ~/.ghq # peco go get github.com/peco/peco/cmd/peco # gh-open go get github.com/typester/gh-open fi  .zshenv を読み込み直す
+$ source ~/.zshenv  インストール完了。</description>
     </item>
     
     <item>
@@ -520,85 +94,11 @@ alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
       <pubDate>Sat, 22 Mar 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-03-22-gitstatus/</guid>
-      <description>
-
-&lt;p&gt;Go言語が流行りっぽいので、Goを使って、カレントディレクトリ配下の、gitで管理されているすべてのディレクトリで「git
-status」を実行するプログラムを書いてみた。
-別にGoで書く必要はないんだけど・・・。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/gitstatus&#34;&gt;yukimemi/gitstatus&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ gitstatus yukimemi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;みたいにすると、「gitstatus」を実行したディレクトリ配下で、「git remote
--v」に「yukimemi」が含まれるものを対象に、「git
-status」を実行して出力する。引数を指定しなければ、すべてのディレクトリで。&lt;/p&gt;
-
-&lt;p&gt;出力イメージはこんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;root /Users/yukimemi
---------------------------------------------------------------------------------
-★  /Users/yukimemi/.oh-my-zsh
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
-
-Changes not staged for commit:
-  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)
-  (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)
-
-        modified:   templates/zshrc.zsh-template
-
-no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;)
-
---------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
-★  /Users/yukimemi/Documents/git/go
-On branch master
-Your branch is up-to-date with &#39;origin/master&#39;.
-
-Changes not staged for commit:
-  (use &amp;quot;git add/rm &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)
-  (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)
-
-        deleted:    gitstatus/gitstatus.go
-
-no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;)
-
---------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
-★  /Users/yukimemi/Documents/git/yukimemi.bitbucket.org
-On branch drafts
-Your branch is ahead of &#39;origin/drafts&#39; by 1 commit.
-  (use &amp;quot;git push&amp;quot; to publish your local commits)
-
-Changes not staged for commit:
-  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)
-  (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)
-
-        modified:   2014/03/22/gitstatus.rst
-        modified:   blog/doctrees/2014/03/22/gitstatus.doctree
-        modified:   blog/doctrees/environment.pickle
-
-no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;)
-
---------------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、Goはクロスコンパイルが簡単ということで、「drone.io」にてクロスコンパイルするようにしてみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://drone.io/github.com/yukimemi/gitstatus/files&#34;&gt;Downloads | gitstatus&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;非常に便利。&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/atotto/items/b796c31c1755dbec13db&#34;&gt;Go言語のビルド生活を drone.ioで幸せに暮らす #golang - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://golang.org/pkg/path/filepath/#Walk&#34;&gt;filepath - The Go Programming Language&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Go言語が流行りっぽいので、Goを使って、カレントディレクトリ配下の、gitで管理されているすべてのディレクトリで「git status」を実行するプログラムを書いてみた。 別にGoで書く必要はないんだけど・・・。
+yukimemi/gitstatus
+$ gitstatus yukimemi  みたいにすると、「gitstatus」を実行したディレクトリ配下で、「git remote -v」に「yukimemi」が含まれるものを対象に、「git status」を実行して出力する。引数を指定しなければ、すべてのディレクトリで。
+出力イメージはこんな感じ。
+root /Users/yukimemi -------------------------------------------------------------------------------- ★ /Users/yukimemi/.oh-my-zsh On branch master Your branch is up-to-date with &#39;origin/master&#39;. Changes not staged for commit: (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed) (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory) modified: templates/zshrc.zsh-template no changes added to commit (use &amp;quot;git add&amp;quot; and/or &amp;quot;git commit -a&amp;quot;) -------------------------------------------------------------------------------- -------------------------------------------------------------------------------- ★ /Users/yukimemi/Documents/git/go On branch master Your branch is up-to-date with &#39;origin/master&#39;.</description>
     </item>
     
   </channel>

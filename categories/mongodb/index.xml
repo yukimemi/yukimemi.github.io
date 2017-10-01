@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mongodb on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/categories/mongodb/index.xml</link>
+    <link>http://yukimemi.github.io/categories/mongodb/</link>
     <description>Recent content in Mongodb on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/categories/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Jun 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/categories/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Mac OSX Mountain Lion MongoDB セットアップ</title>
@@ -14,26 +17,12 @@
       <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-06-16-setup_mongodb/</guid>
-      <description>&lt;p&gt;mongodb をいれてみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install mongodb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでインストール完了。簡単。&lt;/p&gt;
-
-&lt;p&gt;自動起動する設定も書いてあるからそれを実行するだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
-$ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで自動起動される。&lt;/p&gt;
-
-&lt;p&gt;手動で起動するには、次のようにする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ launchctl start homebrew.mxcl.mongodb
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>mongodb をいれてみた。
+$ brew install mongodb  これでインストール完了。簡単。
+自動起動する設定も書いてあるからそれを実行するだけ。
+$ ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents $ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist  これで自動起動される。
+手動で起動するには、次のようにする。
+$ launchctl start homebrew.mxcl.mongodb  </description>
     </item>
     
   </channel>

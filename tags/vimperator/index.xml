@@ -2,49 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vimperator on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/vimperator/index.xml</link>
+    <link>http://yukimemi.github.io/tags/vimperator/</link>
     <description>Recent content in Vimperator on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/vimperator/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Mar 2015 02:00:14 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/vimperator/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>vimperator colorscheme</title>
-      <link>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</link>
+      <link>http://yukimemi.github.io/post/2015-03-02_vimperator-colorscheme/</link>
       <pubDate>Mon, 02 Mar 2015 02:00:14 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</guid>
-      <description>
-
-&lt;p&gt;vimperatorでcolorschemeを使う方法。&lt;/p&gt;
-
-&lt;p&gt;自分で作ってもいいけど、大変なので・・・&lt;/p&gt;
-
-&lt;h3 id=&#34;リポジトリクローン&#34;&gt;リポジトリクローン&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;ghq&lt;/code&gt; については、&lt;a href=&#34;http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/&#34;&gt;この記事&lt;/a&gt;で。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/vimpr/vimperator-colors.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;シンボリックリンク&#34;&gt;シンボリックリンク&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;vimperatorrc編集&#34;&gt;.vimperatorrc編集&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme sweets_snaka
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;かっこいい！！&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-colors&#34;&gt;vimpr/vimperator-colors&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-03-02_vimperator-colorscheme/</guid>
+      <description>vimperatorでcolorschemeを使う方法。
+自分で作ってもいいけど、大変なので・・・
+リポジトリクローン ghq については、この記事で。
+$ ghq get https://github.com/vimpr/vimperator-colors.git  シンボリックリンク $ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors  .vimperatorrc編集 colorscheme sweets_snaka  かっこいい！！
+参考: vimpr/vimperator-colors</description>
     </item>
     
     <item>
@@ -53,33 +30,14 @@
       <pubDate>Sun, 05 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-01-05-vimperator_treestyletab/</guid>
-      <description>&lt;p&gt;vimperator と ツリー型タブ は便利で使ってたのだが、
-先日、表示がおかしくなってることに気づいた。&lt;/p&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_231852.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;コマンドラインの補完部分に、タブ表示が覆い被さっている。&lt;/p&gt;
-
-&lt;p&gt;修正するには、 .vimperatorrc に、以下を記載したら出来た。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;style! -name=treestyletab chrome://* .tabbrowser-tab { z-index: 0 !important; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;style コマンドで、既存のcssを書き換えることが出来るみたい。 詳細は、
-&lt;code&gt;:h style&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;p&gt;修正後はこんな感じ。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140104_232026.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ツリー型タブのcssのクラス名とかを調べるには、 &lt;a href=&#34;https://addons.mozilla.org/ja/firefox/addon/dom-inspector-6622/&#34;&gt;DOM Inspector :: Add-ons for Firefox&lt;/a&gt;
-を使用した。&lt;/p&gt;
-
-&lt;p&gt;使い方は、 &lt;a href=&#34;http://diary.noasobi.net/junk/DOMInspector.html&#34;&gt;Dom Inspectorでブックマークサイドバーを開くコマンドを見つける&lt;/a&gt;
-がすごい参考になった。&lt;/p&gt;
-</description>
+      <description>vimperator と ツリー型タブ は便利で使ってたのだが、 先日、表示がおかしくなってることに気づいた。
+こんな感じ。
+コマンドラインの補完部分に、タブ表示が覆い被さっている。
+修正するには、 .vimperatorrc に、以下を記載したら出来た。
+style! -name=treestyletab chrome://* .tabbrowser-tab { z-index: 0 !important; }  style コマンドで、既存のcssを書き換えることが出来るみたい。 詳細は、 :h style 。
+修正後はこんな感じ。
+ツリー型タブのcssのクラス名とかを調べるには、 DOM Inspector :: Add-ons for Firefox を使用した。
+使い方は、 Dom Inspectorでブックマークサイドバーを開くコマンドを見つける がすごい参考になった。</description>
     </item>
     
   </channel>

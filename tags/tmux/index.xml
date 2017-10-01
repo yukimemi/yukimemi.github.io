@@ -2,72 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tmux on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/tmux/index.xml</link>
+    <link>http://yukimemi.github.io/tags/tmux/</link>
     <description>Recent content in Tmux on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2016 00:30:00 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>True color in iTerm2 Tmux Neovim</title>
-      <link>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</link>
+      <link>http://yukimemi.github.io/post/2016-09-19_true-color-in-iterm2-tmux-neovim/</link>
       <pubDate>Mon, 19 Sep 2016 00:30:00 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</guid>
-      <description>
-
-&lt;p&gt;今時 &lt;code&gt;macbook&lt;/code&gt; のキレイな画面で256色なんて・・・&lt;/p&gt;
-
-&lt;p&gt;っということで、 &lt;code&gt;True color&lt;/code&gt; が使えるそうなので設定してみた。&lt;/p&gt;
-
-&lt;p&gt;まず、 &lt;code&gt;iTerm2&lt;/code&gt; の設定。&lt;/p&gt;
-
-&lt;p&gt;は特になく、 &lt;code&gt;homebrew cask&lt;/code&gt; でインストールすればそのまま &lt;code&gt;true color&lt;/code&gt; が使えるらしい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew cask install iterm2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;次に &lt;code&gt;tmux&lt;/code&gt; の設定。
-&lt;code&gt;tmux&lt;/code&gt; はバージョン &lt;code&gt;2.2&lt;/code&gt; 以上ならOKっぽい。普通に &lt;code&gt;homebrew&lt;/code&gt; でインストールしたら &lt;code&gt;2.2&lt;/code&gt; だった。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install tmux
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;で、設定ファイル &lt;code&gt;tmux.conf&lt;/code&gt; に以下を追加。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;もし、以下の設定が書いてあったらコメントアウト。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# set -g default-terminal xterm-256color
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 &lt;code&gt;neovim&lt;/code&gt; の設定 ( &lt;code&gt;init.vim&lt;/code&gt; )。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;nvim&#39;)
-  set termguicolors
-endif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでOK。
-昔の設定は、
-&lt;code&gt;let $NVIM_TUI_ENABLE_TRUE_COLOR=1&lt;/code&gt;
-とかだったらしいけど、2016/5/11から変わったっぽい。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;terminal&lt;/code&gt; で &lt;code&gt;true color&lt;/code&gt; なのすごいべんり。
-&lt;code&gt;iTerm2&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; に関係せずに &lt;code&gt;vim&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; を変えられる。&lt;/p&gt;
-
-&lt;p&gt;設定方法を書いてくれた人たちに感謝。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/&#34;&gt;True HEX Colors with Neovim and iTerm2 - Prevent Default&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-09-19_true-color-in-iterm2-tmux-neovim/</guid>
+      <description>今時 macbook のキレイな画面で256色なんて・・・
+っということで、 True color が使えるそうなので設定してみた。
+まず、 iTerm2 の設定。
+は特になく、 homebrew cask でインストールすればそのまま true color が使えるらしい。
+$ brew cask install iterm2  次に tmux の設定。 tmux はバージョン 2.2 以上ならOKっぽい。普通に homebrew でインストールしたら 2.2 だった。
+$ brew install tmux  で、設定ファイル tmux.conf に以下を追加。
+set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;  もし、以下の設定が書いてあったらコメントアウト。
+# set -g default-terminal xterm-256color  それから、 neovim の設定 ( init.vim )。
+if has(&#39;nvim&#39;) set termguicolors endif  これでOK。 昔の設定は、 let $NVIM_TUI_ENABLE_TRUE_COLOR=1 とかだったらしいけど、2016/5/11から変わったっぽい。</description>
     </item>
     
     <item>
@@ -76,21 +34,12 @@ endif
       <pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-01-tmux_prefix_z/</guid>
-      <description>&lt;p&gt;知らんかった。便利&lt;/p&gt;
-
-&lt;p&gt;tmux 1.8 以降だと、 &lt;code&gt;prefix z&lt;/code&gt; で最大化をトグルできるみたい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rhysd.hatenablog.com/entry/2013/09/16/003620&#34;&gt;tmux で一時的に pane を最大化する - sorry, uninuplemented:&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ちなみに、vimでは、以下のような設定で似たようなことも出来るみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap so &amp;lt;C-w&amp;gt;_&amp;lt;C-w&amp;gt;|
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2個目の &lt;code&gt;&amp;lt;C-w&amp;gt;&lt;/code&gt; と &lt;code&gt;|&lt;/code&gt; の間には、 &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; があり。( &lt;code&gt;&amp;lt;C-v&amp;gt;&lt;/code&gt; を2回入力する)&lt;/p&gt;
-
-&lt;p&gt;トグルではないけど。&lt;/p&gt;
-</description>
+      <description>知らんかった。便利
+tmux 1.8 以降だと、 prefix z で最大化をトグルできるみたい。
+tmux で一時的に pane を最大化する - sorry, uninuplemented:
+ちなみに、vimでは、以下のような設定で似たようなことも出来るみたい。
+nnoremap so &amp;lt;C-w&amp;gt;_&amp;lt;C-w&amp;gt;|  2個目の &amp;lt;C-w&amp;gt; と | の間には、 &amp;lt;C-v&amp;gt; があり。( &amp;lt;C-v&amp;gt; を2回入力する)
+トグルではないけど。</description>
     </item>
     
     <item>
@@ -99,26 +48,11 @@ endif
       <pubDate>Sun, 16 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-06-16-tmux_detach_before_attach/</guid>
-      <description>
-
-&lt;p&gt;tmux で attach する場合、事前に attach されていた
-画面がある時、その画面サイズに固定されてしまう。&lt;/p&gt;
-
-&lt;p&gt;そのため、 attach する前にオプションで detach させるようにする。&lt;/p&gt;
-
-&lt;p&gt;zsh で自動 attach するには、 .zshrc にこんな感じで書いてる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;if [ -z $TMUX ]; then
-  tmux attach -d || tmux
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/items/fa28ae844bc820c2da57&#34;&gt;tmuxでアタッチした時、画面がおかしくなるのを直した #tmux - Qiita [キータ]&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://filmlang.org/computer/tmux&#34;&gt;Tmuxの設定とメモ&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>tmux で attach する場合、事前に attach されていた 画面がある時、その画面サイズに固定されてしまう。
+そのため、 attach する前にオプションで detach させるようにする。
+zsh で自動 attach するには、 .zshrc にこんな感じで書いてる。
+if [ -z $TMUX ]; then tmux attach -d || tmux fi  参考: tmuxでアタッチした時、画面がおかしくなるのを直した #tmux - Qiita [キータ]
+Tmuxの設定とメモ</description>
     </item>
     
   </channel>

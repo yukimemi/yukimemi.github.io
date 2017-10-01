@@ -2,51 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tickeys on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/tickeys/index.xml</link>
+    <link>http://yukimemi.github.io/tags/tickeys/</link>
     <description>Recent content in Tickeys on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/tickeys/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Sep 2016 10:56:35 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/tickeys/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Type sound with Tickeys</title>
-      <link>http://yukimemi.github.io/post/2016-09-03_Type%20sound%20with%20Tickeys/</link>
+      <link>http://yukimemi.github.io/post/2016-09-03_type-sound-with-tickeys/</link>
       <pubDate>Sat, 03 Sep 2016 10:56:35 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-09-03_Type%20sound%20with%20Tickeys/</guid>
-      <description>
-
-&lt;p&gt;最近、
-&lt;a href=&#34;http://rubikitch.com/2016/08/17/sound-wav/&#34;&gt;Emacsで効果音(SE)を付けて作業効率を3倍にする方法&lt;/a&gt;
-という記事を見つけた。&lt;/p&gt;
-
-&lt;p&gt;やっぱ音があった方がやる気が出るし、コードもすらすら書けるのではないか？
-僕は形から入るタイプなのである・・・。&lt;/p&gt;
-
-&lt;p&gt;そこで、Emacsと限らず他のものでもすべて音が出るようなソフトはないかと探してみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yingDev/Tickeys&#34;&gt;yingDev/Tickeys&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Rust&lt;/code&gt; で書かれてるらしい。&lt;/p&gt;
-
-&lt;p&gt;インストール方法は homebrew cask で一発。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew cask install tickeys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとはシステム環境設定のアクセシビリティから許可するだけ。&lt;/p&gt;
-
-&lt;p&gt;起動したら &lt;code&gt;QAZ123&lt;/code&gt; とタイプすることで設定画面が開く。&lt;/p&gt;
-
-&lt;p&gt;音を選択出来るので、 &lt;code&gt;Cherry G80-3000&lt;/code&gt; ってやつにした。
-良い音！たくさんタイプしたくなるので、コード書くのが捗ること間違いなし。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.softantenna.com/wp/mac/tickeys/&#34;&gt;Tickeys – メカニカルキーボードのタイプ音を堪能できるMacアプリ&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-09-03_type-sound-with-tickeys/</guid>
+      <description>最近、 Emacsで効果音(SE)を付けて作業効率を3倍にする方法 という記事を見つけた。
+やっぱ音があった方がやる気が出るし、コードもすらすら書けるのではないか？ 僕は形から入るタイプなのである・・・。
+そこで、Emacsと限らず他のものでもすべて音が出るようなソフトはないかと探してみた。
+yingDev/Tickeys
+Rust で書かれてるらしい。
+インストール方法は homebrew cask で一発。
+$ brew cask install tickeys  あとはシステム環境設定のアクセシビリティから許可するだけ。
+起動したら QAZ123 とタイプすることで設定画面が開く。
+音を選択出来るので、 Cherry G80-3000 ってやつにした。 良い音！たくさんタイプしたくなるので、コード書くのが捗ること間違いなし。
+参考 Tickeys – メカニカルキーボードのタイプ音を堪能できるMacアプリ</description>
     </item>
     
   </channel>

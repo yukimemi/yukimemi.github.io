@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Theme on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/theme/index.xml</link>
+    <link>http://yukimemi.github.io/tags/theme/</link>
     <description>Recent content in Theme on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/theme/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/theme/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Tinkerer テーマ変更</title>
@@ -14,14 +17,10 @@
       <pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-05-19-change_theme/</guid>
-      <description>&lt;p&gt;Tinkerer のテーマを変えた。 tinkerturquoise ていうテーマ&lt;/p&gt;
-
-&lt;p&gt;naoiwata さん作成。 使用させて頂きます。&lt;/p&gt;
-
-&lt;p&gt;インストールの仕方は以下のページの通り。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://pypi.python.org/pypi/sphinxjp.themes.tinkerturquoise/0.2.21&#34;&gt;sphinxjp.themes.tinkerturquoise 0.2.21 : Python Package Index&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Tinkerer のテーマを変えた。 tinkerturquoise ていうテーマ
+naoiwata さん作成。 使用させて頂きます。
+インストールの仕方は以下のページの通り。
+sphinxjp.themes.tinkerturquoise 0.2.21 : Python Package Index</description>
     </item>
     
     <item>
@@ -30,40 +29,14 @@
       <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-06-13-change_theme/</guid>
-      <description>
-
-&lt;p&gt;Tinkererのテーマをカスタマイズしたいと思った。&lt;/p&gt;
-
-&lt;p&gt;カスタマイズといってもそんな大層なことがしたいわけではなく。&lt;/p&gt;
-
-&lt;p&gt;デフォルトの &amp;ldquo;modern5&amp;rdquo; だと、横幅が狭いと思ったので広くしたかっただけ。
-今時のワイド画面が多い中ではもうちょっと広くてもいいでしょう。&lt;/p&gt;
-
-&lt;p&gt;カスタマイズの方法は、まず元になるテーマである &amp;ldquo;modern5&amp;rdquo;
-をコピーしてくる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mkdir -p _themes/mytheme
-$ cp -r ~/.virtualenvs/2.7.4/lib/python2.7/site-packages/tinkerer/themes/modern5/_themes/mytheme
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、conf.pyにmythemeを使うことを明記する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Pick another Tinkerer theme or use your own
-html_theme = &amp;quot;mytheme&amp;quot;
-
-# Add other theme paths here
-html_theme_path = [&#39;_themes&#39;, tinkerer.paths.themes]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;後は &lt;code&gt;_themes/mytheme/static/modern5.css_t&lt;/code&gt; を編集すればいいみたい。&lt;/p&gt;
-
-&lt;p&gt;よくわからないけど、 width がついているところを全部 +200px
-したった。&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://krakenbeal.blogspot.jp/2012/05/tinkererblog.html&#34;&gt;Tinkererを使ってblogを始める - KRAKENBEAL RECORDS&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>Tinkererのテーマをカスタマイズしたいと思った。
+カスタマイズといってもそんな大層なことがしたいわけではなく。
+デフォルトの &amp;ldquo;modern5&amp;rdquo; だと、横幅が狭いと思ったので広くしたかっただけ。 今時のワイド画面が多い中ではもうちょっと広くてもいいでしょう。
+カスタマイズの方法は、まず元になるテーマである &amp;ldquo;modern5&amp;rdquo; をコピーしてくる。
+$ mkdir -p _themes/mytheme $ cp -r ~/.virtualenvs/2.7.4/lib/python2.7/site-packages/tinkerer/themes/modern5/_themes/mytheme  それから、conf.pyにmythemeを使うことを明記する。
+# Pick another Tinkerer theme or use your own html_theme = &amp;quot;mytheme&amp;quot; # Add other theme paths here html_theme_path = [&#39;_themes&#39;, tinkerer.paths.themes]  後は _themes/mytheme/static/modern5.css_t を編集すればいいみたい。
+よくわからないけど、 width がついているところを全部 +200px したった。
+参考: Tinkererを使ってblogを始める - KRAKENBEAL RECORDS</description>
     </item>
     
   </channel>

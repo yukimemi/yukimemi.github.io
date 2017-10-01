@@ -2,61 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Map on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/map/index.xml</link>
+    <link>http://yukimemi.github.io/tags/map/</link>
     <description>Recent content in Map on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Aug 2016 09:58:11 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Mapping with &lt;nowait&gt; option in vim</title>
-      <link>http://yukimemi.github.io/post/2016-08-09_Mapping%20with%20%3Cnowait%3E%20option%20in%20vim/</link>
+      <link>http://yukimemi.github.io/post/2016-08-09_mapping-with-nowait-option-in-vim/</link>
       <pubDate>Tue, 09 Aug 2016 09:58:11 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-08-09_Mapping%20with%20%3Cnowait%3E%20option%20in%20vim/</guid>
-      <description>&lt;p&gt;&lt;code&gt;vim&lt;/code&gt; でマッピングをする時に、便利なオプションがあることを最近知った。&lt;/p&gt;
-
-&lt;p&gt;それが &lt;code&gt;&amp;lt;nowait&amp;gt;&lt;/code&gt; オプション。&lt;/p&gt;
-
-&lt;p&gt;例えば、よくやるキーマップの例としてこんなのがある。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;エスケープ2回でハイライト消すっていうマッピング。&lt;/p&gt;
-
-&lt;p&gt;だけど、これを設定した状態で、コマンドウィンドウを &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; で閉じたい場合、&lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; を押下しても、次のマッピングを待っている状態になってしまって、すぐに閉じることができない。&lt;/p&gt;
-
-&lt;p&gt;こんなマッピングをした場合。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;この場合に、 &lt;code&gt;&amp;lt;nowait&amp;gt;&lt;/code&gt; というオプションを追加することで、 &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; を押下したらすぐにコマンドウィンドウを閉じることができる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;めちゃめちゃ便利。&lt;/p&gt;
-
-&lt;p&gt;僕の場合、コマンドウィンドウと、Uniteを閉じるのにこのオプションを使っている。&lt;/p&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Cmdwin.
-nnoremap : q:i
-vnoremap : q:A
-
-&amp;quot; nohlsearch.
-nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;
-
-&amp;quot; Escape cmd win.
-au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
-
-&amp;quot; Escape unite.
-au MyAutoCmd FileType unite nmap &amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;Esc&amp;gt; &amp;lt;Plug&amp;gt;(unite_exit)
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-08-09_mapping-with-nowait-option-in-vim/</guid>
+      <description>vim でマッピングをする時に、便利なオプションがあることを最近知った。
+それが &amp;lt;nowait&amp;gt; オプション。
+例えば、よくやるキーマップの例としてこんなのがある。
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;  エスケープ2回でハイライト消すっていうマッピング。
+だけど、これを設定した状態で、コマンドウィンドウを &amp;lt;ESC&amp;gt; で閉じたい場合、&amp;lt;ESC&amp;gt; を押下しても、次のマッピングを待っている状態になってしまって、すぐに閉じることができない。
+こんなマッピングをした場合。
+au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;  この場合に、 &amp;lt;nowait&amp;gt; というオプションを追加することで、 &amp;lt;ESC&amp;gt; を押下したらすぐにコマンドウィンドウを閉じることができる。
+au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;  めちゃめちゃ便利。
+僕の場合、コマンドウィンドウと、Uniteを閉じるのにこのオプションを使っている。
+こんな感じ。
+&amp;quot; Cmdwin. nnoremap : q:i vnoremap : q:A &amp;quot; nohlsearch. nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt; &amp;quot; Escape cmd win. au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt; &amp;quot; Escape unite.</description>
     </item>
     
   </channel>

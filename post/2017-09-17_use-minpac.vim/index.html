@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Use minpac.vim | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="red lighten-3 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2 class="pink-text">Use minpac.vim</h2>
+      <p class="orange-text text-darken-4">2017/09/17 Sun</p>
+      <div class="row">
+        <div class="col s12"><div id="addthis">
+  
+  <div class="addthis_native_toolbox"></div>
+</div>
+</div>
+        <div class="col s12"><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</div>
+      </div>
+      
+
+<p>vim や neovim で標準で用意されている <code>package</code> 機能。まだ一度も触ったことがなかったので使ってみた。</p>
+
+<p>使ってみるに当たって、 <a href="https://github.com/k-takata/minpac">k-takata/minpac</a> が
+便利そうなので、利用してみた。</p>
+
+<pre><code class="language-vim">&quot; Plugin:
+&quot; Use minpac. {{{1
+set packpath^='~/.cache/nvim/'
+let s:minpac_dir = '~/.cache/nvim/pack/minpac/opt/minpac'
+if has('vim_starting')
+  if !isdirectory(s:minpac_dir)
+    echo &quot;Install minpac ...&quot;
+    execute '!git clone --depth 1 https://github.com/k-takata/minpac ' . s:minpac_dir
+  endif
+endif
+
+&quot; pack list. {{{1
+&quot; start plugins. {{{2
+let s:start_plugs = [
+      \ ['Yggdroot/indentLine', {}],
+      \ ['itchyny/lightline.vim', {}],
+      \ ]
+
+&quot; opt plugins. {{{2
+let s:opt_plugs = [
+      \ ['fatih/vim-go', {'type': 'opt'}],
+      \ ['zchee/deoplete-go', {'type': 'opt', 'do': 'silent! !make'}],
+      \ ['kristijanhusak/vim-hybrid-material', {'type': 'opt'}],
+      \ ]
+
+&quot; lazy load plugins. {{{2
+let s:lazy_plugs = [
+      \ ['Konfekt/FastFold', {'type': 'opt'}],
+      \ ['thinca/vim-submode', {'type': 'opt'}],
+      \ ['LeafCage/yankround.vim', {'type': 'opt'}],
+      \ ['tyru/capture.vim', {'type': 'opt'}],
+      \ ['Shougo/context_filetype.vim', {'type': 'opt'}],
+      \ ['Shougo/denite.nvim', {'type': 'opt', 'do': 'silent! UpdateRemotePlugins'}, has('python3')],
+      \ ['Shougo/deoplete.nvim', {'type': 'opt', 'do': 'silent! UpdateRemotePlugins'}, has('nvim')],
+      \ ['Shougo/echodoc.vim', {'type': 'opt'}],
+      \ ['Shougo/vimproc.vim', {'type': 'opt', 'do': 'silent! !make'}],
+      \ ]
+
+&quot; minpac init. {{{1
+if exists('*minpac#init')
+  &quot; minpac is loaded.
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+  function! s:minpac_add(plugs)
+    for plug in a:plugs
+      let cond = len(plug) &gt; 2 ? plug[2] : 1
+      if cond
+        exe 'call minpac#add(&quot;' . plug[0] . '&quot;, ' . string(plug[1]) . ')'
+      endif
+    endfor
+  endfunction
+
+  &quot; start. {{{2
+  call &lt;SID&gt;minpac_add(s:start_plugs)
+
+  &quot; opt. {{{2
+  call &lt;SID&gt;minpac_add(s:opt_plugs)
+
+  &quot; lazy. {{{2
+  call &lt;SID&gt;minpac_add(s:lazy_plugs)
+endif
+
+&quot; Async load lazy plugins. {{{1
+let s:idx = 0
+function! PackAddHandler(timer)
+  let plug = s:lazy_plugs[s:idx]
+  let name = split(plug[0], '/')[1]
+  let cond = len(plug) &gt; 2 ? plug[2] : 1
+  if cond
+    &quot; exe &quot;echom 'packadd &quot; . name . &quot;'&quot;
+    exe 'packadd ' . name
+  endif
+  let s:idx += 1
+  &quot; doautocmd BufReadPost
+  au! lazy_load_bundle
+endfunction
+
+aug lazy_load_bundle
+  au MyAutoCmd VimEnter * call timer_start(1, 'PackAddHandler', {'repeat': len(s:lazy_plugs)})
+aug END
+
+&quot; Plugin settings. {{{1
+&quot; lightline. {{{2
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ }
+
+&quot; deoplete.nvim. {{{2
+let g:deoplete#enable_at_startup = 1
+
+&quot; vim-submode. {{{2
+let g:submode_leave_with_key = 1
+
+au MyAutoCmd VimEnter * call &lt;SID&gt;vim_submode_aft()
+function! s:vim_submode_aft() abort
+  packadd vim-submode
+  call submode#enter_with('bufmove', 'n', '', 's&gt;', '&lt;C-w&gt;&gt;')
+  call submode#enter_with('bufmove', 'n', '', 's&lt;', '&lt;C-w&gt;&lt;')
+  call submode#enter_with('bufmove', 'n', '', 's+', '&lt;C-w&gt;+')
+  call submode#enter_with('bufmove', 'n', '', 's-', '&lt;C-w&gt;-')
+  call submode#map('bufmove', 'n', '', '&gt;', '&lt;C-w&gt;&gt;')
+  call submode#map('bufmove', 'n', '', '&lt;', '&lt;C-w&gt;&lt;')
+  call submode#map('bufmove', 'n', '', '+', '&lt;C-w&gt;+')
+  call submode#map('bufmove', 'n', '', '-', '&lt;C-w&gt;-')
+endfunction
+
+&quot; yankround.vim. {{{2
+nmap p &lt;Plug&gt;(yankround-p)
+nmap P &lt;Plug&gt;(yankround-P)
+nmap &lt;C-p&gt; &lt;Plug&gt;(yankround-prev)
+nmap &lt;C-n&gt; &lt;Plug&gt;(yankround-next)
+let g:yankround_max_history = 100
+
+&quot; vim-go. {{{2
+let g:go_auto_type_info = 1
+let g:go_snippet_engine = &quot;neosnippet&quot;
+let g:go_fmt_command = &quot;goimports&quot;
+
+let g:go_metalinter_autosave = 1
+let g:go_fmt_autosave = 0
+let g:go_gocode_unimported_packages = 1
+&quot; au MyAutoCmd BufWritePost *.go GoMetaLinter
+&quot; au MyAutoCmd BufWritePre *.go silent GoFmt
+
+au MyAutoCmd BufNew,BufRead *.go call &lt;SID&gt;vim_go_cfg()
+
+function! s:vim_go_cfg() abort
+  packadd vim-go
+
+  nmap &lt;buffer&gt; &lt;Leader&gt;gd &lt;Plug&gt;(go-doc)
+  nmap &lt;buffer&gt; &lt;Leader&gt;gs &lt;Plug&gt;(go-doc-split)
+  nmap &lt;buffer&gt; &lt;Leader&gt;gv &lt;Plug&gt;(go-doc-vertical)
+  nmap &lt;buffer&gt; &lt;Leader&gt;gb &lt;Plug&gt;(go-doc-browser)
+  nmap &lt;buffer&gt; &lt;Leader&gt;gr &lt;Plug&gt;(go-rename)
+  nnoremap &lt;buffer&gt; &lt;Leader&gt;gi :&lt;C-u&gt;GoImport&lt;Space&gt;
+  setl completeopt=menu,preview
+endfunction
+
+&quot; Define user commands for updating/cleaning the plugins. {{{1
+&quot; Each of them loads minpac, reloads .vimrc to register the
+&quot; information of plugins, then performs the task.
+com! PackClean     packadd minpac | source $MYVIMRC | call minpac#clean()
+com! PackUpdate    packadd minpac | source $MYVIMRC | call minpac#clean() | call minpac#update()
+com! PackListStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&quot;&quot;, &quot;start&quot;)
+com! PackListOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&quot;&quot;, &quot;opt&quot;)
+com! PackNameStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&quot;&quot;, &quot;start&quot;, &quot;&quot;, 1)
+com! PackNameOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&quot;&quot;, &quot;opt&quot;, &quot;&quot;, 1)
+</code></pre>
+
+<p>設定するに当たって、 <a href="http://d.hatena.ne.jp/heavenshell/20160430/1462088882">Vim の起動速度2 - Memo</a> を参考に (というかほぼパク・・・) した。</p>
+
+<p><code>package</code> には、 <code>start</code> と、 <code>opt</code> がある。 <code>start</code> は、デフォルトで読み込まれるプラグインで、 <code>opt</code> なものは、別途 <code>packadd</code> をすることで
+遅延ロードすることが出来る。</p>
+
+<p>僕は 3つの 種類に分けて設定してみた。</p>
+
+<p><code>s:start_plugs</code> に記載しているプラグインは、文字通り <code>start</code> でデフォルトで読み込まれるプラグインたち。</p>
+
+<p><code>s:opt_plugs</code> に記載しているプラグインは、 特定の <code>filetype</code> で有効化するようなやつ。これらはその <code>filetype</code> の
+<code>autocmd</code> で個別に <code>packadd</code> する。
+ちなみに、 <code>colorscheme</code> も、 <code>opt</code> でいいらしい。 <code>colorscheme</code> コマンドが使用される時に自動的に <code>packadd</code> されるよう。</p>
+
+<p>んで、 <code>s:lazy_plugs</code> に記載しているのが、遅延ロードするやつ。
+<a href="http://d.hatena.ne.jp/heavenshell/20160430/1462088882">Vim の起動速度2 - Memo</a> で書かれているように、
+タイマー機能を使用して、 <code>vim</code> が起動した後に遅延で <code>packadd</code> する。</p>
+
+<p>これで、起動時間を計測したところ・・・ <a href="https://github.com/Shougo/dein.vim">dein.vim</a> より、少し遅いくらいになった・・・。</p>
+
+<p><a href="https://github.com/Shougo/dein.vim">dein.vim</a> めちゃ早いことがわかった・・・。</p>
+
+<hr />
+
+<h5 id="参考">参考</h5>
+
+<p><a href="http://d.hatena.ne.jp/heavenshell/20160430/1462088882">Vim の起動速度2 - Memo</a></p>
+
+<p><a href="https://github.com/k-takata/minpac">k-takata/minpac: A minimal package manager for Vim 8 (and Neovim)</a></p>
+
+<p><a href="http://h-miyako.hatenablog.com/entry/2016/02/29/211534">Vimのパッケージ機能を試してみました - Blank File</a></p>
+
+      <hr />
+      <div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+   
+  var disqus_shortname = 'yukimemi-github'; 
+
+   
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+

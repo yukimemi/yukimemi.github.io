@@ -2,228 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Webpack on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/webpack/index.xml</link>
+    <link>http://yukimemi.github.io/tags/webpack/</link>
     <description>Recent content in Webpack on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Jul 2016 00:58:51 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/webpack/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>JScript by ES2015 with webpack x gulp x babel</title>
-      <link>http://yukimemi.github.io/post/2016-07-26_JScript%20by%20ES2015%20with%20webpack%20x%20gulp%20x%20babel/</link>
+      <link>http://yukimemi.github.io/post/2016-07-26_jscript-by-es2015-with-webpack-x-gulp-x-babel/</link>
       <pubDate>Tue, 26 Jul 2016 00:58:51 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-07-26_JScript%20by%20ES2015%20with%20webpack%20x%20gulp%20x%20babel/</guid>
-      <description>
-
-&lt;p&gt;JScriptをES2015で書こう！！&lt;/p&gt;
-
-&lt;p&gt;・・・今更なJScriptだけれども、まだまだWindowsでは使えるはず。
-いや、仕方なく仕事では使わなきゃいけない場面が多々ある。&lt;/p&gt;
-
-&lt;p&gt;最近はpowershellをよく使っていたけれども、書いてて楽しいのはやっぱりjavascriptの方が上。
-でもどうせ書くなら、ES2015で書きたい！！&lt;/p&gt;
-
-&lt;p&gt;そこで、babelやらwebpackやらgulpやらを駆使してやってみた。&lt;/p&gt;
-
-&lt;p&gt;ディレクトリ構成はこんなの。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree -I node_modules
-.
-├── src
-│   ├── foo.js
-│   └── bar.js
-├── dst
-│   ├── foo.cmd
-│   └── bar.cmd
-├── .babelrc
-├── package.json
-├── gulpfile.babel.js
-└── webpack.config.babel.js
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;いろいろインストール。(こんだけやったか定かじゃないけど・・・&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -D babel babel-loader babel-preset-es2015-loose es3ify-webpack-plugin gulp gulp-cli gulp-convert-encoding gulp-eol gulp-header gulp-plumber gulp-rename gulp-watch webpack webpack-stream
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;package.json&lt;/code&gt; はこんな感じ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;package.json&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
-  &amp;quot;name&amp;quot;: &amp;quot;jscript&amp;quot;,
-  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
-  &amp;quot;description&amp;quot;: &amp;quot;&amp;quot;,
-  &amp;quot;main&amp;quot;: &amp;quot;gulpfile.babel.js&amp;quot;,
-  &amp;quot;dependencies&amp;quot;: {},
-  &amp;quot;devDependencies&amp;quot;: {
-    &amp;quot;babel-core&amp;quot;: &amp;quot;^6.9.1&amp;quot;,
-    &amp;quot;babel-loader&amp;quot;: &amp;quot;^6.2.4&amp;quot;,
-    &amp;quot;babel-plugin-transform-es2015-ie8-classes&amp;quot;: &amp;quot;^0.1.8&amp;quot;,
-    &amp;quot;babel-polyfill&amp;quot;: &amp;quot;^6.9.1&amp;quot;,
-    &amp;quot;babel-preset-es2015&amp;quot;: &amp;quot;^6.9.0&amp;quot;,
-    &amp;quot;babel-preset-es2015-loose&amp;quot;: &amp;quot;^7.0.0&amp;quot;,
-    &amp;quot;babel-preset-es2015-loose-ie8&amp;quot;: &amp;quot;0.0.4&amp;quot;,
-    &amp;quot;es3ify-webpack-plugin&amp;quot;: &amp;quot;0.0.0&amp;quot;,
-    &amp;quot;es5-shim&amp;quot;: &amp;quot;^4.5.8&amp;quot;,
-    &amp;quot;gulp&amp;quot;: &amp;quot;^3.9.1&amp;quot;,
-    &amp;quot;gulp-cli&amp;quot;: &amp;quot;^1.2.2&amp;quot;,
-    &amp;quot;gulp-convert-encoding&amp;quot;: &amp;quot;^1.0.0&amp;quot;,
-    &amp;quot;gulp-eol&amp;quot;: &amp;quot;^0.1.2&amp;quot;,
-    &amp;quot;gulp-header&amp;quot;: &amp;quot;^1.8.7&amp;quot;,
-    &amp;quot;gulp-plumber&amp;quot;: &amp;quot;^1.1.0&amp;quot;,
-    &amp;quot;gulp-rename&amp;quot;: &amp;quot;^1.2.2&amp;quot;,
-    &amp;quot;gulp-replace&amp;quot;: &amp;quot;^0.5.4&amp;quot;,
-    &amp;quot;gulp-watch&amp;quot;: &amp;quot;^4.3.9&amp;quot;,
-    &amp;quot;imports-loader&amp;quot;: &amp;quot;^0.6.5&amp;quot;,
-    &amp;quot;json3&amp;quot;: &amp;quot;^3.3.2&amp;quot;,
-    &amp;quot;lodash&amp;quot;: &amp;quot;^3.10.1&amp;quot;,
-    &amp;quot;moment&amp;quot;: &amp;quot;^2.14.1&amp;quot;,
-    &amp;quot;webpack&amp;quot;: &amp;quot;^1.13.1&amp;quot;,
-    &amp;quot;webpack-stream&amp;quot;: &amp;quot;^3.2.0&amp;quot;
-  },
-  &amp;quot;scripts&amp;quot;: {
-    &amp;quot;test&amp;quot;: &amp;quot;echo \&amp;quot;Error: no test specified\&amp;quot; &amp;amp;&amp;amp; exit 1&amp;quot;,
-    &amp;quot;build&amp;quot;: &amp;quot;gulp&amp;quot;,
-    &amp;quot;watch&amp;quot;: &amp;quot;gulp watch&amp;quot;
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;いらないのあるかもしれない。
-ポイントとしては、 &lt;code&gt;lodash&lt;/code&gt; を使いたい場合、Version 4.0 以降はie8以下に対応してないので、(つまりJScriptも不可) あえてVersionをダウンさせる。&lt;/p&gt;
-
-&lt;p&gt;次に &lt;code&gt;webpack&lt;/code&gt; の設定。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;webpack.config.babel.js&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import path from &#39;path&#39;;
-import encodingPlugin from &#39;webpack-encoding-plugin&#39;;
-import es3ifyPlugin from &#39;es3ify-webpack-plugin&#39;;
-import webpack from &#39;webpack&#39;;
-
-const src = path.join(__dirname, &#39;src&#39;);
-
-export default {
-  entry: {
-    foo: path.join(src, &#39;foo.js&#39;),
-    bar: path.join(src, &#39;bar.js&#39;)
-  },
-  output: {
-    path: path.join(__dirname, &#39;dst&#39;),
-    filename: &#39;[name].js&#39;
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: &#39;babel-loader&#39;
-      }
-    ]
-  },
-  resolve: {
-    extensions: [&#39;&#39;, &#39;.js&#39;]
-  },
-  plugins: [
-    new es3ifyPlugin(),
-    new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(en|ja)$/),
-  ]
-
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;スクリプトってのはその場でちょーっと書くものだから、一つじゃなくてentry pointは複数にしてる。
-ポイント？としては、 &lt;code&gt;es3ify-webpack-plugin&lt;/code&gt; で、es3へダウンコンパイル？させてることと、 &lt;code&gt;moment.js&lt;/code&gt; を使う場合、そのままではwebpackが全ロケールを読みこんじゃうんで、一部だけ読み込むようにしてるところ。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;webpack&lt;/code&gt; でばべる時の設定で、JScriptとして使えるようにするために(IE8以下対応) &lt;code&gt;.babelrc&lt;/code&gt; の設定をする。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;.babelrc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;{
-  &amp;quot;presets&amp;quot;: [
-    &amp;quot;es2015-loose&amp;quot;
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;んで、これが &lt;code&gt;gulp&lt;/code&gt; の設定。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;gulpfile.babel.js&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;import gulp from &#39;gulp&#39;;
-import encoding from &#39;gulp-convert-encoding&#39;;
-import eol from &#39;gulp-eol&#39;;
-import plumber from &#39;gulp-plumber&#39;;
-import watch from &#39;gulp-watch&#39;;
-import rename from &#39;gulp-rename&#39;;
-import header from &#39;gulp-header&#39;;
-import webpack from &#39;webpack-stream&#39;;
-
-import config from &#39;./webpack.config.babel.js&#39;;
-
-const Header = &amp;quot;@set @junk=1 /*\r\n@cscript //nologo //e:jscript \&amp;quot;%~f0\&amp;quot; %*\r\n@exit /b %errorlevel%\r\n\r\n*/&amp;quot;;
-
-gulp.task(&#39;build&#39;, () =&amp;gt; {
-  gulp.src(&#39;src&#39;)
-    .pipe(plumber())
-    .pipe(webpack(config))
-    .pipe(eol(&amp;quot;\r\n&amp;quot;))
-    .pipe(encoding({to: &amp;quot;Shift_JIS&amp;quot;}))
-    .pipe(rename({extname: &amp;quot;.cmd&amp;quot;}))
-    .pipe(header(Header))
-    .pipe(gulp.dest(&#39;dst&#39;));
-});
-
-gulp.task(&#39;watch&#39;, [&#39;build&#39;], () =&amp;gt; {
-  watch([&amp;quot;./src/**&amp;quot;], (evt) =&amp;gt; {
-    gulp.start(&#39;default&#39;);
-  });
-});
-
-gulp.task(&#39;default&#39;, [&#39;build&#39;]);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ol&gt;
-&lt;li&gt;webpack実行&lt;/li&gt;
-&lt;li&gt;改行コードを &lt;code&gt;CRLF&lt;/code&gt; へ変更&lt;/li&gt;
-&lt;li&gt;文字コードを &lt;code&gt;Shift_JIS&lt;/code&gt; へ変換&lt;/li&gt;
-&lt;li&gt;拡張子を &lt;code&gt;.cmd&lt;/code&gt; へ変更&lt;/li&gt;
-&lt;li&gt;ヘッダーを付与 (バッチファイルとして実行させるため)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;ってことをしてる。&lt;/p&gt;
-
-&lt;p&gt;実行するときは、 &lt;code&gt;npm script&lt;/code&gt; で、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm run build
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;watch タスクは&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm run watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで快適にJScriptがかける！！&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/25384360/how-to-prevent-moment-js-from-loading-locales-with-webpack&#34;&gt;javascript - How to prevent moment.js from loading locales with webpack? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/BryceHQ/es3ify-webpack-plugin&#34;&gt;BryceHQ/es3ify-webpack-plugin: A simple webpack plugin to es3ify your code for old versions of ie, such as ie8.&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-07-26_jscript-by-es2015-with-webpack-x-gulp-x-babel/</guid>
+      <description>JScriptをES2015で書こう！！
+・・・今更なJScriptだけれども、まだまだWindowsでは使えるはず。 いや、仕方なく仕事では使わなきゃいけない場面が多々ある。
+最近はpowershellをよく使っていたけれども、書いてて楽しいのはやっぱりjavascriptの方が上。 でもどうせ書くなら、ES2015で書きたい！！
+そこで、babelやらwebpackやらgulpやらを駆使してやってみた。
+ディレクトリ構成はこんなの。
+$ tree -I node_modules . ├── src │ ├── foo.js │ └── bar.js ├── dst │ ├── foo.cmd │ └── bar.cmd ├── .babelrc ├── package.json ├── gulpfile.babel.js └── webpack.config.babel.js  いろいろインストール。(こんだけやったか定かじゃないけど・・・
+$ npm i -D babel babel-loader babel-preset-es2015-loose es3ify-webpack-plugin gulp gulp-cli gulp-convert-encoding gulp-eol gulp-header gulp-plumber gulp-rename gulp-watch webpack webpack-stream  package.json はこんな感じ。
+ package.json  { &amp;quot;name&amp;quot;: &amp;quot;jscript&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;, &amp;quot;description&amp;quot;: &amp;quot;&amp;quot;, &amp;quot;main&amp;quot;: &amp;quot;gulpfile.</description>
     </item>
     
   </channel>

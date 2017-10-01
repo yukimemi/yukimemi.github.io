@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Mayu for IME off in vim | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="red lighten-3 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2 class="pink-text">Mayu for IME off in vim</h2>
+      <p class="orange-text text-darken-4">2015/05/02 Sat</p>
+      <div class="row">
+        <div class="col s12"><div id="addthis">
+  
+  <div class="addthis_native_toolbox"></div>
+</div>
+</div>
+        <div class="col s12"><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</div>
+      </div>
+      
+
+<p>vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。
+Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。</p>
+
+<p>Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。
+そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。</p>
+
+<p>Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。</p>
+
+<p>設定自体は単純なんだけど、キーボードのキーコードを全部定義しなきゃいけないみたいで、それがめんどくさそうだった。
+幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。
+一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。</p>
+
+<h3 id="mayuのインストール">Mayuのインストール</h3>
+
+<p>Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。
+Ubuntu 15.04では以下の通りにやるとビルド出来た。</p>
+
+<pre><code class="language-sh">$ ghq get https://github.com/kenhys/mayu.git
+$ cd ~/.ghq/src/github.com/kenhys/mayu
+$ sudo aptitude install build-essential libboost-iostreams-dev libudev-dev libusb-1.0-0-dev
+$ ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu/
+$ make
+$ sudo make install
+$ sudo chmod +s /usr/local/bin/mayu
+</code></pre>
+
+<p>mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。
+本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。</p>
+
+<h3 id="fcitx設定">fcitx設定</h3>
+
+<p>今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。
+前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。</p>
+
+<p>それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。</p>
+
+<p><img src="/img/fcitx-setting_min.png" alt="fcitx-setting" /></p>
+
+<h3 id="mayu設定">Mayu設定</h3>
+
+<p>次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。</p>
+
+<pre><code class="language-sh">def key Esc Escape = 0x01
+def key Eisu = 0x7b
+
+key Esc = Esc Eisu
+key C-OpenBracket = C-OpenBracket Eisu
+</code></pre>
+
+<p>「Escape」が押された時に、「Escape」、「英数」を押し、「Ctrl-[」が押された時に、「Ctrl-[」、「英数」を押すという設定。</p>
+
+<p>ただ、mayuでは、一通りキーボード上のキーは全てdefしなきゃいけないみたいで、ネット上に公開してくださっているありがたい方の <a href="http://d.hatena.ne.jp/OKIIZO/20080106/1199639459">キーコード一覧</a> を使用させてもらった。</p>
+
+<p>一部、MacBookAirのキーコードと違う部分があったので、改変している。 <a href="https://raw.githubusercontent.com/yukimemi/dotfiles/master/.mayu">mayu</a></p>
+
+<p>この設定ファイルをHOMEに「.mayu」として置く。
+その後、mayuをルート権限で実行する。</p>
+
+<p>これでvim上でもシェル上でも、どこでも同じようにIMEがオフになるようになる。</p>
+
+<p>あと、キーボードでキーコード一覧に記載されていないものがあった場合、mayuの標準出力にキーコードが表示される。それをメモして、設定ファイルに適当な名前で「def key hoge = 0xXX」とかしてやれば大丈夫。</p>
+
+<h3 id="mayu自動起動">Mayu自動起動</h3>
+
+<p>システム起動時に自動でmayuが起動するように、systemdに登録する。</p>
+
+<p>userごとの自動起動設定としたいため、以下のファイルをまず作成する。</p>
+
+<pre><code class="language-sh">$ mkdir -p ~/.config/systemd/user
+$ vim ~/.config/systemd/user/mayu.service
+</code></pre>
+
+<p>「mayu.service」の中身はこんな感じ</p>
+
+<pre><code class="language-sh">[Unit]
+Description=mayu keyboard hack
+
+[Service]
+ExecStart=/usr/local/bin/mayu
+
+[Install]
+WantedBy=default.target
+</code></pre>
+
+<p>それから、以下のようにして登録する。</p>
+
+<pre><code class="language-sh">$ systemctl --user daemon-reload
+$ systemctl --user list-unit-files
+UNIT FILE            STATE
+mayu.service         disabled
+systemd-exit.service static
+basic.target         static
+bluetooth.target     static
+default.target       static
+exit.target          disabled
+paths.target         static
+printer.target       static
+shutdown.target      static
+smartcard.target     static
+sockets.target       static
+sound.target         static
+timers.target        static
+
+13 unit files listed.
+
+$ systemctl --user enable mayu.service
+$ systemctl --user list-unit-files
+UNIT FILE            STATE
+mayu.service         enabled
+systemd-exit.service static
+basic.target         static
+bluetooth.target     static
+default.target       static
+exit.target          disabled
+paths.target         static
+printer.target       static
+shutdown.target      static
+smartcard.target     static
+sockets.target       static
+sound.target         static
+timers.target        static
+
+13 unit files listed.
+</code></pre>
+
+<p>systemdとして正しく起動しているか確かめる場合は、ログを見る。</p>
+
+<pre><code class="language-sh">$ journalctl
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Basic System.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Started mayu keyboard hack.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting mayu keyboard hack...
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Reached target Default.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Startup finished in 44ms.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1]: Started User Manager for UID 1000.
+5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Default.
+5月 02 08:57:56 yukimemi-MacBookAir kernel: input: mayu uinpt as /devices/virtual/input/input14
+5月 02 08:57:56 yukimemi-MacBookAir mayu[1386]: loading: /home/yukimemi/.mayu
+5月 02 08:57:58 yukimemi-MacBookAir mayu[1386]: successfully loaded.
+</code></pre>
+
+<p>こんな感じ。
+だいぶ使いやすくなった。</p>
+
+<hr />
+
+<h5 id="参考">参考</h5>
+
+<p><a href="http://qiita.com/sharow/items/e8f7d3e0628d7ee925db">systemdでの定期実行(timerユニット) - Qiita</a></p>
+
+<p><a href="http://d.hatena.ne.jp/OKIIZO/20080106/1199639459">新型Apple Keyboard微妙 - どんごどんご</a></p>
+
+<p><a href="https://github.com/kenhys/mayu">kenhys/mayu</a></p>
+
+<p><a href="http://symfoware.blog68.fc2.com/blog-entry-1397.html">Ubuntu 14.04にMozcと窓使いの憂鬱をインストールする - Symfoware</a></p>
+
+      <hr />
+      <div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+   
+  var disqus_shortname = 'yukimemi-github'; 
+
+   
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+

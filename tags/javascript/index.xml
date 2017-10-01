@@ -2,217 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/javascript/index.xml</link>
+    <link>http://yukimemi.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Oct 2016 11:23:19 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>js beautify with vim</title>
-      <link>http://yukimemi.github.io/post/2016-10-09_js-beautify%20with%20vim/</link>
+      <link>http://yukimemi.github.io/post/2016-10-09_js-beautify-with-vim/</link>
       <pubDate>Sun, 09 Oct 2016 11:23:19 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-10-09_js-beautify%20with%20vim/</guid>
-      <description>
-
-&lt;p&gt;vimでjavascriptを書くときの設定。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;dein.toml&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Filetype (javascript) ===== {{{1
-[[plugins]]
-repo = &#39;pangloss/vim-javascript&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;maxmellon/vim-jsx-pretty&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/javascript-libraries-syntax.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/es.next.syntax.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-# ==================== Utility =================== {{{1
-[[plugins]]
-repo = &#39;Chiel92/vim-autoformat&#39;
-hook_add = &#39;&#39;&#39;
-  let g:autoformat_autoindent = 0
-  let g:autoformat_retab = 0
-  let g:autoformat_remove_trailing_spaces = 0
-  au MyAutoCmd BufWrite *.js,*.jsx :Autoformat
-  nnoremap [Space]f :&amp;lt;C-u&amp;gt;Autoformat&amp;lt;CR&amp;gt;
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記設定で、かつ、 &lt;code&gt;js-beautify&lt;/code&gt; を別途インストールする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -g js-beautify
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;便利なのが、 &lt;code&gt;vim-autoformat&lt;/code&gt; プラグイン。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;js-beautify&lt;/code&gt; をインストールして上記設定をしていると、javascriptを書いて保存したら自動でインデントを整えてくれる。&lt;br /&gt;
-ただ、ES2015のimportやjsx表記などでインデントが変になってしまうので、&lt;code&gt;js-beautify&lt;/code&gt; 用の設定ファイルを作成する。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;.jsbeautifyrc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;indent_size&amp;quot;: 2,
-  &amp;quot;indent_char&amp;quot;: &amp;quot; &amp;quot;,
-  &amp;quot;eol&amp;quot;: &amp;quot;\n&amp;quot;,
-  &amp;quot;indent_level&amp;quot;: 0,
-  &amp;quot;indent_with_tabs&amp;quot;: false,
-  &amp;quot;preserve_newlines&amp;quot;: true,
-  &amp;quot;max_preserve_newlines&amp;quot;: 10,
-  &amp;quot;jslint_happy&amp;quot;: false,
-  &amp;quot;space_after_anon_function&amp;quot;: false,
-  &amp;quot;brace_style&amp;quot;: &amp;quot;collapse-preserve-inline&amp;quot;,
-  &amp;quot;keep_array_indentation&amp;quot;: false,
-  &amp;quot;keep_function_indentation&amp;quot;: false,
-  &amp;quot;space_before_conditional&amp;quot;: true,
-  &amp;quot;break_chained_methods&amp;quot;: false,
-  &amp;quot;eval_code&amp;quot;: false,
-  &amp;quot;unescape_strings&amp;quot;: false,
-  &amp;quot;wrap_line_length&amp;quot;: 0,
-  &amp;quot;wrap_attributes&amp;quot;: &amp;quot;auto&amp;quot;,
-  &amp;quot;wrap_attributes_indent_size&amp;quot;: 4,
-  &amp;quot;e4x&amp;quot;: true,
-  &amp;quot;end_with_newline&amp;quot;: false
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで快適なエディットができる。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/beautify-web/js-beautify/issues/382&#34;&gt;Newline inserted after ES6 module import/export · Issue #382 · beautify-web/js-beautify · GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/MaxMEllon/vim-jsx-pretty&#34;&gt;GitHub - MaxMEllon/vim-jsx-pretty: [VimL] React JSX syntax pretty highlighting for vim.&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-10-09_js-beautify-with-vim/</guid>
+      <description>vimでjavascriptを書くときの設定。
+ dein.toml  # ==================== Filetype (javascript) ===== {{{1 [[plugins]] repo = &#39;pangloss/vim-javascript&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] [[plugins]] repo = &#39;maxmellon/vim-jsx-pretty&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] [[plugins]] repo = &#39;othree/javascript-libraries-syntax.vim&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] [[plugins]] repo = &#39;othree/es.next.syntax.vim&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] # ==================== Utility =================== {{{1 [[plugins]] repo = &#39;Chiel92/vim-autoformat&#39; hook_add = &#39;&#39;&#39; let g:autoformat_autoindent = 0 let g:autoformat_retab = 0 let g:autoformat_remove_trailing_spaces = 0 au MyAutoCmd BufWrite *.</description>
     </item>
     
     <item>
       <title>roots new post command</title>
-      <link>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</link>
+      <link>http://yukimemi.github.io/post/2014-06-26_roots-new-post-command/</link>
       <pubDate>Thu, 26 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-06-26_roots%20new%20post%20command/</guid>
-      <description>&lt;p&gt;Tinkererでは、 &lt;code&gt;tinker -p &amp;quot;hogehoge&amp;quot;&lt;/code&gt; で、新しい記事を作成することが出来た。
-roots でも同じことがしたかったので、コマンドを作ってみた。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;#!/bin/bash
-
-# posts dir
-postsDir=posts
-
-# title
-echo -n &amp;quot;title: &amp;quot;
-read title
-
-postFile=${postsDir}/$(date +%Y-%m-%d)_${title}.jade
-
-cat &amp;lt;&amp;lt; EOT &amp;gt;&amp;gt; &amp;quot;${postFile}&amp;quot;
----
-title: ${title}
-date: $(date &amp;quot;+%Y/%m/%d %H:%M&amp;quot;)
-layout: ../views/_single_post.jade
----
-
-:markdown
-
-
-// vim: ft=markdown
-EOT
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これを &lt;code&gt;pn&lt;/code&gt; というファイル名でpathの通った場所に保存すると、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ pn
-title: hogehoge
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;とプロンプトが表示され、タイトルを打ち込むことで新しいブログ記事を作成出来る。
-便利。&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-06-26_roots-new-post-command/</guid>
+      <description>Tinkererでは、 tinker -p &amp;quot;hogehoge&amp;quot; で、新しい記事を作成することが出来た。 roots でも同じことがしたかったので、コマンドを作ってみた。
+#!/bin/bash # posts dir postsDir=posts # title echo -n &amp;quot;title: &amp;quot; read title postFile=${postsDir}/$(date +%Y-%m-%d)_${title}.jade cat &amp;lt;&amp;lt; EOT &amp;gt;&amp;gt; &amp;quot;${postFile}&amp;quot; --- title: ${title} date: $(date &amp;quot;+%Y/%m/%d %H:%M&amp;quot;) layout: ../views/_single_post.jade --- :markdown // vim: ft=markdown EOT  これを pn というファイル名でpathの通った場所に保存すると、
+$ pn title: hogehoge  とプロンプトが表示され、タイトルを打ち込むことで新しいブログ記事を作成出来る。 便利。</description>
     </item>
     
     <item>
       <title>roots install</title>
-      <link>http://yukimemi.github.io/post/2014-06-25_roots%20install/</link>
+      <link>http://yukimemi.github.io/post/2014-06-25_roots-install/</link>
       <pubDate>Wed, 25 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-06-25_roots%20install/</guid>
-      <description>
-
-&lt;p&gt;今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。&lt;/p&gt;
-
-&lt;p&gt;roots は、静的サイトジェネレーター。nodeで動く。
-特徴としては、以下の形式で作成出来ること。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;スクリプト -&amp;gt; coffeescript&lt;/li&gt;
-&lt;li&gt;HTML -&amp;gt; jade&lt;/li&gt;
-&lt;li&gt;CSS -&amp;gt; stylus&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。
-jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;ブログ作成手順&#34;&gt;ブログ作成手順&lt;/h3&gt;
-
-&lt;h4 id=&#34;1-npmでグローバルにインストール&#34;&gt;1. npmでグローバルにインストール&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm install -g roots
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-ブログテンプレートでプロジェクト作成&#34;&gt;2. ブログテンプレートでプロジェクト作成&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ roots new yukimemi.github.io --blog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでブログ完成。&lt;/p&gt;
-
-&lt;h4 id=&#34;3-roots-コマンドでコンパイル-ウォッチ&#34;&gt;3. roots コマンドでコンパイル &amp;amp; ウォッチ&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cd yukimemi.github.io
-$ roots watch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ
-を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)&lt;/p&gt;
-
-&lt;h4 id=&#34;4-ブログ記事を修正&#34;&gt;4. ブログ記事を修正&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ cdk posts
-$ vim hello_world.jade
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。
-すごい・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/morishitter/items/b708a11e09b6fcb2f751&#34;&gt;Node.js - 静的サイトジェネレーター「roots」 - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://re-dzine.net/2013/02/roots/&#34;&gt;静的サイトジェネレータ「roots」を触ってみた | REFLECTDESIGN&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-06-25_roots-install/</guid>
+      <description>今までブログはTinkererを使用していたけど、これからは、 roots で書くことにしよう。
+roots は、静的サイトジェネレーター。nodeで動く。 特徴としては、以下の形式で作成出来ること。
+ スクリプト -&amp;gt; coffeescript HTML -&amp;gt; jade CSS -&amp;gt; stylus  しかも、ライブリロードが標準で組み込まれているので、これが非常に便利。 jade ファイルを保存したら、自動でブラウザが更新され、すぐ確認出来る。
+ブログ作成手順 1. npmでグローバルにインストール $ npm install -g roots  2. ブログテンプレートでプロジェクト作成 $ roots new yukimemi.github.io --blog  これでブログ完成。
+3. roots コマンドでコンパイル &amp;amp; ウォッチ $ cd yukimemi.github.io $ roots watch  自動的にコンパイルが動き、 public ディレクトリにコンパイル結果が入り、さらにport 1111でサーバ を起動してくれ、さらにデフォルトのブラウザで自動的に開いてくれる。(至れり尽くせり)
+4. ブログ記事を修正 $ cdk posts $ vim hello_world.jade  修正して保存すると、ブラウザが自動でリロードされ、すぐさま修正結果を確認出来る。 すごい・・・。
+参考: Node.js - 静的サイトジェネレーター「roots」 - Qiita</description>
     </item>
     
     <item>
@@ -221,13 +53,9 @@ $ vim hello_world.jade
       <pubDate>Fri, 20 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-20-second_post/</guid>
-      <description>&lt;p&gt;roots&lt;/p&gt;
-
-&lt;p&gt;やっぱりいろいろ難しい。&lt;/p&gt;
-
-&lt;p&gt;とりあえず、 subtree push が便利っぽい。
-がんばる。&lt;/p&gt;
-</description>
+      <description>roots
+やっぱりいろいろ難しい。
+とりあえず、 subtree push が便利っぽい。 がんばる。</description>
     </item>
     
     <item>
@@ -236,13 +64,9 @@ $ vim hello_world.jade
       <pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-06-19-first_post/</guid>
-      <description>&lt;p&gt;はじめての「roots」&lt;/p&gt;
-
-&lt;p&gt;Markdown でもブログが書けるらしい。&lt;/p&gt;
-
-&lt;p&gt;移行しよかな。
-ライブリロードがあるのがいいね。&lt;/p&gt;
-</description>
+      <description>はじめての「roots」
+Markdown でもブログが書けるらしい。
+移行しよかな。 ライブリロードがあるのがいいね。</description>
     </item>
     
   </channel>

@@ -2,206 +2,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/vim/index.xml</link>
+    <link>http://yukimemi.github.io/tags/vim/</link>
     <description>Recent content in Vim on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Oct 2017 18:21:37 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fix conf with single user mode on mac</title>
+      <link>http://yukimemi.github.io/post/2017-10-01_fix-conf-with-single-user-mode-on-mac/</link>
+      <pubDate>Sun, 01 Oct 2017 18:21:37 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-10-01_fix-conf-with-single-user-mode-on-mac/</guid>
+      <description>mac でシングルユーザーモードの起動と、設定ファイルの修正方法。
+nas の自動マウントを行おうとして、 automount の設定を変更していたら、再起動後、 mac が起動しなくなった。
+その修正方法。
+Mac をシングルユーザモードまたは Verbose モードで起動する
+ここを見ればわかるが、mac起動時に、 Command + S を押しっぱなしでシングルユーザーモードに入れる。
+んで、あとは、 vi で設定をもとに戻して終了・・・っと思いきや、設定を書き込み出来なかった。
+デフォルトだと、 / が読み込み専用でマウントされている。 書き込み可能で再マウントする。 (High Sierra だったので、APFS)
+# mount_apfs -uw /  これで書き込みできる。 設定は、 man で確認できる。
+# man 8 mount  修正後、再起動して完了。
+# reboot  参考 Mac をシングルユーザモードまたは Verbose モードで起動する</description>
+    </item>
     
     <item>
       <title>Use minpac.vim</title>
-      <link>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</link>
+      <link>http://yukimemi.github.io/post/2017-09-17_use-minpac.vim/</link>
       <pubDate>Sun, 17 Sep 2017 23:30:20 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</guid>
-      <description>
-
-&lt;p&gt;vim や neovim で標準で用意されている &lt;code&gt;package&lt;/code&gt; 機能。まだ一度も触ったことがなかったので使ってみた。&lt;/p&gt;
-
-&lt;p&gt;使ってみるに当たって、 &lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac&lt;/a&gt; が
-便利そうなので、利用してみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Plugin:
-&amp;quot; Use minpac. {{{1
-set packpath^=&#39;~/.cache/nvim/&#39;
-let s:minpac_dir = &#39;~/.cache/nvim/pack/minpac/opt/minpac&#39;
-if has(&#39;vim_starting&#39;)
-  if !isdirectory(s:minpac_dir)
-    echo &amp;quot;Install minpac ...&amp;quot;
-    execute &#39;!git clone --depth 1 https://github.com/k-takata/minpac &#39; . s:minpac_dir
-  endif
-endif
-
-&amp;quot; pack list. {{{1
-&amp;quot; start plugins. {{{2
-let s:start_plugs = [
-      \ [&#39;Yggdroot/indentLine&#39;, {}],
-      \ [&#39;itchyny/lightline.vim&#39;, {}],
-      \ ]
-
-&amp;quot; opt plugins. {{{2
-let s:opt_plugs = [
-      \ [&#39;fatih/vim-go&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;zchee/deoplete-go&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! !make&#39;}],
-      \ [&#39;kristijanhusak/vim-hybrid-material&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ ]
-
-&amp;quot; lazy load plugins. {{{2
-let s:lazy_plugs = [
-      \ [&#39;Konfekt/FastFold&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;thinca/vim-submode&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;LeafCage/yankround.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;tyru/capture.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;Shougo/context_filetype.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;Shougo/denite.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;python3&#39;)],
-      \ [&#39;Shougo/deoplete.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;nvim&#39;)],
-      \ [&#39;Shougo/echodoc.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;Shougo/vimproc.vim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! !make&#39;}],
-      \ ]
-
-&amp;quot; minpac init. {{{1
-if exists(&#39;*minpac#init&#39;)
-  &amp;quot; minpac is loaded.
-  call minpac#init()
-  call minpac#add(&#39;k-takata/minpac&#39;, {&#39;type&#39;: &#39;opt&#39;})
-
-  function! s:minpac_add(plugs)
-    for plug in a:plugs
-      let cond = len(plug) &amp;gt; 2 ? plug[2] : 1
-      if cond
-        exe &#39;call minpac#add(&amp;quot;&#39; . plug[0] . &#39;&amp;quot;, &#39; . string(plug[1]) . &#39;)&#39;
-      endif
-    endfor
-  endfunction
-
-  &amp;quot; start. {{{2
-  call &amp;lt;SID&amp;gt;minpac_add(s:start_plugs)
-
-  &amp;quot; opt. {{{2
-  call &amp;lt;SID&amp;gt;minpac_add(s:opt_plugs)
-
-  &amp;quot; lazy. {{{2
-  call &amp;lt;SID&amp;gt;minpac_add(s:lazy_plugs)
-endif
-
-&amp;quot; Async load lazy plugins. {{{1
-let s:idx = 0
-function! PackAddHandler(timer)
-  let plug = s:lazy_plugs[s:idx]
-  let name = split(plug[0], &#39;/&#39;)[1]
-  let cond = len(plug) &amp;gt; 2 ? plug[2] : 1
-  if cond
-    &amp;quot; exe &amp;quot;echom &#39;packadd &amp;quot; . name . &amp;quot;&#39;&amp;quot;
-    exe &#39;packadd &#39; . name
-  endif
-  let s:idx += 1
-  &amp;quot; doautocmd BufReadPost
-  au! lazy_load_bundle
-endfunction
-
-aug lazy_load_bundle
-  au MyAutoCmd VimEnter * call timer_start(1, &#39;PackAddHandler&#39;, {&#39;repeat&#39;: len(s:lazy_plugs)})
-aug END
-
-&amp;quot; Plugin settings. {{{1
-&amp;quot; lightline. {{{2
-let g:lightline = {
-      \ &#39;colorscheme&#39;: &#39;jellybeans&#39;,
-      \ }
-
-&amp;quot; deoplete.nvim. {{{2
-let g:deoplete#enable_at_startup = 1
-
-&amp;quot; vim-submode. {{{2
-let g:submode_leave_with_key = 1
-
-au MyAutoCmd VimEnter * call &amp;lt;SID&amp;gt;vim_submode_aft()
-function! s:vim_submode_aft() abort
-  packadd vim-submode
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s&amp;gt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;gt;&#39;)
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s&amp;lt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;lt;&#39;)
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s+&#39;, &#39;&amp;lt;C-w&amp;gt;+&#39;)
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s-&#39;, &#39;&amp;lt;C-w&amp;gt;-&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;&amp;gt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;gt;&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;&amp;lt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;lt;&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;+&#39;, &#39;&amp;lt;C-w&amp;gt;+&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;-&#39;, &#39;&amp;lt;C-w&amp;gt;-&#39;)
-endfunction
-
-&amp;quot; yankround.vim. {{{2
-nmap p &amp;lt;Plug&amp;gt;(yankround-p)
-nmap P &amp;lt;Plug&amp;gt;(yankround-P)
-nmap &amp;lt;C-p&amp;gt; &amp;lt;Plug&amp;gt;(yankround-prev)
-nmap &amp;lt;C-n&amp;gt; &amp;lt;Plug&amp;gt;(yankround-next)
-let g:yankround_max_history = 100
-
-&amp;quot; vim-go. {{{2
-let g:go_auto_type_info = 1
-let g:go_snippet_engine = &amp;quot;neosnippet&amp;quot;
-let g:go_fmt_command = &amp;quot;goimports&amp;quot;
-
-let g:go_metalinter_autosave = 1
-let g:go_fmt_autosave = 0
-let g:go_gocode_unimported_packages = 1
-&amp;quot; au MyAutoCmd BufWritePost *.go GoMetaLinter
-&amp;quot; au MyAutoCmd BufWritePre *.go silent GoFmt
-
-au MyAutoCmd BufNew,BufRead *.go call &amp;lt;SID&amp;gt;vim_go_cfg()
-
-function! s:vim_go_cfg() abort
-  packadd vim-go
-
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gd &amp;lt;Plug&amp;gt;(go-doc)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gs &amp;lt;Plug&amp;gt;(go-doc-split)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gv &amp;lt;Plug&amp;gt;(go-doc-vertical)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gb &amp;lt;Plug&amp;gt;(go-doc-browser)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gr &amp;lt;Plug&amp;gt;(go-rename)
-  nnoremap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gi :&amp;lt;C-u&amp;gt;GoImport&amp;lt;Space&amp;gt;
-  setl completeopt=menu,preview
-endfunction
-
-&amp;quot; Define user commands for updating/cleaning the plugins. {{{1
-&amp;quot; Each of them loads minpac, reloads .vimrc to register the
-&amp;quot; information of plugins, then performs the task.
-com! PackClean     packadd minpac | source $MYVIMRC | call minpac#clean()
-com! PackUpdate    packadd minpac | source $MYVIMRC | call minpac#clean() | call minpac#update()
-com! PackListStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;start&amp;quot;)
-com! PackListOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;opt&amp;quot;)
-com! PackNameStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;start&amp;quot;, &amp;quot;&amp;quot;, 1)
-com! PackNameOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;opt&amp;quot;, &amp;quot;&amp;quot;, 1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;設定するに当たって、 &lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt; を参考に (というかほぼパク・・・) した。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;package&lt;/code&gt; には、 &lt;code&gt;start&lt;/code&gt; と、 &lt;code&gt;opt&lt;/code&gt; がある。 &lt;code&gt;start&lt;/code&gt; は、デフォルトで読み込まれるプラグインで、 &lt;code&gt;opt&lt;/code&gt; なものは、別途 &lt;code&gt;packadd&lt;/code&gt; をすることで
-遅延ロードすることが出来る。&lt;/p&gt;
-
-&lt;p&gt;僕は 3つの 種類に分けて設定してみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;s:start_plugs&lt;/code&gt; に記載しているプラグインは、文字通り &lt;code&gt;start&lt;/code&gt; でデフォルトで読み込まれるプラグインたち。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;s:opt_plugs&lt;/code&gt; に記載しているプラグインは、 特定の &lt;code&gt;filetype&lt;/code&gt; で有効化するようなやつ。これらはその &lt;code&gt;filetype&lt;/code&gt; の
-&lt;code&gt;autocmd&lt;/code&gt; で個別に &lt;code&gt;packadd&lt;/code&gt; する。
-ちなみに、 &lt;code&gt;colorscheme&lt;/code&gt; も、 &lt;code&gt;opt&lt;/code&gt; でいいらしい。 &lt;code&gt;colorscheme&lt;/code&gt; コマンドが使用される時に自動的に &lt;code&gt;packadd&lt;/code&gt; されるよう。&lt;/p&gt;
-
-&lt;p&gt;んで、 &lt;code&gt;s:lazy_plugs&lt;/code&gt; に記載しているのが、遅延ロードするやつ。
-&lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt; で書かれているように、
-タイマー機能を使用して、 &lt;code&gt;vim&lt;/code&gt; が起動した後に遅延で &lt;code&gt;packadd&lt;/code&gt; する。&lt;/p&gt;
-
-&lt;p&gt;これで、起動時間を計測したところ・・・ &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; より、少し遅いくらいになった・・・。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; めちゃ早いことがわかった・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac: A minimal package manager for Vim 8 (and Neovim)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://h-miyako.hatenablog.com/entry/2016/02/29/211534&#34;&gt;Vimのパッケージ機能を試してみました - Blank File&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2017-09-17_use-minpac.vim/</guid>
+      <description>vim や neovim で標準で用意されている package 機能。まだ一度も触ったことがなかったので使ってみた。
+使ってみるに当たって、 k-takata/minpac が 便利そうなので、利用してみた。
+&amp;quot; Plugin: &amp;quot; Use minpac. {{{1 set packpath^=&#39;~/.cache/nvim/&#39; let s:minpac_dir = &#39;~/.cache/nvim/pack/minpac/opt/minpac&#39; if has(&#39;vim_starting&#39;) if !isdirectory(s:minpac_dir) echo &amp;quot;Install minpac ...&amp;quot; execute &#39;!git clone --depth 1 https://github.com/k-takata/minpac &#39; . s:minpac_dir endif endif &amp;quot; pack list. {{{1 &amp;quot; start plugins. {{{2 let s:start_plugs = [ \ [&#39;Yggdroot/indentLine&#39;, {}], \ [&#39;itchyny/lightline.vim&#39;, {}], \ ] &amp;quot; opt plugins. {{{2 let s:opt_plugs = [ \ [&#39;fatih/vim-go&#39;, {&#39;type&#39;: &#39;opt&#39;}], \ [&#39;zchee/deoplete-go&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent!</description>
     </item>
     
     <item>
@@ -210,1012 +46,159 @@ com! PackNameOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpac
       <pubDate>Thu, 08 Jun 2017 07:43:37 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2017-06-08_vim-plug/</guid>
-      <description>
-
-&lt;p&gt;ずっと &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; を使っていたのだけれど、ちょっと他のも試しに使ってみるかと思って、こっちも人気のある、 &lt;a href=&#34;https://github.com/junegunn/vim-plug&#34;&gt;vim-plug&lt;/a&gt; を試しに使ってみた。&lt;/p&gt;
-
-&lt;p&gt;設定は公式のREADMEとかを参考にして、こんな感じになった。
-(全部じゃないけど、抜粋して)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Plugin: {{{1
-&amp;quot; Use vim-plug.
-let s:cache_home = expand(&#39;~/.cache/nvim&#39;)
-let s:plug_dir = s:cache_home . &#39;/plugs&#39;
-let s:vim_plug_dir = s:cache_home . &#39;/vim-plug&#39;
-if has(&#39;vim_starting&#39;)
-  if !isdirectory(s:vim_plug_dir)
-    echo &amp;quot;Install vim-plug ...&amp;quot;
-    execute &#39;!git clone --depth 1 https://github.com/junegunn/vim-plug.git &#39; . s:vim_plug_dir . &#39;/autoload&#39;
-  endif
-  execute &#39;set runtimepath^=&#39; . fnamemodify(s:vim_plug_dir, &#39;:p&#39;)
-endif
-
-&amp;quot; Helper function.
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : { &#39;on&#39;: [], &#39;for&#39;: [] }
-endfunction
-
-function! MakeVimproc(info) abort &amp;quot;{{{2
-  if a:info.status == &#39;updated&#39; &amp;amp;&amp;amp; g:is_windows &amp;amp;&amp;amp; !has(&#39;kaoriya&#39;)
-    let g:vimproc#download_windows_dll = 1
-  endif
-  if !g:is_windows
-    !make
-  endif
-endfunction
-
-&amp;quot; Plugin list. {{{2
-call plug#begin(s:plug_dir)
-
-Plug &#39;joshdick/onedark.vim&#39;
-Plug &#39;itchyny/vim-cursorword&#39;
-Plug &#39;taku-o/vim-zoom&#39;, Cond(has(&#39;gui&#39;))
-Plug &#39;Yggdroot/indentLine&#39;
-Plug &#39;Shougo/deoplete.nvim&#39;, Cond(has(&#39;nvim&#39;), { &#39;do&#39;: &#39;UpdateRemotePlugins&#39; })
-Plug &#39;Shougo/neocomplete.vim&#39;, Cond(!has(&#39;nvim&#39;))
-Plug &#39;Shougo/context_filetype.vim&#39;
-Plug &#39;Shougo/denite.nvim&#39;, { &#39;on&#39;: &#39;Denite&#39; }
-Plug &#39;airblade/vim-rooter&#39;
-Plug &#39;Shougo/vimproc.vim&#39;, Cond(!has(&#39;kaoriya&#39;), { &#39;do&#39;: function(&#39;MakeVimproc&#39;) })
-Plug &#39;glidenote/memolist.vim&#39;, { &#39;on&#39;: [&#39;Memolist&#39;, &#39;MemoNew&#39;] }
-Plug &#39;mattn/sonictemplate-vim&#39;, { &#39;on&#39;: &#39;Templete&#39; }
-Plug &#39;junegunn/vim-easy-align&#39;, { &#39;on&#39;: &#39;&amp;lt;Plug&amp;gt;(EasyAlign)&#39; }
-Plug &#39;fatih/vim-go&#39;, { &#39;for&#39;: &#39;go&#39; }
-Plug &#39;rust-lang/rust.vim&#39;, Cond(executable(&#39;cargo&#39;), { &#39;for&#39;: &#39;rust&#39; })
-Plug &#39;b4b4r07/vim-sqlfmt&#39;, { &#39;for&#39;: &#39;sql&#39;, &#39;do&#39;: &#39;go get github.com/jackc/sqlfmt&#39; }
-
-call plug#end()
-
-&amp;quot; Plugin settings: {{{1
-let s:p = { &#39;plugs&#39;: get(g:, &#39;plugs&#39;, {}) }
-function! s:p.is_installed(name) abort
-  return has_key(self.plugs, a:name) ? isdirectory(self.plugs[a:name].dir) : 0
-endfunction
-
-&amp;quot; vim-cursorword {{{2
-if s:p.is_installed(&#39;vim-cursorword&#39;)
-  function! s:ToggleCursorWord() abort
-    let b:cursorword = !get(b:, &#39;cursorword&#39;, 1)
-  endfunction
-
-  com! ToggleCursorWord call s:ToggleCursorWord()
-endif
-
-&amp;quot; deoplete.nvim {{{2
-if s:p.is_installed(&#39;deoplete.nvim&#39;)
-  let g:deoplete#enable_at_startup = 1
-endif
-
-&amp;quot; neocomplete.vim {{{2
-if s:p.is_installed(&#39;neocomplete.vim&#39;)
-  let g:neocomplete#enable_at_startup = 1
-endif
-
-&amp;quot; denite.nvim {{{2
-if s:p.is_installed(&#39;denite.nvim&#39;)
-  &amp;quot; Use plefix s
-  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
-  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
-  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
-  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
-  &amp;quot; nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
-  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_mru&amp;lt;CR&amp;gt;
-  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
-  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
-  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
-  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
-  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line -no-quit&amp;lt;CR&amp;gt;
-  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
-
-  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
-
-  &amp;quot; Incremental search in cmdline history.
-  inoremap &amp;lt;C-l&amp;gt; &amp;lt;ESC&amp;gt;:&amp;lt;C-u&amp;gt;Denite command&amp;lt;CR&amp;gt;
-
-  au! User denite.nvim call s:denite_cfg()
-
-  function! s:denite_cfg() abort
-    &amp;quot; Load dependent plugins.
-    call plug#load(&#39;neomru.vim&#39;)
-    &amp;quot; Default options.
-    call denite#custom#option(&#39;default&#39;, {
-          \ &#39;prompt&#39;: &#39;»&#39;,
-          \ &#39;cursor_wrap&#39;: v:true,
-          \ &#39;auto_resize&#39;: v:true,
-          \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
-          \ })
-    &amp;quot; Pt command on grep source
-    if executable(&#39;pt&#39;)
-      call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
-      call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-            \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
-      call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-      call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-      call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-      call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-    endif
-    &amp;quot; custom mappings.
-    call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
-    call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
-    call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
-    call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
-  endfunction
-endif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; のが色々出来るけど、 &lt;a href=&#34;https://github.com/junegunn/vim-plug&#34;&gt;vim-plug&lt;/a&gt; もけっこう色々出来てびっくり。
-何より、インストール画面がかっちょいいのがいいｗ&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/junegunn/vim-plug/wiki/faq&#34;&gt;faq · junegunn/vim-plug Wiki&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/b4b4r07/items/fa9c8cceb321edea5da0&#34;&gt;おい、NeoBundle もいいけど vim-plug 使えよ - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>ずっと dein.vim を使っていたのだけれど、ちょっと他のも試しに使ってみるかと思って、こっちも人気のある、 vim-plug を試しに使ってみた。
+設定は公式のREADMEとかを参考にして、こんな感じになった。 (全部じゃないけど、抜粋して)
+&amp;quot; Plugin: {{{1 &amp;quot; Use vim-plug. let s:cache_home = expand(&#39;~/.cache/nvim&#39;) let s:plug_dir = s:cache_home . &#39;/plugs&#39; let s:vim_plug_dir = s:cache_home . &#39;/vim-plug&#39; if has(&#39;vim_starting&#39;) if !isdirectory(s:vim_plug_dir) echo &amp;quot;Install vim-plug ...&amp;quot; execute &#39;!git clone --depth 1 https://github.com/junegunn/vim-plug.git &#39; . s:vim_plug_dir . &#39;/autoload&#39; endif execute &#39;set runtimepath^=&#39; . fnamemodify(s:vim_plug_dir, &#39;:p&#39;) endif &amp;quot; Helper function. function! Cond(cond, ...) let opts = get(a:000, 0, {}) return a:cond ?</description>
     </item>
     
     <item>
       <title>Use denite instead of unite</title>
-      <link>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</link>
+      <link>http://yukimemi.github.io/post/2017-05-24_use-denite/</link>
       <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</guid>
-      <description>
-
-&lt;p&gt;やろうやろうと思っていた、 &lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; をついに使ってみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein&lt;/a&gt; を使って toml で設定。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
-[[plugins]]
-repo = &#39;Shougo/denite.nvim&#39;
-on_cmd = &#39;Denite&#39;
-if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
-hook_add = &#39;&#39;&#39;
-  &amp;quot; Use plefix s
-  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
-  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
-  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
-  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
-  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
-  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
-  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
-  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
-  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
-  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
-  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
-
-  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
-
-&#39;&#39;&#39;
-hook_post_source = &#39;&#39;&#39;
-  &amp;quot; Default options.
-  call denite#custom#option(&#39;default&#39;, {
-        \ &#39;prompt&#39;: &#39;»&#39;,
-        \ &#39;cursor_wrap&#39;: v:true,
-        \ &#39;auto_resize&#39;: v:true,
-        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
-        \ })
-  &amp;quot; Pt command on grep source
-  if executable(&#39;pt&#39;)
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-          \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-  endif
-  &amp;quot; custom mappings.
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;とりあえず unite の時に使ってたのと似た感じで設定してみた。&lt;/p&gt;
-
-&lt;p&gt;デフォルトオプションの設定と、キーマッピングの設定を追加でしている。
-あと、 grep に pt を使って。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/mattn/jvgrep&#34;&gt;jvgrep&lt;/a&gt; を使う設定にもしてみたんだけど、設定方法が悪いのかうまく出来なかったので、放置。 とりあえず pt でいい感じに使える。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;2017-06-10-追記&#34;&gt;2017/06/10 追記&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; の help を見ると、 &lt;a href=&#34;https://github.com/mattn/jvgrep&#34;&gt;jvgrep&lt;/a&gt; を使う例が載ってた！！
-さすが Shougo さん、ありがとうございます！！&lt;/p&gt;
-
-&lt;p&gt;ということで、こんな設定になりました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
-[[plugins]]
-repo = &#39;Shougo/denite.nvim&#39;
-on_cmd = &#39;Denite&#39;
-if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
-hook_add = &#39;&#39;&#39;
-  &amp;quot; Use plefix s
-  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
-  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
-  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
-  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
-  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
-  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
-  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
-  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
-  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
-  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
-  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
-
-  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
-
-&#39;&#39;&#39;
-hook_post_source = &#39;&#39;&#39;
-  &amp;quot; Default options.
-  call denite#custom#option(&#39;default&#39;, {
-        \ &#39;prompt&#39;: &#39;»&#39;,
-        \ &#39;cursor_wrap&#39;: v:true,
-        \ &#39;auto_resize&#39;: v:true,
-        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
-        \ })
-  if executable(&#39;jvgrep&#39;)
-    &amp;quot; jvgrep command on grep source
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;jvgrep&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [&#39;-R&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-
-  elseif executable(&#39;rg&#39;)
-    &amp;quot; Ripgrep command on grep source
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;rg&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-      \ [&#39;--vimgrep&#39;, &#39;--no-heading&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [&#39;--regexp&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-
-  elseif executable(&#39;pt&#39;)
-    &amp;quot; Pt command on grep source
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-      \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-  endif
-  &amp;quot; custom mappings.
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;さりげなく、 &lt;a href=&#34;https://github.com/BurntSushi/ripgrep&#34;&gt;ripgrep&lt;/a&gt; も入れといた。&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2017-05-24_use-denite/</guid>
+      <description>やろうやろうと思っていた、 Denite をついに使ってみた。
+dein を使って toml で設定。
+# ==================== Denite ==================== {{{1 [[plugins]] repo = &#39;Shougo/denite.nvim&#39; on_cmd = &#39;Denite&#39; if = &amp;quot;has(&#39;python3&#39;)&amp;quot; hook_add = &#39;&#39;&#39; &amp;quot; Use plefix s nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt; nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt; nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt; nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt; nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt; nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt; nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt; nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt; nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt; nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt; nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt; noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt; &#39;&#39;&#39; hook_post_source = &#39;&#39;&#39; &amp;quot; Default options.</description>
     </item>
     
     <item>
       <title>dein and vim singleton</title>
-      <link>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</link>
+      <link>http://yukimemi.github.io/post/2016-12-09_dein-and-vim-singleton/</link>
       <pubDate>Fri, 09 Dec 2016 10:20:28 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://thinca.hatenablog.com/entry/20120201/1328099090&#34;&gt;vim-singleton&lt;/a&gt; という便利な vim plugin がある。&lt;/p&gt;
-
-&lt;p&gt;vim の clientserver 機能を使って、ファイルをすでに起動している vim で開くことができる。&lt;/p&gt;
-
-&lt;p&gt;これを &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; と一緒に使用する時の方法がわからなかったので、 twitter でつぶやいてみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/yukimemi&#34;&gt;@yukimemi&lt;/a&gt; hook_source を使ってください。hook_add はロード前に呼ばれるのでエラーとなります&lt;/p&gt;&amp;mdash; 暗黒美夢王(deoplete dev) (@ShougoMatsu) &lt;a href=&#34;https://twitter.com/ShougoMatsu/status/805623471589892096&#34;&gt;2016年12月5日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;そしたらなんとあの Shougo さんからお返事が！！&lt;/p&gt;
-
-&lt;p&gt;親切に教えてもらえました！&lt;/p&gt;
-
-&lt;p&gt;そこで教えてもらった通り、 &lt;code&gt;hook_add&lt;/code&gt; から &lt;code&gt;hook_source&lt;/code&gt; に変更。&lt;/p&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;dein.toml&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
-repo = &#39;thinca/vim-singleton&#39;
-if = &amp;quot;!has(&#39;nvim&#39;)&amp;quot;
-hook_source = &#39;&#39;&#39;
-  call singleton#enable()
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 lazy でないプラグインは、 &lt;code&gt;hook_source&lt;/code&gt; は動かないため、 &lt;code&gt;dein&lt;/code&gt; のドキュメントに書いてあるように &lt;code&gt;dein#call_hook(&#39;source&#39;)&lt;/code&gt; を手動で呼ぶ必要がある。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;init.vim&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;set shellslash
-if has(&#39;nvim&#39;)
-  let $VIM_PATH = expand(&#39;~/.config/nvim&#39;)
-  let $MYVIMRC = expand(&#39;~/.config/nvim/init.vim&#39;)
-else
-  let $VIM_PATH = expand(&#39;~/.vim&#39;)
-  let $MYVIMRC = expand(&#39;~/.vimrc&#39;)
-  let $MYGVIMRC = expand(&#39;~/.gvimrc&#39;)
-endif
-
-&amp;quot; Use dein.
-if has(&#39;nvim&#39;)
-  let s:cache_home = expand(&#39;~/.cache/nvim&#39;)
-else
-  let s:cache_home = expand(&#39;~/.cache/vim&#39;)
-endif
-
-let s:dein_dir = s:cache_home . &#39;/dein&#39;
-let s:dein_repo_dir = s:dein_dir . &#39;/repos/github.com/Shougo/dein.vim&#39;
-if !isdirectory(s:dein_repo_dir)
-  execute &#39;!git clone https://github.com/Shougo/dein.vim &#39; . s:dein_repo_dir
-endif
-execute &#39;set runtimepath^=&#39; . fnamemodify(s:dein_repo_dir, &#39;:p&#39;)
-
-let g:dein#install_max_processes = 16
-let g:dein#install_progress_type = &#39;title&#39;
-let g:dein#enable_notification = 1
-let s:toml_file = $VIM_PATH . &#39;/dein.toml&#39;
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file])
-  call dein#load_toml(s:toml_file)
-  call dein#end()
-  call dein#save_state()
-endif
-call dein#call_hook(&#39;source&#39;)
-
-&amp;quot; Check and install.
-if has(&#39;vim_starting&#39;) &amp;amp;&amp;amp; dein#check_install()
-  call dein#install()
-endif
-
-&amp;quot; After dein
-filetype plugin indent on
-syntax enable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自分の設定はこんな感じ。
-めちゃべんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://thinca.hatenablog.com/entry/20120201/1328099090&#34;&gt;singleton.vim 作った | 永遠に未完成&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim/blob/master/doc/dein.txt&#34;&gt;dein.vim doc&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-12-09_dein-and-vim-singleton/</guid>
+      <description>vim-singleton という便利な vim plugin がある。
+vim の clientserver 機能を使って、ファイルをすでに起動している vim で開くことができる。
+これを dein.vim と一緒に使用する時の方法がわからなかったので、 twitter でつぶやいてみた。
+@yukimemi hook_source を使ってください。hook_add はロード前に呼ばれるのでエラーとなります
+&amp;mdash; 暗黒美夢王(deoplete dev) (@ShougoMatsu) 2016年12月5日 
+そしたらなんとあの Shougo さんからお返事が！！
+親切に教えてもらえました！
+そこで教えてもらった通り、 hook_add から hook_source に変更。
+こんな感じ。
+ dein.toml  [[plugins]] repo = &#39;thinca/vim-singleton&#39; if = &amp;quot;!has(&#39;nvim&#39;)&amp;quot; hook_source = &#39;&#39;&#39; call singleton#enable() &#39;&#39;&#39;  それから、 lazy でないプラグインは、 hook_source は動かないため、 dein のドキュメントに書いてあるように dein#call_hook(&#39;source&#39;) を手動で呼ぶ必要がある。
+ init.vim  set shellslash if has(&#39;nvim&#39;) let $VIM_PATH = expand(&#39;~/.</description>
     </item>
     
     <item>
       <title>js beautify with vim</title>
-      <link>http://yukimemi.github.io/post/2016-10-09_js-beautify%20with%20vim/</link>
+      <link>http://yukimemi.github.io/post/2016-10-09_js-beautify-with-vim/</link>
       <pubDate>Sun, 09 Oct 2016 11:23:19 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-10-09_js-beautify%20with%20vim/</guid>
-      <description>
-
-&lt;p&gt;vimでjavascriptを書くときの設定。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;dein.toml&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Filetype (javascript) ===== {{{1
-[[plugins]]
-repo = &#39;pangloss/vim-javascript&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;maxmellon/vim-jsx-pretty&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/javascript-libraries-syntax.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/es.next.syntax.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-# ==================== Utility =================== {{{1
-[[plugins]]
-repo = &#39;Chiel92/vim-autoformat&#39;
-hook_add = &#39;&#39;&#39;
-  let g:autoformat_autoindent = 0
-  let g:autoformat_retab = 0
-  let g:autoformat_remove_trailing_spaces = 0
-  au MyAutoCmd BufWrite *.js,*.jsx :Autoformat
-  nnoremap [Space]f :&amp;lt;C-u&amp;gt;Autoformat&amp;lt;CR&amp;gt;
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記設定で、かつ、 &lt;code&gt;js-beautify&lt;/code&gt; を別途インストールする。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -g js-beautify
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;便利なのが、 &lt;code&gt;vim-autoformat&lt;/code&gt; プラグイン。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;js-beautify&lt;/code&gt; をインストールして上記設定をしていると、javascriptを書いて保存したら自動でインデントを整えてくれる。&lt;br /&gt;
-ただ、ES2015のimportやjsx表記などでインデントが変になってしまうので、&lt;code&gt;js-beautify&lt;/code&gt; 用の設定ファイルを作成する。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;.jsbeautifyrc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-  &amp;quot;indent_size&amp;quot;: 2,
-  &amp;quot;indent_char&amp;quot;: &amp;quot; &amp;quot;,
-  &amp;quot;eol&amp;quot;: &amp;quot;\n&amp;quot;,
-  &amp;quot;indent_level&amp;quot;: 0,
-  &amp;quot;indent_with_tabs&amp;quot;: false,
-  &amp;quot;preserve_newlines&amp;quot;: true,
-  &amp;quot;max_preserve_newlines&amp;quot;: 10,
-  &amp;quot;jslint_happy&amp;quot;: false,
-  &amp;quot;space_after_anon_function&amp;quot;: false,
-  &amp;quot;brace_style&amp;quot;: &amp;quot;collapse-preserve-inline&amp;quot;,
-  &amp;quot;keep_array_indentation&amp;quot;: false,
-  &amp;quot;keep_function_indentation&amp;quot;: false,
-  &amp;quot;space_before_conditional&amp;quot;: true,
-  &amp;quot;break_chained_methods&amp;quot;: false,
-  &amp;quot;eval_code&amp;quot;: false,
-  &amp;quot;unescape_strings&amp;quot;: false,
-  &amp;quot;wrap_line_length&amp;quot;: 0,
-  &amp;quot;wrap_attributes&amp;quot;: &amp;quot;auto&amp;quot;,
-  &amp;quot;wrap_attributes_indent_size&amp;quot;: 4,
-  &amp;quot;e4x&amp;quot;: true,
-  &amp;quot;end_with_newline&amp;quot;: false
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで快適なエディットができる。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/beautify-web/js-beautify/issues/382&#34;&gt;Newline inserted after ES6 module import/export · Issue #382 · beautify-web/js-beautify · GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/MaxMEllon/vim-jsx-pretty&#34;&gt;GitHub - MaxMEllon/vim-jsx-pretty: [VimL] React JSX syntax pretty highlighting for vim.&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-10-09_js-beautify-with-vim/</guid>
+      <description>vimでjavascriptを書くときの設定。
+ dein.toml  # ==================== Filetype (javascript) ===== {{{1 [[plugins]] repo = &#39;pangloss/vim-javascript&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] [[plugins]] repo = &#39;maxmellon/vim-jsx-pretty&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] [[plugins]] repo = &#39;othree/javascript-libraries-syntax.vim&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] [[plugins]] repo = &#39;othree/es.next.syntax.vim&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] # ==================== Utility =================== {{{1 [[plugins]] repo = &#39;Chiel92/vim-autoformat&#39; hook_add = &#39;&#39;&#39; let g:autoformat_autoindent = 0 let g:autoformat_retab = 0 let g:autoformat_remove_trailing_spaces = 0 au MyAutoCmd BufWrite *.</description>
     </item>
     
     <item>
       <title>Use solarized colorscheme in true color</title>
-      <link>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</link>
+      <link>http://yukimemi.github.io/post/2016-09-19_use-solarized-colorscheme-in-true-color/</link>
       <pubDate>Mon, 19 Sep 2016 11:15:50 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</guid>
-      <description>
-
-&lt;p&gt;前回の記事(&lt;a href=&#34;http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/&#34;&gt;True color in iTerm2 Tmux Neovim | YUKIMEMI&lt;/a&gt;)で、 &lt;code&gt;iterm&lt;/code&gt; と &lt;code&gt;neovim&lt;/code&gt; でtrue colorを使う方法はわかったんだけど、なぜか、 &lt;code&gt;solarized&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; が有効にならなかった。&lt;/p&gt;
-
-&lt;p&gt;通常の &lt;code&gt;solarized&lt;/code&gt; ではダメなようで、true color対応したやつを使えばいいみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
-repo = &#39;lifepillar/vim-solarized8&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme solarized8_dark
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでできた。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-09-19_use-solarized-colorscheme-in-true-color/</guid>
+      <description>前回の記事(True color in iTerm2 Tmux Neovim | YUKIMEMI)で、 iterm と neovim でtrue colorを使う方法はわかったんだけど、なぜか、 solarized の colorscheme が有効にならなかった。
+通常の solarized ではダメなようで、true color対応したやつを使えばいいみたい。
+[[plugins]] repo = &#39;lifepillar/vim-solarized8&#39;  colorscheme solarized8_dark  これでできた。
+参考 tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita</description>
     </item>
     
     <item>
       <title>True color in iTerm2 Tmux Neovim</title>
-      <link>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</link>
+      <link>http://yukimemi.github.io/post/2016-09-19_true-color-in-iterm2-tmux-neovim/</link>
       <pubDate>Mon, 19 Sep 2016 00:30:00 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/</guid>
-      <description>
-
-&lt;p&gt;今時 &lt;code&gt;macbook&lt;/code&gt; のキレイな画面で256色なんて・・・&lt;/p&gt;
-
-&lt;p&gt;っということで、 &lt;code&gt;True color&lt;/code&gt; が使えるそうなので設定してみた。&lt;/p&gt;
-
-&lt;p&gt;まず、 &lt;code&gt;iTerm2&lt;/code&gt; の設定。&lt;/p&gt;
-
-&lt;p&gt;は特になく、 &lt;code&gt;homebrew cask&lt;/code&gt; でインストールすればそのまま &lt;code&gt;true color&lt;/code&gt; が使えるらしい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew cask install iterm2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;次に &lt;code&gt;tmux&lt;/code&gt; の設定。
-&lt;code&gt;tmux&lt;/code&gt; はバージョン &lt;code&gt;2.2&lt;/code&gt; 以上ならOKっぽい。普通に &lt;code&gt;homebrew&lt;/code&gt; でインストールしたら &lt;code&gt;2.2&lt;/code&gt; だった。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install tmux
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;で、設定ファイル &lt;code&gt;tmux.conf&lt;/code&gt; に以下を追加。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;もし、以下の設定が書いてあったらコメントアウト。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# set -g default-terminal xterm-256color
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 &lt;code&gt;neovim&lt;/code&gt; の設定 ( &lt;code&gt;init.vim&lt;/code&gt; )。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;nvim&#39;)
-  set termguicolors
-endif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでOK。
-昔の設定は、
-&lt;code&gt;let $NVIM_TUI_ENABLE_TRUE_COLOR=1&lt;/code&gt;
-とかだったらしいけど、2016/5/11から変わったっぽい。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;terminal&lt;/code&gt; で &lt;code&gt;true color&lt;/code&gt; なのすごいべんり。
-&lt;code&gt;iTerm2&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; に関係せずに &lt;code&gt;vim&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; を変えられる。&lt;/p&gt;
-
-&lt;p&gt;設定方法を書いてくれた人たちに感謝。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/&#34;&gt;True HEX Colors with Neovim and iTerm2 - Prevent Default&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-09-19_true-color-in-iterm2-tmux-neovim/</guid>
+      <description>今時 macbook のキレイな画面で256色なんて・・・
+っということで、 True color が使えるそうなので設定してみた。
+まず、 iTerm2 の設定。
+は特になく、 homebrew cask でインストールすればそのまま true color が使えるらしい。
+$ brew cask install iterm2  次に tmux の設定。 tmux はバージョン 2.2 以上ならOKっぽい。普通に homebrew でインストールしたら 2.2 だった。
+$ brew install tmux  で、設定ファイル tmux.conf に以下を追加。
+set -ga terminal-overrides &amp;quot;,xterm-256color:Tc&amp;quot;  もし、以下の設定が書いてあったらコメントアウト。
+# set -g default-terminal xterm-256color  それから、 neovim の設定 ( init.vim )。
+if has(&#39;nvim&#39;) set termguicolors endif  これでOK。 昔の設定は、 let $NVIM_TUI_ENABLE_TRUE_COLOR=1 とかだったらしいけど、2016/5/11から変わったっぽい。</description>
     </item>
     
     <item>
       <title>flowtype in vim</title>
-      <link>http://yukimemi.github.io/post/2016-09-18_flowtype%20in%20vim/</link>
+      <link>http://yukimemi.github.io/post/2016-09-18_flowtype-in-vim/</link>
       <pubDate>Sun, 18 Sep 2016 13:03:18 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-09-18_flowtype%20in%20vim/</guid>
-      <description>
-
-&lt;p&gt;最近 &lt;code&gt;flowtype&lt;/code&gt; という &lt;code&gt;Altjs&lt;/code&gt; があるのを知った。&lt;/p&gt;
-
-&lt;p&gt;facebookが作っているらしく、 &lt;code&gt;typescript&lt;/code&gt; と違って、既存のjavascriptをそのまま使うことも出来、型エラーがあってもコンパイル、実行が出来る。&lt;/p&gt;
-
-&lt;p&gt;導入は &lt;code&gt;npm&lt;/code&gt; で簡単にインストール出来る。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ npm i -g flow-bin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;flowtype&lt;/code&gt; 自体の説明は
-&lt;a href=&#34;http://qiita.com/mizchi/items/95ee0101ac22e4b7b662&#34;&gt;型なき世界のためのflowtype入門 - Qiita&lt;/a&gt;
-とか、公式の
-&lt;a href=&#34;https://flowtype.org/&#34;&gt;Flow | A static type checker for JavaScript&lt;/a&gt;
-とか見ればいいと思う。&lt;/p&gt;
-
-&lt;p&gt;んで、公式にも書いてあるように、vimやemacsのプラギンが提供されている。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/flowtype/vim-flow&#34;&gt;flowtype/vim-flow: A vim plugin for Flow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;neovim&lt;/code&gt; &lt;code&gt;dein&lt;/code&gt; でのインストール手順。
-&lt;code&gt;toml&lt;/code&gt; を使っている前提。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;[[plugins]]
-repo = &#39;flowtype/vim-flow&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-build = &#39;npm install -g flow-bin&#39;
-hook_add = &#39;&#39;&#39;
-  let g:flow#autoclose = 1
-&#39;&#39;&#39;
-
-[[plugins]]
-repo = &#39;Shougo/deoplete.nvim&#39;
-if = &amp;quot;has(&#39;nvim&#39;)&amp;quot;
-on_i = 1
-hook_add = &#39;&#39;&#39;
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#omni_patterns = {}
-  let g:deoplete#omni_patterns.javascript = &#39;[^. *\t]\.\w*&#39;
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、 &lt;code&gt;deoplete&lt;/code&gt; を使って自動補完が出来、 &lt;code&gt;flowtype&lt;/code&gt; が記述出来た。&lt;/p&gt;
-
-&lt;p&gt;ちなみに、 &lt;code&gt;javascript&lt;/code&gt; の &lt;code&gt;syntax&lt;/code&gt; とかは、以下の設定がいいもよう。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;[[plugins]]
-repo = &#39;pangloss/vim-javascript&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;mxw/vim-jsx&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/yajs.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;maxmellon/vim-jsx-pretty&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/javascript-libraries-syntax.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-
-[[plugins]]
-repo = &#39;othree/es.next.syntax.vim&#39;
-on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/flowtype/vim-flow&#34;&gt;flowtype/vim-flow: A vim plugin for Flow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/maxmellon/items/0e6173cdd51843053839&#34;&gt;vimのECMASCript2015環境をイイ感じにする - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-09-18_flowtype-in-vim/</guid>
+      <description>最近 flowtype という Altjs があるのを知った。
+facebookが作っているらしく、 typescript と違って、既存のjavascriptをそのまま使うことも出来、型エラーがあってもコンパイル、実行が出来る。
+導入は npm で簡単にインストール出来る。
+$ npm i -g flow-bin  flowtype 自体の説明は 型なき世界のためのflowtype入門 - Qiita とか、公式の Flow | A static type checker for JavaScript とか見ればいいと思う。
+んで、公式にも書いてあるように、vimやemacsのプラギンが提供されている。
+flowtype/vim-flow: A vim plugin for Flow
+neovim dein でのインストール手順。 toml を使っている前提。
+[[plugins]] repo = &#39;flowtype/vim-flow&#39; on_ft = [&#39;javascript&#39;, &#39;javascript.jsx&#39;] build = &#39;npm install -g flow-bin&#39; hook_add = &#39;&#39;&#39; let g:flow#autoclose = 1 &#39;&#39;&#39; [[plugins]] repo = &#39;Shougo/deoplete.</description>
     </item>
     
     <item>
       <title>Mapping with &lt;nowait&gt; option in vim</title>
-      <link>http://yukimemi.github.io/post/2016-08-09_Mapping%20with%20%3Cnowait%3E%20option%20in%20vim/</link>
+      <link>http://yukimemi.github.io/post/2016-08-09_mapping-with-nowait-option-in-vim/</link>
       <pubDate>Tue, 09 Aug 2016 09:58:11 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-08-09_Mapping%20with%20%3Cnowait%3E%20option%20in%20vim/</guid>
-      <description>&lt;p&gt;&lt;code&gt;vim&lt;/code&gt; でマッピングをする時に、便利なオプションがあることを最近知った。&lt;/p&gt;
-
-&lt;p&gt;それが &lt;code&gt;&amp;lt;nowait&amp;gt;&lt;/code&gt; オプション。&lt;/p&gt;
-
-&lt;p&gt;例えば、よくやるキーマップの例としてこんなのがある。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;エスケープ2回でハイライト消すっていうマッピング。&lt;/p&gt;
-
-&lt;p&gt;だけど、これを設定した状態で、コマンドウィンドウを &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; で閉じたい場合、&lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; を押下しても、次のマッピングを待っている状態になってしまって、すぐに閉じることができない。&lt;/p&gt;
-
-&lt;p&gt;こんなマッピングをした場合。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;この場合に、 &lt;code&gt;&amp;lt;nowait&amp;gt;&lt;/code&gt; というオプションを追加することで、 &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; を押下したらすぐにコマンドウィンドウを閉じることができる。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;めちゃめちゃ便利。&lt;/p&gt;
-
-&lt;p&gt;僕の場合、コマンドウィンドウと、Uniteを閉じるのにこのオプションを使っている。&lt;/p&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Cmdwin.
-nnoremap : q:i
-vnoremap : q:A
-
-&amp;quot; nohlsearch.
-nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;
-
-&amp;quot; Escape cmd win.
-au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;
-
-&amp;quot; Escape unite.
-au MyAutoCmd FileType unite nmap &amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;Esc&amp;gt; &amp;lt;Plug&amp;gt;(unite_exit)
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-08-09_mapping-with-nowait-option-in-vim/</guid>
+      <description>vim でマッピングをする時に、便利なオプションがあることを最近知った。
+それが &amp;lt;nowait&amp;gt; オプション。
+例えば、よくやるキーマップの例としてこんなのがある。
+nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;  エスケープ2回でハイライト消すっていうマッピング。
+だけど、これを設定した状態で、コマンドウィンドウを &amp;lt;ESC&amp;gt; で閉じたい場合、&amp;lt;ESC&amp;gt; を押下しても、次のマッピングを待っている状態になってしまって、すぐに閉じることができない。
+こんなマッピングをした場合。
+au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;  この場合に、 &amp;lt;nowait&amp;gt; というオプションを追加することで、 &amp;lt;ESC&amp;gt; を押下したらすぐにコマンドウィンドウを閉じることができる。
+au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt;  めちゃめちゃ便利。
+僕の場合、コマンドウィンドウと、Uniteを閉じるのにこのオプションを使っている。
+こんな感じ。
+&amp;quot; Cmdwin. nnoremap : q:i vnoremap : q:A &amp;quot; nohlsearch. nnoremap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt; &amp;quot; Escape cmd win. au MyAutoCmd CmdwinEnter * nnoremap &amp;lt;silent&amp;gt;&amp;lt;buffer&amp;gt;&amp;lt;nowait&amp;gt; &amp;lt;ESC&amp;gt; :q&amp;lt;CR&amp;gt; &amp;quot; Escape unite.</description>
     </item>
     
     <item>
       <title>Super saiya Vim !</title>
-      <link>http://yukimemi.github.io/post/2015-09-23_Super%20saiya%20Vim%20%21/</link>
+      <link>http://yukimemi.github.io/post/2015-09-23_super-saiya-vim-/</link>
       <pubDate>Wed, 23 Sep 2015 14:54:51 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-09-23_Super%20saiya%20Vim%20%21/</guid>
-      <description>
-
-&lt;p&gt;Vimでも超サイヤ人になりたい！&lt;/p&gt;
-
-&lt;p&gt;ってなわけでやってみた。&lt;/p&gt;
-
-&lt;p&gt;経緯としては、Windows環境でvimの起動がかなり遅かったため。&lt;/p&gt;
-
-&lt;p&gt;vimに導入したプラグイン数が多くなりすぎていたため、起動に時間がかかっていた。
-そこで、起動時には基本的なプラグインのみ読み込み、後から必要に応じてpluginを追加で読み込むようにしてみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;if has(&#39;vim_starting&#39;)
-  if &amp;amp;compatible
-    set nocompatible
-  endif
-  set runtimepath+=~/.cache/neobundle/neobundle.vim
-endif
-
-call neobundle#begin(expand(&#39;~/.cache/neobundle&#39;))
-
-if neobundle#load_cache()
-
-  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle_base.toml&#39;)
-  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy_base.toml&#39;, {&#39;lazy&#39; : 1})
-
-  NeoBundleSaveCache
-endif
-
-call neobundle#end()
-
-filetype plugin indent on
-
-nnoremap &amp;lt;silent&amp;gt; &amp;lt;Space&amp;gt;s :&amp;lt;C-u&amp;gt;call &amp;lt;SID&amp;gt;loadAllPlugins()&amp;lt;CR&amp;gt;
-function! s:loadAllPlugins()
-  call neobundle#append()
-
-  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle.toml&#39;)
-  call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy.toml&#39;, {&#39;lazy&#39; : 1})
-
-  call neobundle#end()
-  filetype plugin indent on
-  source ~/.vim/vim.d/05_pluginsetting.vim
-  echom &amp;quot;Suuuuuuuuuper !!!!!!!&amp;quot;
-endfunction
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、起動時は最小限のpluginで爆速起動し、必要な時に &lt;code&gt;&amp;lt;Space&amp;gt;s&lt;/code&gt; を押下することで超サイヤVimになれる。(全pluginをロードする)&lt;/p&gt;
-
-&lt;p&gt;遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮された・・・！&lt;/p&gt;
-
-&lt;h4 id=&#34;参考&#34;&gt;参考&lt;/h4&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.hifumi.info/2015/03/29/neobundle-load-toml/&#34;&gt;NeoBundleのプラグイン管理をTOMLに任せてvimrcをスッキリさせる | blog: takahiro okumura&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://gist.github.com/Shougo/3d2adcb83e9eb0e8d4af&#34;&gt;neobundle の toml 記法サンプル&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-09-23_super-saiya-vim-/</guid>
+      <description>Vimでも超サイヤ人になりたい！
+ってなわけでやってみた。
+経緯としては、Windows環境でvimの起動がかなり遅かったため。
+vimに導入したプラグイン数が多くなりすぎていたため、起動に時間がかかっていた。 そこで、起動時には基本的なプラグインのみ読み込み、後から必要に応じてpluginを追加で読み込むようにしてみた。
+if has(&#39;vim_starting&#39;) if &amp;amp;compatible set nocompatible endif set runtimepath+=~/.cache/neobundle/neobundle.vim endif call neobundle#begin(expand(&#39;~/.cache/neobundle&#39;)) if neobundle#load_cache() call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle_base.toml&#39;) call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy_base.toml&#39;, {&#39;lazy&#39; : 1}) NeoBundleSaveCache endif call neobundle#end() filetype plugin indent on nnoremap &amp;lt;silent&amp;gt; &amp;lt;Space&amp;gt;s :&amp;lt;C-u&amp;gt;call &amp;lt;SID&amp;gt;loadAllPlugins()&amp;lt;CR&amp;gt; function! s:loadAllPlugins() call neobundle#append() call neobundle#load_toml(&#39;~/.vim/vim.d/neobundle.toml&#39;) call neobundle#load_toml(&#39;~/.vim/vim.d/neobundlelazy.toml&#39;, {&#39;lazy&#39; : 1}) call neobundle#end() filetype plugin indent on source ~/.vim/vim.d/05_pluginsetting.vim echom &amp;quot;Suuuuuuuuuper !!!!!!!&amp;quot; endfunction  これで、起動時は最小限のpluginで爆速起動し、必要な時に &amp;lt;Space&amp;gt;s を押下することで超サイヤVimになれる。(全pluginをロードする)
+遅かったWindows環境ではまだ試せていないが、New MacBook 12では、0.2sくらいの起動時間が0.15sにまで短縮された・・・！</description>
     </item>
     
     <item>
       <title>Mayu for IME off in vim</title>
-      <link>http://yukimemi.github.io/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</link>
+      <link>http://yukimemi.github.io/post/2015-05-02_mayu-for-ime-off-in-vim/</link>
       <pubDate>Sat, 02 May 2015 22:59:12 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-05-02_Mayu%20for%20IME%20off%20in%20vim/</guid>
-      <description>
-
-&lt;p&gt;vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。
-Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。&lt;/p&gt;
-
-&lt;p&gt;Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。
-そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。&lt;/p&gt;
-
-&lt;p&gt;Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。&lt;/p&gt;
-
-&lt;p&gt;設定自体は単純なんだけど、キーボードのキーコードを全部定義しなきゃいけないみたいで、それがめんどくさそうだった。
-幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。
-一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。&lt;/p&gt;
-
-&lt;h3 id=&#34;mayuのインストール&#34;&gt;Mayuのインストール&lt;/h3&gt;
-
-&lt;p&gt;Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。
-Ubuntu 15.04では以下の通りにやるとビルド出来た。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/kenhys/mayu.git
-$ cd ~/.ghq/src/github.com/kenhys/mayu
-$ sudo aptitude install build-essential libboost-iostreams-dev libudev-dev libusb-1.0-0-dev
-$ ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu/
-$ make
-$ sudo make install
-$ sudo chmod +s /usr/local/bin/mayu
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。
-本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。&lt;/p&gt;
-
-&lt;h3 id=&#34;fcitx設定&#34;&gt;fcitx設定&lt;/h3&gt;
-
-&lt;p&gt;今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。
-前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。&lt;/p&gt;
-
-&lt;p&gt;それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/fcitx-setting_min.png&#34; alt=&#34;fcitx-setting&#34; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;mayu設定&#34;&gt;Mayu設定&lt;/h3&gt;
-
-&lt;p&gt;次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;def key Esc Escape = 0x01
-def key Eisu = 0x7b
-
-key Esc = Esc Eisu
-key C-OpenBracket = C-OpenBracket Eisu
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;「Escape」が押された時に、「Escape」、「英数」を押し、「Ctrl-[」が押された時に、「Ctrl-[」、「英数」を押すという設定。&lt;/p&gt;
-
-&lt;p&gt;ただ、mayuでは、一通りキーボード上のキーは全てdefしなきゃいけないみたいで、ネット上に公開してくださっているありがたい方の &lt;a href=&#34;http://d.hatena.ne.jp/OKIIZO/20080106/1199639459&#34;&gt;キーコード一覧&lt;/a&gt; を使用させてもらった。&lt;/p&gt;
-
-&lt;p&gt;一部、MacBookAirのキーコードと違う部分があったので、改変している。 &lt;a href=&#34;https://raw.githubusercontent.com/yukimemi/dotfiles/master/.mayu&#34;&gt;mayu&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この設定ファイルをHOMEに「.mayu」として置く。
-その後、mayuをルート権限で実行する。&lt;/p&gt;
-
-&lt;p&gt;これでvim上でもシェル上でも、どこでも同じようにIMEがオフになるようになる。&lt;/p&gt;
-
-&lt;p&gt;あと、キーボードでキーコード一覧に記載されていないものがあった場合、mayuの標準出力にキーコードが表示される。それをメモして、設定ファイルに適当な名前で「def key hoge = 0xXX」とかしてやれば大丈夫。&lt;/p&gt;
-
-&lt;h3 id=&#34;mayu自動起動&#34;&gt;Mayu自動起動&lt;/h3&gt;
-
-&lt;p&gt;システム起動時に自動でmayuが起動するように、systemdに登録する。&lt;/p&gt;
-
-&lt;p&gt;userごとの自動起動設定としたいため、以下のファイルをまず作成する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mkdir -p ~/.config/systemd/user
-$ vim ~/.config/systemd/user/mayu.service
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;「mayu.service」の中身はこんな感じ&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;[Unit]
-Description=mayu keyboard hack
-
-[Service]
-ExecStart=/usr/local/bin/mayu
-
-[Install]
-WantedBy=default.target
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、以下のようにして登録する。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ systemctl --user daemon-reload
-$ systemctl --user list-unit-files
-UNIT FILE            STATE
-mayu.service         disabled
-systemd-exit.service static
-basic.target         static
-bluetooth.target     static
-default.target       static
-exit.target          disabled
-paths.target         static
-printer.target       static
-shutdown.target      static
-smartcard.target     static
-sockets.target       static
-sound.target         static
-timers.target        static
-
-13 unit files listed.
-
-$ systemctl --user enable mayu.service
-$ systemctl --user list-unit-files
-UNIT FILE            STATE
-mayu.service         enabled
-systemd-exit.service static
-basic.target         static
-bluetooth.target     static
-default.target       static
-exit.target          disabled
-paths.target         static
-printer.target       static
-shutdown.target      static
-smartcard.target     static
-sockets.target       static
-sound.target         static
-timers.target        static
-
-13 unit files listed.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;systemdとして正しく起動しているか確かめる場合は、ログを見る。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ journalctl
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Basic System.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Started mayu keyboard hack.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting mayu keyboard hack...
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Reached target Default.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Startup finished in 44ms.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1]: Started User Manager for UID 1000.
-5月 02 08:57:56 yukimemi-MacBookAir systemd[1372]: Starting Default.
-5月 02 08:57:56 yukimemi-MacBookAir kernel: input: mayu uinpt as /devices/virtual/input/input14
-5月 02 08:57:56 yukimemi-MacBookAir mayu[1386]: loading: /home/yukimemi/.mayu
-5月 02 08:57:58 yukimemi-MacBookAir mayu[1386]: successfully loaded.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こんな感じ。
-だいぶ使いやすくなった。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/sharow/items/e8f7d3e0628d7ee925db&#34;&gt;systemdでの定期実行(timerユニット) - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/OKIIZO/20080106/1199639459&#34;&gt;新型Apple Keyboard微妙 - どんごどんご&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/kenhys/mayu&#34;&gt;kenhys/mayu&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://symfoware.blog68.fc2.com/blog-entry-1397.html&#34;&gt;Ubuntu 14.04にMozcと窓使いの憂鬱をインストールする - Symfoware&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-05-02_mayu-for-ime-off-in-vim/</guid>
+      <description>vimを使っていて困るのがIMEの制御。特に、ノーマルモードに戻った時に自動でIMEがOFFになってくれないと、画面に「jっっっｘ」とかがあふれる。 Macでは、「karabiner」というソフトを使って、「Escape」もしくは、「Ctrl + [」を押下した時に自動でIMEをOFFにすることが出来ていた。
+Linuxでも同じことが出来ないかといろいろググってはみたものの、意外とこれ！ってのが見つからない。 そんな中、一応要望を満たせるのが、「Mayu」というソフトだった。
+Windowsで「窓使いの憂鬱」と呼ばれてたソフトで、Linuxにも対応してるっぽい。
+設定自体は単純なんだけど、キーボードのキーコードを全部定義しなきゃいけないみたいで、それがめんどくさそうだった。 幸いにも、全部をスキャンしたファイルをアップしてくれている人がいたので、使用させてもらった。 一部、MacBookAirのキーコードに対応していなかったものがあったため、少し改変している。
+Mayuのインストール Mayuはソースコードのみ配布されているので、自分でビルドする必要がある。 Ubuntu 15.04では以下の通りにやるとビルド出来た。
+$ ghq get https://github.com/kenhys/mayu.git $ cd ~/.ghq/src/github.com/kenhys/mayu $ sudo aptitude install build-essential libboost-iostreams-dev libudev-dev libusb-1.0-0-dev $ ./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu/ $ make $ sudo make install $ sudo chmod +s /usr/local/bin/mayu  mayuはroot権限で実行する必要があり、systemd経由で自動起動させるためにsetuidをたてている。 本当はvisudoとかでmayuのみパスワードなしsudo出来るようにしたりとかのがいいのかもしれないけど、めんどくさいので・・・。
+fcitx設定 今回やりたいのは、「Escape」を押下した時にIMEをオフにする、もしくは「Crtl-[」を押下した時にIMEをオフにするということ。 前提として、Ubuntu 15.04では、IMEとしてfcitx-mozcを使用している。
+それから、fcitxの設定で、「入力メソッドをオンに」を「Hangul」(かなキー)、入力メソッドをオフ」に「Hangulhanja」(英数キー)を割り当てる。
+Mayu設定 次に、mayuの設定を書く。上記のようにfcitxの設定をしているのであれば、mayuの設定としては以下の通り。
+def key Esc Escape = 0x01 def key Eisu = 0x7b key Esc = Esc Eisu key C-OpenBracket = C-OpenBracket Eisu  「Escape」が押された時に、「Escape」、「英数」を押し、「Ctrl-[」が押された時に、「Ctrl-[」、「英数」を押すという設定。</description>
     </item>
     
     <item>
       <title>Set cursorline as needed</title>
-      <link>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</link>
+      <link>http://yukimemi.github.io/post/2014-08-05_set-cursorline-as-needed/</link>
       <pubDate>Tue, 05 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-08-05_Set%20cursorline%20as%20needed/</guid>
-      <description>&lt;p&gt;これまで、 &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;&amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成&lt;/a&gt; を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。&lt;/p&gt;
-
-&lt;p&gt;よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに &lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; でもとのバッファに戻ったときに、 &lt;code&gt;s:cursorline_lock&lt;/code&gt; 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと &lt;code&gt;set nocursorline&lt;/code&gt; されなくなるようだった。&lt;/p&gt;
-
-&lt;p&gt;そこで、 Lingr のvim部屋で初めて質問してみた。&lt;/p&gt;
-
-&lt;p&gt;そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-^&amp;gt;&lt;/code&gt; では、 &lt;code&gt;WinEnter&lt;/code&gt; イベントは発生しないが、 &lt;code&gt;BufEnter&lt;/code&gt; イベントは発生するらしい。
-また、僕は、 &lt;code&gt;nnoremap : q:i&lt;/code&gt; のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。
-そこで、thincaさんの &lt;a href=&#34;http://d.hatena.ne.jp/thinca/20090530/1243615055&#34;&gt;設定&lt;/a&gt; を以下のように、変更した。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline(&#39;CursorMoved&#39;)
-au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline(&#39;CursorHold&#39;)
-au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline(&#39;WinEnter,BufEnter,CmdwinLeave&#39;)
-au MyAutoCmd WinLeave * call s:auto_cursorline(&#39;WinLeave&#39;)
-
-let s:cursorline_lock = 0
-function! s:auto_cursorline(event)
-  if a:event ==# &#39;WinEnter,BufEnter,CmdwinLeave&#39;
-    setlocal cursorline
-    setlocal cursorcolumn
-    let s:cursorline_lock = 2
-  elseif a:event ==# &#39;WinLeave&#39;
-    setlocal nocursorline
-    setlocal nocursorcolumn
-  elseif a:event ==# &#39;CursorMoved&#39;
-    if s:cursorline_lock
-      if 1 &amp;lt; s:cursorline_lock
-        let s:cursorline_lock = 1
-      else
-        setlocal nocursorline
-        setlocal nocursorcolumn
-        let s:cursorline_lock = 0
-      endif
-    endif
-  elseif a:event ==# &#39;CursorHold&#39;
-    if &amp;amp;updatetime &amp;gt;= 4000
-      setlocal cursorline
-      setlocal cursorcolumn
-    endif
-    let s:cursorline_lock = 1
-  endif
-endfunction
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ついでに &lt;code&gt;cursorcolumn&lt;/code&gt; も追加しといた。
-また、 &lt;a href=&#34;https://github.com/basyura/TweetVim&#34;&gt;TweetVim&lt;/a&gt; や、 &lt;a href=&#34;https://github.com/itchyny/calendar.vim&#34;&gt;calendar.vim&lt;/a&gt; では、 updatetime が短すぎるため、すぐに &lt;code&gt;CursorHold&lt;/code&gt; イベントが発生してしまう。なので、通常の updatetime (4000) 以上の場合だけ、 &lt;code&gt;set cursorline&lt;/code&gt; するようにしている。&lt;/p&gt;
-
-&lt;p&gt;こんないろんな設定出来るvimすごい。&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-08-05_set-cursorline-as-needed/</guid>
+      <description>これまで、 &amp;lsquo;cursorline&amp;rsquo; を必要な時にだけ有効にする - 永遠に未完成 を参考に、cursorlineの設定をしていたけど、時々cursorlineがずっと表示されたままになる現象が発生していた。
+よくよく調べてみると、一度 CursorHold イベントを発生させ(set cursorline)、その後に別Windowへ移動し、さらに &amp;lt;C-^&amp;gt; でもとのバッファに戻ったときに、 s:cursorline_lock 変数が「0」のままとなり、その後 CursorMoved イベントが発生してもずっと set nocursorline されなくなるようだった。
+そこで、 Lingr のvim部屋で初めて質問してみた。
+そしたらあっさりと答えを教えてもらえた。vimmerは思ってたよりこわくなかった。よかた。
+&amp;lt;C-^&amp;gt; では、 WinEnter イベントは発生しないが、 BufEnter イベントは発生するらしい。 また、僕は、 nnoremap : q:i のようにして、コマンドラインウィンドウを使うようにしているのだが、この場合も上記と同様に、cursorlineがずっと消えない事象が発生していた。 そこで、thincaさんの 設定 を以下のように、変更した。
+au MyAutoCmd CursorMoved,CursorMovedI * call s:auto_cursorline(&#39;CursorMoved&#39;) au MyAutoCmd CursorHold,CursorHoldI * call s:auto_cursorline(&#39;CursorHold&#39;) au MyAutoCmd WinEnter,BufEnter,CmdwinLeave * call s:auto_cursorline(&#39;WinEnter,BufEnter,CmdwinLeave&#39;) au MyAutoCmd WinLeave * call s:auto_cursorline(&#39;WinLeave&#39;) let s:cursorline_lock = 0 function! s:auto_cursorline(event) if a:event ==# &#39;WinEnter,BufEnter,CmdwinLeave&#39; setlocal cursorline setlocal cursorcolumn let s:cursorline_lock = 2 elseif a:event ==# &#39;WinLeave&#39; setlocal nocursorline setlocal nocursorcolumn elseif a:event ==# &#39;CursorMoved&#39; if s:cursorline_lock if 1 &amp;lt; s:cursorline_lock let s:cursorline_lock = 1 else setlocal nocursorline setlocal nocursorcolumn let s:cursorline_lock = 0 endif endif elseif a:event ==# &#39;CursorHold&#39; if &amp;amp;updatetime &amp;gt;= 4000 setlocal cursorline setlocal cursorcolumn endif let s:cursorline_lock = 1 endif endfunction  ついでに cursorcolumn も追加しといた。 また、 TweetVim や、 calendar.</description>
     </item>
     
     <item>
@@ -1224,119 +207,15 @@ endfunction
       <pubDate>Sat, 08 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-02-08-powershell_make_cmd/</guid>
-      <description>&lt;p&gt;この記事は、 &lt;a href=&#34;http://atnd.org/events/45072&#34;&gt;Vim Advent Calendar 2013&lt;/a&gt;
-70日目の記事になります。&lt;/p&gt;
-
-&lt;p&gt;vim で powershell を書く時の設定です。&lt;/p&gt;
-
-&lt;p&gt;まず、 syntax と indent 。
-これは、以下のプラグインでOK。(なんかインデントは変だけど・・・)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundleLazy &#39;PProvost/vim-ps1&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 vim から実行するために、 quickrun
-を入れます。(これは定番ですね！)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundleLazy &#39;thinca/vim-quickrun&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ちょっと前までは、powershell
-でquickrunするためには、設定が必要だったけど、最近オフィシャルに対応されるようになったみたいです。&lt;/p&gt;
-
-&lt;p&gt;参考: &lt;a href=&#34;http://qiita.com/rbtnn/items/ea441a77181d29188880&#34;&gt;VimとPowerShell - Qiita&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;これで、powershellを書いてる時に、デフォルトだと &amp;lt;Leader&amp;gt;r
-で実行できます。&lt;/p&gt;
-
-&lt;p&gt;さらに、おもむろに以下のファイルを作成して、 header.cmd
-というファイル名で保存。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;@echo off
-pushd &amp;quot;%~dp0&amp;quot; &amp;gt; nul
-set tm=%time: =0%
-set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1
-for /f &amp;quot;usebackq skip=10 delims=&amp;quot; %%i in (&amp;quot;%~f0&amp;quot;) do @echo %%i &amp;gt;&amp;gt; &amp;quot;%ps1file%&amp;quot;
-powershell -NoProfile -ExecutionPolicy unrestricted -File &amp;quot;%ps1file%&amp;quot; %*
-del &amp;quot;%ps1file%&amp;quot;
-popd &amp;gt; nul
-pause
-exit /b %ERRORLEVEL%
-# ========== do ps1 file as a dosbatch ==========
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;そして、以下の設定を .vimrc
-に書いておくと、powershellスクリプトを手軽に実行できるバッチファイルが作成できます。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;let s:is_windows = has(&#39;win16&#39;) || has(&#39;win32&#39;) || has(&#39;win64&#39;)
-let s:system = exists(&#39;g:loaded_vimproc&#39;) ? &#39;vimproc#system_bg&#39; : &#39;system&#39;
-
-if neobundle#tap(&#39;vim-ps1&#39;)&amp;quot;{{{
-    call neobundle#config({
-                \ &#39;autoload&#39;: {
-                \   &#39;filetypes&#39;: &#39;ps1&#39;
-                \ }
-                \ })
-
-    function! neobundle#tapped.hooks.on_source(bundle)
-        function! s:make_ps12cmd()
-            if s:is_windows
-                let s:com = &amp;quot;copy /b header.cmd + &amp;quot; . expand(&amp;quot;%:p:t&amp;quot;) . &amp;quot; &amp;quot; . expand(&amp;quot;%:p:t:r&amp;quot;) . &amp;quot;.cmd&amp;quot;
-            else
-                let s:com = &amp;quot;cat header.cmd &amp;quot; . expand(&amp;quot;%:p:t&amp;quot;) . &amp;quot; &amp;gt; &amp;quot; . expand(&amp;quot;%:p:t:r&amp;quot;) . &amp;quot;.cmd&amp;quot;
-            endif
-            echom(s:com)
-            call {s:system}(s:com)
-        endfunction
-        au BufWritePost *.ps1 call s:make_ps12cmd()
-    endfunction
-
-    call neobundle#untap()
-endif&amp;quot;}}}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;やってることは単純で、さっきの header.cmd と作成中の powershell
-スクリプトを合体させてるだけです。 windows の場合は、 copy
-コマンドで。LinuxやMac の場合は、 cat コマンドで。&lt;/p&gt;
-
-&lt;p&gt;上記の設定では、保存時に自動で結合されて、元のpowershellファイルの拡張子が&amp;rdquo;cmd&amp;rdquo;になったものができあがります。&lt;/p&gt;
-
-&lt;p&gt;例えば、以下の hello.ps1 をvim上で保存すると・・・&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-ps1&#34;&gt;Write-Host &amp;quot;Hello ps1&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こんな hello.cmd ができてるはずです。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;@echo off
-pushd &amp;quot;%~dp0&amp;quot; &amp;gt; nul
-set tm=%time: =0%
-set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1
-for /f &amp;quot;usebackq skip=10 delims=&amp;quot; %%i in (&amp;quot;%~f0&amp;quot;) do @echo %%i &amp;gt;&amp;gt; &amp;quot;%ps1file%&amp;quot;
-powershell -NoProfile -ExecutionPolicy unrestricted -File &amp;quot;%ps1file%&amp;quot; %*
-del &amp;quot;%ps1file%&amp;quot;
-popd &amp;gt; nul
-pause
-exit /b %ERRORLEVEL%
-# ========== do ps1 file as a dosbatch ==========
-
-Write-Host &amp;quot;Hello ps1&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;このファイルは、エクスプローラからダブルクリックで実行出来ます。
-一時ファイルを作成してから実行しているのでダサいし、途中でスクリプトを強制終了すると一時ファイルが残ったままになるという致命的な問題はありますが、まぁちょっとしたスクリプトにはいいんではないでしょうか。&lt;/p&gt;
-
-&lt;p&gt;ちなみに、 neobundle の tap と untap とかの設定は、 supermomonga
-さんの
-&lt;a href=&#34;http://blog.supermomonga.com/articles/vim/neobundle-sugoi-setting.html&#34;&gt;この記事&lt;/a&gt;
-がすごい参考になります。かなりすごいです。かなり。&lt;/p&gt;
-
-&lt;p&gt;さらにこの保存時に結合っていう方法を使えば、例えば先頭行にコメントで
-import文みたいなのを入れておけば、動的に複数のpowershell
-スクリプトを結合して、一つのバッチファイルにする・・・ってなこともできると思います。(誰かお願いします)&lt;/p&gt;
-
-&lt;p&gt;以上です。&lt;/p&gt;
-</description>
+      <description>この記事は、 Vim Advent Calendar 2013 70日目の記事になります。
+vim で powershell を書く時の設定です。
+まず、 syntax と indent 。 これは、以下のプラグインでOK。(なんかインデントは変だけど・・・)
+NeoBundleLazy &#39;PProvost/vim-ps1&#39;  それから、 vim から実行するために、 quickrun を入れます。(これは定番ですね！)
+NeoBundleLazy &#39;thinca/vim-quickrun&#39;  ちょっと前までは、powershell でquickrunするためには、設定が必要だったけど、最近オフィシャルに対応されるようになったみたいです。
+参考: VimとPowerShell - Qiita
+これで、powershellを書いてる時に、デフォルトだと &amp;lt;Leader&amp;gt;r で実行できます。
+さらに、おもむろに以下のファイルを作成して、 header.cmd というファイル名で保存。
+@echo off pushd &amp;quot;%~dp0&amp;quot; &amp;gt; nul set tm=%time: =0% set ps1file=%~n0___%date:~-10,4%%date:~-5,2%%date:~-2,2%_%tm:~0,2%%tm:~3,2%%tm:~6,2%%tm:~9,2%.ps1 for /f &amp;quot;usebackq skip=10 delims=&amp;quot; %%i in (&amp;quot;%~f0&amp;quot;) do @echo %%i &amp;gt;&amp;gt; &amp;quot;%ps1file%&amp;quot; powershell -NoProfile -ExecutionPolicy unrestricted -File &amp;quot;%ps1file%&amp;quot; %* del &amp;quot;%ps1file%&amp;quot; popd &amp;gt; nul pause exit /b %ERRORLEVEL% # ========== do ps1 file as a dosbatch ==========  そして、以下の設定を .</description>
     </item>
     
     <item>
@@ -1345,47 +224,17 @@ import文みたいなのを入れておけば、動的に複数のpowershell
       <pubDate>Sat, 18 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-01-18-vim_indentline/</guid>
-      <description>&lt;p&gt;vim には、見やすい定番のインデントプラグインとして、
-&lt;a href=&#34;https://github.com/nathanaelkane/vim-indent-guides&#34;&gt;nathanaelkane/vim-indent-guides&lt;/a&gt;
-がある。&lt;/p&gt;
-
-&lt;p&gt;しかし、最近、
-&lt;a href=&#34;https://github.com/Yggdroot/indentLine&#34;&gt;Yggdroot/indentLine&lt;/a&gt;
-というプラグイン が、 &lt;a href=&#34;http://alpaca.tc/blog/vim/plugins-best-of-vim-1.html&#34;&gt;オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ&lt;/a&gt;
-で紹介されていたので、乗り換えた。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_002810.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;シンプルでかっこいい。 それに、 vim-indent-guides は、 indent
-をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。&lt;/p&gt;
-
-&lt;p&gt;個人的にはタブを使用することはなくて、スペースを使用するから問題ないのだけれども・・・。&lt;/p&gt;
-
-&lt;p&gt;その点、 &lt;a href=&#34;https://github.com/Yggdroot/indentLine&#34;&gt;indentLine&lt;/a&gt;
-では、スペースしか対応してなく、タブの場合は何もしない。&lt;/p&gt;
-
-&lt;p&gt;README にも記載があるが、タブで同じことやるためには、 .vimrc
-に、以下の記載を加えればいい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;set list listchars=tab:\¦\
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;最後にスペースが入っていることに注意。&lt;/p&gt;
-
-&lt;p&gt;こうすると、スペースの場合とほぼ同じように表示される。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/20140119_135554.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。&lt;/p&gt;
-
-&lt;p&gt;また、インデントを除外したい場合は、その filetype
-を設定してやればいいみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;let g:indentLine_fileTypeExclude = [&#39;help&#39;, &#39;nerdtree&#39;, &#39;calendar&#39;, &#39;thumbnail&#39;, &#39;tweetvim&#39;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-</description>
+      <description>vim には、見やすい定番のインデントプラグインとして、 nathanaelkane/vim-indent-guides がある。
+しかし、最近、 Yggdroot/indentLine というプラグイン が、 オススメなVimのプラグイン紹介 - RailsとRubyとVimのブログ で紹介されていたので、乗り換えた。
+シンプルでかっこいい。 それに、 vim-indent-guides は、 indent をタブで記述してあるファイルの時の表示がタブ全部が色塗られてしまって見難い。
+個人的にはタブを使用することはなくて、スペースを使用するから問題ないのだけれども・・・。
+その点、 indentLine では、スペースしか対応してなく、タブの場合は何もしない。
+README にも記載があるが、タブで同じことやるためには、 .vimrc に、以下の記載を加えればいい。
+set list listchars=tab:\¦\  最後にスペースが入っていることに注意。
+こうすると、スペースの場合とほぼ同じように表示される。
+ただ、一つ目のインデントからも表示されるのが不満。2行目からのみ表示されるように出来ないものか・・・。
+また、インデントを除外したい場合は、その filetype を設定してやればいいみたい。
+let g:indentLine_fileTypeExclude = [&#39;help&#39;, &#39;nerdtree&#39;, &#39;calendar&#39;, &#39;thumbnail&#39;, &#39;tweetvim&#39;]  こんな感じ。</description>
     </item>
     
     <item>
@@ -1394,13 +243,50 @@ import文みたいなのを入れておけば、動的に複数のpowershell
       <pubDate>Sun, 13 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-10-13-powershell_vim_plugin/</guid>
-      <description>&lt;p&gt;powershell script を vim で書くためのプラグイン&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundleLazy &#39;PProvost/vim-ps1&#39;, {
-      \   &#39;autoload&#39; : {&#39;filetypes&#39;: [&#39;ps1&#39;]}
-      \ }
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>powershell script を vim で書くためのプラグイン
+NeoBundleLazy &#39;PProvost/vim-ps1&#39;, { \ &#39;autoload&#39; : {&#39;filetypes&#39;: [&#39;ps1&#39;]} \ }  </description>
+    </item>
+    
+    <item>
+      <title>vim-automatic &lt;C-[&gt;&lt;C-[&gt; でウィンドウクローズ</title>
+      <link>http://yukimemi.github.io/post/2013-09-15-automatic_vim/</link>
+      <pubDate>Sun, 15 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-09-15-automatic_vim/</guid>
+      <description>automatic.vim という便利なプラギンがある。
+これを利用すると、 Unite や QuickFix や help など、様々なウィンドウを一元管理出来るっぽい。
+そこで、いろんなサイトを参考にやってみた。
+&amp;quot; ESC2回押しで検索ハイライトを消去 autocm MyAutoCmd VimEnter,WinEnter,WinLeave * nmap &amp;lt;silent&amp;gt; &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;nohlsearch&amp;lt;CR&amp;gt;&amp;lt;Plug&amp;gt;(anzu-clear-search-status) &amp;quot; vim-automatic {{{ function! s:my_temporary_window_init(config, context) silent! nunmap &amp;lt;ESC&amp;gt;&amp;lt;ESC&amp;gt; nmap &amp;lt;buffer&amp;gt; &amp;lt;C-[&amp;gt; :&amp;lt;C-u&amp;gt;q&amp;lt;CR&amp;gt; nmap &amp;lt;buffer&amp;gt; &amp;lt;ESC&amp;gt; :&amp;lt;C-u&amp;gt;q&amp;lt;CR&amp;gt; endfunction let g:automatic_default_match_config = { \ &#39;is_open_other_window&#39;: 1 \ } let g:automatic_default_set_config = { \ &#39;height&#39;: &#39;60%&#39;, \ &#39;move&#39;: &#39;bottom&#39;, \ &#39;apply&#39;: function(&#39;s:my_temporary_window_init&#39;) \ } let g:automatic_config = [ \ {&#39;match&#39;: {&#39;buftype&#39;: &#39;help&#39;}}, \ {&#39;match&#39;: {&#39;bufname&#39;: &#39;^.</description>
+    </item>
+    
+    <item>
+      <title>Vim coffeescript syntastic</title>
+      <link>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</link>
+      <pubDate>Sun, 11 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-08-11-syntastic_coffeelint/</guid>
+      <description>vim で保存時に自動で構文チェックとかを行なってくれるプラギンに Syntastic というものがある。
+coffeescript を書く時も、これを使うと便利。
+インストールは NeoBundle で一発。
+NeoBundle &#39;scrooloose/syntastic.git&#39;, { \ &#39;build&#39;: { \ &#39;mac&#39;: [&#39;pip install pyflake&#39;, &#39;npm -g install coffeelint&#39;], \ &#39;unix&#39;: [&#39;pip install pyflake&#39;, &#39;npm -g install coffeelint&#39;] \ }}  上記のように書いておけば、 Syntastic をインストールする時に自動で、 pyflake と coffeelint をインストールしてくれる。 NeoBundle すごい。
+後は普通にコードを書いて、保存すると、自動でエラー行にチェックがつく。 エラーの内容を見たい時は、
+:Errors  コマンドでおｋ
+coffeelint はデフォルトでインデントは 2 みたい。
+.vimrc に以下のように書いておいた。
+autocmd MyAutoCmd BufNewFile,BufRead .coffee setl ft=coffee fenc=utf8 ff=unix tabstop=4 shiftwidth=2 softtabstop=2 expandtab  また、1行の長さが 80文字 を超えてもエラーになるのが邪魔だったので、これは無視したい。</description>
+    </item>
+    
+    <item>
+      <title>qfixhowm Vim でメモ</title>
+      <link>http://yukimemi.github.io/post/2013-06-29-qfixhowm/</link>
+      <pubDate>Sat, 29 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2013-06-29-qfixhowm/</guid>
+      <description>vimでメモをとる場合、簡単な設定では vimrc に JunkFile コマンドを定義するなどする。
+&amp;quot; JunkFile {{{ &amp;quot; http://vim-users.jp/2010/11/hack181/ &amp;quot;&amp;quot; Open junk file. command! -nargs=0 JunkFile call s:open_junk_file() function! s:open_junk_file() let l:junk_dir = $HOME . &#39;/.vim_junk&#39;. strftime(&#39;/%Y/%m&#39;) if !isdirectory(l:junk_dir) call mkdir(l:junk_dir, &#39;p&#39;) endif let l:filename = input(&#39;Junk Code: &#39;, l:junk_dir.strftime(&#39;/%Y-%m-%d-%H%M%S.&#39;)) if l:filename != &#39;&#39; execute &#39;edit &#39; . l:filename endif endfunction &amp;quot; }}}  これは実行時に拡張子が自由に設定出来るので、簡単にスクリプトを試してみたい場合 はとても便利。
+でも、やっぱり最近、メモは統合的に管理したいと思い、 QfixHowm を導入することにした。
+インストール Neobundle で一発
+NeoBundle &#39;fuenor/qfixgrep&#39; NeoBundle &#39;fuenor/qfixhowm&#39;  qfixgrep もいれとくと何かといいみたい。</description>
     </item>
     
   </channel>

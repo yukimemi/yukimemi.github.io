@@ -2,210 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Zsh on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/zsh/index.xml</link>
+    <link>http://yukimemi.github.io/tags/zsh/</link>
     <description>Recent content in Zsh on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Nov 2016 00:49:25 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Use fish instead of zsh</title>
-      <link>http://yukimemi.github.io/post/2016-11-27_Use%20fish%20instead%20of%20zsh/</link>
+      <link>http://yukimemi.github.io/post/2016-11-27_use-fish-instead-of-zsh/</link>
       <pubDate>Sun, 27 Nov 2016 00:49:25 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-11-27_Use%20fish%20instead%20of%20zsh/</guid>
-      <description>
-
-&lt;p&gt;ちまたで(？)話題の &lt;code&gt;fish&lt;/code&gt; を使ってみた。&lt;/p&gt;
-
-&lt;p&gt;長年使ってきた &lt;code&gt;zsh&lt;/code&gt; のかわりにはならないだろうなーと思いながら・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;・・・が、いざ使ってみると非常に使いやすい！&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;zsh&lt;/code&gt; のかわりになるどころか置き換えてしまった。&lt;br /&gt;
-(つまり、自分は結局そこまで &lt;code&gt;zsh&lt;/code&gt; を使いこなしていなかったんだろう・・・。)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;fish&lt;/code&gt; のチュートリアルは、以下にある。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://fishshell.com/docs/current/tutorial.html&#34;&gt;fish tutorial&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;日本語でもqiitaとかにいっぱい解説記事があるので難しいことはないと思う。
-唯一はまったのは、上記tutorialにある、 &lt;code&gt;hybrid_bindings&lt;/code&gt; 。&lt;/p&gt;
-
-&lt;p&gt;vi っぽいキーバインドで、 insert モードの場合は emacs っぽくするって感じなんだろうけど、使用できなかった。
-なんか issue 上がってたりしたので、そのうち修正されるのかもしれない。&lt;/p&gt;
-
-&lt;p&gt;とりあえずは、必要なキーバインドのみを自分で再定義してやることで要望は満たせた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;fish&lt;/code&gt; では、 &lt;a href=&#34;https://github.com/fisherman/fisherman&#34;&gt;fisherman&lt;/a&gt; というプラグインマネージャーが存在しており、これを使って各種プラグインを管理する。
-日本語での解説も書いてあるので導入は簡単。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上記を実行するだけ。&lt;/p&gt;
-
-&lt;p&gt;自分が入れたパッケージはとりあえずこんだけ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;simple&lt;/code&gt; :
-シンプルなテーマ&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;omf/gi&lt;/code&gt; :
-gitignore を管理できるやつ。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;2個だけ。 &lt;code&gt;fish&lt;/code&gt; が単体で色々出来るやつだからこそかも。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;fish&lt;/code&gt; は、設定を &lt;code&gt;~/.config/fish&lt;/code&gt; 配下で管理する。
-こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree fish
-fish
-├── completions
-├── conf.d
-├── config.fish -&amp;gt; /Users/yukimemi/.dotfiles/.config/fish/config.fish
-├── fishd.xxxxxxxxxxxx
-├── fishfile -&amp;gt; /Users/yukimemi/.dotfiles/.config/fish/fishfile
-├── functions
-└── my_functions -&amp;gt; /Users/yukimemi/.dotfiles/.config/fish/my_functions
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ tree my_functions
-my_functions
-├── __cdup.fish
-├── __filter_command.fish
-├── __filter_command_execute.fish
-├── __filter_command_history_execute.fish
-├── __filter_command_history_select.fish
-├── __filter_command_select.fish
-└── fish_user_key_bindings.fish
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、上記 &lt;code&gt;fisherman&lt;/code&gt; を使っている場合、 &lt;code&gt;~/.config/fish/functions&lt;/code&gt; 配下がどんどん侵されていくので、自分で作成した &lt;code&gt;function&lt;/code&gt; は &lt;code&gt;my_functions&lt;/code&gt; というディレクトリ配下で管理することにした。
-(シンボリックリンクが嫌な場合、それを解決した &lt;a href=&#34;http://qiita.com/masa0x80/items/142bc668ea8e5084ce7c&#34;&gt;fresco&lt;/a&gt; というものもあるらしい。)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;config.fish&lt;/code&gt; から、 &lt;code&gt;my_functions&lt;/code&gt; の内容を読み込む。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/config.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Load my_functions.
-for func in ~/.config/fish/my_functions/*.fish
-  source $func
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;かんたん♪&lt;/p&gt;
-
-&lt;p&gt;あとは、 &lt;code&gt;peco&lt;/code&gt; や &lt;code&gt;fzf&lt;/code&gt; などのフィルター系コマンドが使えるようにする。
-zsh の時は、&lt;code&gt;fzf&lt;/code&gt; を使っていたんだけど、 &lt;code&gt;fzy&lt;/code&gt; ってのがあって、 &lt;code&gt;enhancd&lt;/code&gt; でおすすめって書いてあったから、とりあえずそれを使ってみる。&lt;/p&gt;
-
-&lt;p&gt;まずは、コマンド定義。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function __filter_command
-  fzy -l 200
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;fzy&lt;/code&gt; を使うよってだけ。 &lt;code&gt;-l&lt;/code&gt; オプションは表示する候補数。&lt;/p&gt;
-
-&lt;p&gt;それから、これを使って、選択だけするやつと、実行するやつを定義。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_select.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function __filter_command_select
-  __filter_command | read -l line
-  and commandline $line
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_execute.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function __filter_command_execute
-  __filter_command | read -l line
-  and echo &amp;quot;
-  ------
-  Running command: $line
-  ------&amp;quot;
-  and eval $line
-  commandline -f repaint
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;今度はこれで履歴検索するやつを作る。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_history_select.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function __filter_command_history_select
-  history | sort -u | __filter_command_select
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/__filter_command_history_execute.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function __filter_command_history_execute
-  history | sort -u | __filter_command_execute
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;こんな感じ。
-簡単でわかりやすい。&lt;/p&gt;
-
-&lt;p&gt;あとはこれをキーに割り当てる。
-&lt;code&gt;fish&lt;/code&gt; では、キーバインドは &lt;code&gt;fish_user_key_bindings&lt;/code&gt; という関数で行うのが通例っぽい。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;~/.config/fish/my_functions/fish_user_key_bindings.fish&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function fish_user_key_bindings
-
-  bind -M insert \cf accept-autosuggestion
-  bind -M insert \cn down-or-search
-  bind -M insert \cp up-or-search
-  # TODO: Not work.
-  bind -M insert \c\^ __cdup
-
-  # filter command.
-  bind -M insert \cr __filter_command_history_select
-  bind sul __filter_command_history_execute
-
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;-M&lt;/code&gt; オプションでモードを指定できる。&lt;/p&gt;
-
-&lt;p&gt;べんりー！
-あとは、前使ってた &lt;code&gt;enhancd&lt;/code&gt; を使いたい。
-それから、 &lt;code&gt;C-^&lt;/code&gt; で親ディレクトリに移動するってのを &lt;code&gt;zsh&lt;/code&gt; のときにやってたんだけど、それが &lt;code&gt;fish&lt;/code&gt; だとうまくできない。&lt;/p&gt;
-
-&lt;p&gt;どうやってやればいいんだろ・・・。知ってる人いたら教えてください。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://fishshell.com/docs/current/index.html&#34;&gt;fish - Documentation&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/nutsinshell/items/5f111184b50f7081c92f&#34;&gt;初心者がShellを知りFish〜Fishermanを導入するまで&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/sotayamashita/items/61d49431053c44f01714&#34;&gt;fish-shell と fisherman の tips&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-11-27_use-fish-instead-of-zsh/</guid>
+      <description>ちまたで(？)話題の fish を使ってみた。
+長年使ってきた zsh のかわりにはならないだろうなーと思いながら・・・。
+・・・が、いざ使ってみると非常に使いやすい！
+zsh のかわりになるどころか置き換えてしまった。
+(つまり、自分は結局そこまで zsh を使いこなしていなかったんだろう・・・。)
+fish のチュートリアルは、以下にある。
+fish tutorial
+日本語でもqiitaとかにいっぱい解説記事があるので難しいことはないと思う。 唯一はまったのは、上記tutorialにある、 hybrid_bindings 。
+vi っぽいキーバインドで、 insert モードの場合は emacs っぽくするって感じなんだろうけど、使用できなかった。 なんか issue 上がってたりしたので、そのうち修正されるのかもしれない。
+とりあえずは、必要なキーバインドのみを自分で再定義してやることで要望は満たせた。
+fish では、 fisherman というプラグインマネージャーが存在しており、これを使って各種プラグインを管理する。 日本語での解説も書いてあるので導入は簡単。
+$ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher  上記を実行するだけ。
+自分が入れたパッケージはとりあえずこんだけ。
+ simple : シンプルなテーマ omf/gi : gitignore を管理できるやつ。  2個だけ。 fish が単体で色々出来るやつだからこそかも。
+fish は、設定を ~/.config/fish 配下で管理する。 こんな感じ。
+$ tree fish fish ├── completions ├── conf.d ├── config.</description>
     </item>
     
     <item>
@@ -214,362 +41,40 @@ end
       <pubDate>Sun, 25 Sep 2016 23:53:12 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/post/2016-09-25_zsh-autosuggestions/</guid>
-      <description>&lt;p&gt;&lt;code&gt;zsh-autosuggestions&lt;/code&gt; という便利な &lt;em&gt;zsh&lt;/em&gt; のプラギンを見つけた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;zplug&lt;/code&gt; を使って簡単にインストール可能。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;zplug &amp;quot;zsh-users/zsh-autosuggestions&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;あとは、表示された補完を決定するキーの設定を追加。
-ちなみにデフォルトだと、右矢印が割り当てられてる模様。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-zsh&#34;&gt;bindkey &#39;^ &#39; autosuggest-accept
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;で、 &lt;code&gt;Ctrl + Space&lt;/code&gt; で、補完候補が確定する。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://yukimemi.github.io/img/zsh-autosuggestions.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;べんり。&lt;/p&gt;
-</description>
+      <description>zsh-autosuggestions という便利な zsh のプラギンを見つけた。
+zplug を使って簡単にインストール可能。
+zplug &amp;quot;zsh-users/zsh-autosuggestions&amp;quot;  あとは、表示された補完を決定するキーの設定を追加。 ちなみにデフォルトだと、右矢印が割り当てられてる模様。
+bindkey &#39;^ &#39; autosuggest-accept  で、 Ctrl + Space で、補完候補が確定する。
+べんり。</description>
     </item>
     
     <item>
       <title>mosh error No such file or directory</title>
-      <link>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</link>
+      <link>http://yukimemi.github.io/post/2014-07-06_mosh-error-no-such-file-or-directory/</link>
       <pubDate>Sun, 06 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-07-06_mosh%20error%20No%20such%20file%20or%20directory/</guid>
-      <description>
-
-&lt;p&gt;mosh というmobile-shelllを導入してみたところ、「No such file or directory」という
-エラーが発生して使えなかった・・・。&lt;/p&gt;
-
-&lt;p&gt;原因は結局よくわからなかったんだけど、とりあえず使えるようになったので、一応メモとして残しとこ。&lt;/p&gt;
-
-&lt;h3 id=&#34;mosh-install&#34;&gt;mosh install&lt;/h3&gt;
-
-&lt;p&gt;環境は Mac OSX Mavericks。Homebrewで簡単にインストール出来た。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install mosh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;昔は &lt;code&gt;mobile-shelll&lt;/code&gt; だったみたいだけど、今は &lt;code&gt;mosh&lt;/code&gt; でインストール出来る。
-クライアント側とサーバ側両方インストールしておく必要あり。&lt;/p&gt;
-
-&lt;h3 id=&#34;使い方&#34;&gt;使い方&lt;/h3&gt;
-
-&lt;p&gt;普通の &lt;code&gt;ssh&lt;/code&gt; を &lt;code&gt;mosh&lt;/code&gt; に変えるだけ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ssh yukimemi@yukimemi-my-host.com
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;↓&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;だけど、なぜか、こんなエラーが出て使えなかった・・・。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
-zsh: No such file or directory
-ssh_exchange_identification: Connection closed by remote host
-/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;なんかzshが見つかんない？みたいなエラー。
-zshが悪いのかと思い、bashからやってみてもエラーになった。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ mosh yukimemi@yukimemi-my-host.com
-bash: No such file or directory
-ssh_exchange_identification: Connection closed by remote host
-/usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;環境変数が悪いのか？と思い、以下のようにしてみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ SHELL=/bin/bash mosh yukimemi@yukimemi-my-host.com
-bash: mosh-server: command not found
-Connection to yukimemi-my-host.com closed.
-/usr/local/bin/mosh: Did not find mosh server startup message.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一応なんかエラーメッセージは変わったみたい。
-これは &lt;code&gt;mosh-server&lt;/code&gt; コマンドが見つかんないって言ってるだけなので、
-moshのオプションで指定出来るっぽい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ SHELL=/bin/bash mosh --server=/usr/local/bin/mosh-server yukimemi@yukimemi-my-host.com
-[yukimemi@yukimemi-my-host.com] $
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;つながった。
-Airを閉じて一度ネットの接続がきれても、自動で再接続してくれるの便利。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://rcmdnk.github.io/blog/2014/06/30/computer-linux-mac/&#34;&gt;Moshを使ってみる #Linux - rcmdnk&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-07-06_mosh-error-no-such-file-or-directory/</guid>
+      <description>mosh というmobile-shelllを導入してみたところ、「No such file or directory」という エラーが発生して使えなかった・・・。
+原因は結局よくわからなかったんだけど、とりあえず使えるようになったので、一応メモとして残しとこ。
+mosh install 環境は Mac OSX Mavericks。Homebrewで簡単にインストール出来た。
+$ brew install mosh  昔は mobile-shelll だったみたいだけど、今は mosh でインストール出来る。 クライアント側とサーバ側両方インストールしておく必要あり。
+使い方 普通の ssh を mosh に変えるだけ。
+$ ssh yukimemi@yukimemi-my-host.com  ↓
+$ mosh yukimemi@yukimemi-my-host.com  だけど、なぜか、こんなエラーが出て使えなかった・・・。
+$ mosh yukimemi@yukimemi-my-host.com zsh: No such file or directory ssh_exchange_identification: Connection closed by remote host /usr/local/bin/mosh: Did not find remote IP address (is SSH ProxyCommand disabled?).  なんかzshが見つかんない？みたいなエラー。 zshが悪いのかと思い、bashからやってみてもエラーになった。</description>
     </item>
     
     <item>
       <title>All You Need Is Peco</title>
-      <link>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</link>
+      <link>http://yukimemi.github.io/post/2014-06-29_all-you-need-is-peco/</link>
       <pubDate>Sun, 29 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/</guid>
-      <description>
-
-&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; がかなり流行りっぽい。
-そこで導入してみた。思ったより使い心地よくて、 &lt;a href=&#34;https://github.com/zsh-users/zaw&#34;&gt;zaw&lt;/a&gt; から乗り換えた。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;導入手順&#34;&gt;導入手順&lt;/h3&gt;
-
-&lt;p&gt;homebrewでgoをインストール。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ brew install go --cross-compile-common
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;.zshenv&lt;/code&gt; に以下を記載。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# go
-export GOPATH=$HOME/.go
-export PATH=$GOPATH/bin:$PATH
-
-[ ! -d $GOPATH ] &amp;amp;&amp;amp; mkdir $GOPATH
-if which go &amp;gt; /dev/null; then
-    export GOROOT=$(go env GOROOT)
-
-    # ghq
-    go get github.com/motemen/ghq
-    git config --global ghq.root ~/.ghq
-    # peco
-    go get github.com/peco/peco/cmd/peco
-    # gh-open
-    go get github.com/typester/gh-open
-
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;.zshenv&lt;/code&gt; を読み込み直す&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ source ~/.zshenv
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;インストール完了。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ls -l | peco
-QUERY&amp;gt;                                                         IgnoreCase [1/1]
-total 96100
-drwxr-xr-x  13 yukimemi staff      442  6 27 05:07 Applications
-drwx------+  3 yukimemi staff      102  6 23 22:00 Desktop
-drwx------+  6 yukimemi staff      204  5 25 10:58 Documents
-drwx------+ 20 yukimemi staff      680  6 22 08:20 Downloads
-drwx------  94 yukimemi staff     3196  6 29 00:23 Dropbox
-drwx------+ 47 yukimemi staff     1598  5 18 12:26 Library
-drwx------+  3 yukimemi staff      102  5 17 18:13 Movies
-drwx------+  4 yukimemi staff      136  5 18 00:35 Music
-drwx------+  3 yukimemi staff      102  6  8 18:24 Pictures
-drwxr-xr-x+  5 yukimemi staff      170  5 17 18:13 Public
-drwxr-xr-x   5 yukimemi staff      170  6 29 00:07 bin
-drwxr-xr-x  35 yukimemi staff     1190  6 28 17:20 dotfiles
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;peco-使い方&#34;&gt;&lt;strong&gt;peco&lt;/strong&gt; 使い方&lt;/h3&gt;
-
-&lt;h4 id=&#34;history&#34;&gt;history&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-select-history() {
-  local tac
-  if which tac &amp;gt; /dev/null; then
-      tac=&amp;quot;tac&amp;quot;
-  else
-      tac=&amp;quot;tail -r&amp;quot;
-  fi
-  BUFFER=$(history -n 1 | \
-      eval $tac | \
-      peco --query &amp;quot;$LBUFFER&amp;quot;)
-  CURSOR=$#BUFFER
-  zle clear-screen
-}
-zle -N peco-select-history
-bindkey &#39;^r&#39; peco-select-history
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-r&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/189]
-ls   -l | peco
-cd
-go env
-env G -i go
-pvim
-pwd
-git co drafts; roots watch
-mux github
-exit
-pn
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;resent-dirs&#34;&gt;resent dirs&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;zstyle &#39;:filter-select&#39; case-insensitive yes
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-zstyle &#39;:chpwd:*&#39; recent-dirs-max 5000
-zstyle &#39;:chpwd:*&#39; recent-dirs-default yes
-zstyle &#39;:completion:*&#39; recent-dirs-insert both
-
-function peco-cdr () {
-    local selected_dir=$(cdr -l | awk &#39;{ print $2 }&#39; | peco)
-    if [ -n &amp;quot;$selected_dir&amp;quot; ]; then
-        BUFFER=&amp;quot;cd ${selected_dir}&amp;quot;
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-cdr
-bindkey &#39;^@&#39; peco-cdr
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-@&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/4]
-~
-~/.ghq
-~/.ghq/bitbucket.org/yukimemi/haskell
-~/.ghq/github.com/yukimemi/yukimemi.github.io
-~/.cabal/bin
-~/.ghq/bitbucket.org/yukimemi/yukimemi.bitbucket.org
-~/dotfiles
-~/dotfiles/.tmuxinator
-~/Documents/git/yukimemi.github.io
-~/.ghq/github.com/zcbenz/nw-sample-apps
-~/.go
-~/Pictures
-~/Downloads
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;snippets&#34;&gt;snippets&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;function peco-snippets() {
-    BUFFER=$(grep -v &amp;quot;^#&amp;quot; ~/.peco-snippets | peco --query &amp;quot;$LBUFFER&amp;quot;)
-    zle clear-screen
-}
-zle -N peco-snippets
-bindkey &#39;^s&#39; peco-snippets
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;~/.peco-snippets&lt;/code&gt; によく使うコマンドを記載しておく。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# find
-find . -type f -mtime +10
-find . -mtime +50 -exec mv {} del \;
-
-# date
-date +%Y%m%d
-
-# kill
-kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
-kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
-
-# screensaver
-open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
-
-# exiftool
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
-
-# neobundle
-vim +NeoBundleInstall! +q
-
-# ghq
-# github
-ghq get git@github.com:yukimemi/md2docx.git
-ghq get git@github.com:yukimemi/gitstatus.git
-
-# bitbucket
-ghq get git@bitbucket.org:yukimemi/haskell.git
-ghq get git@bitbucket.org:yukimemi/node-webkit.git
-ghq get git@bitbucket.org:yukimemi/clojure.git
-ghq get git@bitbucket.org:yukimemi/go.git
-ghq get git@bitbucket.org:yukimemi/scripts.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;&amp;lt;C-s&amp;gt;&lt;/code&gt; で起動。こんな感じ。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;QUERY&amp;gt;                                                           IgnoreCase [1/1]
-find . -type f -mtime +10
-find . -mtime +50 -exec mv {} del \;
-
-date +%Y%m%d
-
-kill -9 $(ps -ef | grep -i vlc | grep -v grep | awk &#39;{ print $2 }&#39;)
-kill -9 $(ps -ef | grep -i firefox | grep -v grep | awk &#39;{ print $2 }&#39;)
-
-open /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app
-
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Photos/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(JPG|jpg)
-exiftool &#39;-FileName &amp;lt; CreateDate&#39; -d ~/backup/Mov/%Y-%m/%Y-%m-%d_%H-%M-%S%%-c.%%e *.(MOV|mov)
-
-vim +NeoBundleInstall! +q
-
-ghq get git@github.com:yukimemi/md2docx.git
-ghq get git@github.com:yukimemi/gitstatus.git
-
-ghq get git@bitbucket.org:yukimemi/haskell.git
-ghq get git@bitbucket.org:yukimemi/node-webkit.git
-ghq get git@bitbucket.org:yukimemi/clojure.git
-ghq get git@bitbucket.org:yukimemi/go.git
-ghq get git@bitbucket.org:yukimemi/scripts.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;ghq&#34;&gt;ghq&lt;/h4&gt;
-
-&lt;p&gt;最近 &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; も流行りだけど、 &lt;a href=&#34;https://github.com/motemen/ghq&#34;&gt;ghq&lt;/a&gt; も流行り。ちょうべんり。
-上記で記載済みの導入手順に従っていればインストールされているはず。&lt;/p&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias ghl=&#39;cd $(ghq list -p | peco)&#39;
-alias gho=&#39;gh-open $(ghq list -p | peco)&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、 ghq のどれかに &lt;code&gt;cd&lt;/code&gt; したり、該当のgithubをブラウザで開いたり出来る。&lt;/p&gt;
-
-&lt;h4 id=&#34;vim&#34;&gt;vim&lt;/h4&gt;
-
-&lt;p&gt;以下を &lt;code&gt;.zshrc&lt;/code&gt; に記載&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;alias pvim=&#39;vim &amp;quot;$(find . -type f | peco)&amp;quot;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これで、カレントディレクトリ以下のファイルをすぐにvimで開ける。ちょうべんり。&lt;/p&gt;
-
-&lt;p&gt;いろんな参考ページの方々ありがとうございます。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://mattn.kaoriya.net/software/peco.htm&#34;&gt;Big Sky :: Windows のコマンドプロンプトを10倍便利にするコマンド「peco」&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://shibayu36.hatenablog.com/entry/2014/06/27/223538&#34;&gt;pecoを使い始めた - $shibayu36-&amp;gt;blog;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://webtech-walker.com/archive/2014/06/peco-ghq-gh-open.html&#34;&gt;peco、ghq、gh-openの組み合わせが捗る - Webtech Walker&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://blog.glidenote.com/blog/2014/06/26/snippets-peco-percol/&#34;&gt;peco/percolでCUIなスニペットツールを作ってみる - Glide Note - グライドノート&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2014-06-29_all-you-need-is-peco/</guid>
+      <description>最近 peco がかなり流行りっぽい。 そこで導入してみた。思ったより使い心地よくて、 zaw から乗り換えた。
+導入手順 homebrewでgoをインストール。
+$ brew install go --cross-compile-common  .zshenv に以下を記載。
+# go export GOPATH=$HOME/.go export PATH=$GOPATH/bin:$PATH [ ! -d $GOPATH ] &amp;amp;&amp;amp; mkdir $GOPATH if which go &amp;gt; /dev/null; then export GOROOT=$(go env GOROOT) # ghq go get github.com/motemen/ghq git config --global ghq.root ~/.ghq # peco go get github.com/peco/peco/cmd/peco # gh-open go get github.com/typester/gh-open fi  .zshenv を読み込み直す
+$ source ~/.zshenv  インストール完了。</description>
     </item>
     
   </channel>

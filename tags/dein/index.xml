@@ -2,112 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dein on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/dein/index.xml</link>
+    <link>http://yukimemi.github.io/tags/dein/</link>
     <description>Recent content in Dein on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/dein/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Dec 2016 10:20:28 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/dein/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>dein and vim singleton</title>
-      <link>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</link>
+      <link>http://yukimemi.github.io/post/2016-12-09_dein-and-vim-singleton/</link>
       <pubDate>Fri, 09 Dec 2016 10:20:28 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://thinca.hatenablog.com/entry/20120201/1328099090&#34;&gt;vim-singleton&lt;/a&gt; という便利な vim plugin がある。&lt;/p&gt;
-
-&lt;p&gt;vim の clientserver 機能を使って、ファイルをすでに起動している vim で開くことができる。&lt;/p&gt;
-
-&lt;p&gt;これを &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; と一緒に使用する時の方法がわからなかったので、 twitter でつぶやいてみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/yukimemi&#34;&gt;@yukimemi&lt;/a&gt; hook_source を使ってください。hook_add はロード前に呼ばれるのでエラーとなります&lt;/p&gt;&amp;mdash; 暗黒美夢王(deoplete dev) (@ShougoMatsu) &lt;a href=&#34;https://twitter.com/ShougoMatsu/status/805623471589892096&#34;&gt;2016年12月5日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;そしたらなんとあの Shougo さんからお返事が！！&lt;/p&gt;
-
-&lt;p&gt;親切に教えてもらえました！&lt;/p&gt;
-
-&lt;p&gt;そこで教えてもらった通り、 &lt;code&gt;hook_add&lt;/code&gt; から &lt;code&gt;hook_source&lt;/code&gt; に変更。&lt;/p&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;dein.toml&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
-repo = &#39;thinca/vim-singleton&#39;
-if = &amp;quot;!has(&#39;nvim&#39;)&amp;quot;
-hook_source = &#39;&#39;&#39;
-  call singleton#enable()
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 lazy でないプラグインは、 &lt;code&gt;hook_source&lt;/code&gt; は動かないため、 &lt;code&gt;dein&lt;/code&gt; のドキュメントに書いてあるように &lt;code&gt;dein#call_hook(&#39;source&#39;)&lt;/code&gt; を手動で呼ぶ必要がある。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;init.vim&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;set shellslash
-if has(&#39;nvim&#39;)
-  let $VIM_PATH = expand(&#39;~/.config/nvim&#39;)
-  let $MYVIMRC = expand(&#39;~/.config/nvim/init.vim&#39;)
-else
-  let $VIM_PATH = expand(&#39;~/.vim&#39;)
-  let $MYVIMRC = expand(&#39;~/.vimrc&#39;)
-  let $MYGVIMRC = expand(&#39;~/.gvimrc&#39;)
-endif
-
-&amp;quot; Use dein.
-if has(&#39;nvim&#39;)
-  let s:cache_home = expand(&#39;~/.cache/nvim&#39;)
-else
-  let s:cache_home = expand(&#39;~/.cache/vim&#39;)
-endif
-
-let s:dein_dir = s:cache_home . &#39;/dein&#39;
-let s:dein_repo_dir = s:dein_dir . &#39;/repos/github.com/Shougo/dein.vim&#39;
-if !isdirectory(s:dein_repo_dir)
-  execute &#39;!git clone https://github.com/Shougo/dein.vim &#39; . s:dein_repo_dir
-endif
-execute &#39;set runtimepath^=&#39; . fnamemodify(s:dein_repo_dir, &#39;:p&#39;)
-
-let g:dein#install_max_processes = 16
-let g:dein#install_progress_type = &#39;title&#39;
-let g:dein#enable_notification = 1
-let s:toml_file = $VIM_PATH . &#39;/dein.toml&#39;
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file])
-  call dein#load_toml(s:toml_file)
-  call dein#end()
-  call dein#save_state()
-endif
-call dein#call_hook(&#39;source&#39;)
-
-&amp;quot; Check and install.
-if has(&#39;vim_starting&#39;) &amp;amp;&amp;amp; dein#check_install()
-  call dein#install()
-endif
-
-&amp;quot; After dein
-filetype plugin indent on
-syntax enable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自分の設定はこんな感じ。
-めちゃべんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://thinca.hatenablog.com/entry/20120201/1328099090&#34;&gt;singleton.vim 作った | 永遠に未完成&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim/blob/master/doc/dein.txt&#34;&gt;dein.vim doc&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-12-09_dein-and-vim-singleton/</guid>
+      <description>vim-singleton という便利な vim plugin がある。
+vim の clientserver 機能を使って、ファイルをすでに起動している vim で開くことができる。
+これを dein.vim と一緒に使用する時の方法がわからなかったので、 twitter でつぶやいてみた。
+@yukimemi hook_source を使ってください。hook_add はロード前に呼ばれるのでエラーとなります
+&amp;mdash; 暗黒美夢王(deoplete dev) (@ShougoMatsu) 2016年12月5日 
+そしたらなんとあの Shougo さんからお返事が！！
+親切に教えてもらえました！
+そこで教えてもらった通り、 hook_add から hook_source に変更。
+こんな感じ。
+ dein.toml  [[plugins]] repo = &#39;thinca/vim-singleton&#39; if = &amp;quot;!has(&#39;nvim&#39;)&amp;quot; hook_source = &#39;&#39;&#39; call singleton#enable() &#39;&#39;&#39;  それから、 lazy でないプラグインは、 hook_source は動かないため、 dein のドキュメントに書いてあるように dein#call_hook(&#39;source&#39;) を手動で呼ぶ必要がある。
+ init.vim  set shellslash if has(&#39;nvim&#39;) let $VIM_PATH = expand(&#39;~/.</description>
     </item>
     
   </channel>

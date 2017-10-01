@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Haskell on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/categories/haskell/index.xml</link>
+    <link>http://yukimemi.github.io/categories/haskell/</link>
     <description>Recent content in Haskell on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 May 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>haskellでgitstatus</title>
@@ -14,72 +17,9 @@
       <pubDate>Thu, 15 May 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-05-15-haskell_gitstatus/</guid>
-      <description>
-
-&lt;p&gt;前に Go言語で &lt;a href=&#34;http://yukimemi.bitbucket.org/blog/html/2014/03/22/gitstatus.html#more&#34;&gt;「すべてのディレクトリで git statusする」&lt;/a&gt;
-という記事を書いた。&lt;/p&gt;
-
-&lt;p&gt;今度は、 haskell で同じようなのを書いてみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;import System.IO
-import System.Process
-import System.Directory
-import Control.Exception
-import System.FilePath
-
-getAllFiles :: FilePath -&amp;gt; IO [String]
-getAllFiles dir = do
-  contents &amp;lt;- getDirectoryContents dir `catch` (\(SomeException e) -&amp;gt; const (return []) e)
-  let contents&#39; = [dir &amp;lt;/&amp;gt; path | path &amp;lt;- contents, notElem path [&amp;quot;.&amp;quot;, &amp;quot;..&amp;quot;]]
-  contents&#39;&#39; &amp;lt;- mapM getAllFiles contents&#39;
-  return $ contents&#39; ++ concat contents&#39;&#39;
-
-takeLast list n = reverse . take n $ reverse list
-
-join :: String -&amp;gt; [String] -&amp;gt; String
-join sep [] = []
-join sep [x] = x
-join sep (x:xs) = x ++ sep ++ join sep xs
-
-onlyGitDir :: FilePath -&amp;gt; Bool
-onlyGitDir fileName =
-  if last == &amp;quot;.git&amp;quot;
-    then True
-    else False
-      where last = takeLast fileName 4
-
-gitStatus :: FilePath -&amp;gt; IO String
-gitStatus path = do
-  setCurrentDirectory path
-  readProcess &amp;quot;git&amp;quot; [&amp;quot;status&amp;quot;] &amp;quot;&amp;quot;
-
-printGitStatus :: FilePath -&amp;gt; IO ()
-printGitStatus path = do
-  putStrLn &amp;quot;--------------------------------------------------------------------------------&amp;quot;
-  putStrLn $ &amp;quot;* &amp;quot; ++ path
-  putStrLn &amp;quot;--------------------------------------------------------------------------------&amp;quot;
-  gitStatus path &amp;gt;&amp;gt;= putStrLn
-  return ()
-
-main = do
-  path &amp;lt;- getCurrentDirectory
-  files &amp;lt;- getAllFiles path
-  let dirs = map takeDirectory $ filter onlyGitDir files
-  mapM printGitStatus dirs
-  return ()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;haskell は勉強始めたばっかだからいろいろ改善の余地があると思われる。
-詳しい人教えてくだしあ&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://yunomu.hatenablog.jp/entry/2012/03/10/111222&#34;&gt;HaskellでOSコマンド実行 - yunomuのブログ&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://sitekamimura.blogspot.jp/2014/01/haskell-systemfilepathpathseparator.html&#34;&gt;Haskell - 移植性の問題(ファイル名問題(パス区切りの違い), System.FilePathモジュール(pathSeparator, joinPath関数)) | Kamimura&amp;rsquo;s blog&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://tsurushuu.wikidot.com/haskell&#34;&gt;Haskell - すてきにへんな覚え書き&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>前に Go言語で 「すべてのディレクトリで git statusする」 という記事を書いた。
+今度は、 haskell で同じようなのを書いてみた。
+import System.IO import System.Process import System.Directory import Control.Exception import System.FilePath getAllFiles :: FilePath -&amp;gt; IO [String] getAllFiles dir = do contents &amp;lt;- getDirectoryContents dir `catch` (\(SomeException e) -&amp;gt; const (return []) e) let contents&#39; = [dir &amp;lt;/&amp;gt; path | path &amp;lt;- contents, notElem path [&amp;quot;.&amp;quot;, &amp;quot;..&amp;quot;]] contents&#39;&#39; &amp;lt;- mapM getAllFiles contents&#39; return $ contents&#39; ++ concat contents&#39;&#39; takeLast list n = reverse .</description>
     </item>
     
   </channel>

@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Powershell on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/categories/powershell/index.xml</link>
+    <link>http://yukimemi.github.io/categories/powershell/</link>
     <description>Recent content in Powershell on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/categories/powershell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 17 Apr 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/categories/powershell/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>PowerShell Markdown を Wordに変換する</title>
@@ -14,37 +17,18 @@
       <pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2014-04-17-md2docx/</guid>
-      <description>&lt;p&gt;仕事でwordを使うことが多々あるのだが、正直いってwordは使いづらい！
-勝手にレイアウトが変わったりスタイルが変わったり・・・思い通りにならないこと山のごとし。&lt;/p&gt;
-
-&lt;p&gt;なんとかならんもんか！とGoogle先生に聞いたところ、Markdownを使ってdocxを作成出来るものがあるじゃないですか。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://johnmacfarlane.net/pandoc/&#34;&gt;Pandoc - About pandoc&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;ただ、pandocは基本htmlやlatex向きに作成されているのか、wordで思い通りのレイアウトには出来なかった。
-特にスタイルとか・・・。&lt;/p&gt;
-
-&lt;p&gt;そこで、Markdownからdocxに変換するスクリプトを書いた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/yukimemi/md2docx&#34;&gt;yukimemi/md2docx&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;詳しくは README
-に記載してあるが、見出しやリストや画像や改ページ等には対応しています。&lt;/p&gt;
-
-&lt;p&gt;簡単に試すなら、上記リポジトリにある、 md2docx.cmd と sample.md
-をダウンロードし、コマンドプロンプトより、&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bat&#34;&gt;&amp;gt; md2docx.cmd sample.md
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;と実行すれば、あら不思議。sample.docxが出来ているはずです。&lt;/p&gt;
-
-&lt;p&gt;Windows標準のPowerShellで書いてあるので、Windowsを使ってる人なら誰でもMarkdownからdocxに変換出来ます。&lt;/p&gt;
-
-&lt;p&gt;pandocだと、わざわざpandocをインストールしなくてはいけないので、これからプロジェクトの仕様書はMarkdownで書く！なんてことは出来ませんが、このPowerShellならそれも可能・・・なはず。&lt;/p&gt;
-
-&lt;p&gt;ぜひブラッシュアップして本当に使えるようにしたいので、プルリクお願いします＞＜&lt;/p&gt;
-</description>
+      <description>仕事でwordを使うことが多々あるのだが、正直いってwordは使いづらい！ 勝手にレイアウトが変わったりスタイルが変わったり・・・思い通りにならないこと山のごとし。
+なんとかならんもんか！とGoogle先生に聞いたところ、Markdownを使ってdocxを作成出来るものがあるじゃないですか。
+Pandoc - About pandoc
+ただ、pandocは基本htmlやlatex向きに作成されているのか、wordで思い通りのレイアウトには出来なかった。 特にスタイルとか・・・。
+そこで、Markdownからdocxに変換するスクリプトを書いた。
+yukimemi/md2docx
+詳しくは README に記載してあるが、見出しやリストや画像や改ページ等には対応しています。
+簡単に試すなら、上記リポジトリにある、 md2docx.cmd と sample.md をダウンロードし、コマンドプロンプトより、
+&amp;gt; md2docx.cmd sample.md  と実行すれば、あら不思議。sample.docxが出来ているはずです。
+Windows標準のPowerShellで書いてあるので、Windowsを使ってる人なら誰でもMarkdownからdocxに変換出来ます。
+pandocだと、わざわざpandocをインストールしなくてはいけないので、これからプロジェクトの仕様書はMarkdownで書く！なんてことは出来ませんが、このPowerShellならそれも可能・・・なはず。
+ぜひブラッシュアップして本当に使えるようにしたいので、プルリクお願いします＞＜</description>
     </item>
     
     <item>
@@ -53,45 +37,12 @@
       <pubDate>Sat, 19 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-10-19-foreach_object_continue/</guid>
-      <description>
-
-&lt;p&gt;powershell の ForEach-Object で、continue しようと
-したら、思ったように動かなかった話。&lt;/p&gt;
-
-&lt;p&gt;こんなコードを書いた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;gci -r |
-% {
-   if ($_.Name -match &amp;quot;^tes.*&amp;quot;) {
-      continue
-   }
-   $_
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;現在のディレクトリ配下を再帰的に見て、ファイル名が tes
-から始まるもの以外を 表示する・・・みたいな処理。 マッチした場合のみ、
-continue して次の処理に行きたいのだが、この書き方だと、 break
-したのと同じような動きになってしまい、初回マッチしたら、それ以降の処理
-はされない。&lt;/p&gt;
-
-&lt;p&gt;やりたいことを満たすには、以下のように書けばいいみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-powershell&#34;&gt;gci -r |
-% {
-   if ($_.Name -match &amp;quot;^tes.*&amp;quot;) {
-      return
-   }
-   $_
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;continue の代わりに return を使う。&lt;/p&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/7760013/why-does-continue-behave-like-break-in-a-foreach-object&#34;&gt;powershell - Why does continue behave like break in a Foreach-Object? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>powershell の ForEach-Object で、continue しようと したら、思ったように動かなかった話。
+こんなコードを書いた。
+gci -r | % { if ($_.Name -match &amp;quot;^tes.*&amp;quot;) { continue } $_ }  現在のディレクトリ配下を再帰的に見て、ファイル名が tes から始まるもの以外を 表示する・・・みたいな処理。 マッチした場合のみ、 continue して次の処理に行きたいのだが、この書き方だと、 break したのと同じような動きになってしまい、初回マッチしたら、それ以降の処理 はされない。
+やりたいことを満たすには、以下のように書けばいいみたい。
+gci -r | % { if ($_.Name -match &amp;quot;^tes.*&amp;quot;) { return } $_ }  continue の代わりに return を使う。
+参考: powershell - Why does continue behave like break in a Foreach-Object? - Stack Overflow</description>
     </item>
     
     <item>
@@ -100,26 +51,11 @@ continue して次の処理に行きたいのだが、この書き方だと、 b
       <pubDate>Sun, 13 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-10-13-powershell_server/</guid>
-      <description>&lt;p&gt;普段家で触れるのはMacだけど、仕事で使うのはWindows。 Windows
-でCUI環境といえば、今はもうコマンドプロンプトでは なくて powershell
-らしい。 そこで、 powershell を覚えようと思った。&lt;/p&gt;
-
-&lt;p&gt;僕はかたちから入るタイプなので、まずは環境構築から。&lt;/p&gt;
-
-&lt;p&gt;理想としては、 powershell のスクリプトを書いたり実行する
-のは普段使っているMacから行いたい。
-そこで、MacからWindowsへsshして、Macのターミナルから powershell
-を実行することにする。 調べたら、 powershell server
-という便利なものがあるらしい。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.powershellserver.com/&#34;&gt;PowerShell Server | Secure Remote Access to PowerShell Over SSH&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;上記からダウンロードして、インストール。
-特に何も設定は変えずにそのままインストールした。
-あとは、「other」タブにある、エンコーディングを「UTF-8」に設定して、「Start」。
-Macからsshで簡単に接続できた。 これで powershell
-の勉強をやっていこう。&lt;/p&gt;
-</description>
+      <description>普段家で触れるのはMacだけど、仕事で使うのはWindows。 Windows でCUI環境といえば、今はもうコマンドプロンプトでは なくて powershell らしい。 そこで、 powershell を覚えようと思った。
+僕はかたちから入るタイプなので、まずは環境構築から。
+理想としては、 powershell のスクリプトを書いたり実行する のは普段使っているMacから行いたい。 そこで、MacからWindowsへsshして、Macのターミナルから powershell を実行することにする。 調べたら、 powershell server という便利なものがあるらしい。
+PowerShell Server | Secure Remote Access to PowerShell Over SSH
+上記からダウンロードして、インストール。 特に何も設定は変えずにそのままインストールした。 あとは、「other」タブにある、エンコーディングを「UTF-8」に設定して、「Start」。 Macからsshで簡単に接続できた。 これで powershell の勉強をやっていこう。</description>
     </item>
     
     <item>
@@ -128,13 +64,8 @@ Macからsshで簡単に接続できた。 これで powershell
       <pubDate>Sun, 13 Oct 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/post/2013-10-13-powershell_vim_plugin/</guid>
-      <description>&lt;p&gt;powershell script を vim で書くためのプラグイン&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;NeoBundleLazy &#39;PProvost/vim-ps1&#39;, {
-      \   &#39;autoload&#39; : {&#39;filetypes&#39;: [&#39;ps1&#39;]}
-      \ }
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>powershell script を vim で書くためのプラグイン
+NeoBundleLazy &#39;PProvost/vim-ps1&#39;, { \ &#39;autoload&#39; : {&#39;filetypes&#39;: [&#39;ps1&#39;]} \ }  </description>
     </item>
     
   </channel>

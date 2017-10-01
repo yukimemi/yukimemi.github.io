@@ -2,455 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Neovim on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/neovim/index.xml</link>
+    <link>http://yukimemi.github.io/tags/neovim/</link>
     <description>Recent content in Neovim on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/neovim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Sep 2017 23:30:20 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/neovim/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Use minpac.vim</title>
-      <link>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</link>
+      <link>http://yukimemi.github.io/post/2017-09-17_use-minpac.vim/</link>
       <pubDate>Sun, 17 Sep 2017 23:30:20 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2017-09-17_Use%20minpac.vim/</guid>
-      <description>
-
-&lt;p&gt;vim や neovim で標準で用意されている &lt;code&gt;package&lt;/code&gt; 機能。まだ一度も触ったことがなかったので使ってみた。&lt;/p&gt;
-
-&lt;p&gt;使ってみるに当たって、 &lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac&lt;/a&gt; が
-便利そうなので、利用してみた。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;&amp;quot; Plugin:
-&amp;quot; Use minpac. {{{1
-set packpath^=&#39;~/.cache/nvim/&#39;
-let s:minpac_dir = &#39;~/.cache/nvim/pack/minpac/opt/minpac&#39;
-if has(&#39;vim_starting&#39;)
-  if !isdirectory(s:minpac_dir)
-    echo &amp;quot;Install minpac ...&amp;quot;
-    execute &#39;!git clone --depth 1 https://github.com/k-takata/minpac &#39; . s:minpac_dir
-  endif
-endif
-
-&amp;quot; pack list. {{{1
-&amp;quot; start plugins. {{{2
-let s:start_plugs = [
-      \ [&#39;Yggdroot/indentLine&#39;, {}],
-      \ [&#39;itchyny/lightline.vim&#39;, {}],
-      \ ]
-
-&amp;quot; opt plugins. {{{2
-let s:opt_plugs = [
-      \ [&#39;fatih/vim-go&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;zchee/deoplete-go&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! !make&#39;}],
-      \ [&#39;kristijanhusak/vim-hybrid-material&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ ]
-
-&amp;quot; lazy load plugins. {{{2
-let s:lazy_plugs = [
-      \ [&#39;Konfekt/FastFold&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;thinca/vim-submode&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;LeafCage/yankround.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;tyru/capture.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;Shougo/context_filetype.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;Shougo/denite.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;python3&#39;)],
-      \ [&#39;Shougo/deoplete.nvim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! UpdateRemotePlugins&#39;}, has(&#39;nvim&#39;)],
-      \ [&#39;Shougo/echodoc.vim&#39;, {&#39;type&#39;: &#39;opt&#39;}],
-      \ [&#39;Shougo/vimproc.vim&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent! !make&#39;}],
-      \ ]
-
-&amp;quot; minpac init. {{{1
-if exists(&#39;*minpac#init&#39;)
-  &amp;quot; minpac is loaded.
-  call minpac#init()
-  call minpac#add(&#39;k-takata/minpac&#39;, {&#39;type&#39;: &#39;opt&#39;})
-
-  function! s:minpac_add(plugs)
-    for plug in a:plugs
-      let cond = len(plug) &amp;gt; 2 ? plug[2] : 1
-      if cond
-        exe &#39;call minpac#add(&amp;quot;&#39; . plug[0] . &#39;&amp;quot;, &#39; . string(plug[1]) . &#39;)&#39;
-      endif
-    endfor
-  endfunction
-
-  &amp;quot; start. {{{2
-  call &amp;lt;SID&amp;gt;minpac_add(s:start_plugs)
-
-  &amp;quot; opt. {{{2
-  call &amp;lt;SID&amp;gt;minpac_add(s:opt_plugs)
-
-  &amp;quot; lazy. {{{2
-  call &amp;lt;SID&amp;gt;minpac_add(s:lazy_plugs)
-endif
-
-&amp;quot; Async load lazy plugins. {{{1
-let s:idx = 0
-function! PackAddHandler(timer)
-  let plug = s:lazy_plugs[s:idx]
-  let name = split(plug[0], &#39;/&#39;)[1]
-  let cond = len(plug) &amp;gt; 2 ? plug[2] : 1
-  if cond
-    &amp;quot; exe &amp;quot;echom &#39;packadd &amp;quot; . name . &amp;quot;&#39;&amp;quot;
-    exe &#39;packadd &#39; . name
-  endif
-  let s:idx += 1
-  &amp;quot; doautocmd BufReadPost
-  au! lazy_load_bundle
-endfunction
-
-aug lazy_load_bundle
-  au MyAutoCmd VimEnter * call timer_start(1, &#39;PackAddHandler&#39;, {&#39;repeat&#39;: len(s:lazy_plugs)})
-aug END
-
-&amp;quot; Plugin settings. {{{1
-&amp;quot; lightline. {{{2
-let g:lightline = {
-      \ &#39;colorscheme&#39;: &#39;jellybeans&#39;,
-      \ }
-
-&amp;quot; deoplete.nvim. {{{2
-let g:deoplete#enable_at_startup = 1
-
-&amp;quot; vim-submode. {{{2
-let g:submode_leave_with_key = 1
-
-au MyAutoCmd VimEnter * call &amp;lt;SID&amp;gt;vim_submode_aft()
-function! s:vim_submode_aft() abort
-  packadd vim-submode
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s&amp;gt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;gt;&#39;)
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s&amp;lt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;lt;&#39;)
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s+&#39;, &#39;&amp;lt;C-w&amp;gt;+&#39;)
-  call submode#enter_with(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;s-&#39;, &#39;&amp;lt;C-w&amp;gt;-&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;&amp;gt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;gt;&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;&amp;lt;&#39;, &#39;&amp;lt;C-w&amp;gt;&amp;lt;&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;+&#39;, &#39;&amp;lt;C-w&amp;gt;+&#39;)
-  call submode#map(&#39;bufmove&#39;, &#39;n&#39;, &#39;&#39;, &#39;-&#39;, &#39;&amp;lt;C-w&amp;gt;-&#39;)
-endfunction
-
-&amp;quot; yankround.vim. {{{2
-nmap p &amp;lt;Plug&amp;gt;(yankround-p)
-nmap P &amp;lt;Plug&amp;gt;(yankround-P)
-nmap &amp;lt;C-p&amp;gt; &amp;lt;Plug&amp;gt;(yankround-prev)
-nmap &amp;lt;C-n&amp;gt; &amp;lt;Plug&amp;gt;(yankround-next)
-let g:yankround_max_history = 100
-
-&amp;quot; vim-go. {{{2
-let g:go_auto_type_info = 1
-let g:go_snippet_engine = &amp;quot;neosnippet&amp;quot;
-let g:go_fmt_command = &amp;quot;goimports&amp;quot;
-
-let g:go_metalinter_autosave = 1
-let g:go_fmt_autosave = 0
-let g:go_gocode_unimported_packages = 1
-&amp;quot; au MyAutoCmd BufWritePost *.go GoMetaLinter
-&amp;quot; au MyAutoCmd BufWritePre *.go silent GoFmt
-
-au MyAutoCmd BufNew,BufRead *.go call &amp;lt;SID&amp;gt;vim_go_cfg()
-
-function! s:vim_go_cfg() abort
-  packadd vim-go
-
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gd &amp;lt;Plug&amp;gt;(go-doc)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gs &amp;lt;Plug&amp;gt;(go-doc-split)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gv &amp;lt;Plug&amp;gt;(go-doc-vertical)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gb &amp;lt;Plug&amp;gt;(go-doc-browser)
-  nmap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gr &amp;lt;Plug&amp;gt;(go-rename)
-  nnoremap &amp;lt;buffer&amp;gt; &amp;lt;Leader&amp;gt;gi :&amp;lt;C-u&amp;gt;GoImport&amp;lt;Space&amp;gt;
-  setl completeopt=menu,preview
-endfunction
-
-&amp;quot; Define user commands for updating/cleaning the plugins. {{{1
-&amp;quot; Each of them loads minpac, reloads .vimrc to register the
-&amp;quot; information of plugins, then performs the task.
-com! PackClean     packadd minpac | source $MYVIMRC | call minpac#clean()
-com! PackUpdate    packadd minpac | source $MYVIMRC | call minpac#clean() | call minpac#update()
-com! PackListStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;start&amp;quot;)
-com! PackListOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;opt&amp;quot;)
-com! PackNameStart packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;start&amp;quot;, &amp;quot;&amp;quot;, 1)
-com! PackNameOpt   packadd minpac | source $MYVIMRC | Capture echo minpac#getpackages(&amp;quot;&amp;quot;, &amp;quot;opt&amp;quot;, &amp;quot;&amp;quot;, 1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;設定するに当たって、 &lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt; を参考に (というかほぼパク・・・) した。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;package&lt;/code&gt; には、 &lt;code&gt;start&lt;/code&gt; と、 &lt;code&gt;opt&lt;/code&gt; がある。 &lt;code&gt;start&lt;/code&gt; は、デフォルトで読み込まれるプラグインで、 &lt;code&gt;opt&lt;/code&gt; なものは、別途 &lt;code&gt;packadd&lt;/code&gt; をすることで
-遅延ロードすることが出来る。&lt;/p&gt;
-
-&lt;p&gt;僕は 3つの 種類に分けて設定してみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;s:start_plugs&lt;/code&gt; に記載しているプラグインは、文字通り &lt;code&gt;start&lt;/code&gt; でデフォルトで読み込まれるプラグインたち。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;s:opt_plugs&lt;/code&gt; に記載しているプラグインは、 特定の &lt;code&gt;filetype&lt;/code&gt; で有効化するようなやつ。これらはその &lt;code&gt;filetype&lt;/code&gt; の
-&lt;code&gt;autocmd&lt;/code&gt; で個別に &lt;code&gt;packadd&lt;/code&gt; する。
-ちなみに、 &lt;code&gt;colorscheme&lt;/code&gt; も、 &lt;code&gt;opt&lt;/code&gt; でいいらしい。 &lt;code&gt;colorscheme&lt;/code&gt; コマンドが使用される時に自動的に &lt;code&gt;packadd&lt;/code&gt; されるよう。&lt;/p&gt;
-
-&lt;p&gt;んで、 &lt;code&gt;s:lazy_plugs&lt;/code&gt; に記載しているのが、遅延ロードするやつ。
-&lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt; で書かれているように、
-タイマー機能を使用して、 &lt;code&gt;vim&lt;/code&gt; が起動した後に遅延で &lt;code&gt;packadd&lt;/code&gt; する。&lt;/p&gt;
-
-&lt;p&gt;これで、起動時間を計測したところ・・・ &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; より、少し遅いくらいになった・・・。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; めちゃ早いことがわかった・・・。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://d.hatena.ne.jp/heavenshell/20160430/1462088882&#34;&gt;Vim の起動速度2 - Memo&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/k-takata/minpac&#34;&gt;k-takata/minpac: A minimal package manager for Vim 8 (and Neovim)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://h-miyako.hatenablog.com/entry/2016/02/29/211534&#34;&gt;Vimのパッケージ機能を試してみました - Blank File&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2017-09-17_use-minpac.vim/</guid>
+      <description>vim や neovim で標準で用意されている package 機能。まだ一度も触ったことがなかったので使ってみた。
+使ってみるに当たって、 k-takata/minpac が 便利そうなので、利用してみた。
+&amp;quot; Plugin: &amp;quot; Use minpac. {{{1 set packpath^=&#39;~/.cache/nvim/&#39; let s:minpac_dir = &#39;~/.cache/nvim/pack/minpac/opt/minpac&#39; if has(&#39;vim_starting&#39;) if !isdirectory(s:minpac_dir) echo &amp;quot;Install minpac ...&amp;quot; execute &#39;!git clone --depth 1 https://github.com/k-takata/minpac &#39; . s:minpac_dir endif endif &amp;quot; pack list. {{{1 &amp;quot; start plugins. {{{2 let s:start_plugs = [ \ [&#39;Yggdroot/indentLine&#39;, {}], \ [&#39;itchyny/lightline.vim&#39;, {}], \ ] &amp;quot; opt plugins. {{{2 let s:opt_plugs = [ \ [&#39;fatih/vim-go&#39;, {&#39;type&#39;: &#39;opt&#39;}], \ [&#39;zchee/deoplete-go&#39;, {&#39;type&#39;: &#39;opt&#39;, &#39;do&#39;: &#39;silent!</description>
     </item>
     
     <item>
       <title>Use denite instead of unite</title>
-      <link>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</link>
+      <link>http://yukimemi.github.io/post/2017-05-24_use-denite/</link>
       <pubDate>Wed, 24 May 2017 18:15:16 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2017-05-24_Use%20denite/</guid>
-      <description>
-
-&lt;p&gt;やろうやろうと思っていた、 &lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; をついに使ってみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein&lt;/a&gt; を使って toml で設定。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
-[[plugins]]
-repo = &#39;Shougo/denite.nvim&#39;
-on_cmd = &#39;Denite&#39;
-if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
-hook_add = &#39;&#39;&#39;
-  &amp;quot; Use plefix s
-  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
-  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
-  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
-  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
-  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
-  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
-  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
-  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
-  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
-  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
-  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
-
-  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
-
-&#39;&#39;&#39;
-hook_post_source = &#39;&#39;&#39;
-  &amp;quot; Default options.
-  call denite#custom#option(&#39;default&#39;, {
-        \ &#39;prompt&#39;: &#39;»&#39;,
-        \ &#39;cursor_wrap&#39;: v:true,
-        \ &#39;auto_resize&#39;: v:true,
-        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
-        \ })
-  &amp;quot; Pt command on grep source
-  if executable(&#39;pt&#39;)
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-          \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-  endif
-  &amp;quot; custom mappings.
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;とりあえず unite の時に使ってたのと似た感じで設定してみた。&lt;/p&gt;
-
-&lt;p&gt;デフォルトオプションの設定と、キーマッピングの設定を追加でしている。
-あと、 grep に pt を使って。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/mattn/jvgrep&#34;&gt;jvgrep&lt;/a&gt; を使う設定にもしてみたんだけど、設定方法が悪いのかうまく出来なかったので、放置。 とりあえず pt でいい感じに使える。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;2017-06-10-追記&#34;&gt;2017/06/10 追記&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/denite.nvim&#34;&gt;Denite&lt;/a&gt; の help を見ると、 &lt;a href=&#34;https://github.com/mattn/jvgrep&#34;&gt;jvgrep&lt;/a&gt; を使う例が載ってた！！
-さすが Shougo さん、ありがとうございます！！&lt;/p&gt;
-
-&lt;p&gt;ということで、こんな設定になりました。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;# ==================== Denite ==================== {{{1
-[[plugins]]
-repo = &#39;Shougo/denite.nvim&#39;
-on_cmd = &#39;Denite&#39;
-if = &amp;quot;has(&#39;python3&#39;)&amp;quot;
-hook_add = &#39;&#39;&#39;
-  &amp;quot; Use plefix s
-  nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt;
-  nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt;
-  nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt;
-  nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt;
-  nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt;
-  nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt;
-  nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt;
-  nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt;
-  nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt;
-  nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt;
-  nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt;
-
-  noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt;
-
-&#39;&#39;&#39;
-hook_post_source = &#39;&#39;&#39;
-  &amp;quot; Default options.
-  call denite#custom#option(&#39;default&#39;, {
-        \ &#39;prompt&#39;: &#39;»&#39;,
-        \ &#39;cursor_wrap&#39;: v:true,
-        \ &#39;auto_resize&#39;: v:true,
-        \ &#39;highlight_mode_insert&#39;: &#39;WildMenu&#39;
-        \ })
-  if executable(&#39;jvgrep&#39;)
-    &amp;quot; jvgrep command on grep source
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;jvgrep&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [&#39;-R&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-
-  elseif executable(&#39;rg&#39;)
-    &amp;quot; Ripgrep command on grep source
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;rg&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-      \ [&#39;--vimgrep&#39;, &#39;--no-heading&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [&#39;--regexp&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-
-  elseif executable(&#39;pt&#39;)
-    &amp;quot; Pt command on grep source
-    call denite#custom#var(&#39;grep&#39;, &#39;command&#39;, [&#39;pt&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;default_opts&#39;,
-      \ [&#39;--nogroup&#39;, &#39;--nocolor&#39;, &#39;--smart-case&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;recursive_opts&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;pattern_opt&#39;, [])
-    call denite#custom#var(&#39;grep&#39;, &#39;separator&#39;, [&#39;--&#39;])
-    call denite#custom#var(&#39;grep&#39;, &#39;final_opts&#39;, [])
-  endif
-  &amp;quot; custom mappings.
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-n&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_next_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-p&amp;gt;&#39;, &#39;&amp;lt;denite:move_to_previous_line&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;insert&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:enter_mode:normal&amp;gt;&#39;, &#39;noremap&#39;)
-  call denite#custom#map(&#39;normal&#39;, &#39;&amp;lt;C-[&amp;gt;&#39;, &#39;&amp;lt;denite:quit&amp;gt;&#39;, &#39;noremap&#39;)
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;さりげなく、 &lt;a href=&#34;https://github.com/BurntSushi/ripgrep&#34;&gt;ripgrep&lt;/a&gt; も入れといた。&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2017-05-24_use-denite/</guid>
+      <description>やろうやろうと思っていた、 Denite をついに使ってみた。
+dein を使って toml で設定。
+# ==================== Denite ==================== {{{1 [[plugins]] repo = &#39;Shougo/denite.nvim&#39; on_cmd = &#39;Denite&#39; if = &amp;quot;has(&#39;python3&#39;)&amp;quot; hook_add = &#39;&#39;&#39; &amp;quot; Use plefix s nnoremap suc :&amp;lt;C-u&amp;gt;Denite colorscheme -auto-preview&amp;lt;CR&amp;gt; nnoremap sub :&amp;lt;C-u&amp;gt;Denite buffer&amp;lt;CR&amp;gt; nnoremap suf :&amp;lt;C-u&amp;gt;Denite file&amp;lt;CR&amp;gt; nnoremap suF :&amp;lt;C-u&amp;gt;Denite file_rec&amp;lt;CR&amp;gt; nnoremap suu :&amp;lt;C-u&amp;gt;Denite buffer file_old&amp;lt;CR&amp;gt; nnoremap suo :&amp;lt;C-u&amp;gt;Denite outline -no-quit -mode=normal&amp;lt;CR&amp;gt; nnoremap suh :&amp;lt;C-u&amp;gt;Denite help&amp;lt;CR&amp;gt; nnoremap sur :&amp;lt;C-u&amp;gt;Denite register&amp;lt;CR&amp;gt; nnoremap sug :&amp;lt;C-u&amp;gt;Denite grep -no-empty&amp;lt;CR&amp;gt; nnoremap su/ :&amp;lt;C-u&amp;gt;Denite line&amp;lt;CR&amp;gt; nnoremap suR :&amp;lt;C-u&amp;gt;Denite -resume&amp;lt;CR&amp;gt; noremap sul :&amp;lt;C-u&amp;gt;Denite command_history&amp;lt;CR&amp;gt; &#39;&#39;&#39; hook_post_source = &#39;&#39;&#39; &amp;quot; Default options.</description>
     </item>
     
     <item>
       <title>dein and vim singleton</title>
-      <link>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</link>
+      <link>http://yukimemi.github.io/post/2016-12-09_dein-and-vim-singleton/</link>
       <pubDate>Fri, 09 Dec 2016 10:20:28 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-12-09_dein%20and%20vim-singleton/</guid>
-      <description>
-
-&lt;p&gt;&lt;a href=&#34;http://thinca.hatenablog.com/entry/20120201/1328099090&#34;&gt;vim-singleton&lt;/a&gt; という便利な vim plugin がある。&lt;/p&gt;
-
-&lt;p&gt;vim の clientserver 機能を使って、ファイルをすでに起動している vim で開くことができる。&lt;/p&gt;
-
-&lt;p&gt;これを &lt;a href=&#34;https://github.com/Shougo/dein.vim&#34;&gt;dein.vim&lt;/a&gt; と一緒に使用する時の方法がわからなかったので、 twitter でつぶやいてみた。&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;ja&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/yukimemi&#34;&gt;@yukimemi&lt;/a&gt; hook_source を使ってください。hook_add はロード前に呼ばれるのでエラーとなります&lt;/p&gt;&amp;mdash; 暗黒美夢王(deoplete dev) (@ShougoMatsu) &lt;a href=&#34;https://twitter.com/ShougoMatsu/status/805623471589892096&#34;&gt;2016年12月5日&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
-
-&lt;p&gt;そしたらなんとあの Shougo さんからお返事が！！&lt;/p&gt;
-
-&lt;p&gt;親切に教えてもらえました！&lt;/p&gt;
-
-&lt;p&gt;そこで教えてもらった通り、 &lt;code&gt;hook_add&lt;/code&gt; から &lt;code&gt;hook_source&lt;/code&gt; に変更。&lt;/p&gt;
-
-&lt;p&gt;こんな感じ。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;dein.toml&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
-repo = &#39;thinca/vim-singleton&#39;
-if = &amp;quot;!has(&#39;nvim&#39;)&amp;quot;
-hook_source = &#39;&#39;&#39;
-  call singleton#enable()
-&#39;&#39;&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;それから、 lazy でないプラグインは、 &lt;code&gt;hook_source&lt;/code&gt; は動かないため、 &lt;code&gt;dein&lt;/code&gt; のドキュメントに書いてあるように &lt;code&gt;dein#call_hook(&#39;source&#39;)&lt;/code&gt; を手動で呼ぶ必要がある。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;init.vim&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;set shellslash
-if has(&#39;nvim&#39;)
-  let $VIM_PATH = expand(&#39;~/.config/nvim&#39;)
-  let $MYVIMRC = expand(&#39;~/.config/nvim/init.vim&#39;)
-else
-  let $VIM_PATH = expand(&#39;~/.vim&#39;)
-  let $MYVIMRC = expand(&#39;~/.vimrc&#39;)
-  let $MYGVIMRC = expand(&#39;~/.gvimrc&#39;)
-endif
-
-&amp;quot; Use dein.
-if has(&#39;nvim&#39;)
-  let s:cache_home = expand(&#39;~/.cache/nvim&#39;)
-else
-  let s:cache_home = expand(&#39;~/.cache/vim&#39;)
-endif
-
-let s:dein_dir = s:cache_home . &#39;/dein&#39;
-let s:dein_repo_dir = s:dein_dir . &#39;/repos/github.com/Shougo/dein.vim&#39;
-if !isdirectory(s:dein_repo_dir)
-  execute &#39;!git clone https://github.com/Shougo/dein.vim &#39; . s:dein_repo_dir
-endif
-execute &#39;set runtimepath^=&#39; . fnamemodify(s:dein_repo_dir, &#39;:p&#39;)
-
-let g:dein#install_max_processes = 16
-let g:dein#install_progress_type = &#39;title&#39;
-let g:dein#enable_notification = 1
-let s:toml_file = $VIM_PATH . &#39;/dein.toml&#39;
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file])
-  call dein#load_toml(s:toml_file)
-  call dein#end()
-  call dein#save_state()
-endif
-call dein#call_hook(&#39;source&#39;)
-
-&amp;quot; Check and install.
-if has(&#39;vim_starting&#39;) &amp;amp;&amp;amp; dein#check_install()
-  call dein#install()
-endif
-
-&amp;quot; After dein
-filetype plugin indent on
-syntax enable
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;自分の設定はこんな感じ。
-めちゃべんり。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://thinca.hatenablog.com/entry/20120201/1328099090&#34;&gt;singleton.vim 作った | 永遠に未完成&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/Shougo/dein.vim/blob/master/doc/dein.txt&#34;&gt;dein.vim doc&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-12-09_dein-and-vim-singleton/</guid>
+      <description>vim-singleton という便利な vim plugin がある。
+vim の clientserver 機能を使って、ファイルをすでに起動している vim で開くことができる。
+これを dein.vim と一緒に使用する時の方法がわからなかったので、 twitter でつぶやいてみた。
+@yukimemi hook_source を使ってください。hook_add はロード前に呼ばれるのでエラーとなります
+&amp;mdash; 暗黒美夢王(deoplete dev) (@ShougoMatsu) 2016年12月5日 
+そしたらなんとあの Shougo さんからお返事が！！
+親切に教えてもらえました！
+そこで教えてもらった通り、 hook_add から hook_source に変更。
+こんな感じ。
+ dein.toml  [[plugins]] repo = &#39;thinca/vim-singleton&#39; if = &amp;quot;!has(&#39;nvim&#39;)&amp;quot; hook_source = &#39;&#39;&#39; call singleton#enable() &#39;&#39;&#39;  それから、 lazy でないプラグインは、 hook_source は動かないため、 dein のドキュメントに書いてあるように dein#call_hook(&#39;source&#39;) を手動で呼ぶ必要がある。
+ init.vim  set shellslash if has(&#39;nvim&#39;) let $VIM_PATH = expand(&#39;~/.</description>
     </item>
     
   </channel>

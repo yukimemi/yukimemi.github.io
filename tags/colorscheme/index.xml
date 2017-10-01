@@ -2,78 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Colorscheme on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/colorscheme/index.xml</link>
+    <link>http://yukimemi.github.io/tags/colorscheme/</link>
     <description>Recent content in Colorscheme on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <atom:link href="http://yukimemi.github.io/tags/colorscheme/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2016 11:15:50 +0900</lastBuildDate>
+    
+	<atom:link href="http://yukimemi.github.io/tags/colorscheme/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Use solarized colorscheme in true color</title>
-      <link>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</link>
+      <link>http://yukimemi.github.io/post/2016-09-19_use-solarized-colorscheme-in-true-color/</link>
       <pubDate>Mon, 19 Sep 2016 11:15:50 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2016-09-19_Use%20solarized%20colorscheme%20in%20true%20color/</guid>
-      <description>
-
-&lt;p&gt;前回の記事(&lt;a href=&#34;http://yukimemi.github.io/post/2016-09-19_True%20color%20in%20iTerm2%20Tmux%20Neovim/&#34;&gt;True color in iTerm2 Tmux Neovim | YUKIMEMI&lt;/a&gt;)で、 &lt;code&gt;iterm&lt;/code&gt; と &lt;code&gt;neovim&lt;/code&gt; でtrue colorを使う方法はわかったんだけど、なぜか、 &lt;code&gt;solarized&lt;/code&gt; の &lt;code&gt;colorscheme&lt;/code&gt; が有効にならなかった。&lt;/p&gt;
-
-&lt;p&gt;通常の &lt;code&gt;solarized&lt;/code&gt; ではダメなようで、true color対応したやつを使えばいいみたい。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[plugins]]
-repo = &#39;lifepillar/vim-solarized8&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme solarized8_dark
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;これでできた。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://qiita.com/delphinus35/items/b8c1a8d3af9bbacb85b8&#34;&gt;tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2016-09-19_use-solarized-colorscheme-in-true-color/</guid>
+      <description>前回の記事(True color in iTerm2 Tmux Neovim | YUKIMEMI)で、 iterm と neovim でtrue colorを使う方法はわかったんだけど、なぜか、 solarized の colorscheme が有効にならなかった。
+通常の solarized ではダメなようで、true color対応したやつを使えばいいみたい。
+[[plugins]] repo = &#39;lifepillar/vim-solarized8&#39;  colorscheme solarized8_dark  これでできた。
+参考 tmux on iTerm2 で斜体 &amp;amp; True Color を使う - Qiita</description>
     </item>
     
     <item>
       <title>vimperator colorscheme</title>
-      <link>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</link>
+      <link>http://yukimemi.github.io/post/2015-03-02_vimperator-colorscheme/</link>
       <pubDate>Mon, 02 Mar 2015 02:00:14 +0900</pubDate>
       
-      <guid>http://yukimemi.github.io/post/2015-03-02_vimperator%20colorscheme/</guid>
-      <description>
-
-&lt;p&gt;vimperatorでcolorschemeを使う方法。&lt;/p&gt;
-
-&lt;p&gt;自分で作ってもいいけど、大変なので・・・&lt;/p&gt;
-
-&lt;h3 id=&#34;リポジトリクローン&#34;&gt;リポジトリクローン&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;ghq&lt;/code&gt; については、&lt;a href=&#34;http://yukimemi.github.io/post/2014-06-29_All%20You%20Need%20Is%20Peco/&#34;&gt;この記事&lt;/a&gt;で。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ghq get https://github.com/vimpr/vimperator-colors.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;シンボリックリンク&#34;&gt;シンボリックリンク&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;vimperatorrc編集&#34;&gt;.vimperatorrc編集&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-vim&#34;&gt;colorscheme sweets_snaka
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;かっこいい！！&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h5 id=&#34;参考&#34;&gt;参考:&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/vimpr/vimperator-colors&#34;&gt;vimpr/vimperator-colors&lt;/a&gt;&lt;/p&gt;
-</description>
+      <guid>http://yukimemi.github.io/post/2015-03-02_vimperator-colorscheme/</guid>
+      <description>vimperatorでcolorschemeを使う方法。
+自分で作ってもいいけど、大変なので・・・
+リポジトリクローン ghq については、この記事で。
+$ ghq get https://github.com/vimpr/vimperator-colors.git  シンボリックリンク $ ln -sfn ~/.ghq/src/github.com/vimpr/vimperator-colors ~/.vimperator/colors  .vimperatorrc編集 colorscheme sweets_snaka  かっこいい！！
+参考: vimpr/vimperator-colors</description>
     </item>
     
   </channel>
