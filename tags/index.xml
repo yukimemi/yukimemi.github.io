@@ -212,7 +212,7 @@
     <item>
       <title>Font</title>
       <link>http://yukimemi.github.io/tags/font/</link>
-      <pubDate>Sat, 14 Sep 2013 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/tags/font/</guid>
       <description></description>
@@ -287,6 +287,15 @@
       <pubDate>Tue, 26 Jul 2016 00:58:51 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/tags/gulp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hack</title>
+      <link>http://yukimemi.github.io/tags/hack/</link>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/tags/hack/</guid>
       <description></description>
     </item>
     
@@ -500,9 +509,18 @@
     <item>
       <title>Neovim</title>
       <link>http://yukimemi.github.io/tags/neovim/</link>
-      <pubDate>Sun, 17 Sep 2017 23:30:20 +0900</pubDate>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/tags/neovim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nerd Fonts</title>
+      <link>http://yukimemi.github.io/tags/nerd-fonts/</link>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/tags/nerd-fonts/</guid>
       <description></description>
     </item>
     
@@ -815,9 +833,18 @@
     <item>
       <title>Vim</title>
       <link>http://yukimemi.github.io/tags/vim/</link>
-      <pubDate>Sun, 01 Oct 2017 18:21:37 +0900</pubDate>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
       
       <guid>http://yukimemi.github.io/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim Airline</title>
+      <link>http://yukimemi.github.io/tags/vim-airline/</link>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/tags/vim-airline/</guid>
       <description></description>
     </item>
     
@@ -827,6 +854,15 @@
       <pubDate>Sun, 15 Sep 2013 00:00:00 +0000</pubDate>
       
       <guid>http://yukimemi.github.io/tags/vim-automatic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim Devicons</title>
+      <link>http://yukimemi.github.io/tags/vim-devicons/</link>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/tags/vim-devicons/</guid>
       <description></description>
     </item>
     

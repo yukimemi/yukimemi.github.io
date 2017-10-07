@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Use Vim Devicons | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="red lighten-3 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2 class="pink-text">Use Vim Devicons</h2>
+      <p class="orange-text text-darken-4">2017/10/07 Sat</p>
+      <div class="row">
+        <div class="col s12"><div id="addthis">
+  
+  <div class="addthis_native_toolbox"></div>
+</div>
+</div>
+        <div class="col s12"><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</div>
+      </div>
+      
+
+<p><a href="https://github.com/ryanoasis/vim-devicons">vim-devicons</a> という、 <a href="https://atom.io/">atom</a> であるようなアイコン表示できるやつがあるみたいなので使ってみた。</p>
+
+<p>ついでに、前から気になっていた、 <a href="https://github.com/vim-airline/vim-airline">vim-airline</a> も試してみた。</p>
+
+<hr />
+
+<h3 id="パッチ済みフォントのインストール">パッチ済みフォントのインストール</h3>
+
+<p><a href="https://github.com/ryanoasis/vim-devicons">vim-devicons</a> を使用するには、まず、パッチ済みフォント ( <a href="https://github.com/ryanoasis/nerd-fonts">nerd-fonts</a> ) をインストールする必要がある。</p>
+
+<p>mac の場合は、 <a href="https://brew.sh/index_ja.html">homebrew</a> があるから簡単にインストールできる。</p>
+
+<pre><code class="language-sh">$ brew tap caskroom/fonts
+$ brew cask install font-hack-nerd-font
+</code></pre>
+
+<p>それから、 iTerm2 の設定から、インストールされた、 <code>Knack Nerd Font</code> を選択する。</p>
+
+<h3 id="neovim-の設定">Neovim の設定</h3>
+
+<p>neovim の設定を追加する。
+<a href="http://yukimemi.github.io/post/2017-09-17_use-minpac.vim/">以前の投稿</a> と同様に、 <a href="https://github.com/k-takata/minpac">k-takata/minpac</a> を使用した、遅延ロードで設定をした。</p>
+
+<p>こんな感じ。(一部[だいぶ] 省略)</p>
+
+<pre><code class="language-vim">let s:start_plugs = [
+      \ ['tpope/vim-fugitive', {}],
+      \ ['vim-airline/vim-airline', {}],
+      \ ['vim-airline/vim-airline-themes', {}],
+      \ ['ryanoasis/vim-devicons', {}],
+      \ ]
+
+&quot; vim-airline settings.
+let g:airline_powerline_fonts = 1
+let g:airline_detect_iminsert = 1
+let g:airline_symbols_ascii = 0
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+&quot; powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+&quot; unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+&quot; extensions
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+
+&quot; theme
+let g:airline_theme = 'luna'
+</code></pre>
+
+<p>こんな感じ。</p>
+
+<p><img src="/img/vim-devicons_min.png" alt="vim-devicons" /></p>
+
+<p>うーん、微妙かも・・・。</p>
+
+      <hr />
+      <div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+   
+  var disqus_shortname = 'yukimemi-github'; 
+
+   
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+

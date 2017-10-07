@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Font on YUKIMEMI</title>
-    <link>http://yukimemi.github.io/tags/font/</link>
-    <description>Recent content in Font on YUKIMEMI</description>
+    <title>Hack on YUKIMEMI</title>
+    <link>http://yukimemi.github.io/tags/hack/</link>
+    <description>Recent content in Hack on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sat, 07 Oct 2017 23:15:34 +0900</lastBuildDate>
     
-	<atom:link href="http://yukimemi.github.io/tags/font/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://yukimemi.github.io/tags/hack/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -25,19 +25,6 @@ $ brew tap caskroom/fonts $ brew cask install font-hack-nerd-font  それから�
 Neovim の設定 neovim の設定を追加する。 以前の投稿 と同様に、 k-takata/minpac を使用した、遅延ロードで設定をした。
 こんな感じ。(一部[だいぶ] 省略)
 let s:start_plugs = [ \ [&#39;tpope/vim-fugitive&#39;, {}], \ [&#39;vim-airline/vim-airline&#39;, {}], \ [&#39;vim-airline/vim-airline-themes&#39;, {}], \ [&#39;ryanoasis/vim-devicons&#39;, {}], \ ] &amp;quot; vim-airline settings. let g:airline_powerline_fonts = 1 let g:airline_detect_iminsert = 1 let g:airline_symbols_ascii = 0 let g:airline_mode_map = { \ &#39;__&#39; : &#39;-&#39;, \ &#39;n&#39; : &#39;N&#39;, \ &#39;i&#39; : &#39;I&#39;, \ &#39;R&#39; : &#39;R&#39;, \ &#39;c&#39; : &#39;C&#39;, \ &#39;v&#39; : &#39;V&#39;, \ &#39;V&#39; : &#39;V&#39;, \ &#39;&#39; : &#39;V&#39;, \ &#39;s&#39; : &#39;S&#39;, \ &#39;S&#39; : &#39;S&#39;, \ &#39;&#39; : &#39;S&#39;, \ } if !</description>
-    </item>
-    
-    <item>
-      <title>Ricty Mac HomebrewでRicty Powerline フォントをインストールする</title>
-      <link>http://yukimemi.github.io/post/2013-09-14-ricty_powerline_install/</link>
-      <pubDate>Sat, 14 Sep 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://yukimemi.github.io/post/2013-09-14-ricty_powerline_install/</guid>
-      <description>最近動作が重くなってきたこともあり、Mountain Lion を 再インストールした。
-再インストールは簡単で、起動時に 「 Command + R 」を押せばOK。
-まずディスクユーティリティでディスクを消去して、Mountain Lion の再インストール。
-再インストール後、 iTerm2 や、 MacVim のフォント Ricty のインストールと Powerline のパッチ当てをまた簡単に出来るようにスクリプトとしてまとめた。
-#!/bin/sh brew tap sanemat/font brew install ricty cmd=$(brew info ricty | grep &amp;quot;Ricty\*.ttf&amp;quot; | sed -e &amp;quot;s/.*\(cp -f.*\)/\1/&amp;quot;) echo $cmd eval $cmd #git clone https://github.com/Lokaltog/powerline.git ~/.powerline #fontforge -script $HOME/.powerline/font/fontpatcher.py ~/Library/Fonts/Ricty-Regular.ttf git clone https://github.com/Lokaltog/vim-powerline ~/.vim-powerline fontforge -lang=py -script ~/.vim-powerline/fontpatcher/fontpatcher ~/Library/Fonts/Ricty-Regular.ttf mv -f *.ttf ~/Library/Fonts/ # wait a minute fc-cache -vf  Powerline の方のパッチではなぜかうまく出来なかったので、 vim-powerline の方で行っている。</description>
     </item>
     
   </channel>

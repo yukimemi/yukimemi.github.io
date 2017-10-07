@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://yukimemi.github.io/post/2017-10-07_use-vim-devicons/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yukimemi.github.io/post/2017-10-01_fix-conf-with-single-user-mode-on-mac/</loc>
     <lastmod>2017-10-01T18:21:37+09:00</lastmod>
   </url>
@@ -493,7 +498,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/tags/font/</loc>
-    <lastmod>2013-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -560,6 +565,12 @@
   <url>
     <loc>http://yukimemi.github.io/tags/gulp/</loc>
     <lastmod>2016-07-26T00:58:51+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/hack/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -745,13 +756,19 @@
   
   <url>
     <loc>http://yukimemi.github.io/tags/neovim/</loc>
-    <lastmod>2017-09-17T23:30:20+09:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/neovim/</loc>
-    <lastmod>2017-05-24T18:15:16+09:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/nerd-fonts/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -805,7 +822,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/post/</loc>
-    <lastmod>2017-10-01T18:21:37+09:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1009,19 +1026,31 @@
   
   <url>
     <loc>http://yukimemi.github.io/tags/vim/</loc>
-    <lastmod>2017-10-01T18:21:37+09:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/vim/</loc>
-    <lastmod>2017-10-01T18:21:37+09:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/vim-airline/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/tags/vim-automatic/</loc>
     <lastmod>2013-09-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/vim-devicons/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1087,7 +1116,7 @@
   
   <url>
     <loc>http://yukimemi.github.io/</loc>
-    <lastmod>2017-10-01T18:21:37+09:00</lastmod>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   

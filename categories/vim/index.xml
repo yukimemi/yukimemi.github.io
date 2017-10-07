@@ -6,10 +6,26 @@
     <description>Recent content in Vim on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 01 Oct 2017 18:21:37 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Oct 2017 23:15:34 +0900</lastBuildDate>
     
 	<atom:link href="http://yukimemi.github.io/categories/vim/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Use Vim Devicons</title>
+      <link>http://yukimemi.github.io/post/2017-10-07_use-vim-devicons/</link>
+      <pubDate>Sat, 07 Oct 2017 23:15:34 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-10-07_use-vim-devicons/</guid>
+      <description>vim-devicons という、 atom であるようなアイコン表示できるやつがあるみたいなので使ってみた。
+ついでに、前から気になっていた、 vim-airline も試してみた。
+パッチ済みフォントのインストール vim-devicons を使用するには、まず、パッチ済みフォント ( nerd-fonts ) をインストールする必要がある。
+mac の場合は、 homebrew があるから簡単にインストールできる。
+$ brew tap caskroom/fonts $ brew cask install font-hack-nerd-font  それから、 iTerm2 の設定から、インストールされた、 Knack Nerd Font を選択する。
+Neovim の設定 neovim の設定を追加する。 以前の投稿 と同様に、 k-takata/minpac を使用した、遅延ロードで設定をした。
+こんな感じ。(一部[だいぶ] 省略)
+let s:start_plugs = [ \ [&#39;tpope/vim-fugitive&#39;, {}], \ [&#39;vim-airline/vim-airline&#39;, {}], \ [&#39;vim-airline/vim-airline-themes&#39;, {}], \ [&#39;ryanoasis/vim-devicons&#39;, {}], \ ] &amp;quot; vim-airline settings. let g:airline_powerline_fonts = 1 let g:airline_detect_iminsert = 1 let g:airline_symbols_ascii = 0 let g:airline_mode_map = { \ &#39;__&#39; : &#39;-&#39;, \ &#39;n&#39; : &#39;N&#39;, \ &#39;i&#39; : &#39;I&#39;, \ &#39;R&#39; : &#39;R&#39;, \ &#39;c&#39; : &#39;C&#39;, \ &#39;v&#39; : &#39;V&#39;, \ &#39;V&#39; : &#39;V&#39;, \ &#39;&#39; : &#39;V&#39;, \ &#39;s&#39; : &#39;S&#39;, \ &#39;S&#39; : &#39;S&#39;, \ &#39;&#39; : &#39;S&#39;, \ } if !</description>
+    </item>
     
     <item>
       <title>Fix conf with single user mode on mac</title>
