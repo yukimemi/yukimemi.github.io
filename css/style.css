@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+@import url(http://cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css);
 
 @font-face {
   font-family: 'M+ 1m';
@@ -28,7 +29,8 @@
 body {
   /* font-family: 'SistersFS', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'Noto Sans Japanese', sun-serif; */
-  font-family: 'M+ 1m', 'Noto Sans Japanese', sun-serif;
+  /* font-family: 'M+ 1m', 'Noto Sans Japanese', sun-serif; */
+  font-family: 'Hack', 'M+ 1m', 'Noto Sans Japanese', sun-serif;
   /* font-family: 'uzura_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'S2G Love font', 'azuki_font', 'Noto Sans Japanese', sun-serif; */
   /* font-family: 'azuki_font', 'Noto Sans Japanese', sun-serif; */
@@ -71,6 +73,7 @@ pre code {
   padding: 0;
   border: 0;
   background: none;
+  font-family: 'Hack', 'M+ 1m', 'Noto Sans Japanese', sun-serif;
 }
 
 pre ol.linenums {
