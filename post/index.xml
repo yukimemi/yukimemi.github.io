@@ -6,10 +6,22 @@
     <description>Recent content in Posts on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 07 Oct 2017 23:15:34 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 12 Nov 2017 10:27:29 +0900</lastBuildDate>
     
 	<atom:link href="http://yukimemi.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>gsr in Rust</title>
+      <link>http://yukimemi.github.io/post/2017-11-12_gsr-in-rust/</link>
+      <pubDate>Sun, 12 Nov 2017 10:27:29 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2017-11-12_gsr-in-rust/</guid>
+      <description>以前の 投稿 で、git status を再帰的に全Gitディレクトリで実行して、変更のあるリポジトリを簡単に見つける というのを golang で書いていたのだが、それを rust で書き直してみた。
+yukimemi/gsr-rs
+インストールは、 cargo で実施。
+$ cargo install --git https://github.com/yukimemi/gsr-rs $ gsr -h gsr 0.2.2 USAGE: gsr [FLAGS] [input] FLAGS: --ahead Print ahead repo -a, --all Print all git directory --behind Print behind repo -f, --fetch Execute git fetch before check -h, --help Prints help information -V, --version Prints version information ARGS: &amp;lt;input&amp;gt; Input directory. default is $(ghq root) or &#39;.</description>
+    </item>
     
     <item>
       <title>Use Vim Devicons</title>

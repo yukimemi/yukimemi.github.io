@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>gsr in Rust | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="red lighten-3 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2 class="pink-text">gsr in Rust</h2>
+      <p class="orange-text text-darken-4">2017/11/12 Sun</p>
+      <div class="row">
+        <div class="col s12"><div id="addthis">
+  
+  <div class="addthis_native_toolbox"></div>
+</div>
+</div>
+        <div class="col s12"><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</div>
+      </div>
+      
+
+<p>以前の <a href="http://yukimemi.github.io/post/2017-03-19_git-status-recurse/">投稿</a> で、<code>git status を再帰的に全Gitディレクトリで実行して、変更のあるリポジトリを簡単に見つける</code> というのを <code>golang</code> で書いていたのだが、それを <code>rust</code> で書き直してみた。</p>
+
+<p><a href="https://github.com/yukimemi/gsr-rs">yukimemi/gsr-rs</a></p>
+
+<p>インストールは、 <code>cargo</code> で実施。</p>
+
+<pre><code class="language-sh">$ cargo install --git https://github.com/yukimemi/gsr-rs
+$ gsr -h
+gsr 0.2.2
+
+USAGE:
+    gsr [FLAGS] [input]
+
+FLAGS:
+        --ahead      Print ahead repo
+    -a, --all        Print all git directory
+        --behind     Print behind repo
+    -f, --fetch      Execute git fetch before check
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+ARGS:
+    &lt;input&gt;    Input directory. default is $(ghq root) or '.'
+</code></pre>
+
+<p>使い方は、だいたい <a href="http://yukimemi.github.io/post/2017-03-19_git-status-recurse/">以前の投稿</a> で書いた <code>golang</code> 版と同じ。</p>
+
+<p>いくつかライブラリを使っていて、便利だったものを紹介。</p>
+
+<h3 id="structopt-https-github-com-texitoi-structopt"><a href="https://github.com/TeXitoi/structopt">structopt</a></h3>
+
+<p>使い方は、 github 上の <a href="https://github.com/TeXitoi/structopt">README</a> を読めばすぐわかると思う。</p>
+
+<p><a href="https://github.com/yukimemi/gsr-rs">yukimemi/gsr-rs</a> では、以下のようにしてオプションの定義を実施。</p>
+
+<pre><code class="language-rust">#![feature(attr_literals)]
+extern crate structopt;
+#[macro_use]
+extern crate structopt_derive;
+
+use structopt::StructOpt;
+
+#[derive(StructOpt, Debug)]
+struct Opt {
+    #[structopt(short = &quot;a&quot;, long = &quot;all&quot;, help = &quot;Print all git directory&quot;)]
+    all: bool,
+
+    #[structopt(short = &quot;f&quot;, long = &quot;fetch&quot;, help = &quot;Execute git fetch before check&quot;)]
+    fetch: bool,
+
+    #[structopt(long = &quot;behind&quot;, help = &quot;Print behind repo&quot;)]
+    behind: bool,
+    #[structopt(long = &quot;ahead&quot;, help = &quot;Print ahead repo&quot;)]
+    ahead: bool,
+
+    #[structopt(required = false, help = &quot;Input directory. default is $(ghq root) or '.'&quot;)]
+    input: Option&lt;String&gt;,
+}
+</code></pre>
+
+<p>これで、上記で書いたようないい感じの help が表示される。
+内部的に <a href="https://github.com/kbknapp/clap-rs">clap</a> を使ってるみたい。</p>
+
+<h3 id="walkdir-https-github-com-burntsushi-walkdir-rust-threadpool-https-github-com-rust-threadpool-rust-threadpool"><a href="https://github.com/BurntSushi/walkdir">walkdir</a>, <a href="https://github.com/rust-threadpool/rust-threadpool">rust-threadpool</a></h3>
+
+<p>ディレクトリやファイルを再帰的に取得するやつ。
+だいたい cli でなんかするときには必要な気がする。
+<a href="https://github.com/yukimemi/gsr-rs">yukimemi/gsr-rs</a> では、以下のようにして、 git のディレクトリをリスティングしている。</p>
+
+<pre><code class="language-rust">fn get_rootdir(input: &amp;Option&lt;String&gt;) -&gt; WalkDir {
+    match *input {
+        Some(ref inp) =&gt; WalkDir::new(inp),
+        None =&gt; {
+            if let Ok(out) = Command::new(&quot;ghq&quot;).arg(&quot;root&quot;).output() {
+                return WalkDir::new(String::from_utf8_lossy(&amp;out.stdout).trim_right());
+            }
+            WalkDir::new(&quot;.&quot;)
+        }
+    }
+}
+
+fn get_gsrs(walk_dir: WalkDir, fetch: bool) -&gt; mpsc::Receiver&lt;Gsr&gt; {
+    let (tx, rx) = mpsc::channel::&lt;Gsr&gt;();
+    let pool = ThreadPool::new(WORKERS);
+    thread::spawn(move || {
+        walk_dir
+            .into_iter()
+            .map(|e| match e {
+                Ok(e) =&gt; {
+                    if e.file_name().to_str().unwrap_or(&quot;&quot;).eq(&quot;.git&quot;) {
+                        let tx = tx.clone();
+                        pool.execute(move || {
+                            let parent = e.path().parent().unwrap();
+                            let gsr = Gsr::new(parent);
+                            if fetch {
+                                gsr.fetch();
+                            }
+                            let gsr = gsr.status().diff().is_ahead().is_behind();
+                            tx.send(gsr).unwrap();
+                        });
+                    }
+                }
+                Err(e) =&gt; eprintln!(&quot;{}&quot;, e),
+            })
+            .collect::&lt;Vec&lt;_&gt;&gt;();
+        pool.join();
+        drop(tx);
+    });
+    rx
+}
+</code></pre>
+
+<p>ここでは、ディレクトリリスティングと、 git status などの取得をパラレルで行うために、 <a href="https://github.com/rust-threadpool/rust-threadpool">rust-threadpool</a> も使用している。</p>
+
+<p>この <code>crate</code> も非常に便利だった。</p>
+
+<hr />
+
+<h5 id="参考">参考</h5>
+
+<p><a href="https://github.com/TeXitoi/structopt">structopt</a></p>
+
+<p><a href="https://github.com/BurntSushi/walkdir">walkdir</a></p>
+
+<p><a href="https://github.com/rust-threadpool/rust-threadpool">rust-threadpool</a></p>
+
+      <hr />
+      <div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+   
+  var disqus_shortname = 'yukimemi-github'; 
+
+   
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+
