@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Fix Broken Pipe in Rust | YUKIMEMI</title>
+
+    
+    <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/desert.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <nav class="red lighten-3 valign-wrapper" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper center-align">
+          <a href="/" id="title" class="valign">YUKIMEMI</a>
+        </div>
+      </div>
+    </nav>
+    
+    
+    
+    
+    
+    
+    
+
+<div id="post" class="container">
+  <div class="row">
+    <div class="col s12">
+      <h2 class="pink-text">Fix Broken Pipe in Rust</h2>
+      <p class="orange-text text-darken-4">2018/01/07 Sun</p>
+      <div class="row">
+        <div class="col s12"><div id="addthis">
+  
+  <div class="addthis_native_toolbox"></div>
+</div>
+</div>
+        <div class="col s12"><div id="twitterfollow">
+  <a href="https://twitter.com/yukimemi" class="twitter-follow-button" data-show-count="false">Follow @yukimemi</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</div>
+      </div>
+      
+
+<p><a href="http://yukimemi.github.io/post/2017-11-12_gsr-in-rust/">以前の記事</a> で、 rust で変更のある <code>git</code> リポジトリを再帰的に検索する、というのを書いたのだけど、一部バグがあったので、修正した。</p>
+
+<p><code>gsr</code> では、 <code>--all</code> というオプションを指定することで、指定配下 (デフォルトは $(ghq root) ) の git リポジトリを全て列挙する。
+それに、パイプで <code>fzf</code> や、 <code>peco</code> を通すことで、選択して移動、というのをやっていた。</p>
+
+<p><code>fish</code> で書くとこんな感じ。</p>
+
+<pre><code class="language-fish">function __cd_to_git_dir
+  gsr --all | peco | read -l line
+  and echo &quot;Change directory $line&quot;
+  and cd $line
+end
+</code></pre>
+
+<p>だけど、 <code>gsr</code> が全ての結果を出力する前に、選択を決定して移動してしまった場合、以下のエラーが出力された。</p>
+
+<pre><code class="language-sh">thread 'main' panicked at 'failed printing to stdout: Broken pipe (os error 32)'
+</code></pre>
+
+<p>どうやら、 <code>println!</code> で標準出力に出力している場合で、パイプ出力が中断されるとダメみたい。</p>
+
+<p>簡単のために、以下の <code>rust</code> プログラムで実験。</p>
+
+<pre><code class="language-rust">fn main() {
+    (0..100).into_iter().map(|x|
+        println!(&quot;Hello: {}&quot;, x)
+    ).collect::&lt;Vec&lt;_&gt;&gt;();
+}
+</code></pre>
+
+<p>このプログラムに対して、 <code>head</code> を通すとエラーが再現する。</p>
+
+<pre><code class="language-sh">$ cargo run | head
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/pipe-test`
+Hello: 0
+Hello: 1
+Hello: 2
+Hello: 3
+Hello: 4
+Hello: 5
+Hello: 6
+Hello: 7
+Hello: 8
+Hello: 9
+thread 'main' panicked at 'failed printing to stdout: Broken pipe (os error 32)', src/libstd/io/stdio.rs:690:9
+note: Run with `RUST_BACKTRACE=1` for a backtrace.
+</code></pre>
+
+<p>これを直すには、以下のように、 <code>writeln</code> を使用して、エラー時はちゃんとプロセスを終了するようにするといいみたい。
+(ただ、これが正しい解決方法なのかはわからんです・・・。)</p>
+
+<pre><code class="language-rust">use std::io::{self, Write};
+use std::process;
+
+fn main() {
+    (0..100)
+        .into_iter()
+        .map(|x| {
+            let r = writeln!(&amp;mut io::stdout(), &quot;Hello: {}&quot;, x);
+            if r.is_err() {
+                // Probably a broken pipe. Exit gracefully.
+                process::exit(0);
+            }
+        })
+        .collect::&lt;Vec&lt;_&gt;&gt;();
+}
+</code></pre>
+
+<p>これで、再度実行すると、正しく終了する。</p>
+
+<pre><code class="language-sh">$ cargo run | head
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/pipe-test`
+Hello: 0
+Hello: 1
+Hello: 2
+Hello: 3
+Hello: 4
+Hello: 5
+Hello: 6
+Hello: 7
+Hello: 8
+Hello: 9
+</code></pre>
+
+<hr />
+
+<h5 id="参考">参考</h5>
+
+<p><a href="https://github.com/sharkdp/fd/issues/24">Panic on broken pipe #24</a></p>
+
+<p><a href="https://github.com/sharkdp/fd/commit/2ea23c00005602255a29e387006a9fc1e91185b1">Exit gracefully on broken pipe, fixes #24</a></p>
+
+      <hr />
+      <div id="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+   
+  var disqus_shortname = 'yukimemi-github'; 
+
+   
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script src="/js/prettify.js"></script>
+<script src="/js/main.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53d87e9e343919e9"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47356782-2', 'yukimemi.github.io');
+  ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+

@@ -6,10 +6,25 @@
     <description>Recent content on YUKIMEMI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 12 Nov 2017 10:27:29 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jan 2018 16:59:47 +0900</lastBuildDate>
     
 	<atom:link href="http://yukimemi.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fix Broken Pipe in Rust</title>
+      <link>http://yukimemi.github.io/post/2018-01-07_fix-broken-pipe-in-rust/</link>
+      <pubDate>Sun, 07 Jan 2018 16:59:47 +0900</pubDate>
+      
+      <guid>http://yukimemi.github.io/post/2018-01-07_fix-broken-pipe-in-rust/</guid>
+      <description>以前の記事 で、 rust で変更のある git リポジトリを再帰的に検索する、というのを書いたのだけど、一部バグがあったので、修正した。
+gsr では、 --all というオプションを指定することで、指定配下 (デフォルトは $(ghq root) ) の git リポジトリを全て列挙する。 それに、パイプで fzf や、 peco を通すことで、選択して移動、というのをやっていた。
+fish で書くとこんな感じ。
+function __cd_to_git_dir gsr --all | peco | read -l line and echo &amp;quot;Change directory $line&amp;quot; and cd $line end  だけど、 gsr が全ての結果を出力する前に、選択を決定して移動してしまった場合、以下のエラーが出力された。
+thread &#39;main&#39; panicked at &#39;failed printing to stdout: Broken pipe (os error 32)&#39;  どうやら、 println! で標準出力に出力している場合で、パイプ出力が中断されるとダメみたい。
+簡単のために、以下の rust プログラムで実験。
+fn main() { (0.</description>
+    </item>
     
     <item>
       <title>gsr in Rust</title>

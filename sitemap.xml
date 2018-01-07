@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://yukimemi.github.io/post/2018-01-07_fix-broken-pipe-in-rust/</loc>
+    <lastmod>2018-01-07T16:59:47+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://yukimemi.github.io/post/2017-11-12_gsr-in-rust/</loc>
     <lastmod>2017-11-12T10:27:29+09:00</lastmod>
   </url>
@@ -328,13 +333,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/ansible/</loc>
+    <loc>http://yukimemi.github.io/categories/ansible/</loc>
     <lastmod>2015-07-26T16:08:23+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/ansible/</loc>
+    <loc>http://yukimemi.github.io/tags/ansible/</loc>
     <lastmod>2015-07-26T16:08:23+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -376,14 +381,14 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/coffeescript/</loc>
-    <lastmod>2014-07-15T00:00:00+00:00</lastmod>
+    <loc>http://yukimemi.github.io/categories/coffeescript/</loc>
+    <lastmod>2013-08-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/coffeescript/</loc>
-    <lastmod>2013-08-11T00:00:00+00:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/coffeescript/</loc>
+    <lastmod>2014-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -400,13 +405,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/cygwin/</loc>
+    <loc>http://yukimemi.github.io/categories/cygwin/</loc>
     <lastmod>2013-07-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/cygwin/</loc>
+    <loc>http://yukimemi.github.io/tags/cygwin/</loc>
     <lastmod>2013-07-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -442,25 +447,25 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/es2015/</loc>
-    <lastmod>2016-07-26T00:58:51+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://yukimemi.github.io/categories/es2015/</loc>
     <lastmod>2016-07-26T00:58:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/fcitx/</loc>
-    <lastmod>2015-05-02T22:59:12+09:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/es2015/</loc>
+    <lastmod>2016-07-26T00:58:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/fcitx/</loc>
+    <lastmod>2015-05-02T22:59:12+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/fcitx/</loc>
     <lastmod>2015-05-02T22:59:12+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -472,13 +477,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/fish/</loc>
+    <loc>http://yukimemi.github.io/categories/fish/</loc>
     <lastmod>2016-11-27T00:49:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/fish/</loc>
+    <loc>http://yukimemi.github.io/tags/fish/</loc>
     <lastmod>2016-11-27T00:49:25+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -502,14 +507,14 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/font/</loc>
-    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
+    <loc>http://yukimemi.github.io/categories/font/</loc>
+    <lastmod>2013-09-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/font/</loc>
-    <lastmod>2013-09-14T00:00:00+00:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/font/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -526,14 +531,14 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/git/</loc>
-    <lastmod>2017-03-19T00:00:07+09:00</lastmod>
+    <loc>http://yukimemi.github.io/categories/git/</loc>
+    <lastmod>2014-07-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/git/</loc>
-    <lastmod>2014-07-02T00:00:00+00:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/git/</loc>
+    <lastmod>2017-03-19T00:00:07+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -544,13 +549,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/golang/</loc>
+    <loc>http://yukimemi.github.io/categories/golang/</loc>
     <lastmod>2017-03-19T00:00:07+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/golang/</loc>
+    <loc>http://yukimemi.github.io/tags/golang/</loc>
     <lastmod>2017-03-19T00:00:07+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -586,13 +591,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/haskell/</loc>
+    <loc>http://yukimemi.github.io/categories/haskell/</loc>
     <lastmod>2014-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/haskell/</loc>
+    <loc>http://yukimemi.github.io/tags/haskell/</loc>
     <lastmod>2014-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -610,13 +615,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/hugo/</loc>
+    <loc>http://yukimemi.github.io/categories/hugo/</loc>
     <lastmod>2016-12-10T22:01:28+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/hugo/</loc>
+    <loc>http://yukimemi.github.io/tags/hugo/</loc>
     <lastmod>2016-12-10T22:01:28+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -640,13 +645,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/iterm/</loc>
+    <loc>http://yukimemi.github.io/categories/iterm/</loc>
     <lastmod>2016-09-19T00:30:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/iterm/</loc>
+    <loc>http://yukimemi.github.io/tags/iterm/</loc>
     <lastmod>2016-09-19T00:30:00+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -670,25 +675,25 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/jscript/</loc>
-    <lastmod>2016-07-26T00:58:51+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://yukimemi.github.io/categories/jscript/</loc>
     <lastmod>2016-07-26T00:58:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/mac/</loc>
-    <lastmod>2017-10-01T18:21:37+09:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/jscript/</loc>
+    <lastmod>2016-07-26T00:58:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/mac/</loc>
+    <lastmod>2017-10-01T18:21:37+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/mac/</loc>
     <lastmod>2017-10-01T18:21:37+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -724,13 +729,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/mongodb/</loc>
+    <loc>http://yukimemi.github.io/categories/mongodb/</loc>
     <lastmod>2013-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/mongodb/</loc>
+    <loc>http://yukimemi.github.io/tags/mongodb/</loc>
     <lastmod>2013-06-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -742,13 +747,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/mosh/</loc>
+    <loc>http://yukimemi.github.io/categories/mosh/</loc>
     <lastmod>2014-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/mosh/</loc>
+    <loc>http://yukimemi.github.io/tags/mosh/</loc>
     <lastmod>2014-07-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -766,13 +771,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/neovim/</loc>
+    <loc>http://yukimemi.github.io/categories/neovim/</loc>
     <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/neovim/</loc>
+    <loc>http://yukimemi.github.io/tags/neovim/</loc>
     <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -796,13 +801,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/nvim/</loc>
+    <loc>http://yukimemi.github.io/categories/nvim/</loc>
     <lastmod>2017-06-08T07:43:37+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/nvim/</loc>
+    <loc>http://yukimemi.github.io/tags/nvim/</loc>
     <lastmod>2017-06-08T07:43:37+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -833,18 +838,18 @@
   
   <url>
     <loc>http://yukimemi.github.io/post/</loc>
-    <lastmod>2017-11-12T10:27:29+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://yukimemi.github.io/tags/powershell/</loc>
-    <lastmod>2014-04-17T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-07T16:59:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/powershell/</loc>
+    <lastmod>2014-04-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/powershell/</loc>
     <lastmod>2014-04-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -856,13 +861,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/python/</loc>
+    <loc>http://yukimemi.github.io/categories/python/</loc>
     <lastmod>2014-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/python/</loc>
+    <loc>http://yukimemi.github.io/tags/python/</loc>
     <lastmod>2014-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -898,26 +903,26 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/roots/</loc>
-    <lastmod>2014-07-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://yukimemi.github.io/categories/roots/</loc>
     <lastmod>2014-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/rust/</loc>
-    <lastmod>2017-11-12T10:27:29+09:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/roots/</loc>
+    <lastmod>2014-07-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/rust/</loc>
-    <lastmod>2017-11-12T10:27:29+09:00</lastmod>
+    <lastmod>2018-01-07T16:59:47+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/rust/</loc>
+    <lastmod>2018-01-07T16:59:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1006,13 +1011,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/tmux/</loc>
+    <loc>http://yukimemi.github.io/categories/tmux/</loc>
     <lastmod>2016-09-19T00:30:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/tmux/</loc>
+    <loc>http://yukimemi.github.io/tags/tmux/</loc>
     <lastmod>2016-09-19T00:30:00+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1036,25 +1041,25 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/ubuntu/</loc>
-    <lastmod>2015-05-10T08:57:44+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://yukimemi.github.io/categories/ubuntu/</loc>
     <lastmod>2015-05-10T08:57:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/vim/</loc>
-    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/ubuntu/</loc>
+    <lastmod>2015-05-10T08:57:44+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/vim/</loc>
+    <lastmod>2017-10-07T23:15:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/vim/</loc>
     <lastmod>2017-10-07T23:15:34+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1090,13 +1095,13 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/vimperator/</loc>
+    <loc>http://yukimemi.github.io/categories/vimperator/</loc>
     <lastmod>2015-03-02T02:00:14+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/categories/vimperator/</loc>
+    <loc>http://yukimemi.github.io/tags/vimperator/</loc>
     <lastmod>2015-03-02T02:00:14+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -1126,32 +1131,32 @@
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/wsh/</loc>
-    <lastmod>2014-07-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://yukimemi.github.io/categories/wsh/</loc>
     <lastmod>2014-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/</loc>
-    <lastmod>2017-11-12T10:27:29+09:00</lastmod>
+    <loc>http://yukimemi.github.io/tags/wsh/</loc>
+    <lastmod>2014-07-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://yukimemi.github.io/tags/zsh/</loc>
-    <lastmod>2016-11-27T00:49:25+09:00</lastmod>
+    <loc>http://yukimemi.github.io/</loc>
+    <lastmod>2018-01-07T16:59:47+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://yukimemi.github.io/categories/zsh/</loc>
     <lastmod>2016-09-25T23:53:12+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://yukimemi.github.io/tags/zsh/</loc>
+    <lastmod>2016-11-27T00:49:25+09:00</lastmod>
     <priority>0</priority>
   </url>
   
